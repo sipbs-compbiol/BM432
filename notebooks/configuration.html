@@ -250,7 +250,7 @@ div.tocify {
 
 <div id="introduction" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
-<p>This course material is built up from several components, and mostly written in the programming language <a href="https://www.r-project.org/about.html"><code>R</code></a>, which is widely used in academia and industry for statistical computing and graphics.</p>
+<p>This course material is built up from several components, and mostly written in the programming language <a href="https://www.r-project.org/about.html"><code>R</code></a>. <code>R</code> is widely used in academia and industry for statistical computing and graphics.</p>
 <div id="note">
 <p>To use this repository and engage with the materials locally on your own machine, you will need access to the software described below. In addition, you will need an up-to-date web browser.</p>
 </div>
@@ -261,7 +261,11 @@ div.tocify {
 </ul></li>
 <li><code>OpenRefine</code>
 <ul>
-<li>To engage with the data-cleaning section, you will need <code>OpenRefine</code> and a wev browser. This is a <code>Java</code> program that runs on your machine (not in the cloud) and, although it runs in a web browser, no web connection is needed.</li>
+<li>To engage with the data-cleaning section, you will need <code>OpenRefine</code> and a web browser. <code>OPenRefine</code> is a <code>Java</code> program that runs on your machine (not in the cloud) and, although it runs in a web browser, no web connection is needed.</li>
+</ul></li>
+<li><code>bash</code> shell/terminal
+<ul>
+<li>The <code>bash</code> shell is a powerful way of giving your computer instructions by typing them. It may already be available on your computer.</li>
 </ul></li>
 <li><code>git</code>
 <ul>
@@ -269,12 +273,12 @@ div.tocify {
 </ul></li>
 </ul>
 </div>
-<div id="how-to-obtain-these-materials" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> How to Obtain These Materials</h1>
-<p>The material for this repository is held at <code>GitHub</code> in a <a href="https://github.com/sipbs-compbiol/BM432">public repository</a>. You can interact with this repository using <code>git</code>, or download the files as a compressed <code>.zip</code> archive.</p>
+<div id="how-to-get-the-materials-onto-your-computer" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> How to Get The Materials Onto Your Computer</h1>
+<p>The material for this repository is held at <code>GitHub</code> in a <a href="https://github.com/sipbs-compbiol/BM432">public repository</a>. You can download the material by interacting with the <code>GitHub</code> repository using <code>git</code>, or by downloading the files as a compressed <code>.zip</code> archive.</p>
 <details>
 <summary>
-Download a <code>.zip</code> file
+Download a <code>.zip</code> file (click to expand)
 </summary>
 <p>The course materials can be downloaded as the very latest ‘in development’ version, or as a time-stamped release for a particular presentation. Whichever version is downloaded, it will be provided as a <code>.zip</code> archive which, when extracted, will replicate the directory structure of the <code>GitHub</code> repository.</p>
 <div id="note">
@@ -287,7 +291,7 @@ Download a <code>.zip</code> file
 </details>
 <details>
 <summary>
-Using <code>git</code>
+Using <code>git</code> (click to expand)
 </summary>
 <p><em>Clone</em> this repository using one of the GUIs (graphical user interfaces) for <code>git</code>, or by issuing the command <code>git clone git@github.com:sipbs-compbiol/BM432.git</code> in a terminal window.</p>
 <p>Cloning the repository will enable you to interact with it using <code>git</code>. This facilitates making changes and suggestions for the code, via <code>git</code>’s system of pull requests. This is the way we would expect changes to be made to the materials.</p>
@@ -309,7 +313,7 @@ Using <code>git</code>
 <p>Please follow the instructions below for your operating system, to obtain an up-to-date version of <code>R</code> and <code>RStudio</code> on your machine.</p>
 <details>
 <summary>
-Windows
+Windows (click to expand)
 </summary>
 <p>To install <code>R</code> (the programming language), download and run <a href="https://cran.r-project.org/bin/windows/base/release.htm"><code>this .exe file</code></a> from <a href="https://cran.r-project.org/index.html"><code>CRAN</code></a>(the Comprehensive <code>R</code> Archive Network). Please also install the <a href="https://www.rstudio.com/products/rstudio/download/#download"><code>RStudio</code> IDE</a>.</p>
 <div id="warning">
@@ -323,7 +327,7 @@ Windows
 </details>
 <details>
 <summary>
-macOS
+macOS (click to expand)
 </summary>
 <p>To install <code>R</code> (the programming language), download and run <a href="https://cran.r-project.org/bin/macosx/R-latest.pkg"><code>this .pkg file</code></a> from <a href="https://cran.r-project.org/index.html"><code>CRAN</code></a>(the Comprehensive <code>R</code> Archive Network). Please also install the <a href="https://www.rstudio.com/products/rstudio/download/#download"><code>RStudio</code> IDE</a>.</p>
 <p><a href="https://carpentries.org/">The Carpentries</a> provide a video guide to installing <code>R</code> and <code>RStudio</code> (see below).</p>
@@ -333,7 +337,7 @@ macOS
 </details>
 <details>
 <summary>
-Linux
+Linux (click to expand)
 </summary>
 The binary files for your Linux distribution can be downloaded from <a href="https://cran.r-project.org/index.html"><code>CRAN</code></a>(the Comprehensive <code>R</code> Archive Network). Alternatively, you may wish to use your distribution’s package manager (e.g. for Fedora run <code>sudo dnf install R</code>, and for Ubuntu/Debian run <code>sudo apt-get install r-base</code>).
 </details>
@@ -344,10 +348,10 @@ The binary files for your Linux distribution can be downloaded from <a href="htt
 <div id="note">
 <p><code>OpenRefine</code> is a Java program that runs on your machine, not in the cloud. Although it runs inside a web browser, no web connection is required.</p>
 </div>
-<p>Please follow the instructions below for your operating system.</p>
+<p>Please follow the instructions below to obtain and install <code>OpenRefine</code> for your operating system.</p>
 <details>
 <summary>
-Windows
+Windows (click to expand)
 </summary>
 <ol style="list-style-type: decimal">
 <li>Check that you have either Firefox, Chrome, or Microsoft Edge installed and set as your default browser. <strong>NOTE: <code>OpenRefine</code> will run in your default browser.</strong></li>
@@ -363,7 +367,7 @@ Windows
 </details>
 <details>
 <summary>
-macOS
+macOS (click to expand)
 </summary>
 <ol style="list-style-type: decimal">
 <li>Check that you have either Firefox, Chrome, or Microsoft Edge installed and set as your default browser. <strong>NOTE: <code>OpenRefine</code> will run in your default browser.</strong></li>
@@ -383,7 +387,7 @@ macOS
 </details>
 <details>
 <summary>
-Linux
+Linux (click to expand)
 </summary>
 <ol style="list-style-type: decimal">
 <li>Check that you have either Firefox, Chrome, or Microsoft Edge installed and set as your default browser. <strong>NOTE: <code>OpenRefine</code> will run in your default browser.</strong></li>
@@ -396,6 +400,61 @@ Linux
 <div id="note">
 <p>If you are using a different browser, or if <code>OpenRefine</code> does not automatically run in your browser, point your browser to at <a href="http://127.0.0.1:3333/">http://127.0.0.1:3333/</a> or <a href="http://localhost:3333">http://localhost:3333</a> to use the program.</p>
 </div>
+</details>
+</div>
+<div id="bash" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> <code>bash</code></h2>
+<p>The <code>bash</code> shell is a powerful way of giving your computer instructions by typing them. It may already be available on your computer, depending on which operating system you use.</p>
+<p>Please follow the instructions below to obtain a <code>bash</code> terminal on your operating system.</p>
+<details>
+<summary>
+Windows (click to expand)
+</summary>
+<ol style="list-style-type: decimal">
+<li>Download the <a href="https://gitforwindows.org/"><code>git for Windows installer</code></a></li>
+<li>Run the installer, and follow the steps below.</li>
+<li>Click on <code>Next</code> to move through the <code>Information</code>, <code>Location</code>, <code>Components</code> and <code>Start Menu</code> screens, without changing any options.</li>
+<li>From the dropdown menu on the next screen, select <code>Use the Nano efitor by default</code> and click on <code>Next</code></li>
+<li>On the page that says <code>Adjusting the name of the initial branch in new repositories</code>, ensure that <code>Let Git decide</code> is selected.</li>
+<li>Ensure that <code>Git from the command line and also from 3rd-party software</code> is selected and click on <code>Next</code>.</li>
+<li>Ensure that <code>Use the native Windows Secure Channel Library</code> is selected and click on <code>Next</code>.</li>
+<li>Ensure that <code>Checkout Windows-style, commit Unix-style line endings</code> is selected and click on <code>Next</code>.</li>
+<li>Ensure that <code>Use Windows' default console window</code> is selected and click on <code>Next</code>.</li>
+<li>Ensure that <code>Default (fast-forward or merge)</code> is selected and click <code>Next</code>.</li>
+<li>Ensure that <code>Git Credential Manager Core</code> is selected and click on <code>Next</code>.</li>
+<li>Ensure that <code>Enable file system caching</code> is selected and click on <code>Next</code>.</li>
+<li>Click on <code>Install</code>.</li>
+<li>Click on <code>Finish</code> or <code>Next</code>.</li>
+<li>If your <code>HOME</code> environment variable is not set (or you don’t know what this is):</li>
+<li>Open command prompt (Open <code>Start Menu</code> then type <code>cmd</code> and press <code>Enter</code>).</li>
+<li>Type the following line into the command prompt window exactly as shown: <code>setx HOME "%USERPROFILE%"</code>.</li>
+<li>Press <code>Enter</code>, you should see <code>SUCCESS: Specified value was saved</code>.</li>
+<li>Quit command prompt by typing <code>exit</code> then pressing <code>Enter</code>.</li>
+</ol>
+<p>This will provide you with both <code>git</code> and <code>bash</code> in the <code>Git Bash</code> program, from your <code>Start Menu</code>.</p>
+<p><a href="https://carpentries.org/">The Carpentries</a> provide a video guide to installing <code>Git Bash</code> (see below).</p>
+<div align="center">
+<p><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/339AEqk9c-8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+</div>
+</details>
+<details>
+<summary>
+macOS (click to expand)
+</summary>
+<p>On some <code>macOS</code> versions, <code>bash</code> is already the default shell, and you will not need to install anything. Even if this is not the case for you, <code>bash</code> is available in all versions, so there is no need to install any new software.</p>
+<p>To access <code>bash</code>, start the <code>Terminal</code> program (this can be found in <code>/Applications/Utilities</code>). The video tutorial below will show you how to open the <code>Terminal</code> program. It can be useful to have this program available in your dock.</p>
+<p>To check if your default shell is <code>bash</code> type <code>echo $SHELL</code> in the <code>Terminal</code> and press the <code>Return</code> key. If the message printed does not end with <code>/bash</code> then your default is something else and you can run <code>bash</code> by typing <code>bash</code> and pressing <code>Enter</code>.</p>
+<p><a href="https://carpentries.org/">The Carpentries</a> provide a video guide to installing <code>bash</code>, <code>git</code> and <code>nano</code> on your own machine (see below).</p>
+<div align="center">
+<p><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/9LQhwETCdwY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+</div>
+</details>
+<details>
+<summary>
+Linux (click to expand)
+</summary>
+<p>On Linux, <code>bash</code> is usually the default shell, and you will not need to install anything.</p>
+To check if your default shell is <code>bash</code> type <code>echo $SHELL</code> in a terminal window and press the <code>Return</code> key. If the message printed does not end with <code>/bash</code> then your default is something else and you can run <code>bash</code> by typing <code>bash</code> and pressing <code>Enter</code>.
 </details>
 </div>
 </div>

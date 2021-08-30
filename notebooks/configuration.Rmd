@@ -28,7 +28,7 @@ figbg = "whitesmoke"
 
 # Introduction
 
-This course material is built up from several components, and mostly written in the programming language [`R`](https://www.r-project.org/about.html), which is widely used in academia and industry for statistical computing and graphics.
+This course material is built up from several components, and mostly written in the programming language [`R`](https://www.r-project.org/about.html). `R` is widely used in academia and industry for statistical computing and graphics.
 
 <div id="note">
 To use this repository and engage with the materials locally on your own machine, you will need access to the software described below. In addition, you will need an up-to-date web browser.
@@ -37,16 +37,18 @@ To use this repository and engage with the materials locally on your own machine
 - `R` and `RStudio`
   - These are necessary to run the notebooks and Shiny applications locally on your computer
 - `OpenRefine`
-  - To engage with the data-cleaning section, you will need `OpenRefine` and a wev browser. This is a `Java` program that runs on your machine (not in the cloud) and, although it runs in a web browser, no web connection is needed.
+  - To engage with the data-cleaning section, you will need `OpenRefine` and a web browser. `OPenRefine` is a `Java` program that runs on your machine (not in the cloud) and, although it runs in a web browser, no web connection is needed.
+- `bash` shell/terminal
+  - The `bash` shell is a powerful way of giving your computer instructions by typing them. It may already be available on your computer.
 - `git` 
   - `git` is the version control management system we use to manage the course materials. This is an optional installation. You can obtain the source materials for this course (and contribute changes) without using `git`.
 
-# How to Obtain These Materials
+# How to Get The Materials Onto Your Computer
 
-The material for this repository is held at `GitHub` in a [public repository](https://github.com/sipbs-compbiol/BM432). You can interact with this repository using `git`, or download the files as a compressed `.zip` archive.
+The material for this repository is held at `GitHub` in a [public repository](https://github.com/sipbs-compbiol/BM432). You can download the material by interacting with the `GitHub` repository using `git`, or by downloading the files as a compressed `.zip` archive.
 
 <details>
-  <summary>Download a `.zip` file</summary>
+  <summary>Download a `.zip` file (click to expand)</summary>
   
 The course materials can be downloaded as the very latest 'in development' version, or as a time-stamped release for a particular presentation. Whichever version is downloaded, it will be provided as a `.zip` archive which, when extracted, will replicate the directory structure of the `GitHub` repository.
 
@@ -60,7 +62,7 @@ To download the materials, click on one of the links below.
 </details>
 
 <details>
-  <summary>Using `git`</summary>
+  <summary>Using `git` (click to expand)</summary>
 
 *Clone* this repository using one of the GUIs (graphical user interfaces) for `git`, or by issuing the command `git clone git@github.com:sipbs-compbiol/BM432.git` in a terminal window.
 
@@ -89,7 +91,7 @@ To interact with `R`, we use the `RStudio` Integrated Development Environment (I
 Please follow the instructions below for your operating system, to obtain an up-to-date version of `R` and `RStudio` on your machine.
 
 <details>
-  <summary>Windows</summary>
+  <summary>Windows (click to expand)</summary>
   
 To install `R` (the programming language), download and run [`this .exe file`](https://cran.r-project.org/bin/windows/base/release.htm) from [`CRAN`](https://cran.r-project.org/index.html)(the Comprehensive `R` Archive Network). Please also install the [`RStudio` IDE](https://www.rstudio.com/products/rstudio/download/#download).
 
@@ -107,7 +109,7 @@ To do so, right-click on the `.exe` file and select `Run as Adminstrator`.
 </details>
 
 <details>
-  <summary>macOS</summary>
+  <summary>macOS (click to expand)</summary>
 
 To install `R` (the programming language), download and run [`this .pkg file`](https://cran.r-project.org/bin/macosx/R-latest.pkg) from [`CRAN`](https://cran.r-project.org/index.html)(the Comprehensive `R` Archive Network). Please also install the [`RStudio` IDE](https://www.rstudio.com/products/rstudio/download/#download).
 
@@ -119,7 +121,7 @@ To install `R` (the programming language), download and run [`this .pkg file`](h
 </details>
 
 <details>
-  <summary>Linux</summary>
+  <summary>Linux (click to expand)</summary>
 
 The binary files for your Linux distribution can be downloaded from [`CRAN`](https://cran.r-project.org/index.html)(the Comprehensive `R` Archive Network). Alternatively, you may wish to use your distribution's package manager (e.g. for Fedora run `sudo dnf install R`, and for Ubuntu/Debian run `sudo apt-get install r-base`).
 </details>
@@ -132,10 +134,10 @@ For the data-cleaning section of the workshop, you will need `OpenRefine` and an
 `OpenRefine` is a Java program that runs on your machine, not in the cloud. Although it runs inside a web browser, no web connection is required.
 </div>
 
-Please follow the instructions below for your operating system.
+Please follow the instructions below to obtain and install `OpenRefine` for your operating system.
 
 <details>
-  <summary>Windows</summary>
+  <summary>Windows (click to expand)</summary>
   
 1. Check that you have either Firefox, Chrome, or Microsoft Edge installed and set as your default browser. **NOTE: `OpenRefine` will run in your default browser.**
 2. Download the latest version of `OpenRefine` from [https://openrefine.org/download.html](https://openrefine.org/download.html).
@@ -150,7 +152,7 @@ If you are using a different browser, or if `OpenRefine` does not automatically 
 </details>
 
 <details>
-  <summary>macOS</summary>
+  <summary>macOS (click to expand)</summary>
   
 1. Check that you have either Firefox, Chrome, or Microsoft Edge installed and set as your default browser. **NOTE: `OpenRefine` will run in your default browser.**
 2. Download the latest version of `OpenRefine` from [https://openrefine.org/download.html](https://openrefine.org/download.html).
@@ -170,7 +172,7 @@ If you are using a different browser, or if `OpenRefine` does not automatically 
 </details>
 
 <details>
-  <summary>Linux</summary>
+  <summary>Linux (click to expand)</summary>
   
 1. Check that you have either Firefox, Chrome, or Microsoft Edge installed and set as your default browser. **NOTE: `OpenRefine` will run in your default browser.**
 2. Download the latest version of `OpenRefine` from [https://openrefine.org/download.html](https://openrefine.org/download.html).
@@ -182,4 +184,67 @@ If you are using a different browser, or if `OpenRefine` does not automatically 
 <div id="note">
 If you are using a different browser, or if `OpenRefine` does not automatically run in your browser, point your browser to at [http://127.0.0.1:3333/](http://127.0.0.1:3333/) or [http://localhost:3333](http://localhost:3333) to use the program.
 </div>
+</details>
+
+## `bash`
+
+The `bash` shell is a powerful way of giving your computer instructions by typing them. It may already be available on your computer, depending on which operating system you use.
+
+Please follow the instructions below to obtain a `bash` terminal on your operating system.
+
+<details>
+  <summary>Windows (click to expand)</summary>
+  
+1. Download the [`git for Windows installer`](https://gitforwindows.org/)
+2. Run the installer, and follow the steps below.
+  1. Click on `Next` to move through the `Information`, `Location`, `Components` and `Start Menu` screens, without changing any options.
+  2. From the dropdown menu on the next screen, select `Use the Nano efitor by default` and click on `Next`
+  3. On the page that says `Adjusting the name of the initial branch in new repositories`, ensure that `Let Git decide` is selected.
+  4.  Ensure that `Git from the command line and also from 3rd-party software` is selected and click on `Next`. 
+  5. Ensure that `Use the native Windows Secure Channel Library` is selected and click on `Next`.
+  6. Ensure that `Checkout Windows-style, commit Unix-style line endings` is selected and click on `Next`.
+  7. Ensure that `Use Windows' default console window` is selected and click on `Next`.
+  8. Ensure that `Default (fast-forward or merge)` is selected and click `Next`.
+  9. Ensure that `Git Credential Manager Core` is selected and click on `Next`.
+  10. Ensure that `Enable file system caching` is selected and click on `Next`.
+  11. Click on `Install`.
+  12. Click on `Finish` or `Next`.
+3. If your `HOME` environment variable is not set (or you don't know what this is):
+  1. Open command prompt (Open `Start Menu` then type `cmd` and press `Enter`).
+  2. Type the following line into the command prompt window exactly as shown: `setx HOME "%USERPROFILE%"`.
+  3. Press `Enter`, you should see `SUCCESS: Specified value was saved`.
+  4. Quit command prompt by typing `exit` then pressing `Enter`.
+
+This will provide you with both `git` and `bash` in the `Git Bash` program, from your `Start Menu`.
+  
+[The Carpentries](https://carpentries.org/) provide a video guide to installing `Git Bash` (see below).
+
+<div align="center">
+  <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/339AEqk9c-8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+</details>
+
+<details>
+  <summary>macOS (click to expand)</summary>
+  
+On some `macOS` versions, `bash` is already the default shell, and you will not need to install anything. Even if this is not the case for you, `bash` is available in all versions, so there is no need to install any new software.
+
+To access `bash`, start the `Terminal` program (this can be found in `/Applications/Utilities`). The video tutorial below will show you how to open the `Terminal` program. It can be useful to have this program available in your dock.
+
+To check if your default shell is `bash` type `echo $SHELL` in the `Terminal` and press the `Return` key. If the message printed does not end with `/bash` then your default is something else and you can run `bash` by typing `bash` and pressing `Enter`.
+
+[The Carpentries](https://carpentries.org/) provide a video guide to installing `bash`, `git` and `nano` on your own machine (see below).
+
+<div align="center">
+  <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/9LQhwETCdwY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+</details>
+
+<details>
+  <summary>Linux (click to expand)</summary>
+  
+On Linux, `bash` is usually the default shell, and you will not need to install anything.
+
+To check if your default shell is `bash` type `echo $SHELL` in a terminal window and press the `Return` key. If the message printed does not end with `/bash` then your default is something else and you can run `bash` by typing `bash` and pressing `Enter`.
 </details>
