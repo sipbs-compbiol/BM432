@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Leighton Pritchard" />
+
+
+<title>Configuring Your Computer</title>
+
+<script src="configuration_files/header-attrs-2.10/header-attrs.js"></script>
+<script src="configuration_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="configuration_files/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="configuration_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="configuration_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="configuration_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="configuration_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="configuration_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="configuration_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="configuration_files/navigation-1.1/tabsets.js"></script>
+<link href="configuration_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="configuration_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="css/rmd_style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Configuring Your Computer</h1>
+<h4 class="author">Leighton Pritchard</h4>
+<h4 class="date">2021 Presentation</h4>
+
+</div>
+
+
+<p>```</p>
+<div id="introduction" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Introduction</h1>
+<p>This course material is built up from several components, and mostly written in the programming language <a href="https://www.r-project.org/about.html"><code>R</code></a>, which is widely used in academia and industry for statistical computing and graphics.</p>
+<div id="note">
+<p>To use this repository and engage with the materials locally on your own machine, you will need access to the software described below. In addition, you will need an up-to-date web browser.</p>
+</div>
+<ul>
+<li><code>R</code> and <code>RStudio</code>
+<ul>
+<li>These are necessary to run the notebooks and Shiny applications locally on your computer</li>
+</ul></li>
+<li><code>OpenRefine</code>
+<ul>
+<li>To engage with the data-cleaning section, you will need <code>OpenRefine</code> and a wev browser. This is a <code>Java</code> program that runs on your machine (not in the cloud) and, although it runs in a web browser, no web connection is needed.</li>
+</ul></li>
+<li><code>git</code>
+<ul>
+<li><code>git</code> is the version control management system we use to manage the course materials. This is an optional installation. You can obtain the source materials for this course (and contribute changes) without using <code>git</code>.</li>
+</ul></li>
+</ul>
+</div>
+<div id="how-to-obtain-these-materials" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> How to Obtain These Materials</h1>
+<p>The material for this repository is held at <code>GitHub</code> in a public repository. You can interact with this repository using <code>git</code>, or download the files as a compressed <code>.zip</code> archive.</p>
+<details>
+<summary>
+Download a <code>.zip</code> file
+</summary>
+<p>The course materials can be downloaded as the very latest ‘in development’ version, or as a time-stamped release for a particular presentation. Whichever version is downloaded, it will be provided as a <code>.zip</code> archive which, when extracted, will replicate the directory structure of the <code>GitHub</code> repository.</p>
+<div id="note">
+<p>This archive is sufficient to work through the course on your own computer.</p>
+</div>
+<p>To download the materials, click on one of the links below.</p>
+<ul>
+<li><a href="https://github.com/sipbs-compbiol/BM432/archive/refs/heads/2021.zip">current ‘development’ version</a></li>
+</ul>
+</details>
+<details>
+<summary>
+Using <code>git</code>
+</summary>
+<p><em>Clone</em> this repository using one of the GUIs (graphical user interfaces) for <code>git</code>, or by issuing the command <code>git clone git@github.com:sipbs-compbiol/BM432.git</code> in a terminal window.</p>
+<p>Cloning the repository will enable you to interact with it using <code>git</code>. This facilitates making changes and suggestions for the code, via <code>git</code>’s system of pull requests. This is the way we would expect changes to be made to the materials.</p>
+<div id="note">
+<p>If you do not have a terminal installed on your machine, or do not know where to find a terminal, please see the instructions for <code>bash</code> shell installation below.</p>
+</div>
+<div id="note">
+<p>If you do not have <code>git</code> installed on your machine, please see the instructions for <code>git</code> installation below.</p>
+</div>
+</details>
+</div>
+<div id="installing-software-tools" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Installing Software Tools</h1>
+<div id="rrstudio" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> <code>R</code>/<code>RStudio</code></h2>
+<p><code>R</code> is a powerful programming language that is widely-used for statistical data analysis and visualisation. Most of this material is written in <code>R</code>. It is a very versatile and capable language, and it can be used to write theses (with <code>bookdown</code>), and produce interactive standalone and web applications (with <code>Shiny</code>).</p>
+<p>In this repository, we use <code>R</code> to produce the webpages and interactive applications for the course.</p>
+<p>To interact with <code>R</code>, we use the <code>RStudio</code> Integrated Development Environment (IDE).</p>
+<p>Please follow the instructions below for your operating system, to obtain an up-to-date version of <code>R</code> and <code>RStudio</code> on your machine.</p>
+<details>
+<summary>
+Windows
+</summary>
+<p>To install <code>R</code> (the programming language), download and run <a href="https://cran.r-project.org/bin/windows/base/release.htm"><code>this .exe file</code></a> from <a href="https://cran.r-project.org/index.html"><code>CRAN</code></a>(the Comprehensive <code>R</code> Archive Network). Please also install the <a href="https://www.rstudio.com/products/rstudio/download/#download"><code>RStudio</code> IDE</a>.</p>
+<div id="warning">
+<p><strong>You should run both installers as an Administrator level account</strong></p>
+<p>To do so, right-click on the <code>.exe</code> file and select <code>Run as Adminstrator</code>.</p>
+</div>
+<p><a href="https://carpentries.org/">The Carpentries</a> provide a video guide to installing <code>R</code> and <code>RStudio</code> (see below).</p>
+<div align="center">
+<p><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/q0PjTAylwoU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+</div>
+</details>
+<details>
+<summary>
+macOS
+</summary>
+<p>To install <code>R</code> (the programming language), download and run <a href="https://cran.r-project.org/bin/macosx/R-latest.pkg"><code>this .pkg file</code></a> from <a href="https://cran.r-project.org/index.html"><code>CRAN</code></a>(the Comprehensive <code>R</code> Archive Network). Please also install the <a href="https://www.rstudio.com/products/rstudio/download/#download"><code>RStudio</code> IDE</a>.</p>
+<p><a href="https://carpentries.org/">The Carpentries</a> provide a video guide to installing <code>R</code> and <code>RStudio</code> (see below).</p>
+<div align="center">
+<p><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/5-ly3kyxwEg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+</div>
+</details>
+<details>
+<summary>
+Linux
+</summary>
+The binary files for your Linux distribution can be downloaded from <a href="https://cran.r-project.org/index.html"><code>CRAN</code></a>(the Comprehensive <code>R</code> Archive Network). Alternatively, you may wish to use your distribution’s package manager (e.g. for Fedora run <code>sudo dnf install R</code>, and for Ubuntu/Debian run <code>sudo apt-get install r-base</code>).
+</details>
+</div>
+<div id="openrefine" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> <code>OpenRefine</code></h2>
+<p>For the data-cleaning section of the workshop, you will need <code>OpenRefine</code> and an up-to-date web browser installed on your own machine.</p>
+<div id="note">
+<p><code>OpenRefine</code> is a Java program that runs on your machine, not in the cloud. Although it runs inside a web browser, no web connection is required.</p>
+</div>
+<p>Please follow the instructions below for your operating system.</p>
+<details>
+<summary>
+Windows
+</summary>
+<ol style="list-style-type: decimal">
+<li>Check that you have either Firefox, Chrome, or Microsoft Edge installed and set as your default browser. <strong>NOTE: <code>OpenRefine</code> will run in your default browser.</strong></li>
+<li>Download the latest version of <code>OpenRefine</code> from <a href="https://openrefine.org/download.html">https://openrefine.org/download.html</a>.</li>
+<li>Create a new directory callled <code>OpenRefine</code></li>
+<li>Unzip the downloaded file into the <code>OpenRefine</code> directory (e.g. right-click on the file and select <code>Extract...</code>).</li>
+<li>Go to the newly-created <code>OpenRefine</code> directory.</li>
+<li>Launch OpenRefine by clicking <code>openrefine.exe</code>.</li>
+</ol>
+<div id="note">
+<p>If you are using a different browser, or if <code>OpenRefine</code> does not automatically run in your browser, point your browser to at <a href="http://127.0.0.1:3333/">http://127.0.0.1:3333/</a> or <a href="http://localhost:3333">http://localhost:3333</a> to use the program.</p>
+</div>
+</details>
+<details>
+<summary>
+macOS
+</summary>
+<ol style="list-style-type: decimal">
+<li>Check that you have either Firefox, Chrome, or Microsoft Edge installed and set as your default browser. <strong>NOTE: <code>OpenRefine</code> will run in your default browser.</strong></li>
+<li>Download the latest version of <code>OpenRefine</code> from <a href="https://openrefine.org/download.html">https://openrefine.org/download.html</a>.</li>
+<li>Create a new directory callled <code>OpenRefine</code></li>
+<li>Unzip the downloaded file into the <code>OpenRefine</code> directory (e.g. double-click on the compressed file).</li>
+<li>Go to the newly-created <code>OpenRefine</code> directory.</li>
+<li>Drag the <code>OpenRefine</code> icon into your <code>Applications</code> folder</li>
+<li>Double-click (or <code>Ctrl-</code>click and select <code>Open...</code>) on the <code>OpenRefine</code> icon to launch the program.</li>
+</ol>
+<div id="note">
+<p>If you are using a different browser, or if <code>OpenRefine</code> does not automatically run in your browser, point your browser to at <a href="http://127.0.0.1:3333/">http://127.0.0.1:3333/</a> or <a href="http://localhost:3333">http://localhost:3333</a> to use the program.</p>
+</div>
+<div id="warning">
+<p><code>OpenRefine</code> may not run in the <code>Safari</code> browser.</p>
+</div>
+</details>
+<details>
+<summary>
+Linux
+</summary>
+<ol style="list-style-type: decimal">
+<li>Check that you have either Firefox, Chrome, or Microsoft Edge installed and set as your default browser. <strong>NOTE: <code>OpenRefine</code> will run in your default browser.</strong></li>
+<li>Download the latest version of <code>OpenRefine</code> from <a href="https://openrefine.org/download.html">https://openrefine.org/download.html</a>.</li>
+<li>Make a new directory called <code>OpenRefine</code> (e.g. <code>mkdir -p OpenRefine</code>)</li>
+<li>Unzip the downloaded file into the <code>OpenRefine</code> directory (e.g. <code>unzip openrefine-linux-3.4.1.tar.gz -d OpenRefine</code>)</li>
+<li>Go to the newly-created <code>OpenRefine</code> directory (e.g. <code>cd OpenRefine</code>)</li>
+<li>Launch <code>OpenRefine</code> by entering <code>./refine</code> into the terminal, while in the <code>OpenRefine</code> directory</li>
+</ol>
+<div id="note">
+<p>If you are using a different browser, or if <code>OpenRefine</code> does not automatically run in your browser, point your browser to at <a href="http://127.0.0.1:3333/">http://127.0.0.1:3333/</a> or <a href="http://localhost:3333">http://localhost:3333</a> to use the program.</p>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

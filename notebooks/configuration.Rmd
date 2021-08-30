@@ -1,0 +1,186 @@
+---
+title: "Configuring Your Computer"
+author: "Leighton Pritchard"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+    self_contained: no
+---
+
+```{r setup, include=FALSE}
+# Suppress R codeblock warning messages, but do show output
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+# Import libraries/functions here
+library("DT")
+library("dplyr")
+library("ggplot2")
+
+# BG color for plots - should match .figure and .caption classes in rmd_style.css
+figbg = "whitesmoke"
+```
+```
+
+# Introduction
+
+This course material is built up from several components, and mostly written in the programming language [`R`](https://www.r-project.org/about.html), which is widely used in academia and industry for statistical computing and graphics.
+
+<div id="note">
+To use this repository and engage with the materials locally on your own machine, you will need access to the software described below. In addition, you will need an up-to-date web browser.
+</div>
+
+- `R` and `RStudio`
+  - These are necessary to run the notebooks and Shiny applications locally on your computer
+- `OpenRefine`
+  - To engage with the data-cleaning section, you will need `OpenRefine` and a wev browser. This is a `Java` program that runs on your machine (not in the cloud) and, although it runs in a web browser, no web connection is needed.
+- `git` 
+  - `git` is the version control management system we use to manage the course materials. This is an optional installation. You can obtain the source materials for this course (and contribute changes) without using `git`.
+
+# How to Obtain These Materials
+
+The material for this repository is held at `GitHub` in a [public repository](https://github.com/sipbs-compbiol/BM432). You can interact with this repository using `git`, or download the files as a compressed `.zip` archive.
+
+<details>
+  <summary>Download a `.zip` file</summary>
+  
+The course materials can be downloaded as the very latest 'in development' version, or as a time-stamped release for a particular presentation. Whichever version is downloaded, it will be provided as a `.zip` archive which, when extracted, will replicate the directory structure of the `GitHub` repository.
+
+<div id="note">
+This archive is sufficient to work through the course on your own computer.
+</div>
+
+To download the materials, click on one of the links below.
+
+- [current 'development' version](https://github.com/sipbs-compbiol/BM432/archive/refs/heads/2021.zip)
+</details>
+
+<details>
+  <summary>Using `git`</summary>
+
+*Clone* this repository using one of the GUIs (graphical user interfaces) for `git`, or by issuing the command `git clone git@github.com:sipbs-compbiol/BM432.git` in a terminal window.
+
+Cloning the repository will enable you to interact with it using `git`. This facilitates making changes and suggestions for the code, via `git`'s system of pull requests. This is the way we would expect changes to be made to the materials.
+
+<div id="note">
+If you do not have a terminal installed on your machine, or do not know where to find a terminal, please see the instructions for `bash` shell installation below.
+</div>
+
+<div id="note">
+If you do not have `git` installed on your machine, please see the instructions for `git` installation below.
+</div>
+</details>
+
+
+# Installing Software Tools
+
+## `R`/`RStudio`
+
+`R` is a powerful programming language that is widely-used for statistical data analysis and visualisation. Most of this material is written in `R`. It is a very versatile and capable language, and it can be used to write theses (with `bookdown`), and produce interactive standalone and web applications (with `Shiny`).
+
+In this repository, we use `R` to produce the webpages and interactive applications for the course.
+
+To interact with `R`, we use the `RStudio` Integrated Development Environment (IDE).
+
+Please follow the instructions below for your operating system, to obtain an up-to-date version of `R` and `RStudio` on your machine.
+
+<details>
+  <summary>Windows</summary>
+  
+To install `R` (the programming language), download and run [`this .exe file`](https://cran.r-project.org/bin/windows/base/release.htm) from [`CRAN`](https://cran.r-project.org/index.html)(the Comprehensive `R` Archive Network). Please also install the [`RStudio` IDE](https://www.rstudio.com/products/rstudio/download/#download).
+
+<div id="warning">
+**You should run both installers as an Administrator level account**
+
+To do so, right-click on the `.exe` file and select `Run as Adminstrator`.
+</div>
+
+[The Carpentries](https://carpentries.org/) provide a video guide to installing `R` and `RStudio` (see below).
+
+<div align="center">
+  <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/q0PjTAylwoU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+</details>
+
+<details>
+  <summary>macOS</summary>
+
+To install `R` (the programming language), download and run [`this .pkg file`](https://cran.r-project.org/bin/macosx/R-latest.pkg) from [`CRAN`](https://cran.r-project.org/index.html)(the Comprehensive `R` Archive Network). Please also install the [`RStudio` IDE](https://www.rstudio.com/products/rstudio/download/#download).
+
+[The Carpentries](https://carpentries.org/) provide a video guide to installing `R` and `RStudio` (see below).
+
+<div align="center">
+  <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/5-ly3kyxwEg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+</details>
+
+<details>
+  <summary>Linux</summary>
+
+The binary files for your Linux distribution can be downloaded from [`CRAN`](https://cran.r-project.org/index.html)(the Comprehensive `R` Archive Network). Alternatively, you may wish to use your distribution's package manager (e.g. for Fedora run `sudo dnf install R`, and for Ubuntu/Debian run `sudo apt-get install r-base`).
+</details>
+
+## `OpenRefine`
+
+For the data-cleaning section of the workshop, you will need `OpenRefine` and an up-to-date web browser installed on your own machine.
+
+<div id="note">
+`OpenRefine` is a Java program that runs on your machine, not in the cloud. Although it runs inside a web browser, no web connection is required.
+</div>
+
+Please follow the instructions below for your operating system.
+
+<details>
+  <summary>Windows</summary>
+  
+1. Check that you have either Firefox, Chrome, or Microsoft Edge installed and set as your default browser. **NOTE: `OpenRefine` will run in your default browser.**
+2. Download the latest version of `OpenRefine` from [https://openrefine.org/download.html](https://openrefine.org/download.html).
+3. Create a new directory callled `OpenRefine`
+4. Unzip the downloaded file into the `OpenRefine` directory (e.g. right-click on the file and select `Extract...`).
+5. Go to the newly-created `OpenRefine` directory.
+6. Launch OpenRefine by clicking `openrefine.exe`.
+
+<div id="note">
+If you are using a different browser, or if `OpenRefine` does not automatically run in your browser, point your browser to at [http://127.0.0.1:3333/](http://127.0.0.1:3333/) or [http://localhost:3333](http://localhost:3333) to use the program.
+</div>
+</details>
+
+<details>
+  <summary>macOS</summary>
+  
+1. Check that you have either Firefox, Chrome, or Microsoft Edge installed and set as your default browser. **NOTE: `OpenRefine` will run in your default browser.**
+2. Download the latest version of `OpenRefine` from [https://openrefine.org/download.html](https://openrefine.org/download.html).
+3. Create a new directory callled `OpenRefine`
+4. Unzip the downloaded file into the `OpenRefine` directory (e.g. double-click on the compressed file).
+5. Go to the newly-created `OpenRefine` directory.
+6. Drag the `OpenRefine` icon into your `Applications` folder
+7. Double-click (or `Ctrl-`click and select `Open...`) on the `OpenRefine` icon to launch the program.
+
+<div id="note">
+If you are using a different browser, or if `OpenRefine` does not automatically run in your browser, point your browser to at [http://127.0.0.1:3333/](http://127.0.0.1:3333/) or [http://localhost:3333](http://localhost:3333) to use the program.
+</div>
+
+<div id="warning">
+`OpenRefine` may not run in the `Safari` browser.
+</div>
+</details>
+
+<details>
+  <summary>Linux</summary>
+  
+1. Check that you have either Firefox, Chrome, or Microsoft Edge installed and set as your default browser. **NOTE: `OpenRefine` will run in your default browser.**
+2. Download the latest version of `OpenRefine` from [https://openrefine.org/download.html](https://openrefine.org/download.html).
+3. Make a new directory called `OpenRefine` (e.g. `mkdir -p OpenRefine`)
+4. Unzip the downloaded file into the `OpenRefine` directory (e.g. `unzip openrefine-linux-3.4.1.tar.gz -d OpenRefine`)
+5. Go to the newly-created `OpenRefine` directory (e.g. `cd OpenRefine`)
+6. Launch `OpenRefine` by entering `./refine` into the terminal, while in the `OpenRefine` directory
+
+<div id="note">
+If you are using a different browser, or if `OpenRefine` does not automatically run in your browser, point your browser to at [http://127.0.0.1:3333/](http://127.0.0.1:3333/) or [http://localhost:3333](http://localhost:3333) to use the program.
+</div>
+</details>
