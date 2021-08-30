@@ -1,0 +1,192 @@
+---
+title: "How to access data from public databases"
+author: "Morgan Feeney, Leighton Pritchard"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    self_contained: no
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+<div id="summary">
+- A wealth of information is freely available in public databases, and can be searched and accessed for use in your project.
+  - Different databases are available for different purposes
+- Data deposited into databases are assigned unique identifiers called accession numbers.
+
+This part of the workshop aims to teach you how to access data from public databases.
+</div>
+
+# Introduction
+
+Many, if not all, projects will involve the use of data from publicly available databases. You may be analysing these data as the main focus of your project, or comparing data you have generated with publicly available data (e.g, comparing the 16S rRNA gene sequence from an organism you isolated, with 16S rRNA gene sequences deposited in the NCBI database.)
+
+Databases provide an essential service in storing, organizing, and allowing researchers to easily search and access data. Most journals (certainly all reputable journals!) require researchers to deposit any data generated as part of a publication in the appropriate database. 
+
+# Where can we get public data from?
+
+There are different databases for different types of data and for different purposes: your choice of database will depend on the specific task you are carrying out. For example, if you are trying to find the 3D structure of your protein of interest, you would look for it in the Protein Data Bank (PDB), and not in Genbank (which has the nucleotide and amino acid sequence information).
+
+All of these databases can be accessed interactively through a web-based interface. Many can also be accessed programmatically via the command line (not covered in this workshop).
+
+[Links to some key public databases](#anchor)
+
+## Repository of record (NCBI) vs domain-specific curated (or not) resources
+
+Primary databases, or repositories of record, contain experimentally derived data (e.g., 3D protein structures solved by X-ray crystallography (data deposited at PDB), raw nucleotide reads from a sequencing run (data deposited at NCBI)) accompanied by appropriate metadata (e.g., information about when and where the sample was obtained). These data are part of the permanent scientific record. 
+
+There are also a large number of subject- or organism- specific databases. These usually contain data derived from analysis of primary databases, or integrate data from multiple sources to provide a comprehensive view of a particular topic. For example, the Comprehensive Antibiotic Resistance Database (CARD) is a curated database of known resistance determinants and associated antibiotics.
+
+<div id="warning">
+Watch out for unmaintained sites! 
+
+Major databases are continuously updated and well-maintained. For example, the databases in the International Sequence Database Collaboration (Genbank, EMBL, DDBJ) automatically update one another with new data collected daily. 
+
+However, not all databases are equally well-curated. Some will persist, even after they are no longer curated - and thus may contain out-of-date information, or not have the latest updates. <em>Caveat emptor...</em>
+</div>
+
+## Different sites may have very different access/functionality/searching
+
+Most databases can be searched by keywords, though the search interfaces may vary. Many will also allow you to search by sequence similarity (e.g., BLASTp to search for proteins similar to a query protein).
+
+<div id="warning">
+Pay careful attention to your search terms! 
+
+As with any query to a computer database, keyword searches in biological databases are sensitive to typos or spelling errors. For example, searching UniProt for "lipaomide dehydrogenase" retrieves 0 results, while the correctly spelled search "lipoamide dehydrogenase" retrieves thousands of results.
+</div>
+
+# What are accession numbers and how can we use them?
+
+Records deposited into a primary database will always be assigned a unique identifier (an accession number). These accession numbers will <em>always</em> refer to the same record. 
+
+Accession numbers follow a standard style, depending on the database (e.g., Genbank acccession [BAD70110.1](https://www.ncbi.nlm.nih.gov/protein/BAD70110) versus UniProt accession [Q5SLK6](https://www.uniprot.org/uniprot/Q5SLK6) versus PDB accession [2EQ7](https://www.rcsb.org/structure/2eq7)).
+
+<div id="note">
+Sometimes it may be necessary to update a particular database entry when new experimental data becomes available (e.g., to correct errors or add new information about the sequence or molecule.) The previous database entry will be preserved (it is part of the permanent scientific record!), but an updated version will be published to the database, with a new version of the accession number. 
+
+For example, the sequence of the well-studied model organism <em>Escherichia coli</em> (MG1655) was deposited to Genbank under the access number NC_000913.1 in June 2004 and this record can still be accessed at <https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.1>. However, since then a few errors in the sequence have been corrected, and the annotation updated: the current record (at time of writing) has accession number NC_000913.3 can be found at <https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.3>. 
+
+Note that the old version has a warning note attached to it and a link to the current version. 
+</div>
+
+# How do we cite data from public databases?
+
+Give the URL to the database, the accession number(s) of the data you used, and state the date of access or version number (if available).
+
+# Examples of how to search public databases and retrieve information
+
+To look at how you might use public databases in the context of a capstone project, we will take the example of a beta-lactamase (carbapenemase) called NDM-1, which makes bacteria resistant to a broad range of beta-lactam antibiotics. The spread of bacteria carrying these carbapenemase genes is a major public health concern.
+
+<details>
+  <summary>Click to toggle an example of how to search the NCBI databases (example of how to search using a keyword query</summary>
+
+Our first task is to find the NDM-1 amino acid sequence. To do this, we will search the NCBI databases (starting from <https://www.ncbi.nlm.nih.gov/>). 
+![The search bar is at the top of the page (arrow). Note that we can choose which of the NCBI databases we would like to search (arrow) - for this example, we will keep the default (all databases), but we could equally choose to search the Protein database - since the protein sequence is what we are looking for.](https://img1.jpg)
+![Once we have searched for "ndm-1" in the databases, we see the following page of results, showing the entries which match our query in <em>all</em> the databases at NCBI. Since we want the protein sequence, we will click on the link to those results (box).](https://img2.jpg)
+
+![This then takes us to a page displaying all of the hits matching our "ndm-1" query in the Protein database. In this case, we want the sequence from *Klebsiella pneumoniae*, the organism where NDM-1 was first discovered](https://img3.jpg)
+
+![Clicking on the "NDM-1 (Klebsiella pneumoniae)" page shown in the previous image, brings us to the results page. By default, this is in the GenPept format - you can use the pulldown menu (top-left box) to change the format, e.g. to a FASTA format. The results page displays information including the accession number for this protein (AQT38377), the amino acid sequence, and information about different features in the protein (e.g., metal-binding sites). Note that you can download this information if you wish, by selecting "Send to:" (top right box), and in the pop-up menu - Choose Destination: File.](https://img4.jpg)
+
+</details>
+
+<details>
+  <summary>Click to toggle an example of how to search the Comprehensive Antibiotic Resistance Database (CARD) (example of how to search using a keyword query with autocomplete</summary>
+We might also want to find information about which other species have been found to have NDM-1, or sequence variants that have been observed in different strains. For this, we will turn to the CARD database (<https://card.mcmaster.ca/>).
+
+![The search bar for the CARD database is at the top right hand corner of the page. Note that as we start typing in our "ndm-1" query, a drop-down list of autocomplete options appears (arrow). We select and search for the option we want.](https://img5.jpg)
+
+![The results page from our query: this gives us a list of resistomes with perfect matches and with sequence variants, information about the protein - including a list of publications with PubMed links - and a look at the prevalence of NDM-1 in 263 important pathogens. Note that the accession number (ARO:3000589) is different than the accession number for the *K. pneumoniae* protein we looked at in the NCBI Protein database.](https://img6.jpg)
+</details>
+
+<details>
+  <summary>Click to toggle an example of how to search the Protein Data Bank (PDB) (example of how to search using a keyword query)</summary>
+We also want to find the 3D structure of the NDM-1 protein. To do this, we turn to the Protein Data Bank (PDB) at <https://www.rcsb.org/>.
+
+![The search bar is at the top right-hand corner of the screen (arrow). We enter our "ndm-1" query and hit search.](https://img7.jpg)
+
+![The results page offers an Advanced Search query builder (top arrow), and a number of options for filtering our search (Refinements - bottom arrow). We could, for example, specify which organism we were interested in, or which experimental method - e.g., X-ray diffraction or solution NMR.](https://img8.jpg)
+
+![The results page shows a ribbon diagram of the protein and allows us to download the structural data, which we can analyse using software on our computers. The results page also links to the associated paper where this structure was first published, where you can learn more about how these data were generated.](https://img9.jpg)
+<details>
+  <summary>Click to toggle an example of how to search the Pfam database (example of how to search a database using a sequence query</summary>
+Having learned about the sequence and structure of our NDM-1 protein, we now want to learn about any related proteins. To do this, we will turn to the Pfam database (a database of protein families), at <http://pfam.xfam.org/>. 
+  
+![There are a number of different ways ot search the Pfam database (centre of the page), including by keyword, accession number, or protein sequence.](https://img10.jpg)
+
+![In our case, we already have the protein sequence (from NCBI), so we will use that to search Pfam. Clicking on "sequence search" brings up a query box where we can paste the sequence of NDM-1 from *K. pneumoniae* ](https://img11.jpg)
+
+![The results page will bring up all matching protein families. In this case, there is only one match - the Lactamase B family. Note that the search results will also tell you which parts of your query match the Pfam family, which can be important for multidomain proteins. ](https://img12.jpg)
+
+![Clicking on the Lactamase B family brings us to the Pfam page about this protein family (accession PF00753). By default, you land on the "Summary" part of the page, but you can access more information by clicking on the headings (e.g. Domain organization, Clan, Alignments, etc.) in the menu on the left. There is also a menu in pale blue across the top, with links to the protein architectures, sequences, interactions, species, and structures.](https://img13.jpg)
+</details>
+
+<details>
+  <summary>Click to toggle an example of how to search the UniProt database (example of advanced search using Boolean terms)</summary>
+
+We also want to find out what is known about NDM-1 function, i.e. the catalytic activity of the protein. For this, we will turn to the UniProt database at <https://www.uniprot.org/>. 
+
+![We enter our keyword query "ndm-1" into the search bar at the top of the page. However, we specifically want to find more information about NDM-1 from *K. pneumoniae*, so we next click "Advanced" (instead of "Search").](https://img14.jpg)
+
+![We can add additional search terms to our query by clicking on the + icon. In this case, we want to restrict our search to *K. pneumoniae*, so we use Organism (arrow) and type in "KLebsiella". A drop-down list appears highlighting potential choices and in our case, we select "Klebsiella pneumoniae".](https://img15.jpg)
+
+![The results page brings up a number of proteins from *Klebsiella pneumoniae* that match our search. Note that there are additional options for filtering the search in the left-hand menu bar. For example, we might want to filter by "Reviewed" versus "Unreviewed" records. However, the NDM-1 protein that we are looking for is the top hit in the list.](https://img16.jpg)
+
+![The page for our protein, NDM-1 from *K. pneumoniae*. This page has information about the catalytic activity, cofactor, regulation, kinetics, localization, etc. etc. There are also links to a number of other databases and information about similar proteins.](https://img17.jpg)
+</details>
+
+## Links to some key public databases
+
+The following are some databases that you may find useful while working on your capstone project. While we have attempted to include all of the databases you are likely to use, this is not an exhaustive list of all the public databases that exist in the biomedical sciences. Please send any suggestions for additional databases that should be included here, or report any broken links, to Dr. Morgan Feeney.
+
+- [BioCyc](https://biocyc.org/): BioCyc integrates genome data with a comprehensive body of additional data including metabolic reconstructions, regulatory networks, protein features, orthologs, gene essentiality, and atom mappings.
+- [Genbank](https://www.ncbi.nlm.nih.gov/genbank/):  the NIH genetic sequence database, an annotated collection of all publicly available DNA sequences
+- [Genomes OnLine Database (GOLD)](https://gold.jgi.doe.gov/): comprehensive access to information regarding genome and metagenome sequencing projects, and their associated metadata, around the world.
+- [Ensembl Genome Browser](https://www.ensembl.org/index.html): a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation
+- [IMG/M](https://img.jgi.doe.gov/): supports the annotation, analysis and distribution of microbial genome and microbiome datasets sequenced at DOE's Joint Genome Institute (JGI).
+- [Kyoto Encyclopedia of Genes and Genomes (KEGG)](https://www.genome.jp/kegg/): a database resource for understanding high-level functions and utilities of the biological system, such as the cell, the organism and the ecosystem, from molecular-level information, especially large-scale molecular datasets generated by genome sequencing and other high-throughput experimental technologies
+- [microbesonline](http://www.microbesonline.org/): A comparative functional genomic database and workbench with advanced tools for phylogenetic analysis and annotation, functional data storage/display/analysis, metabolic analysis and metafunctional genomics
+- [Pfam](http://pfam.xfam.org/):  large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)
+- [Protein Data Bank (PDB)](https://www.rcsb.org/): 3D structure data for large biological molecules (proteins, DNA, and RNA) 
+- [Rfam](https://rfam.xfam.org/): a collection of RNA families, each represented by multiple sequence alignments, consensus secondary structures and covariance models
+- [STRING](https://string-db.org/):  a database of known and predicted protein-protein interactions
+- [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra/): the largest publicly available repository of high throughput sequencing data
+- [Uniprot](https://www.uniprot.org/): a comprehensive, high-quality and freely accessible resource of protein sequence and functional information
+
+## Organism-specific databases
+
+- [EcoCyc](https://ecocyc.org/): database for the bacterium *Escherichia coli* K-12 MG1655
+- [FlyBase](http://flybase.org/): database of *Drosophila* Genes & Genomes
+- [Mouse Genome Informatics (MGI)](http://www.informatics.jax.org/): international database resource for the laboratory mouse, providing integrated genetic, genomic, and biological data to facilitate the study of human health and disease.
+- [MycoBrowser](https://mycobrowser.epfl.ch/): a comprehensive genomic and proteomic data repository for pathogenic mycobacteria
+- [PomBase](https://www.pombase.org/): comprehensive database for the fission yeast *Schizosaccharomyces pombe*, providing structural and functional annotation, literature curation and access to large-scale data sets
+- [Saccharomyces Genome Database (SGD)](https://www.yeastgenome.org/): comprehensive integrated biological information for the budding yeast *Saccharomyces cerevisiae* along with search and analysis tools to explore these data
+- [StrepDB](http://strepdb.streptomyces.org.uk/): the *Streptomyces* Annotation Server
+- [The Arabidopsis Information Resource (TAIR)](https://www.arabidopsis.org/): genetic and molecular biology data for the model higher plant *Arabidopsis thaliana*
+- [WormBase](https://wormbase.org/#012-34-5): accurate, current, accessible information concerning the genetics, genomics and biology of *C. elegans* and related nematodes
+- [XenBase](http://www.xenbase.org/entry/): resource that integrates all the diverse biological, genomic, genotype and phenotype data available from *Xenopus* research
+- [ZFin](http://zfin.org/): database of genetic and genomic data for the zebrafish (*Danio rerio*) as a model organism
+
+## Topic-specific databases
+
+- [Codon Usage Database](http://www.kazusa.or.jp/codon/): Database of codon usage tabulated from Genbank
+- [Comprehensive Antibiotic Resistance Database (CARD)](https://card.mcmaster.ca/): bioinformatic database of resistance genes, their products and associated phenotypes
+- [MetaCyc](https://metacyc.org/): a curated database of experimentally elucidated metabolic pathways from all domains of life
+- [The Restriction Enzyme Database (REBASE)](http://rebase.neb.com/rebase/rebase.html): a dynamic, curated database of restriction enzymes and related proteins
+
+
+
+<details>
+  <summary>Click to see links to additional databases</summary>
+Looking for a database not listed here? Try looking in the [NAR database list](https://www.oxfordjournals.org/nar/database/c) or the [Online Bioinformatics Resources Collection (OBRC)](https://www.hsls.pitt.edu/obrc/).
+</details>
+
+
+

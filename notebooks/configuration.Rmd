@@ -1,6 +1,6 @@
 ---
 title: "Configuring Your Computer"
-author: "Leighton Pritchard"
+author: "Leighton Pritchard, Morgan Feeney"
 date: "2021 Presentation"
 output: 
   bookdown::html_document2:
@@ -25,6 +25,10 @@ library("ggplot2")
 # BG color for plots - should match .figure and .caption classes in rmd_style.css
 figbg = "whitesmoke"
 ```
+
+<div id="summary">
+This notebook contains instructions for downloading the course materials, and setting up your own computer with the software required to run the course examples, and reproduce the materials.
+</div>
 
 # Introduction
 
