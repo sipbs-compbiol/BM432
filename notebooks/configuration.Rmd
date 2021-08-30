@@ -8,9 +8,9 @@ output:
     toc_float:
       toc_collapsed: false
     number_sections: true
-    css: "css/rmd_style.css"
-    theme: lumen
     self_contained: no
+    css: "./css/rmd_style.css"
+    theme: lumen
 ---
 
 ```{r setup, include=FALSE}
@@ -25,7 +25,6 @@ library("ggplot2")
 # BG color for plots - should match .figure and .caption classes in rmd_style.css
 figbg = "whitesmoke"
 ```
-
 
 # Introduction
 
