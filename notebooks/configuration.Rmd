@@ -25,7 +25,7 @@ library("ggplot2")
 # BG color for plots - should match .figure and .caption classes in rmd_style.css
 figbg = "whitesmoke"
 ```
-```
+
 
 # Introduction
 
