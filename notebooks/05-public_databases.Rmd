@@ -1,5 +1,5 @@
 ---
-title: "How to access data from public databases"
+title: "How to Access Data from Public Databases"
 author: "Morgan Feeney, Leighton Pritchard"
 date: "2021 Presentation"
 output: 
