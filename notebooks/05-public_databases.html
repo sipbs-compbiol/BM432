@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Morgan Feeney, Leighton Pritchard" />
+
+
+<title>How to access data from public databases</title>
+
+<script src="05-public_databases_files/header-attrs-2.10/header-attrs.js"></script>
+<script src="05-public_databases_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="05-public_databases_files/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="05-public_databases_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="05-public_databases_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="05-public_databases_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="05-public_databases_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="05-public_databases_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="05-public_databases_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="05-public_databases_files/navigation-1.1/tabsets.js"></script>
+<link href="05-public_databases_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="05-public_databases_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="css/rmd_style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">How to access data from public databases</h1>
+<h4 class="author">Morgan Feeney, Leighton Pritchard</h4>
+<h4 class="date">2021 Presentation</h4>
+
+</div>
+
+
+<div id="summary">
+<ul>
+<li>A wealth of information is freely available in public databases, and can be searched and accessed for use in your project.
+<ul>
+<li>Specialised databases are available for different purposes</li>
+</ul></li>
+<li>Each item of data deposited into a database is assigned a unique identifier called an <em>accession number</em>.</li>
+<li>Deposition of research data in public repositories is often a requirement for publication</li>
+<li>Databases are not equally authoritative: some are databases of record, and not all are curated for quality control and accuracy.</li>
+</ul>
+<p>This part of the workshop aims to introduce you to several ways of accessing data from public databases.</p>
+</div>
+<div id="introduction" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Introduction</h1>
+<p>Many, if not all, projects will involve the use of data from publicly available databases. You may be analysing these data as the main focus of your project, or comparing data you have generated with publicly available data (e.g. comparing the 16S rRNA gene sequence from an organism you isolated with 16S rRNA gene sequences deposited in the NCBI database.)</p>
+<p>Databases provide an essential service in storing, organizing, and allowing researchers to easily search and access data. Most journals (certainly all reputable journals!) require researchers to deposit any data generated as part of a publication in the appropriate public database.</p>
+<details>
+<summary>
+Some example journal requirements for data deposition (click to expand)
+</summary>
+<ul>
+<li><a href="https://rupress.org/jem/pages/data-deposition">Journal of Experimental Medicine</a></li>
+<li><a href="https://academic.oup.com/nar/pages/data_deposition_and_standardization">Nucleic Acids Research</a></li>
+<li><a href="https://www.mdpi.com/journal/data/instructions#suppmaterials">MDPI Journals</a></li>
+</ul>
+</details>
+</div>
+<div id="where-can-we-get-public-data-from" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Where can we get public data from?</h1>
+<p>There are specialised databases for particular types of data. The databases that are relevant to you will depend on the specific task you are carrying out. For example, if you are trying to find the 3D structure of your protein of interest, the appropriate data will be stored in the <a href="https://www.rcsb.org/">Protein Data Bank</a>, but not in the <a href="https://www.ncbi.nlm.nih.gov/genbank/">NCBI Genbank</a> database (this database stores nucleotide and amino acid sequence information).</p>
+<div id="note">
+<p>Many public databases are connected by database <em>crosslinks</em> (also known as <em>xlinks</em>). Some of the most useful databases, such as <a href="https://www.ebi.ac.uk/uniprot/">UniProt</a>, are valuable not just because they contain useful data but because they <em>cross-link</em> between so many other databases to connect very different data types for easy <em>integration</em> of datasets.</p>
+</div>
+<p>Most databases can be accessed interactively through a web-based interface. Many can also be accessed <em>via</em> the command line, or <em>programmatically</em> (not covered in this workshop).</p>
+<ul>
+<li><a href="./database_list.html">Links to some key public databases</a></li>
+</ul>
+<div id="repositories-of-record-vs-domain-specific-curated-or-not-resources" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Repositories of record vs domain-specific curated (or not) resources</h2>
+<p>Primary databases usually provide experimentally-derived data, such as the 3D protein structures solved by X-ray crystallography, NMR or Cryo-EM, whose data are deposited at the PDB. Similarly, the <a href="https://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive (SRA)</a> stores raw reads obtained from high throughput sequencing. and <a href="https://www.cancer.gov/about-nci/organization/ccg/research/structural-genomics/tcga">The Cancer Genome Atlas (TCGA)</a> provides access to genomic, transcriptomic, and clinical data for a range of cancers.</p>
+<p>Both the PDB and SRA are <em>Repositories of Record</em>. In addition to being stores of experimentally-derived data, they are internationally recognised as the scientific community’s main repository for their datatypes. As such, journals may require that any suitable data is deposited in these repositories as a condition of publication. These kinds of repositories are required to be stable over decades, so are often funded at a national or international level.</p>
+<p>There are a large number of subject- or organism-specific databases. These may contain primary data, but often contain data derived from analysis of primary databases, or integrate data from multiple sources to provide a comprehensive view of a particular topic. For example, the <a href="https://card.mcmaster.ca/">Comprehensive Antibiotic Resistance Database (CARD)</a> is a curated database of known resistance determinants and associated antibiotics. Curation can increase the reliability and trustworthiness of a database, as problematic data may be excluded and only well-evidenced data included. However, curation is time-consuming, and these databases may be smaller than comprehensive databases that have less quality control.</p>
+<details>
+<summary>
+UniProt, Swiss-Prot and TrEMBL: Curated and Uncurated (click to expand)
+</summary>
+<p>The <code>UniProt</code> database comprises two main sequence databases under the name <code>UniProtKB</code> (UniProt Knowledgebase): <code>Swiss-Prot</code> and <code>TrEMBL</code>. The <code>TrEMBL</code> database contains all translated protein-coding sequences from public nucleic acid databases. The vast majority of these translated sequences are predictions - they have never been experimentally studied, or their existence confirmed. By contrast, the <code>Swiss-Prot</code> database contains only non-redundant, manually annotated protein sequences. Each sequence in <code>Swiss-Prot</code> carries an <em>evidence code</em> to indicate the strength of experimental evidence for the existence of the protein.</p>
+Manual annotation takes time, and there are relatively few annotators. As a result, at the time of writing, there are over 400 proteins in <code>TrEMBL</code> for every protein in <code>Swiss-Prot</code>, and the ratio increases with every version of the database.
+</details>
+<div id="warning">
+<p><strong>Watch out for unmaintained sites!</strong></p>
+<p>Major databases are continuously updated and well-maintained. For example, the databases in the International Sequence Database Collaboration (INSDC: Genbank, EMBL, DDBJ) automatically update one another with new data collected daily.</p>
+<p>However, not all databases are equally well-curated. Some will persist, even after they are no longer curated - and thus may contain out-of-date information, or not have the latest updates. <em>Caveat emptor…</em></p>
+</div>
+<div id="note">
+<p><strong>Database versioning</strong></p>
+<p>Database contents change over time as new data is added, redundant or incorrect data is removed, or otherwise modified. It is important for reproducibility, therefore, to report the version information appropriate to your dataset.</p>
+<p>Some databases, such as <code>UniProt</code>, provide a <a href="https://www.uniprot.org/uniprot/B6J853?version=*">complete history</a> for each database entry. Other databases provide a version number for each accession, such as the number following the decimal point in <code>GenBank</code> records like <a href="https://www.ncbi.nlm.nih.gov/assembly/GCF_007858975.2/">GCF_007858975.2</a>. Others may provide a release version number for the database as a whole - and <code>GenBank</code> does this also, every two months (<a href="https://www.ncbi.nlm.nih.gov/genbank/release/">GenBank releases</a>). Some databases provide no version information, and these should be reported with a date when the database was accessed.</p>
+</div>
+</div>
+<div id="different-sites-may-have-very-different-accessfunctionalitysearching" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Different sites may have very different access/functionality/searching</h2>
+<p>Most databases can be searched by keywords, though the search interfaces may vary. Many sequence databases will allow you to search by sequence similarity (e.g., <code>BLASTP</code> to search for proteins similar to a query protein).</p>
+<div id="warning">
+<p>Pay careful attention to your search terms!</p>
+<p>As with any query to a computer database, keyword searches in biological databases are sensitive to typos or spelling errors. For example, searching <code>UniProt</code> for “lipaomide dehydrogenase” retrieves <a href="https://www.uniprot.org/uniprot/?query=lipaomide+dehydrogenase&amp;sort=score">0 results</a>, while the correctly spelled search “lipoamide dehydrogenase” retrieves <a href="https://www.uniprot.org/uniprot/?query=lipoamide+dehydrogenase&amp;sort=score">thousands of results</a>.</p>
+</div>
+</div>
+</div>
+<div id="what-are-accession-numbers-and-how-can-we-use-them" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> What are accession numbers and how can we use them?</h1>
+<p>Records deposited into a database will be assigned a unique identifier, called an <em>accession number</em>. An accession number will <em>always</em> refer to the same record.</p>
+<p>The format of accession numbers varies between databases:</p>
+<ul>
+<li>Genbank acccession: <a href="https://www.ncbi.nlm.nih.gov/protein/BAD70110">BAD70110.1</a></li>
+<li>UniProt accession <a href="https://www.uniprot.org/uniprot/Q5SLK6">Q5SLK6</a></li>
+<li>PDB accession <a href="https://www.rcsb.org/structure/2eq7">2EQ7</a>).</li>
+</ul>
+<div id="note">
+<p>Sometimes it may be necessary to update a particular database entry when new experimental data becomes available (e.g., to correct errors or add new information about the sequence or molecule.) The previous database entry will be preserved (it is part of the permanent scientific record!), but an updated version will be published to the database, with a new version of the accession number.</p>
+<p>For example, the sequence of the well-studied model organism <em>Escherichia coli</em> (MG1655) was deposited to Genbank under the access number NC_000913.1 in June 2004 and this record can still be accessed at <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.1" class="uri">https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.1</a>. However, since then a few errors in the sequence have been corrected, and the annotation updated: the current record (at time of writing) has accession number NC_000913.3 can be found at <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.3" class="uri">https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.3</a>.</p>
+<p>Note that the old version has a warning note attached to it and a link to the current version.</p>
+<p><strong>Although an accession number is sufficient to identify the record, the version number should also be cited.</strong></p>
+</div>
+</div>
+<div id="how-do-we-cite-data-from-public-databases" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> How do we cite data from public databases?</h1>
+<p>Give the URL to the database, the accession number(s) of the data used, and state the date of access or version number (if available).</p>
+</div>
+<div id="examples-of-how-to-search-public-databases-and-retrieve-information" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Examples of how to search public databases and retrieve information</h1>
+<p>To look at how you might use public databases in the context of a capstone project, we will take the example of a beta-lactamase (carbapenemase) called NDM-1, which makes bacteria resistant to a broad range of beta-lactam antibiotics. The spread of bacteria carrying these carbapenemase genes is a major public health concern.</p>
+<details>
+<summary>
+Click to toggle an example of how to search the NCBI databases (example of how to search using a keyword query
+</summary>
+<p>Our first task is to find the NDM-1 amino acid sequence. To do this, we will search the NCBI databases (starting from <a href="https://www.ncbi.nlm.nih.gov/" class="uri">https://www.ncbi.nlm.nih.gov/</a>).
+<img src="https://img1.jpg" alt="The search bar is at the top of the page (arrow). Note that we can choose which of the NCBI databases we would like to search (arrow) - for this example, we will keep the default (all databases), but we could equally choose to search the Protein database - since the protein sequence is what we are looking for." />
+<img src="https://img2.jpg" alt="Once we have searched for “ndm-1” in the databases, we see the following page of results, showing the entries which match our query in all the databases at NCBI. Since we want the protein sequence, we will click on the link to those results (box)." /></p>
+<div class="figure">
+<img src="https://img3.jpg" alt="" />
+<p class="caption">This then takes us to a page displaying all of the hits matching our “ndm-1” query in the Protein database. In this case, we want the sequence from <em>Klebsiella pneumoniae</em>, the organism where NDM-1 was first discovered</p>
+</div>
+<div class="figure">
+<img src="https://img4.jpg" alt="" />
+<p class="caption">Clicking on the “NDM-1 (Klebsiella pneumoniae)” page shown in the previous image, brings us to the results page. By default, this is in the GenPept format - you can use the pulldown menu (top-left box) to change the format, e.g. to a FASTA format. The results page displays information including the accession number for this protein (AQT38377), the amino acid sequence, and information about different features in the protein (e.g., metal-binding sites). Note that you can download this information if you wish, by selecting “Send to:” (top right box), and in the pop-up menu - Choose Destination: File.</p>
+</div>
+</details>
+<details>
+<summary>
+Click to toggle an example of how to search the Comprehensive Antibiotic Resistance Database (CARD) (example of how to search using a keyword query with autocomplete
+</summary>
+<p>We might also want to find information about which other species have been found to have NDM-1, or sequence variants that have been observed in different strains. For this, we will turn to the CARD database (<a href="https://card.mcmaster.ca/" class="uri">https://card.mcmaster.ca/</a>).</p>
+<div class="figure">
+<img src="https://img5.jpg" alt="" />
+<p class="caption">The search bar for the CARD database is at the top right hand corner of the page. Note that as we start typing in our “ndm-1” query, a drop-down list of autocomplete options appears (arrow). We select and search for the option we want.</p>
+</div>
+<img src="https://img6.jpg" title="fig:" alt="The results page from our query: this gives us a list of resistomes with perfect matches and with sequence variants, information about the protein - including a list of publications with PubMed links - and a look at the prevalence of NDM-1 in 263 important pathogens. Note that the accession number (ARO:3000589) is different than the accession number for the K. pneumoniae protein we looked at in the NCBI Protein database." />
+</details>
+<details>
+<summary>
+Click to toggle an example of how to search the Protein Data Bank (PDB) (example of how to search using a keyword query)
+</summary>
+<p>We also want to find the 3D structure of the NDM-1 protein. To do this, we turn to the Protein Data Bank (PDB) at <a href="https://www.rcsb.org/" class="uri">https://www.rcsb.org/</a>.</p>
+<div class="figure">
+<img src="https://img7.jpg" alt="" />
+<p class="caption">The search bar is at the top right-hand corner of the screen (arrow). We enter our “ndm-1” query and hit search.</p>
+</div>
+<div class="figure">
+<img src="https://img8.jpg" alt="" />
+<p class="caption">The results page offers an Advanced Search query builder (top arrow), and a number of options for filtering our search (Refinements - bottom arrow). We could, for example, specify which organism we were interested in, or which experimental method - e.g., X-ray diffraction or solution NMR.</p>
+</div>
+<img src="https://img9.jpg" title="fig:" alt="The results page shows a ribbon diagram of the protein and allows us to download the structural data, which we can analyse using software on our computers. The results page also links to the associated paper where this structure was first published, where you can learn more about how these data were generated." />
+<details>
+<summary>
+Click to toggle an example of how to search the Pfam database (example of how to search a database using a sequence query
+</summary>
+<p>Having learned about the sequence and structure of our NDM-1 protein, we now want to learn about any related proteins. To do this, we will turn to the Pfam database (a database of protein families), at <a href="http://pfam.xfam.org/" class="uri">http://pfam.xfam.org/</a>.</p>
+<div class="figure">
+<img src="https://img10.jpg" alt="" />
+<p class="caption">There are a number of different ways ot search the Pfam database (centre of the page), including by keyword, accession number, or protein sequence.</p>
+</div>
+<div class="figure">
+<img src="https://img11.jpg" alt="" />
+<p class="caption">In our case, we already have the protein sequence (from NCBI), so we will use that to search Pfam. Clicking on “sequence search” brings up a query box where we can paste the sequence of NDM-1 from <em>K. pneumoniae</em></p>
+</div>
+<div class="figure">
+<img src="https://img12.jpg" alt="" />
+<p class="caption">The results page will bring up all matching protein families. In this case, there is only one match - the Lactamase B family. Note that the search results will also tell you which parts of your query match the Pfam family, which can be important for multidomain proteins.</p>
+</div>
+<img src="https://img13.jpg" title="fig:" alt="Clicking on the Lactamase B family brings us to the Pfam page about this protein family (accession PF00753). By default, you land on the “Summary” part of the page, but you can access more information by clicking on the headings (e.g. Domain organization, Clan, Alignments, etc.) in the menu on the left. There is also a menu in pale blue across the top, with links to the protein architectures, sequences, interactions, species, and structures." />
+</details>
+<details>
+<summary>
+Click to toggle an example of how to search the UniProt database (example of advanced search using Boolean terms)
+</summary>
+<p>We also want to find out what is known about NDM-1 function, i.e. the catalytic activity of the protein. For this, we will turn to the UniProt database at <a href="https://www.uniprot.org/" class="uri">https://www.uniprot.org/</a>.</p>
+<div class="figure">
+<img src="https://img14.jpg" alt="" />
+<p class="caption">We enter our keyword query “ndm-1” into the search bar at the top of the page. However, we specifically want to find more information about NDM-1 from <em>K. pneumoniae</em>, so we next click “Advanced” (instead of “Search”).</p>
+</div>
+<div class="figure">
+<img src="https://img15.jpg" alt="" />
+<p class="caption">We can add additional search terms to our query by clicking on the + icon. In this case, we want to restrict our search to <em>K. pneumoniae</em>, so we use Organism (arrow) and type in “KLebsiella”. A drop-down list appears highlighting potential choices and in our case, we select “Klebsiella pneumoniae”.</p>
+</div>
+<div class="figure">
+<img src="https://img16.jpg" alt="" />
+<p class="caption">The results page brings up a number of proteins from <em>Klebsiella pneumoniae</em> that match our search. Note that there are additional options for filtering the search in the left-hand menu bar. For example, we might want to filter by “Reviewed” versus “Unreviewed” records. However, the NDM-1 protein that we are looking for is the top hit in the list.</p>
+</div>
+<img src="https://img17.jpg" title="fig:" alt="The page for our protein, NDM-1 from K. pneumoniae. This page has information about the catalytic activity, cofactor, regulation, kinetics, localization, etc. etc. There are also links to a number of other databases and information about similar proteins." />
+</details>
+<p>The following are some databases that you may find useful while working on your capstone project. While we have attempted to include all of the databases you are likely to use, this is not an exhaustive list of all the public databases that exist in the biomedical sciences. Please send any suggestions for additional databases that should be included here, or report any broken links, to Dr. Morgan Feeney.</p>
+<ul>
+<li><a href="https://biocyc.org/">BioCyc</a>: BioCyc integrates genome data with a comprehensive body of additional data including metabolic reconstructions, regulatory networks, protein features, orthologs, gene essentiality, and atom mappings.</li>
+<li><a href="https://www.ncbi.nlm.nih.gov/genbank/">Genbank</a>: the NIH genetic sequence database, an annotated collection of all publicly available DNA sequences</li>
+<li><a href="https://gold.jgi.doe.gov/">Genomes OnLine Database (GOLD)</a>: comprehensive access to information regarding genome and metagenome sequencing projects, and their associated metadata, around the world.</li>
+<li><a href="https://www.ensembl.org/index.html">Ensembl Genome Browser</a>: a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation</li>
+<li><a href="https://img.jgi.doe.gov/">IMG/M</a>: supports the annotation, analysis and distribution of microbial genome and microbiome datasets sequenced at DOE’s Joint Genome Institute (JGI).</li>
+<li><a href="https://www.genome.jp/kegg/">Kyoto Encyclopedia of Genes and Genomes (KEGG)</a>: a database resource for understanding high-level functions and utilities of the biological system, such as the cell, the organism and the ecosystem, from molecular-level information, especially large-scale molecular datasets generated by genome sequencing and other high-throughput experimental technologies</li>
+<li><a href="http://www.microbesonline.org/">microbesonline</a>: A comparative functional genomic database and workbench with advanced tools for phylogenetic analysis and annotation, functional data storage/display/analysis, metabolic analysis and metafunctional genomics</li>
+<li><a href="http://pfam.xfam.org/">Pfam</a>: large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)</li>
+<li><a href="https://www.rcsb.org/">Protein Data Bank (PDB)</a>: 3D structure data for large biological molecules (proteins, DNA, and RNA)</li>
+<li><a href="https://rfam.xfam.org/">Rfam</a>: a collection of RNA families, each represented by multiple sequence alignments, consensus secondary structures and covariance models</li>
+<li><a href="https://string-db.org/">STRING</a>: a database of known and predicted protein-protein interactions</li>
+<li><a href="https://www.ncbi.nlm.nih.gov/sra/">Sequence Read Archive (SRA)</a>: the largest publicly available repository of high throughput sequencing data</li>
+<li><a href="https://www.uniprot.org/">Uniprot</a>: a comprehensive, high-quality and freely accessible resource of protein sequence and functional information</li>
+</ul>
+<div id="organism-specific-databases" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Organism-specific databases</h2>
+<ul>
+<li><a href="https://ecocyc.org/">EcoCyc</a>: database for the bacterium <em>Escherichia coli</em> K-12 MG1655</li>
+<li><a href="http://flybase.org/">FlyBase</a>: database of <em>Drosophila</em> Genes &amp; Genomes</li>
+<li><a href="http://www.informatics.jax.org/">Mouse Genome Informatics (MGI)</a>: international database resource for the laboratory mouse, providing integrated genetic, genomic, and biological data to facilitate the study of human health and disease.</li>
+<li><a href="https://mycobrowser.epfl.ch/">MycoBrowser</a>: a comprehensive genomic and proteomic data repository for pathogenic mycobacteria</li>
+<li><a href="https://www.pombase.org/">PomBase</a>: comprehensive database for the fission yeast <em>Schizosaccharomyces pombe</em>, providing structural and functional annotation, literature curation and access to large-scale data sets</li>
+<li><a href="https://www.yeastgenome.org/">Saccharomyces Genome Database (SGD)</a>: comprehensive integrated biological information for the budding yeast <em>Saccharomyces cerevisiae</em> along with search and analysis tools to explore these data</li>
+<li><a href="http://strepdb.streptomyces.org.uk/">StrepDB</a>: the <em>Streptomyces</em> Annotation Server</li>
+<li><a href="https://www.arabidopsis.org/">The Arabidopsis Information Resource (TAIR)</a>: genetic and molecular biology data for the model higher plant <em>Arabidopsis thaliana</em></li>
+<li><a href="https://wormbase.org/#012-34-5">WormBase</a>: accurate, current, accessible information concerning the genetics, genomics and biology of <em>C. elegans</em> and related nematodes</li>
+<li><a href="http://www.xenbase.org/entry/">XenBase</a>: resource that integrates all the diverse biological, genomic, genotype and phenotype data available from <em>Xenopus</em> research</li>
+<li><a href="http://zfin.org/">ZFin</a>: database of genetic and genomic data for the zebrafish (<em>Danio rerio</em>) as a model organism</li>
+</ul>
+</div>
+<div id="topic-specific-databases" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Topic-specific databases</h2>
+<ul>
+<li><a href="http://www.kazusa.or.jp/codon/">Codon Usage Database</a>: Database of codon usage tabulated from Genbank</li>
+<li><a href="https://card.mcmaster.ca/">Comprehensive Antibiotic Resistance Database (CARD)</a>: bioinformatic database of resistance genes, their products and associated phenotypes</li>
+<li><a href="https://metacyc.org/">MetaCyc</a>: a curated database of experimentally elucidated metabolic pathways from all domains of life</li>
+<li><a href="http://rebase.neb.com/rebase/rebase.html">The Restriction Enzyme Database (REBASE)</a>: a dynamic, curated database of restriction enzymes and related proteins</li>
+</ul>
+<details>
+<summary>
+Click to see links to additional databases
+</summary>
+Looking for a database not listed here? Try looking in the <a href="https://www.oxfordjournals.org/nar/database/c">NAR database list</a> or the <a href="https://www.hsls.pitt.edu/obrc/">Online Bioinformatics Resources Collection (OBRC)</a>.
+</details>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
