@@ -1,0 +1,187 @@
+---
+title: "Data and Project Management"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<div id="summary">
+- There is no one correct way to organise a project or data, **but there are good principles for project and data management**
+- Use a single working directory per project or analysis (and name it after the project or analysis)
+- Treat raw data as **read-only**
+  - Place cleaned data in a separate file/folder
+  - Place output/analysed data in a separate file/folder
+- Clean your data in an automated, reproducible way^[We will work with [`OpenRefine`](https://openrefine.org/) as a tool for data cleaning, in the workshop.].
+- Store all data and analysis in a human-readable format
+- Automate your analysis as much as possible
+</div>
+
+# Mary, Mary, How Does Your Project Grow?
+
+```{r finaldoc, fig.cap="How document namestend to grow... [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1531)"}
+knitr::include_graphics(rep("images/phd101212s.gif"))
+```
+
+I'm sure you're all familiar with the situation in figure \@ref(fig:finaldoc). Research (like writing) tends to be incremental. Project files start out as random notes here, a bit of code there, some data over there... and eventually a project thesis emerges.
+
+```{r filenames, fig.cap="How project files tend to grow... [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1323)"}
+knitr::include_graphics(rep("images/phd052810s.gif"))
+```
+
+But the situation in figure \@ref(fig:finaldoc) is bad. It's not clear which order the documents were created in, or which files contain which changes. There are many reasons why we should **always** avoid working in a haphazard manner, or naming files like they do figure \@ref(fig:filenames).
+
+<div id="warning">
+It's possible to spend a lot of time chasing down old file versions, and a lot of that pain can be avoided by using good project management principles.
+</div>
+
+# Good Project and Data Management Principles
+
+## There is no single good way to organise a project
+
+All projects are different, to some extent, so there is no one-size-fits-all advice. It's important to find something that **works for you**, but it's also important that it **works for collaborators**.
+
+In general, if you can name all files and folders to be self-describing, it makes everyone's life easier. A file called `analysis.doc` could contain anything, but if the file was called `2021-08-21_geldoc_sampleABC.doc` you could probably guess that it was a geldoc image for sample `ABC`, taken on 31st August 2021. A similar principle works for naming folders. A folder called `mass_spec` data suggests it contains mass spectrometry data, but `2021-05-15_ms_sampleABC` makes it clearer which sample was run, and when.
+
+This approach does not cover all circumstances, and it's not a good idea to make file or folder names arbitrarily long. So it is good practice to include a **plain text** `README.txt` file in each folder. This file should describe the files in the folder briefly, but more importantly should describe *what* the data represents and *why* it is important (e.g. the research goal and which project it belongs to). There should also be a contact name/email in the file.
+
+These small steps will make the project data much more understandable to others you might share it with, and to yourself if you return to the project, later.
+
+## Use a single working directory for each project or analysis
+
+If you keep all relevant files together in a single folder, it is easy to package up (e.g. as a `.zip` archive), move around, share and publish alongside your paper. Having all relevant files in one place means you will spend less time hunting around your hard drive to find files.
+
+<div id="note">
+Name your project's working directory after the project.
+</div>
+
+<details>
+  <summary>Why is a single working directory useful on remote servers? (click to expand)</summary>
+If you have all project files under a single working directory, then you can always use relative filenames within that working directory. This allows you to transfer analyses between computers and servers, and still be sure your code and analysis will run.
+</details>
+
+### An example directory structure
+
+<div id="note">
+**This is only one of many ways to structure a working directory.**
+
+It's a good starting point, but something else might be more appropriate for your own work.
+</div>
+
+```{r working-directory, fig.cap="An example working directory structure. For your own work, a different structure may be appropriated"}
+knitr::include_graphics(rep("images/working-directory-structure.png"))
+```
+
+The intent behind each directory in figure \@ref(fig:working-directory) is:
+
+- `WORKING_DIR/` is the *root* directory of the project.
+  - Name this after your project
+  - Everything related to the project (data, scripts, figures, notes to yourself, etc.) should be contained *below* this directory (perhaps in subdirectories)
+- `data/` is a subdirectory for stroing data.
+  - Should you stare only raw data, or raw and processed data? **That is your decision.**
+  - Keep your data together with associated metadata (e.g. output spectra with the data files describing machine settings)
+  - Use subfolders when sensible (e.g. `data/raw`, `data/intermediate`, `data/processed`, etc.)
+- `data_output/` could be a place to write analysis output.
+- `documents/` is a directory that could contain notes, draft papers, supporting material, etc.
+- `fig_output/` is a directory that could be used to store graphical output from the analysis.
+- `scripts/` is a directory where you could store executable code that automates your analysis.
+
+<div id="warning">
+- The project determines the folder structure.
+- Structure is a means to an end. You can bend and break guidelines if it improves robustness, readability or maintenance.
+- Have a `README.txt` file in each folder and subfolder to explain its contents.
+</div>
+
+## Treat raw data as read-only
+
+Keeping your raw data in its original state **establishes provenance** and **enables reanalysis**.
+
+<div id="warning">
+You should never modify your raw data files in-place. If you do so, it can be impossible to recover their original state, rendering the original data collection suspect and compromising the integrity of the entire project.
+</div>
+
+Keep raw data in a separate, clearly-labelled, subfolder of the project working directory. 
+
+## Clean raw data programmatically as part of the analysis chain
+
+Most of the time, scientific data is *dirty*, by which we mean it is not exactly in the form necessary for analysis^[It is sometimes argued that ≈80% of data analysis is spent on the process of cleaning and preparing data.]. Cleaning scientific data is part of the analysis process, and can require quite sophisticated choices. Should you, for instance, remove missing values or record them as `Null`? All of these decisions are part of your analysis.
+
+Manual modification and cleaning of data tends to not be reproducible. It can be difficult to remember (or even express) the complex operations involved in removing outliers, fixing typographical errors, or the many other operations that go into cleaning a dataset. For that reason, it is far preferable to automate the process as much as possible.
+
+<div ide="note">
+We will cover one of the tools available for automated and reproducible data-cleaning ([`OpenRefine`](https://openrefine.org/)), in the workshop.
+</div>
+
+<div id="warning">
+Data is like chicken.
+
+**Cleaned data should always be kept separate from raw data.**
+
+Place cleaned data in its own subfolder.
+</div>
+
+## Automate your analysis
+
+As with data cleaning, manual analysis can sometimes be^[Some would say *frequently is*] not entirely reproducible. Especially when dealing with large datasets, it can be very difficult to be consistent with manual analysis. For very large datasets, manual analysis may not be possible.
+
+<div id="note">
+Automating your analyses is outwith the scope of these workshops, but there are many very good online resources that can help you get started.
+</div>
+
+<details>
+  <summary>Some online resources for learning how to automate your analyses (click to expand)</summary>
+  
+- [The Carpentries](https://carpentries.org/) offer online materials, and organise in-person courses, in data analysis and programming for researchers.
+  - We ran two [Data Carpentry courses](https://github.com/sipbs-compbiol/2021-05-11-strathclyde-online) for PhD students at Strathclyde in 2021.
+- [IBM: Data Analysis with Python and pandas](https://developer.ibm.com/learningpaths/data-analysis-using-python/data-analysis-in-python-using-pandas/) is a free online course using Python and pandas for data science.
+- [Introduction to Bioinformatics](https://widdowquinn.github.io/2018-03-06-ibioic/) is a course we ran in 2018 for PhD students at IBioIC
+- [Real Python](https://realpython.com/) is a commercial site that offers online tutorials in Python.
+</details>
+
+## Use version control
+
+As you will have seen from figure \@ref(fig:finaldoc), it is easy to get into a situation where we have multiple nearly-identical versions of the same document. That can happen because we share document versions via email, or make updates in one file and not another for all kinds of reasons.
+
+You may be familiar with Microsoft Word's [Track Changes](https://support.office.com/en-us/article/Track-changes-in-Word-197ba630-0f5f-4a8e-9a77-3712475e806a), Google Docs' [Version History](https://support.google.com/docs/answer/190843?hl=en) or LibreOffice's [Recording and Displaying Changes](https://help.libreoffice.org/Common/Recording_and_Displaying_Changes). All of these options allow you to *snapshot* different versions of the same document, and to preferentially accept or reject individual changes. This is a kind of *version control* - active management of several versions and the history of a document. Version control can help avoid the file naming issues in figure \@ref(fig:finaldoc) and make your workflow much easier to manage.
+
+<div id="note">
+Version control is outwith the scope of these workshops, but there are many very good online resources that can help you get started.
+</div>
+
+# Where To Store Data
+
+Each project should have a *data management plan*, which is developed through discussion between the project leader (e.g. your supervisor) and those working on the project. This should help ensure continuation of the project in case of hardware failure or other catastrophe which, in part, means considering where you should store your data.
+
+<div id="note">
+There is no one-size-fits-all data management plan, but there are some good principles to follow for how and where to store your data that means you are at less risk of accidental (or malicious) loss.
+</div>
+
+1. **Your laptop/PC/hard drive will not live forever.**
+
+Keep backups. This can be automated. macOS has `TimeMachine` built-in, which makes continuous incremental backups. Cloud services such as `OneDrive` can link in with your laptop to ensure that data is continuously synchronised to cloud storage.
+
+2. **Data should be considered not to exist unless it is stored in at least three different places.**
+
+Those three places could be: your laptop, an external hard drive in your office, and a cloud service. It is important to have a copy of the key data at two physically-separated sites, in case of physical accident or disaster at one of those sites. Cloud services distribute their storage and can often be considered safer than on-site storage.
+
+3. **What if you get hit by a bus?**
+
+It might seem sufficient to keep backups, and put your data in the cloud. But consider how your project partners (and supervisor) will get access if, for some reason, you are not available. Would it help to have shared access to the same cloud resource?
+
+<div id="note">
+**The University of Strathclyde uses Microsoft's OneDrive to securely store and share data in the cloud.**
+
+OneDrive can integrate with your operating system, providing fine-grained permissions for access to shared project documents and data. Users get 1TB of storage space.
+
+- [OneDrive at Strathclyde](https://www.strath.ac.uk/professionalservices/it/saveandshare/onedrive/)
+</div>
