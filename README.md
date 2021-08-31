@@ -51,5 +51,6 @@ To download and use the materials for this workshop on your own computer, please
 The current versions of the notebook HTML pages are linked below, for convenience:
 
 - [01-Data Analysis in the Research Cycle](notebooks/01-data_analysis.html)
-- [02-Data and Project Management](notebooks/01-project_management.html)
-- [05-DHow to Access Data from Public Databases](notebooks/05-public_databases.html)
+- [02-Data and Project Management](notebooks/02-project_management.html)
+- [03-What is a Dataset?](notebooks/03-dataset.html)
+- [05-How to Access Data from Public Databases](notebooks/05-public_databases.html)
