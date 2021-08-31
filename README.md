@@ -49,3 +49,5 @@ To download and use the materials for this workshop on your own computer, please
 ## Notebook HTML
 
 The current versions of the notebook HTML pages are linked below, for convenience:
+
+- [01-Data Analysis in the Research Cycle](notebooks/01-data_analysis.html)

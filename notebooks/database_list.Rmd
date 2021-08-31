@@ -8,7 +8,6 @@ output:
     toc_float:
       toc_collapsed: false
     number_sections: true
-    self_contained: no
     css: "css/rmd_style.css"
     theme: lumen
 ---

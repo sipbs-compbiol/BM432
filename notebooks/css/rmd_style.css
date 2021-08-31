@@ -84,6 +84,10 @@ blockquote {
     content: "Note:";
     padding-left: 25px;
 }
+#note a:link { color: firebrick; }
+#note a:visited { color: orangered; }
+#note a:hover {color: lemonchiffon;}
+#note a:active {color: lime;}
 
 #summary, #section-summary {
     background: cornsilk;
@@ -112,6 +116,10 @@ blockquote {
     content: "Caution:";
     padding-left: 25px;
 }
+#warning a:link { color: navy; }
+#warning a:visited { color: dodgerblue; }
+#warning a:hover {color: darkcyan;}
+#warning a:active {color: lime;}
 
 details {
     background-color: linen;

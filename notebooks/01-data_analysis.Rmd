@@ -1,0 +1,78 @@
+---
+title: "Data Analysis in the Research Cycle"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<div id="summary">
+- Data is often the first step in the reserach cycle, as it is required to form a hypothesis.
+</div>
+
+# Data in the Cycle of Science
+
+The *cycle of science* is often presented as:
+
+1. formulate a hypothesis
+2. test the hypothesis
+    1. gather data
+    2. analyse data
+3. update the hypothesis
+4. repeat until done
+
+```{r cycle-of-science, fig.cap="The cycle of science"}
+knitr::include_graphics(rep("images/cycle.png"))
+```
+
+However, it may be difficult to form a hypothesis without having first made some observations of the system under study, or a similar system. These observations are *data.* The scientific cycle has always started - even if unacknowledged - with data collection and analysis. For instance, Darwin and Wallace both made long journeys with many observations before they formulated their hypotheses of descent with selection.
+
+<div id="note">
+In the curent age of data-intensive research, researchers who do not identify as *data scientists* are having to work with large, complex datasets. The focus of modern research can be very much on open-minded data analysis to formulate hypotheses as a first step in the cycle. With the ever-increasing amount of freely-available public research data, we can get started on formulating hypotheses more easily than ever before.
+
+**It is therefore especially important that your data exploration is recorded, replicable, and systematic.**
+</div>
+
+# Pipelines and Workflows, Oh My!
+
+We can distinguish between two terms that are often used interchangeably: *pipelines* and *workflows*.
+
+- A **Pipeline** is a set of instructions, often run by a computer, that takes a dataset and *pipes* it through a process or series of processes, until a result emerges from the end.
+
+- A **Workflow** is a process that *researchers* use to investigate a problem.
+
+A *workflow* may involve using one or more *pipelines*, but includes things like exploring your data, forming hypotheses, writing code, and interpreting your results.
+
+In these workshops, we are concerned with the complete research workflow.
+
+# Explore, Refine, Produce (ERP)
+
+One way to think about your workflow of data analysis is as an "Explore, Refine, Produce" cycle^[Stoudt *et al.* (2021) "Principles for data analysis workflows" *PLoS Comp. Biol.* [doi:10.1371/journal.pcbi.1008770.g001](https://doi.org/10.1371/journal.pcbi.1008770.g001)].
+
+```{r erp-cycle, fig.cap="The Explore, Refine, Produce cycle. Reproduced from Stoudt *et al.* (2021), [doi:10.1371/journal.pcbi.1008770.g001](https://doi.org/10.1371/journal.pcbi.1008770.g001)"}
+knitr::include_graphics(rep("images/erp.png"))
+```
+
+In the **Explore** phase you process and interrogate your data to identify potential solutions. This phase is centred on *you* as the researcher, as you dig deep into your data.
+
+In the **Refine** phase, you narrow down your focus to the most promising approaches. This phase is about how you, and your team, work towards a satisfying solution.
+
+The **Produce** phase is really a companion to the *Explore* and *Refine* phases, and is about how you communicate your results to the wider community.
+
+<div id="note">
+You should always be recording your work and preparing it for future consumption by yourself, or by others.
+
+An essential skill for this is [**data management**](./02-data_management.html)
+</div>
+
+
