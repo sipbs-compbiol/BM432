@@ -1,0 +1,278 @@
+---
+title: "What is a Dataset?"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library("DT")
+library("GGally")
+library("readr")
+
+# BG color for plots - should match .figure and .caption classes in rmd_style.css
+figbg = "whitesmoke"
+```
+
+<div id="summary">
+- Data is typically collected into tables where **rows are observations**, and **columns are variables**.
+- Variables may be numerical or categorical.
+- Numerical variables may be continuous or discrete.
+- Categorical variables may have an implicit ordering ("ordinal"), or no implicit ordering ("factors").
+  - Categorical data is often "coded" into number representations.
+- **The kind of data you have should guide your choice of statistical and visualisation approaches.**
+</div>
+
+# Introduction
+
+## What is a dataset?
+
+It's an unhelpful definition, but a dataset is *just a set of data*.
+
+In this notebook, we will explore features of datasets that make them useful for scientific analyses, and characteristics of data that may guide a choice of analysis, or statistical approach.
+
+### A well-organised dataset
+
+Data comes in many forms, but in science we nearly always want our data to be well-organised. To organise our data, we typically collect it into *tables*. These are two-dimensional data structures, with *rows* and *columns*, and this allows us to deal with two important and distinct concepts about data: *observations* and *variables* (variables may also be referred to as *features*, or *measurements*).
+
+## Observations
+
+An *observation* is the act of collecting one or more *measurements* of, or from, an "experimental unit." 
+
+What constitutes an experimental unit depends on the nature of the experiment. For example, if you measured the [BMI](https://www.nhs.uk/live-well/healthy-weight/bmi-calculator/) of each patient in a GP's surgery, the experimental unit would be the patient (and the patient's BMI would be a *variable*). On the other hand, if you were tracking the concentration of a compound in blood samples taken from a single patient over a period of time, each blood sample could be an experimental unit.
+
+## Variables, Features and Measurements
+
+In an experiment, we measure properties of each "experimental unit." The things that are measured are usually referred to as *variables*, or *features*. In the first example above, the BMI would be termed a *variable*; in the second example, the compound concentration would be called a *variable*.
+
+<div id="warning">
+The terms *variable*, *feature* and *measurement* may often be used interchangeably, but they are sometimes used to imply slightly different things:
+
+- *variable*:
+  - a property that varies across the experimental units
+- *feature*:
+  - (i) a property that varies across the experimental units, but is expected to be constant for each of the experimental units (like eye colour)
+  - (ii) a generic term for a *variable*
+- *measurement*:
+  - (i) a generic term for a *variable*
+  - (ii) the actual value that was measured
+  
+**The use of these terms is not always consistent in the literature, and can sometimes be confusing.**
+</div>
+
+## Data Tables
+
+By convention, we represent data in *tables* so that *rows* represent *observations*, and *columns* represent *variables*.
+
+```{r datatable, fig.cap="Example table showing the layout of observations, variables, and measurements"}
+knitr::include_graphics(rep("images/obs_var_table.png"))
+```
+
+The interactive tables and visualisations below show two example datasets that are similar to those you may meet in your own work.
+
+### The `iris` dataset
+
+The [`iris` dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set) describes morphological variation of the flowers (the lengths and widths of sepals and petals, measured in cm), of three related iris species: *Iris setosa*, *I. virginica* and *I. versicolor*. The dataset was introduced in 1936 papers by the botanist Edgar Anderson and the statistician R.A.Fisher, and is a common example dataset in statistics packages.
+
+> Anderson, E. (1936) "The species problem in iris" *Annal of the Missouri Botanical Garden* **23**: 457-509 [https://doi.org/10.2307%2F2394164](https://doi.org/10.2307%2F2394164)
+>
+> Fisher, R.A. (1936), "The Use of Multiple Measurements in Taxonomic Problems." *Annals of Eugenics*, **7**: 179-188. [https://doi.org/10.1111/j.1469-1809.1936.tb02137.x](https://doi.org/10.1111/j.1469-1809.1936.tb02137.x)
+
+```{r iris-table, echo=FALSE, fig.cap="A dataset of measurements of iris flowers^[Anderson, E. (1936) “The species problem in iris” *Annal of the Missouri Botanical Garden* [doi:10.2307%2F2394164](https://doi.org/10.2307%2F2394164)]."}
+datatable(iris)
+```
+
+We can visualise relationships between the variables of the iris data with a *pairs plot*, which gives us a rich visual overview of the relationships in our dataset.
+
+<div id="note">
+We will explore data visualisation later in the workshop.
+</div>
+
+```{r iris-pairs, echo=FALSE, fig.cap="Pairs plot of `iris` data, providing an overview of relationships between variables.", fig.width=10, fig.height=10}
+p = ggpairs(iris)                                             # create pairs plot for all iris data
+p = p + theme(plot.background = element_rect(fill = figbg,    # colour background
+                                             color = figbg))
+p                                                             # show plot
+```
+
+<div id="questions">
+1. Which variables appear to distinguish between iris species?
+2. What features of the data and visualisation indicate that variables discriminate between species?
+3. Which variables look like they are correlated?
+4. What features of the data and visualisation indicate correlation?
+</div>
+
+
+### The Pima Diabetes Dataset
+
+The `pima` dataset describes a set of females aged at least 21 and having Akimel O'odham (formerly known as Pima Indian) heritage. These are a Native American people living in an area of Central and Southern Arizona. This group have a high rate of diabetes mellitus. The dataset was collected by the National Institute of Diabetes and Digestive and Kidney Diseases (in the US), and has been used as an example dataset for machine learning, e.g. in
+
+> Smith, J.W., Everhart, J.E., Dickson, W.C., Knowler, W.C., & Johannes, R.S. (1988). Using the ADAP learning algorithm to forecast the onset of diabetes mellitus. In *Proceedings of the Symposium on Computer Applications and Medical Care* (pp. 261--265). IEEE Computer Society Press. [Online at PubMedCentral](https://europepmc.org/article/PMC/2245318)
+
+```{r pima-table, echo=FALSE, fig.cap="Clinical measurements from a group of Native American females."}
+pima = read_csv("../assets/data/pima/pima-indians-diabetes.csv",                    # Load data from file
+                col_names=c("pregnancies", "conc_Glc", "diastolic", "skin_fold",
+                            "insulin", "BMI", "diabetes_pedigree", "age", "class"),
+                col_types="iiiiiddif")
+datatable(pima)
+```
+
+Again, we can visualise relationships with a pairs plot. The `class` variable has values `0` (indicating did not test positive for diabetes) and `1` (indicating *did* test positive for diabetes)
+
+```{r pima-pairs, echo=FALSE, fig.cap="Pairs plot of `pima` data, providing an overview of relationships between variables.", fig.width=10, fig.height=10}
+p = ggpairs(pima)                                             # create pairs plot for all pima data
+p = p + theme(plot.background = element_rect(fill = figbg,    # colour background
+                                             color = figbg))
+p                                                             # show plot
+```
+
+<div id="questions">
+1. Do any variables appear to distinguish between individuals who did and did not test positive for diabetes?
+2. Why do you think this?
+3. How many observations are there in the `pima` dataset?
+4. How many variables are there in the `iris` dataset?
+5. Do the visualisations appear to suggest any potential problems with either the `iris` or `pima` datasets?
+</div>
+
+<details>
+  <summary>Why can collections of spectra be considered as tables of data? (click to expand)</summary>
+  
+Suppose you have taken a number of spectra (e.g. mass spectra, or Rama spectrum) of ten different samples. Each spectrum can be considered to be a *vector*: an ordered sequence of numbers. Each number in that vector may represent a measurement taken at a particular mass:charge (m/z) ratio, or a particular wavenumber or frequency.
+
+Here, each sample is an *observation* - a row in the table. Each individual m/z ratio or wavenumber is a variable, whose measurement is a value in the vector corresponding to that sample. 
+</details>
+
+# Types of variable
+
+When analysing an experiment, especially when critically reviewing someone else's work, it is very important to understand the dataset, and the data represented in it. There are two main types of data: numerical and categorical
+
+## Numerical Data
+
+Numerical data is, unsurprisingly, data that can reasonably be represented as numbers. Values like 3.141, 0, -7, $10^8$ and so on are all numbers, and could be found in numerical data.
+
+But it's a little more complicated than that.
+
+```{r numerical-data, echo=FALSE, fig.cap="Numerical data can be subdivided into two categories: Discrete and Continuous data"}
+knitr::include_graphics(rep("images/numerical_data.png"))
+```
+
+### Continuous Data
+
+This might be the first kind of numerical data that comes to mind for you. Measurements like length, mass, concentration, and time, can be represented by [*real numbers*](https://en.wikipedia.org/wiki/Real_number). The important characteristic of *real numbers* and therefore *continuous data* is that, in principle, any number can be represented to an arbitrary level of precision.
+
+Although our ability to measure things is limited in practice (e.g. a standard 30cm ruler might not be able to measure a difference in length smaller than 1mm accurately), it's the ability of the *property* to take on one of these values that matters. For instance, with a kitchen timer we might not be able to time a 100m sprint more accurately than the nearest second; but the runners could finish at any time between consecutive ticks of the clock (e.g. at 14.461723884756325347s exactly, even if we only measure 14.46s on a stopwatch). 
+
+<div id="note">
+It is not our ability to measure precisely that makes the data *continuous*, it is the nature of the *thing being measured*.
+
+Measurements are almost always taken as *discrete* values, such as mass to the nearest gram, but we *model* the measurements on their underlying continuous scale.
+</div>
+
+### Discrete Data
+
+Not all numerical data is continuous. For instance, count data (e.g. security staff ticking off how many people are in a pub, club or concert hall, for fire safety) is not continuous: you can only count whole number, *integer* values. We call this kind of numerical data *discrete numerical data*. 
+
+With discrete data, every state of the property is different and separate; intermediate values are either not allowed or not possible. Because the values are restricted, we need to treat this data differently than continuous numerical data, and interpret analyses differently.
+
+<details>
+  <summary>The difference between discrete and continuous data (click to expand)</summary>
+
+The difference between discrete and continuous data is why it's sometimes reported that "the average person in the UK has fewer than two legs". An individual may have zero, one or two legs, and many more people have two legs than not. Most people you will meet ("the average person") are likely to have exactly two legs, rather than one. But calculating an average number of legs using the formula 
+
+$$\textrm{average number of legs} = \frac{\textrm{total number of legs}}{\textrm{total number of people}}$$
+
+may give an answer somewhere between 1 and 2.
+
+<div id="note">
+The problem here is not so much mathematical, but that **the wrong choice of model** was made. When we calculate an *average* we're really calculating a *central value* or *location*. There's more than one way to calculate a central value - this kind of *mean* is just [one of several methods](https://en.wikipedia.org/wiki/Average). Alternative values, such as the *median* or *mode* number of legs in the population will most likely be exactly 2.
+
+<div align="center">
+```{r geothmetic, fig.cap="[XKCD 2435: Geothmetic Meandian; **this is satire**](https://xkcd.com/2435/)", echo=FALSE}
+knitr::include_graphics(rep("https://imgs.xkcd.com/comics/geothmetic_meandian.png"))
+```
+</div>
+
+It can be a warning sign that something is not right with an analysis if a calculation gives apparently nonsensical values, such as fractional values for entities that can only be whole numbers. That suggests that an inappropriate model may have been used somewhere.
+</div>
+</details>
+
+## Categorical Data
+
+*Categorical data* is data that can be divided up into a finite set of *categories*. There may be few categories (e.g. "has diabetes" and "does not have diabetes") or many (such as nationality, sex, age group, make of car, and so on).
+
+But, as with numerical data, it's a little more complicated than that.
+
+```{r categorical-data, echo=FALSE, fig.cap="Categorical data can be subdivided into two categories: Factors and Ordinal data"}
+knitr::include_graphics(rep("./images/categorical_data.png"))
+```
+
+Sometimes, as with *continuous numerical data*, the category is a property of the experimental unit that falls into one or more groups, such as eye colour, or nationality. Here there is no implicit ranking or ordering (blue eyes are not "more than" green eyes, for instance). These are often referred to as *factors*.
+
+Other categories however may have an implicit ranking - like "large", "medium", and "small" drinks at a fast food outlet ("large" being bigger than "small") - and these are called *ordinal data*.
+
+### Ordinal Data
+
+In a competition, individuals might finish first, second, third and so on. These rankings are often treated as numbers, but they are in fact *categories*, and they should always be treated as categorical data, not as numerical data. We might consider that those who finish first are "better" or "more" in some way than those who finish second or third. There is a natural ordering to these categories, which we want to consider in our analyses - but we can't rightly treat `1`, `2` and `3` as the whole numbers $1$, $2$ and $3$ - they are instead treated as labels.
+
+Similarly, we often divide populations into age ranges, rather than using an accurate age. These ranges are categories too, and there is an implicit ordering: "70+" is *older than* "55-70" is *older than* "45-55". Here, the categories are ordered, but they are not the same size, and we can't treat them as numerical values without taking more care.
+
+Likewise, we might divide disease symptoms into "none", "mild", "severe", and "critical". Again, there is an ordering of sorts, but there is no natural numerical representation.
+
+### Coding
+
+Categorical data is often *coded*. This means that the categories are assigned numbers as labels. Each discrete category gets a different number (a bit like the Dewey decimal system in a library, matriculation numbers, or IP addresses on a computer network). These numbers don't necessarily relate to the size, value, or measure of a category. The codes are just convenient ways of representing different things in a table.
+
+<div id="note">
+By convention we often take `1` implicitly to mean "true" or "present", and `0` to mean "false" or "absent".
+</div>
+
+<div id="questions">
+1. What kind of data is in the `iris` dataset?
+2. What kind of data are the variables `pregnancies`, `BMI`, and `class` in the `pima` dataset?
+</div>
+
+# `R` code used in this notebook
+
+<details>
+  <summary>Click to toggle `R` code for visualising `iris` data</summary>
+
+The `iris` data exists as a variable in `R`, and we visualise it with the `ggpairs()` function from the `GGally` package.
+
+```r
+p = ggpairs(iris)                           # create pairs plot for all iris data
+p = p + theme(plot.background = element_rect(fill = figbg,    # colour background
+                                             color = figbg))
+p  
+```
+</details>
+
+<details>
+  <summary>Click to toggle `R` code for visualising `pima` data</summary>
+
+The `pima` dataset is visualised in the same way, but must be loaded in from file, first. The data is read in using the `read_csv()` function from the `readr` package, defining useful column/field names for the variables, and specifying the data types for each variable in the `col_types` string:
+
+- `i`: integer (numerical)
+- `f`: factor (categorical)
+- `d`: double (numerical, continuous)
+
+```r
+pima = read_csv("../assets/data/pima/pima-indians-diabetes.csv",
+                col_names=c("pregnancies", "conc_Glc",        # Load data from file
+                "diastolic", "skin_fold",
+                "insulin", "BMI", "diabetes_pedigree",
+                "age", "class"),
+                col_types="iiiiiddif")
+p = ggpairs(pima)                                             # create pairs plot
+p = p + theme(plot.background = element_rect(fill = figbg,    # colour background
+                                             color = figbg))
+p                                                             # show plot
+```
+</details>
