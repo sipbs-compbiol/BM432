@@ -1,0 +1,124 @@
+---
+title: "Links to Key Public Data Resources"
+author: "Morgan Feeney, Leighton Pritchard"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    self_contained: no
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<div id="summary">
+- This page lists some data resources that you may find useful while working on your capstone project.
+- While we have attempted to include common databases and resources you are likely to use, but it is **not an exhaustive list of all the public databases** that exist in the biomedical sciences.
+- Please send any suggestions for additional databases that should be included here, or report any broken links, to Dr. Morgan Feeney^[Or, if you're feeling ambitious, make a pull request against the [course material repository](https://github.com/sipbs-compbiol/BM432)].
+</div>
+
+# Multi-organism databases
+
+- [BioCyc](https://biocyc.org/)
+  - BioCyc integrates genome data with a comprehensive body of additional data including metabolic reconstructions, regulatory networks, protein features, orthologs, gene essentiality, and atom mappings.
+- [BioModels](https://www.ebi.ac.uk/biomodels/)
+  - BioModels is the repository of record for mathematical models of biological and biomedical systems. Many of the models in this database are manually validated and tested for reproducibility.
+- [BRENDA](https://www.brenda-enzymes.org/)
+  - BRENDA integrates functional and sequence data for enzymes.
+- [Genbank](https://www.ncbi.nlm.nih.gov/genbank/)
+  - GenBank is the NIH genetic sequence database, the reference of record for nucleotide sequences. Deposition of new sequence data (including genes, genomes, and metagenomes) into this database is usually a requirement for publication.
+- [Genomes OnLine Database (GOLD)](https://gold.jgi.doe.gov/)
+  - Comprehensive access to information regarding genome and metagenome sequencing projects, and their associated metadata, around the world.
+- [Ensembl Genome Browser](https://www.ensembl.org/index.html)
+  - A genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation.
+- [Ensembl Genomes](https://ensemblgenomes.org/)
+  - The equivalent of Ensembl Genome Browser for non-vertebrate genomes, including plants, bacteria, fungi and protists.
+- [IMG/M](https://img.jgi.doe.gov/)
+  - Supports the annotation, analysis and distribution of microbial genome and microbiome for those datasets sequenced at DOE's Joint Genome Institute (JGI).
+- [Kyoto Encyclopedia of Genes and Genomes (KEGG)](https://www.genome.jp/kegg/)
+  - A database resource that integrates pathway, sequence and enzyme function into high-level overviews of biological system, such as metabolic pathways, the cell, the organism and the ecosystem. 
+- [microbesonline](http://www.microbesonline.org/)
+  - A comparative functional genomic database and workbench with tools for phylogenetic analysis and annotation, functional data storage/display/analysis, metabolic analysis and metafunctional genomics
+- [NCBI Databases](https://www.ncbi.nlm.nih.gov/)
+  - NCBI provides several databases (SRA, GEO, and GenBank are provided by NCBI but listed separately, here). In addition to raw sequence and transcriptome data, NCBI provides metadata describing biological samples, research projects, publications (PMIC) that are integrated and cross-referenced to each other.
+- [Pfam](http://pfam.xfam.org/)
+  - A large collection of protein domains and families, each represented by multiple sequence alignments and hidden Markov models (HMMs), that is a central reference for protein functional annotation.
+- [RCSB Protein Data Bank (PDB)](https://www.rcsb.org/)
+  - The repository of record for 3D structure data of large biological molecules (proteins, DNA, RNA, and complex assemblies). Deposition of structural data in this database is usually a requirement for publication.
+- [Rfam](https://rfam.xfam.org/)
+  - A resource that is analogous to Pfam for RNA sequences. A large collection of RNA families, each represented by multiple sequence alignments, consensus secondary structures and covariance models.
+- [STRING](https://string-db.org/)
+  - A database of known and predicted protein-protein interactions, and networks of those interactions.
+- [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra/)
+  - The repository of record for high throughput sequencing (sequence read) data. Deposition of read data in this database is usually a requirement for publication.
+- [Uniprot](https://www.uniprot.org/)
+  - A comprehensive, high-quality and freely accessible resource of protein sequence and functional information. It comprises four databases, the two key resources being Swiss-Prot - which is manually annotated and reviewed - and TrEMBL, which is automatically annotated and not reviewed.
+
+# Organism-specific databases
+
+- [EcoCyc](https://ecocyc.org/):
+  - Database for the bacterium *Escherichia coli* K-12 MG1655
+- [FlyBase](http://flybase.org/):
+  - Database of *Drosophila* Genes & Genomes
+- [Mouse Genome Informatics (MGI)](http://www.informatics.jax.org/):
+  - International database resource for the laboratory mouse, providing integrated genetic, genomic, and biological data to facilitate the study of human health and disease.
+- [MycoBrowser](https://mycobrowser.epfl.ch/):
+  - A comprehensive genomic and proteomic data repository for pathogenic mycobacteria
+- [PomBase](https://www.pombase.org/):
+  - Comprehensive database for the fission yeast *Schizosaccharomyces pombe*, providing structural and functional annotation, literature curation and access to large-scale data sets
+- [pseudomonas.com](https://pseudomonas.com/):
+  - A repository for *Pseudomonas* genomes and functional annotations.
+- [Saccharomyces Genome Database (SGD)](https://www.yeastgenome.org/):
+  - Comprehensive integrated biological information for the budding yeast *Saccharomyces cerevisiae* along with search and analysis tools to explore these data
+- [StrepDB](http://strepdb.streptomyces.org.uk/):
+  - The *Streptomyces* Annotation Server
+- [The Arabidopsis Information Resource (TAIR)](https://www.arabidopsis.org/):
+  - Genetic and molecular biology data for the model higher plant *Arabidopsis thaliana*
+- [WormBase](https://wormbase.org/#012-34-5):
+  - Accurate, current, accessible information concerning the genetics, genomics and biology of *C. elegans* and related nematodes
+- [XenBase](http://www.xenbase.org/entry/):
+  - Resource that integrates all the diverse biological, genomic, genotype and phenotype data available from *Xenopus* research
+- [ZFin](http://zfin.org/):
+  - Database of genetic and genomic data for the zebrafish (*Danio rerio*) as a model organism
+
+# Topic-specific databases
+
+- [ChEMBL](https://www.ebi.ac.uk/chembl/):
+  - ChEMBL is a manually-curated database of bioactive molecules with drug-like properties that integrates chemical, bioactivity and genomic data.
+- [Codon Usage Database](http://www.kazusa.or.jp/codon/):
+  - Database of codon usage tabulated from Genbank.
+- [Comprehensive Antibiotic Resistance Database (CARD)](https://card.mcmaster.ca/):
+  - Bioinformatic database of resistance genes, their products and associated phenotypes.
+- [MetaCyc](https://metacyc.org/):
+  - A curated database of experimentally elucidated metabolic pathways from all domains of life.
+- [PHI-Base](http://www.phi-base.org/)
+  - A curated database describing molecular and biological information on genes proven to affect the outcome of pathogen-host interactions.
+- [The Restriction Enzyme Database (REBASE)](http://rebase.neb.com/rebase/rebase.html):
+  - A dynamic, curated database of restriction enzymes and related proteins
+
+# Other data resources
+
+Some publications will deposit experimental or other supplementary data at generic data repositories that are not, strictly, databases. This is an increasingly common practice as funders insist on Open Science practices. Some examples of these resources are listed below.
+
+- [FigShare](https://figshare.com/)
+  - FigShare provides a repository for papers, FAIR data and non-traditional research outputs. It is able to assign DOIs to each deposited item.
+- [GitHub](https://github.com/)
+  -  GitHub offers distributed version control and source code management, plus a range of features such as bug tracking, feature requests, task management, continuous integration and wikis. Most open source scientific software is hosted on GitHub. Many researchers use GitHub as a repository for supplementary data, with Zenodo as the DOI issuing authority.
+- [osf.io](https://osf.io/):
+  - OSF is a free, open source project management tool that supports researchers throughout their entire project lifecycle. Many researchers use OSF as a long-term data repository, electronic lab notebook, or as the collaboration tool for their team’s research - this repository may then become supplementary information in a publication.
+- [Zenodo](https://zenodo.org/)
+  - Zenodo - developed at CERN as a catch-all repository for research data - provides a range of services for open science, including issuing of DOIs for research items. Many researchers use Zenodo to host preprints, archive public datasets, and software projects.
+
+
+<details>
+  <summary>Click to see links to additional databases</summary>
+Looking for a database not listed here? Try looking in the [NAR database list](https://www.oxfordjournals.org/nar/database/c) or the [Online Bioinformatics Resources Collection (OBRC)](https://www.hsls.pitt.edu/obrc/).
+</details>
+
+

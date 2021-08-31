@@ -16,57 +16,94 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
 <div id="summary">
 - A wealth of information is freely available in public databases, and can be searched and accessed for use in your project.
-  - Different databases are available for different purposes
-- Data deposited into databases are assigned unique identifiers called accession numbers.
+  - Specialised databases are available for different purposes
+- Each item of data deposited into a database is assigned a unique identifier called an *accession number*.
+- Deposition of research data in public repositories is often a requirement for publication
+- Databases are not equally authoritative: some are databases of record, and not all are curated for quality control and accuracy.
 
-This part of the workshop aims to teach you how to access data from public databases.
+This part of the workshop aims to introduce you to several ways of accessing data from public databases.
 </div>
 
 # Introduction
 
-Many, if not all, projects will involve the use of data from publicly available databases. You may be analysing these data as the main focus of your project, or comparing data you have generated with publicly available data (e.g, comparing the 16S rRNA gene sequence from an organism you isolated, with 16S rRNA gene sequences deposited in the NCBI database.)
+Many, if not all, projects will involve the use of data from publicly available databases. You may be analysing these data as the main focus of your project, or comparing data you have generated with publicly available data (e.g. comparing the 16S rRNA gene sequence from an organism you isolated with 16S rRNA gene sequences deposited in the NCBI database.)
 
-Databases provide an essential service in storing, organizing, and allowing researchers to easily search and access data. Most journals (certainly all reputable journals!) require researchers to deposit any data generated as part of a publication in the appropriate database. 
+Databases provide an essential service in storing, organizing, and allowing researchers to easily search and access data. Most journals (certainly all reputable journals!) require researchers to deposit any data generated as part of a publication in the appropriate public database. 
+
+<details>
+  <summary>Some example journal requirements for data deposition (click to expand)</summary>
+  
+- [Journal of Experimental Medicine](https://rupress.org/jem/pages/data-deposition)
+- [Nucleic Acids Research](https://academic.oup.com/nar/pages/data_deposition_and_standardization)
+- [MDPI Journals](https://www.mdpi.com/journal/data/instructions#suppmaterials)
+</details>
 
 # Where can we get public data from?
 
-There are different databases for different types of data and for different purposes: your choice of database will depend on the specific task you are carrying out. For example, if you are trying to find the 3D structure of your protein of interest, you would look for it in the Protein Data Bank (PDB), and not in Genbank (which has the nucleotide and amino acid sequence information).
+There are specialised databases for particular types of data. The databases that are relevant to you will depend on the specific task you are carrying out. For example, if you are trying to find the 3D structure of your protein of interest, the appropriate data will be stored in the [Protein Data Bank ](https://www.rcsb.org/), but not in the [NCBI Genbank](https://www.ncbi.nlm.nih.gov/genbank/) database (this database stores nucleotide and amino acid sequence information).
 
-All of these databases can be accessed interactively through a web-based interface. Many can also be accessed programmatically via the command line (not covered in this workshop).
+<div id="note">
+Many public databases are connected by database *crosslinks* (also known as *xlinks*). Some of the most useful databases, such as [UniProt](https://www.ebi.ac.uk/uniprot/), are valuable not just because they contain useful data but because they *cross-link* between so many other databases to connect very different data types for easy *integration* of datasets.
+</div>
 
-[Links to some key public databases](#anchor)
+Most databases can be accessed interactively through a web-based interface. Many can also be accessed *via* the command line, or *programmatically* (not covered in this workshop).
 
-## Repository of record (NCBI) vs domain-specific curated (or not) resources
+- [Links to some key public databases](./database_list.html)
 
-Primary databases, or repositories of record, contain experimentally derived data (e.g., 3D protein structures solved by X-ray crystallography (data deposited at PDB), raw nucleotide reads from a sequencing run (data deposited at NCBI)) accompanied by appropriate metadata (e.g., information about when and where the sample was obtained). These data are part of the permanent scientific record. 
+## Repositories of record vs domain-specific curated (or not) resources
 
-There are also a large number of subject- or organism- specific databases. These usually contain data derived from analysis of primary databases, or integrate data from multiple sources to provide a comprehensive view of a particular topic. For example, the Comprehensive Antibiotic Resistance Database (CARD) is a curated database of known resistance determinants and associated antibiotics.
+Primary databases usually provide experimentally-derived data, such as the 3D protein structures solved by X-ray crystallography, NMR or Cryo-EM, whose data are deposited at the PDB. Similarly, the [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) stores raw reads obtained from high throughput sequencing. and [The Cancer Genome Atlas (TCGA)](https://www.cancer.gov/about-nci/organization/ccg/research/structural-genomics/tcga) provides access to genomic, transcriptomic, and clinical data for a range of cancers.
+
+Both the PDB and SRA are *Repositories of Record*. In addition to being stores of experimentally-derived data, they are internationally recognised as the scientific community's main repository for their datatypes. As such, journals may require that any suitable data is deposited in these repositories as a condition of publication. These kinds of repositories are required to be stable over decades, so are often funded at a national or international level.
+
+There are a large number of subject- or organism-specific databases. These may contain primary data, but often contain data derived from analysis of primary databases, or integrate data from multiple sources to provide a comprehensive view of a particular topic. For example, the [Comprehensive Antibiotic Resistance Database (CARD)](https://card.mcmaster.ca/) is a curated database of known resistance determinants and associated antibiotics. Curation can increase the reliability and trustworthiness of a database, as problematic data may be excluded and only well-evidenced data included. However, curation is time-consuming, and these databases may be smaller than comprehensive databases with less quality control.
+
+<details>
+  <summary>UniProt, Swiss-Prot and TrEMBL: Curated and Uncurated (click to expand)</summary>
+  
+The `UniProt` database comprises two main sequence databases under the name `UniProtKB` (UniProt Knowledgebase): `Swiss-Prot` and `TrEMBL`. The `TrEMBL` database contains all translated protein-coding sequences from public nucleic acid databases. The vast majority of these translated sequences are predictions - they have never been experimentally studied, or their existence confirmed. By contrast, the `Swiss-Prot` database contains only non-redundant, manually annotated protein sequences. Each sequence in `Swiss-Prot` carries an *evidence code* to indicate the strength of experimental evidence for the existence of the protein.
+
+Manual annotation takes time, and there are relatively few annotators. As a result, at the time of writing, there are over 400 proteins in `TrEMBL` for every protein in `Swiss-Prot`, and the ratio increases with every version of the database.
+</details>
 
 <div id="warning">
-Watch out for unmaintained sites! 
+**Watch out for unmaintained sites!**
 
-Major databases are continuously updated and well-maintained. For example, the databases in the International Sequence Database Collaboration (Genbank, EMBL, DDBJ) automatically update one another with new data collected daily. 
+Major databases are continuously updated and well-maintained. For example, the databases in the International Sequence Database Collaboration (INSDC: Genbank, EMBL, DDBJ) automatically update one another with new data collected daily. 
 
 However, not all databases are equally well-curated. Some will persist, even after they are no longer curated - and thus may contain out-of-date information, or not have the latest updates. <em>Caveat emptor...</em>
 </div>
 
+<div id="note">
+**Database versioning**
+
+Database contents change over time as new data is added, redundant or incorrect data is removed, or otherwise modified. It is important for reproducibility, therefore, to report the version information appropriate to your dataset.
+
+Some databases, such as `UniProt`, provide a [complete history](https://www.uniprot.org/uniprot/B6J853?version=*) for each database entry. Other databases provide a version number for each accession, such as the number following the decimal point in `GenBank` records like [GCF_007858975.2](https://www.ncbi.nlm.nih.gov/assembly/GCF_007858975.2/). Others may provide a release version number for the database as a whole - and `GenBank` does this also, every two months ([GenBank releases](https://www.ncbi.nlm.nih.gov/genbank/release/)). Some databases provide no version information, and these should be reported with a date when the database was accessed.
+</div>
+
 ## Different sites may have very different access/functionality/searching
 
-Most databases can be searched by keywords, though the search interfaces may vary. Many will also allow you to search by sequence similarity (e.g., BLASTp to search for proteins similar to a query protein).
+Most databases can be searched by keywords, though the search interfaces may vary. Many sequence databases will allow you to search by sequence similarity (e.g., `BLASTP` to search for proteins similar to a query protein).
 
 <div id="warning">
 Pay careful attention to your search terms! 
 
-As with any query to a computer database, keyword searches in biological databases are sensitive to typos or spelling errors. For example, searching UniProt for "lipaomide dehydrogenase" retrieves 0 results, while the correctly spelled search "lipoamide dehydrogenase" retrieves thousands of results.
+As with any query to a computer database, keyword searches in biological databases are sensitive to typos or spelling errors. For example, searching `UniProt` for "lipaomide dehydrogenase" retrieves [0 results](https://www.uniprot.org/uniprot/?query=lipaomide+dehydrogenase&sort=score), while the correctly spelled search "lipoamide dehydrogenase" retrieves [thousands of results](https://www.uniprot.org/uniprot/?query=lipoamide+dehydrogenase&sort=score).
 </div>
 
 # What are accession numbers and how can we use them?
 
-Records deposited into a primary database will always be assigned a unique identifier (an accession number). These accession numbers will <em>always</em> refer to the same record. 
+Records deposited into a database will be assigned a unique identifier, called an *accession number*. An accession number will <em>always</em> refer to the same record.
 
-Accession numbers follow a standard style, depending on the database (e.g., Genbank acccession [BAD70110.1](https://www.ncbi.nlm.nih.gov/protein/BAD70110) versus UniProt accession [Q5SLK6](https://www.uniprot.org/uniprot/Q5SLK6) versus PDB accession [2EQ7](https://www.rcsb.org/structure/2eq7)).
+The format of accession numbers varies between databases:
+
+- Genbank acccession: [BAD70110.1](https://www.ncbi.nlm.nih.gov/protein/BAD70110)
+- UniProt accession [Q5SLK6](https://www.uniprot.org/uniprot/Q5SLK6)
+- PDB accession [2EQ7](https://www.rcsb.org/structure/2eq7)).
 
 <div id="note">
 Sometimes it may be necessary to update a particular database entry when new experimental data becomes available (e.g., to correct errors or add new information about the sequence or molecule.) The previous database entry will be preserved (it is part of the permanent scientific record!), but an updated version will be published to the database, with a new version of the accession number. 
@@ -74,11 +111,13 @@ Sometimes it may be necessary to update a particular database entry when new exp
 For example, the sequence of the well-studied model organism <em>Escherichia coli</em> (MG1655) was deposited to Genbank under the access number NC_000913.1 in June 2004 and this record can still be accessed at <https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.1>. However, since then a few errors in the sequence have been corrected, and the annotation updated: the current record (at time of writing) has accession number NC_000913.3 can be found at <https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.3>. 
 
 Note that the old version has a warning note attached to it and a link to the current version. 
+
+**Although an accession number is sufficient to identify the record, the version number should also be cited.**
 </div>
 
 # How do we cite data from public databases?
 
-Give the URL to the database, the accession number(s) of the data you used, and state the date of access or version number (if available).
+Give the URL to the database, the accession number(s) of the data used, and state the date of access or version number (if available).
 
 # Examples of how to search public databases and retrieve information
 
@@ -142,7 +181,7 @@ We also want to find out what is known about NDM-1 function, i.e. the catalytic 
 ![The page for our protein, NDM-1 from *K. pneumoniae*. This page has information about the catalytic activity, cofactor, regulation, kinetics, localization, etc. etc. There are also links to a number of other databases and information about similar proteins.](https://img17.jpg)
 </details>
 
-## Links to some key public databases
+[^1]: Links to some key public databases
 
 The following are some databases that you may find useful while working on your capstone project. While we have attempted to include all of the databases you are likely to use, this is not an exhaustive list of all the public databases that exist in the biomedical sciences. Please send any suggestions for additional databases that should be included here, or report any broken links, to Dr. Morgan Feeney.
 
