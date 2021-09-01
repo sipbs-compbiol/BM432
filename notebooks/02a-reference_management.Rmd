@@ -1,0 +1,97 @@
+---
+title: "Reference Management"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Why Do We Need to Manage References?
+
+It is essential, as a researcher, for you to be aware of the context of your work in terms of what others have previously done. 
+
+1. When planning your own research you will almost certainly be building on the work of others, and this prior art must be acknowledged when it is used. 
+2. As you document your work for others to read whether as a thesis, paper or in some other way, you will need to support statements of fact with an appropriate citation.
+
+In both cases, you will need to *refer* to previously-published work. Any project of a reasonable size will likely involve references to several, maybe tens (or hundreds!) of previous publications. Managing this manually can become very difficult. Happily, there are many software packages available to help you with this.
+
+- [Strathclyde Library guidance on referencing](https://guides.lib.strath.ac.uk/referencing_guide/home)
+
+Using reference management software will:
+
+- save you time
+- ensure consistent referencing
+- help track what you have read (and what you have still to read)
+
+# What is Reference Management Software?
+
+Reference management software typically automates components of academic reference, including:
+
+- reference collection (e.g. by pressing a toolbar button in your browser to download a reference)
+- reference storage (e.g. as a local database of `.pdf` files or links to online papers)
+- storage ana management of personal notes, as you annotate papers in your local database
+- inserting inline citations into a word-processed document as you type, with creation of a reference list or bibliography
+- formatting references and citations in a prescribed bibliographic style
+
+Some tools also enable document sharing and collaboration, and social networking.
+
+## Reference Management Software Options
+
+<div id="note">
+**The University of Strathclyde supports the use of `EndNote` as its preferred reference management software.**
+
+The Library provides training courses for EndNote Online and EndNote Desktop
+
+- [EndNote Online](https://bookings.strath.ac.uk/Home/Course/297)
+- [EndNote Desktop](https://bookings.strath.ac.uk/Home/Course/295)
+
+`EndNote` can be obtained from the [university software pages](https://www.strath.ac.uk/professionalservices/is/software/).
+</div>
+
+There are many reference management tools available, including:
+
+- [`BibDesk`](https://bibdesk.sourceforge.io/)
+- [`EndNote`](https://endnote.com/) - **this is the university's recommended tool**
+- [`Mendeley`](https://www.mendeley.com/?interaction_required=true)
+- [`PaperPile`](https://paperpile.com/)
+- [`Papers`](https://www.papersapp.com/)
+- [`RefWorks`](https://refworks.proquest.com/researcher/)
+- [`Zotero`](https://www.zotero.org/)
+
+### Which of the many options should I choose?
+
+There is no one best tool to use, and you will need to decide for yourself which suits your purposes. Some questions you might want to ask as you make your choice include:
+
+- **What kind of computer am I using?** - You may have your own laptop that you use all the time, with lots of local storage for PDFs, for which a single local library of references would be good. Alternatively you might use your own tablet with relatively little storage, so an online library might be best. You might instead be using any one of several university machines as you write, so cannot rely on local storage, and would also need to use an online library.
+- **What operating system am I using?** - Some of the listed tools are available on Windows, macOS and Linux. Some are web-based and do not interact directly with the operating system. Others are only available on one, or a subset of the operating systems.
+- **"What do the rest of my colleagues use?"** - It's usually the case that the best help you will get will be friendly advice from colelagues who are familiar with what you are doing.
+- **What training can I get?** - The university provides training for `EndNote` only, but there may be other resources for other tools, or you might not feel you need training.
+- **What happens when I leave the university?** - University licenses only cover students and staff, and expire when you leave your course of study. Some of the reference management tools are free for all to use, so you can continue using them. All of them are able to import and export libraries from other tools.
+
+Wikipedia has a [comprehensive comparison table](https://en.wikipedia.org/wiki/Comparison_of_reference_management_software) of many reference management packages.
+
+### How do I move libraries between reference management tools?
+
+Suppose your software licence expires, or you decide you'd rather use a different tool, how do you move your data between different packages?
+
+All good reference management software will allow you to export your reference database completely, or in part, into an *exchange format* that can be read and written by multiple tools. These include:
+
+- `EndNote/EndNote XML format` - a plaintext but originally proprietary format developed by EndNote but understood by many other tools^[https://en.wikipedia.org/wiki/EndNote#Import_format]
+- `BibTex` - a vendor-independent format that was originally developed for LaTeX^[https://en.wikipedia.org/wiki/BibTeX]
+- `RIS` - a standardised format that is vendor-independent^[https://en.wikipedia.org/wiki/RIS_(file_format)].
+
+<div id="warning">
+Frictionless interoperability between alternative tools is possible, but hampered by proprietary formats. This has been the subject of much anguish for researchers and software developers^[Beta blockers?. *Nature* **455**, 708 (2008). [https://doi.org/10.1038/455708a](https://www.nature.com/articles/455708a)].
+
+It is probably wise to ensure that all your important data is stored in plain-text, open science formats, rather than closed, proprietary formats.
+</div>
