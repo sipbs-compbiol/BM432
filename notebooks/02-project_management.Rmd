@@ -143,9 +143,13 @@ Automating your analyses is outwith the scope of these workshops, but there are 
   
 - [The Carpentries](https://carpentries.org/) offer online materials, and organise in-person courses, in data analysis and programming for researchers.
   - We ran two [Data Carpentry courses](https://github.com/sipbs-compbiol/2021-05-11-strathclyde-online) for PhD students at Strathclyde in 2021.
+- [Coursera](https://www.coursera.org/) provide online short courses and certification in a number of relevant areas.
 - [IBM: Data Analysis with Python and pandas](https://developer.ibm.com/learningpaths/data-analysis-using-python/data-analysis-in-python-using-pandas/) is a free online course using Python and pandas for data science.
 - [Introduction to Bioinformatics](https://widdowquinn.github.io/2018-03-06-ibioic/) is a course we ran in 2018 for PhD students at IBioIC
+- [Khan Academy](https://www.khanacademy.org/) provides a range of courses, several relevant to data analysis.
+- [MIT OpenCourseWare](https://ocw.mit.edu/index.htm) offers MIT online materials in a number of useful topics.
 - [Real Python](https://realpython.com/) is a commercial site that offers online tutorials in Python.
+- [Rosalind](http://rosalind.info/problems/locations/) is an online "gamified" platform for learning bioinformatics.
 </details>
 
 ## Use version control
