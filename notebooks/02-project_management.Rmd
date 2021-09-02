@@ -42,8 +42,10 @@ knitr::include_graphics(rep("images/phd052810s.gif"))
 But the situation in figure \@ref(fig:finaldoc) is bad. It's not clear which order the documents were created in, or which files contain which changes. There are many reasons why we should **always** avoid working in a haphazard manner, or naming files like they do figure \@ref(fig:filenames).
 
 <div id="warning">
-It's possible to spend a lot of time chasing down old file versions, and a lot of that pain can be avoided by using good project management principles.
+Regardless of your project topic, you are going to spend a lot of time working on a computer. Your relationship with your computer is going to be one of the most important ones in your career. It's worth making the effort to ensure it is a healthy and productive one.
 </div>
+
+**It's possible to spend a lot of time chasing down old file versions, and a lot of that pain can be avoided by using good project management principles.**
 
 # Good Project and Data Management Principles
 
@@ -159,7 +161,38 @@ As you will have seen from figure \@ref(fig:finaldoc), it is easy to get into a 
 You may be familiar with Microsoft Word's [Track Changes](https://support.office.com/en-us/article/Track-changes-in-Word-197ba630-0f5f-4a8e-9a77-3712475e806a), Google Docs' [Version History](https://support.google.com/docs/answer/190843?hl=en) or LibreOffice's [Recording and Displaying Changes](https://help.libreoffice.org/Common/Recording_and_Displaying_Changes). All of these options allow you to *snapshot* different versions of the same document, and to preferentially accept or reject individual changes. This is a kind of *version control* - active management of several versions and the history of a document. Version control can help avoid the file naming issues in figure \@ref(fig:finaldoc) and make your workflow much easier to manage.
 
 <div id="note">
-Version control is outwith the scope of these workshops, but there are many very good online resources that can help you get started.
+A detailed account of version control is outwith the scope of these workshops, but there are many very good online resources that can help you get started.
+
+- If you use Office365 and store documents in OneDrive, [you can see past versions](https://support.microsoft.com/en-us/office/view-previous-versions-of-office-files-5c1e076f-a9c9-41b8-8ace-f77b9642e2c2#ID0EDDD=Office_365)
+  - [Versioning with Word](https://support.microsoft.com/en-us/office/use-versioning-with-word-46b4d23f-b032-4837-94ab-746de8fbe6ec)
+- If you use cloud storage solutions like DropBox, you can see [older versions of files](https://help.dropbox.com/files-folders/restore-delete/version-history-overview).
+- [Comparing and combining Word documents](https://www.howtogeek.com/school/microsoft-word-for-teams/lesson5/)
+- [Git](https://git-scm.com/) and [GitHub](https://github.com/) offer generic version control (though this is quite advanced)
+</div>
+
+## Use meaningful, easy to sort, file names
+
+If a file's name is meaningful and self-explanatory, then you don't need to open it to see what's in it. That will save you time.
+
+<div id="warning">
+Avoid using terms like "draft" or "final" for different versions of the same document. It's easy to lose track of successive drafts and "final" versions.
+</div>
+
+If you aren't going to use some kind of version control (see above), then a quick way to get some of its benefits is to *date* versions of a document with [`ISO 8601` dates](https://en.wikipedia.org/wiki/ISO_8601). For example:
+
+```text
+2021-09-02_thesis.docx
+2021-08-31_thesis.docx
+2021-08-16_thesis.docx
+2021-08-09_thesis.docx
+```
+
+Files with this format can be sorted automatically in your file explorer.
+
+<div align="center">
+```{r iso8601, echo=FALSE, fig.cap="[XKCD 1179:](https://xkcd.com/1179/) ISO 8601. (Randall Munroe)"}
+knitr::include_graphics(rep("https://imgs.xkcd.com/comics/iso_8601.png"))
+```
 </div>
 
 # Where To Store Data

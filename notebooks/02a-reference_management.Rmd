@@ -33,6 +33,12 @@ Using reference management software will:
 - ensure consistent referencing
 - help track what you have read (and what you have still to read)
 
+<div id="warning">
+It can be tempting to put every interesting-looking paper into your reference manager, as *aspirational* entries of things you might read. This can quickly become an overwhelming reminder of all the things you have not yet read, and be rather useless.
+
+You may be better served by keeping the reference manager database for papers you have read, and having a separate "to read" list.
+</div>
+
 # What is Reference Management Software?
 
 Reference management software typically automates components of academic reference, including:
