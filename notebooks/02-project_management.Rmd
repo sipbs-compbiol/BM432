@@ -134,7 +134,7 @@ Place cleaned data in its own subfolder.
 
 ## Automate your analysis
 
-As with data cleaning, manual analysis can sometimes be^[Some would say *frequently is*] not entirely reproducible. Especially when dealing with large datasets, it can be very difficult to be consistent with manual analysis. For very large datasets, manual analysis may not be possible.
+As with data cleaning, manual analysis can sometimes be^[Some would say [*frequently is*](https://mikecroucher.github.io/MLPM_talk/)] not entirely reproducible. Especially when dealing with large datasets, it can be very difficult to be consistent with manual analysis. For very large datasets, manual analysis may not be possible.
 
 <div id="note">
 Automating your analyses is outwith the scope of these workshops, but there are many very good online resources that can help you get started.
