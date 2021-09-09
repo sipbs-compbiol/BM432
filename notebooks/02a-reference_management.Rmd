@@ -23,7 +23,7 @@ It is essential, as a researcher, for you to be aware of the context of your wor
 1. When planning your own research you will almost certainly be building on the work of others, and this prior art must be acknowledged when it is used. 
 2. As you document your work for others to read whether as a thesis, paper or in some other way, you will need to support statements of fact with an appropriate citation.
 
-In both cases, you will need to *refer* to previously-published work. Any project of a reasonable size will likely involve references to several, maybe tens (or hundreds!) of previous publications. Managing this manually can become very difficult. Happily, there are many software packages available to help you with this.
+In both cases, you will need to *refer* to previously published work. Any project of a reasonable size will likely involve references to several, maybe tens (or hundreds!) of previous publications. Managing this manually can become very difficult. Happily, there are many software packages available to help you with this.
 
 - [Strathclyde Library guidance on referencing](https://guides.lib.strath.ac.uk/referencing_guide/home)
 
@@ -31,12 +31,18 @@ Using reference management software will:
 
 - save you time
 - ensure consistent referencing
-- help track what you have read (and what you have still to read)
+- help track what you have read (and what you still have to read)
 
 <div id="warning">
-It can be tempting to put every interesting-looking paper into your reference manager, as *aspirational* entries of things you might read. This can quickly become an overwhelming reminder of all the things you have not yet read, and be rather useless.
+Start documenting references from Day 1 - keep track of what you read! When working on a large project (such as a thesis), it becomes easy to forget or muddle what you have read and where you have read it. 
 
-You may be better served by keeping the reference manager database for papers you have read, and having a separate "to read" list.
+- We strongly recommend that you take detailed notes on what you are reading and that you start using a reference manager from the very beginning of your project. 
+
+- It is very frustrating, and a waste of time, when you are struggling to find a piece of information that you read six weeks ago, but can't remember the author, article title, or what journal it was published in.
+
+- However, while it can be tempting to put every interesting-looking paper into your reference manager, as *aspirational* entries of things you might read, this can quickly become an overwhelming reminder of all the things you have not yet read, and make it difficult to find the papers that you actually *have* read.
+
+Therefore, we suggest that you keep the reference manager database for papers you have read, and have a separate "to read" list.
 </div>
 
 # What is Reference Management Software?
@@ -45,7 +51,7 @@ Reference management software typically automates components of academic referen
 
 - reference collection (e.g. by pressing a toolbar button in your browser to download a reference)
 - reference storage (e.g. as a local database of `.pdf` files or links to online papers)
-- storage ana management of personal notes, as you annotate papers in your local database
+- storage and management of personal notes, as you annotate papers in your local database
 - inserting inline citations into a word-processed document as you type, with creation of a reference list or bibliography
 - formatting references and citations in a prescribed bibliographic style
 
@@ -74,13 +80,13 @@ There are many reference management tools available, including:
 - [`RefWorks`](https://refworks.proquest.com/researcher/)
 - [`Zotero`](https://www.zotero.org/)
 
-### Which of the many options should I choose?
+### Which of the many reference management options should I choose?
 
 There is no one best tool to use, and you will need to decide for yourself which suits your purposes. Some questions you might want to ask as you make your choice include:
 
 - **What kind of computer am I using?** - You may have your own laptop that you use all the time, with lots of local storage for PDFs, for which a single local library of references would be good. Alternatively you might use your own tablet with relatively little storage, so an online library might be best. You might instead be using any one of several university machines as you write, so cannot rely on local storage, and would also need to use an online library.
 - **What operating system am I using?** - Some of the listed tools are available on Windows, macOS and Linux. Some are web-based and do not interact directly with the operating system. Others are only available on one, or a subset of the operating systems.
-- **"What do the rest of my colleagues use?"** - It's usually the case that the best help you will get will be friendly advice from colelagues who are familiar with what you are doing.
+- **"What do the rest of my colleagues use?"** - It's usually the case that the best help you will get will be friendly advice from colleagues who are familiar with what you are doing.
 - **What training can I get?** - The university provides training for `EndNote` only, but there may be other resources for other tools, or you might not feel you need training.
 - **What happens when I leave the university?** - University licenses only cover students and staff, and expire when you leave your course of study. Some of the reference management tools are free for all to use, so you can continue using them. All of them are able to import and export libraries from other tools.
 
@@ -88,7 +94,7 @@ Wikipedia has a [comprehensive comparison table](https://en.wikipedia.org/wiki/C
 
 ### How do I move libraries between reference management tools?
 
-Suppose your software licence expires, or you decide you'd rather use a different tool, how do you move your data between different packages?
+Suppose your software license expires, or you decide you'd rather use a different tool, how do you move your data between different packages?
 
 All good reference management software will allow you to export your reference database completely, or in part, into an *exchange format* that can be read and written by multiple tools. These include:
 
@@ -101,3 +107,52 @@ Frictionless interoperability between alternative tools is possible, but hampere
 
 It is probably wise to ensure that all your important data is stored in plain-text, open science formats, rather than closed, proprietary formats.
 </div>
+
+# What sources should I be citing?
+
+You demonstrate your knowledge and understanding of the field by correctly citing the appropriate works where necessary in your thesis. 
+
+- You should include a citation to give the source for any data, ideas, figures, etc. that are not common knowledge (i.e., textbook-level knowledge). This gives credit to the authors of the original study, and helps you avoid accusations of plagiarism or academic misconduct.
+
+<details>
+  <summary>Click to toggle more information about what types of sources you should be citing</summary>
+It is your responsibility to critically evaluate the quality of the information in each of your sources. Standards for good academic practice can vary between different fields. The following are some general guidelines to help you get started - subject-specific questions about your references should be directed to your supervisor.
+
+- In the vast majority of cases, you will be citing peer-reviewed journal articles. In some instances (where the data is not published in a journal), it may be appropriate to cite other sources, e.g. government publications, other databases, webpages, etc.
+  - In some cases, you may find it necessary to cite a preprint article (e.g., one available on a repository such as bioRxiv.)
+- In general, best practice is to cite the **original** publication of a particular discovery: give credit to the authors who did the work, instead of citing a secondary source or a review article. **It does not matter how long ago the original work was published.**
+- Make certain that the cited paper actually contains the information that you are citing - not a reference to another paper or work where that information can be found. 
+- Including a paper in your references implicitly indicates that you have read (and understood!) the paper in its entirety. It is therefore bad practice to cite works in a language that you do not read, even if another work has pointed you to that work as the primary source.
+</details>
+
+## When should I be citing a review instead of a paper?
+
+In general, it is best academic practice to cite the paper in which a discovery was initially published, and not a later paper that cites the same work or a review that synthesizes the knowledge of the field. 
+
+However, in some cases, it is certainly appropriate to cite review articles, such as when you want to:
+- Give an indication of the breadth of the field, or the current state of the art
+- Cite the reviewer's further analysis of the original data
+- Point readers to an overview of the field or subject (e.g., "...the role of FtsW in cell division, which was recently reviewed by Smith et al. (2019).")
+
+# How do I make sure the citations and bibliography in my thesis are correctly formatted? 
+
+Please refer first to the Thesis Writing Guide for formatting guidelines and examples of correctly formatted citations.
+
+<div id="warning">
+Watch out for formatting errors! Do not trust your reference manager to preserve text formatting or any special characters correctly: it is quite common for symbols such as $\alpha$ (alpha) or italicisation to be lost.
+</div>
+
+The Strathclyde library also has a number of [referencing guides](https://guides.lib.strath.ac.uk/referencing_guide) to assist you with referencing, including information on how to use Harvard and Vancouver styles. 
+
+<details>
+  <summary>Click to toggle some information about some common referencing/citation errors</summary>
+- Not following one of the approved reference styles, or using a mixture of more than one style.
+- Citations should be placed *before* the punctuation mark ending the sentence or clause - e.g., "...high levels of *N*-acetylglucosamine (Zhang et al., 1999)."  
+- Multiple citations at the same point in the text should be enclosed within a single set of brackets - e.g., (Li et al., 2018; Alvarez et al., 2019)
+- Stylistic errors made by the reference manager - e.g., failure to italicize species or gene names; inappropriate capitalization of article or journal titles
+</details>
+
+# "I want to know more!"
+
+- On citing well. Nat Chem Biol 6, 79 (2010). https://doi.org/10.1038/nchembio.310 
+- Penders B (2018) Ten simple rules for responsible referencing. PLoS Comput Biol 14(4): e1006036. https://doi.org/10.1371/journal.pcbi.1006036
