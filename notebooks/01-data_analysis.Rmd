@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 <div id="summary">
-- Data is often the first step in the reserach cycle, as it is required to form a hypothesis.
+- Data is often the first step in the research cycle, as it is required to form a hypothesis.
 - The process you use to manage and analyse data is a *workflow*.
 - You should always record your workflow so it is reproducible and understandable by yourself and others.
 </div>
