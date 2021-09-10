@@ -53,7 +53,25 @@ Regardless of your project topic, you are going to spend a lot of time working o
 
 All projects are different, to some extent, so there is no one-size-fits-all advice. It's important to find something that **works for you**, but it's also important that it **works for collaborators**.
 
-In general, if you can name all files and folders to be self-describing, it makes everyone's life easier. A file called `analysis.doc` could contain anything, but if the file was called `2021-08-21_geldoc_sampleABC.doc` you could probably guess that it was a geldoc image for sample `ABC`, taken on 31st August 2021. A similar principle works for naming folders. A folder called `mass_spec` data suggests it contains mass spectrometry data, but `2021-05-15_ms_sampleABC` makes it clearer which sample was run, and when.
+<div id="warning">
+It's very tempting to imagine that you will always understand your current project management structure. We have all learned from experience though, that "me" in six months is quite different from "me" right now. A useful rule of thumb for assessing whether your data management is working is:
+
+- **"Will I be able to understand what these files are and how they relate to each other, in six months' - or one year's - time?"**
+
+which is more or less the same thing as asking:
+
+- **"Would someone who didn't know anything about the project be able to understand what these files are, and their relationships to each other?"**
+
+You will probably never know more about the files you're creating than at the time you create them. Similarly, you'll likely never understand what you did in an analysis better than when you're running that analysis, so:
+
+- **Write documentation about files at the time they are created, and document your analyses when you run your analyses.**
+</div>
+
+Your goal is to make the analysis clear enough to be repeated.
+
+- [Reproducibility, repeatability, and FAIR research](./02b-reproducibility.html)
+
+In general, if you can name all files and folders to be self-describing, it makes everyone's life easier, including your own. A file called `analysis.doc` could contain anything, but if the file was called `2021-08-21_geldoc_sampleABC.doc` you could probably guess that it was a geldoc image for sample `ABC`, taken on 31st August 2021. A similar principle works for naming folders. A folder called `mass_spec` data suggests it contains mass spectrometry data, but `2021-05-15_ms_sampleABC` makes it clearer which sample was run, and when.
 
 This approach does not cover all circumstances, and it's not a good idea to make file or folder names arbitrarily long. So it is good practice to include a **plain text** `README.txt` file in each folder. This file should describe the files in the folder briefly, but more importantly should describe *what* the data represents and *why* it is important (e.g. the research goal and which project it belongs to). There should also be a contact name/email in the file.
 
