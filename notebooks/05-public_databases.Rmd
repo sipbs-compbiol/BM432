@@ -14,7 +14,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 <div id="summary">
@@ -103,7 +103,7 @@ The format of accession numbers varies between databases:
 
 - Genbank acccession: [BAD70110.1](https://www.ncbi.nlm.nih.gov/protein/BAD70110)
 - UniProt accession [Q5SLK6](https://www.uniprot.org/uniprot/Q5SLK6)
-- PDB accession [2EQ7](https://www.rcsb.org/structure/2eq7)).
+- PDB accession [2EQ7](https://www.rcsb.org/structure/2eq7)
 
 <div id="note">
 Sometimes it may be necessary to update a particular database entry when new experimental data becomes available (e.g., to correct errors or add new information about the sequence or molecule.) The previous database entry will be preserved (it is part of the permanent scientific record!), but an updated version will be published to the database, with a new version of the accession number. 
@@ -124,47 +124,80 @@ Give the URL to the database, the accession number(s) of the data used, and stat
 To look at how you might use public databases in the context of a capstone project, we will take the example of a beta-lactamase (carbapenemase) called NDM-1, which makes bacteria resistant to a broad range of beta-lactam antibiotics. The spread of bacteria carrying these carbapenemase genes is a major public health concern.
 
 <details>
-  <summary>Click to toggle an example of how to search the NCBI databases (example of how to search using a keyword query</summary>
+  <summary>Click to toggle an example of how to search the NCBI databases (example of how to search using a keyword query)</summary>
 
 Our first task is to find the NDM-1 amino acid sequence. To do this, we will search the NCBI databases (starting from <https://www.ncbi.nlm.nih.gov/>). 
-![The search bar is at the top of the page (arrow). Note that we can choose which of the NCBI databases we would like to search (arrow) - for this example, we will keep the default (all databases), but we could equally choose to search the Protein database - since the protein sequence is what we are looking for.](https://img1.jpg)
-![Once we have searched for "ndm-1" in the databases, we see the following page of results, showing the entries which match our query in <em>all</em> the databases at NCBI. Since we want the protein sequence, we will click on the link to those results (box).](https://img2.jpg)
+![The search bar is at the top of the page (arrow). Note that we can choose which of the NCBI databases we would like to search (arrow) - for this example, we will keep the default (all databases), but we could equally choose to search the Protein database - since the protein sequence is what we are looking for.]
 
-![This then takes us to a page displaying all of the hits matching our "ndm-1" query in the Protein database. In this case, we want the sequence from *Klebsiella pneumoniae*, the organism where NDM-1 was first discovered](https://img3.jpg)
-
-![Clicking on the "NDM-1 (Klebsiella pneumoniae)" page shown in the previous image, brings us to the results page. By default, this is in the GenPept format - you can use the pulldown menu (top-left box) to change the format, e.g. to a FASTA format. The results page displays information including the accession number for this protein (AQT38377), the amino acid sequence, and information about different features in the protein (e.g., metal-binding sites). Note that you can download this information if you wish, by selecting "Send to:" (top right box), and in the pop-up menu - Choose Destination: File.](https://img4.jpg)
-
+```{r img1, fig.cap="An NCBI search for ndm-1"}
+knitr::include_graphics(rep("images/img1.JPG"))
+```
+Once we have searched for "ndm-1" in the databases, we see the following page of results, showing the entries which match our query in <em>all</em> the databases at NCBI. Since we want the protein sequence, we will click on the link to those results (box).
+```{r img2, fig.cap="Results page for an NCBI search for ndm-1"}
+knitr::include_graphics(rep("images/img2.JPG"))
+```
+This then takes us to a page displaying all of the hits matching our "ndm-1" query in the Protein database. In this case, we want the sequence from *Klebsiella pneumoniae*, the organism where NDM-1 was first discovered.
+```{r img3, fig.cap="Protein database hits from an NCBI search for ndm-1"}
+knitr::include_graphics(rep("images/img3.JPG"))
+```
+Clicking on the "NDM-1 (Klebsiella pneumoniae)" link shown in the previous image, brings us to the results page. By default, this is in the GenPept format - you can use the pulldown menu (top-left box) to change the format, e.g. to a FASTA format. The results page displays information including the accession number for this protein (AQT38377), the amino acid sequence, and information about different features in the protein (e.g., metal-binding sites). Note that you can download this information if you wish, by selecting "Send to:" (top right box), and in the pop-up menu - Choose Destination: File.
+```{r img4, fig.cap="Klebsiella pneumoniae NDM-1 NCBI page"}
+knitr::include_graphics(rep("images/img4.JPG"))
+```
 </details>
 
 <details>
-  <summary>Click to toggle an example of how to search the Comprehensive Antibiotic Resistance Database (CARD) (example of how to search using a keyword query with autocomplete</summary>
+  <summary>Click to toggle an example of how to search the Comprehensive Antibiotic Resistance Database (CARD) (example of how to search using a keyword query with autocomplete)</summary>
 We might also want to find information about which other species have been found to have NDM-1, or sequence variants that have been observed in different strains. For this, we will turn to the CARD database (<https://card.mcmaster.ca/>).
 
-![The search bar for the CARD database is at the top right hand corner of the page. Note that as we start typing in our "ndm-1" query, a drop-down list of autocomplete options appears (arrow). We select and search for the option we want.](https://img5.jpg)
-
-![The results page from our query: this gives us a list of resistomes with perfect matches and with sequence variants, information about the protein - including a list of publications with PubMed links - and a look at the prevalence of NDM-1 in 263 important pathogens. Note that the accession number (ARO:3000589) is different than the accession number for the *K. pneumoniae* protein we looked at in the NCBI Protein database.](https://img6.jpg)
+The search bar for the CARD database is at the top right hand corner of the page. Note that as we start typing in our "ndm-1" query, a drop-down list of autocomplete options appears (arrow). We select and search for the option we want.
+```{r img5, fig.cap="A CARD search for ndm-1"}
+knitr::include_graphics(rep("images/img5.JPG"))
+```
+The results page from our query: this gives us a list of resistomes with perfect matches and with sequence variants, information about the protein - including a list of publications with PubMed links - and a look at the prevalence of NDM-1 in 263 important pathogens. Note that the accession number (ARO:3000589) is different than the accession number for the *K. pneumoniae* protein we looked at in the NCBI Protein database.
+```{r img6, fig.cap="ndm-1 results page from CARD search"}
+knitr::include_graphics(rep("images/img6.JPG"))
+```
 </details>
 
 <details>
   <summary>Click to toggle an example of how to search the Protein Data Bank (PDB) (example of how to search using a keyword query)</summary>
 We also want to find the 3D structure of the NDM-1 protein. To do this, we turn to the Protein Data Bank (PDB) at <https://www.rcsb.org/>.
 
-![The search bar is at the top right-hand corner of the screen (arrow). We enter our "ndm-1" query and hit search.](https://img7.jpg)
+The search bar is at the top right-hand corner of the screen (arrow). We enter our "ndm-1" query and hit search.
+```{r img7, fig.cap="A PDB search for ndm-1"}
+knitr::include_graphics(rep("images/img7.JPG"))
+```
+The results page offers an Advanced Search query builder (top arrow), and a number of options for filtering our search (Refinements - bottom arrow). We could, for example, specify which organism we were interested in, or which experimental method - e.g., X-ray diffraction or solution NMR.
+```{r img8, fig.cap="PDB search results for ndm-1"}
+knitr::include_graphics(rep("images/img8.JPG"))
+```
+The results page shows a ribbon diagram of the protein and allows us to download the structural data, which we can analyse using software on our computers. The results page also links to the associated paper where this structure was first published, where you can learn more about how these data were generated.
+```{r img9, fig.cap="PDB page for NDM-1"}
+knitr::include_graphics(rep("images/img9.JPG"))
+```
+</details>
 
-![The results page offers an Advanced Search query builder (top arrow), and a number of options for filtering our search (Refinements - bottom arrow). We could, for example, specify which organism we were interested in, or which experimental method - e.g., X-ray diffraction or solution NMR.](https://img8.jpg)
-
-![The results page shows a ribbon diagram of the protein and allows us to download the structural data, which we can analyse using software on our computers. The results page also links to the associated paper where this structure was first published, where you can learn more about how these data were generated.](https://img9.jpg)
 <details>
-  <summary>Click to toggle an example of how to search the Pfam database (example of how to search a database using a sequence query</summary>
+  <summary>Click to toggle an example of how to search the Pfam database (example of how to search a database using a sequence query)</summary>
 Having learned about the sequence and structure of our NDM-1 protein, we now want to learn about any related proteins. To do this, we will turn to the Pfam database (a database of protein families), at <http://pfam.xfam.org/>. 
-  
-![There are a number of different ways ot search the Pfam database (centre of the page), including by keyword, accession number, or protein sequence.](https://img10.jpg)
 
-![In our case, we already have the protein sequence (from NCBI), so we will use that to search Pfam. Clicking on "sequence search" brings up a query box where we can paste the sequence of NDM-1 from *K. pneumoniae* ](https://img11.jpg)
-
-![The results page will bring up all matching protein families. In this case, there is only one match - the Lactamase B family. Note that the search results will also tell you which parts of your query match the Pfam family, which can be important for multidomain proteins. ](https://img12.jpg)
-
-![Clicking on the Lactamase B family brings us to the Pfam page about this protein family (accession PF00753). By default, you land on the "Summary" part of the page, but you can access more information by clicking on the headings (e.g. Domain organization, Clan, Alignments, etc.) in the menu on the left. There is also a menu in pale blue across the top, with links to the protein architectures, sequences, interactions, species, and structures.](https://img13.jpg)
+There are a number of different ways to search the Pfam database (centre of the page), including by keyword, accession number, or protein sequence.
+```{r img10, fig.cap="The Pfam database main page"}
+knitr::include_graphics(rep("images/img10.JPG"))
+```
+In our case, we already have the protein sequence (from NCBI), so we will use that to search Pfam. Clicking on "sequence search" brings up a query box where we can paste the sequence of NDM-1 from *K. pneumoniae* 
+```{r img11, fig.cap="A Pfam sequence search using the NDM-1 amino acid sequence"}
+knitr::include_graphics(rep("images/img11.JPG"))
+```
+The results page will bring up all matching protein families. In this case, there is only one match - the Lactamase B family. Note that the search results will also tell you which parts of your query match the Pfam family, which can be important for multidomain proteins. 
+```{r img12, fig.cap="Pfam sequence search results"}
+knitr::include_graphics(rep("images/img12.JPG"))
+```
+Clicking on the Lactamase B family brings us to the Pfam page about this protein family (accession PF00753). By default, you land on the "Summary" part of the page, but you can access more information by clicking on the headings (e.g. Domain organization, Clan, Alignments, etc.) in the menu on the left. There is also a menu in pale blue across the top, with links to the protein architectures, sequences, interactions, species, and structures.
+```{r img13, fig.cap="Pfam page for the Lactamase B family"}
+knitr::include_graphics(rep("images/img13.JPG"))
+```
 </details>
 
 <details>
@@ -172,60 +205,24 @@ Having learned about the sequence and structure of our NDM-1 protein, we now wan
 
 We also want to find out what is known about NDM-1 function, i.e. the catalytic activity of the protein. For this, we will turn to the UniProt database at <https://www.uniprot.org/>. 
 
-![We enter our keyword query "ndm-1" into the search bar at the top of the page. However, we specifically want to find more information about NDM-1 from *K. pneumoniae*, so we next click "Advanced" (instead of "Search").](https://img14.jpg)
-
-![We can add additional search terms to our query by clicking on the + icon. In this case, we want to restrict our search to *K. pneumoniae*, so we use Organism (arrow) and type in "KLebsiella". A drop-down list appears highlighting potential choices and in our case, we select "Klebsiella pneumoniae".](https://img15.jpg)
-
-![The results page brings up a number of proteins from *Klebsiella pneumoniae* that match our search. Note that there are additional options for filtering the search in the left-hand menu bar. For example, we might want to filter by "Reviewed" versus "Unreviewed" records. However, the NDM-1 protein that we are looking for is the top hit in the list.](https://img16.jpg)
-
-![The page for our protein, NDM-1 from *K. pneumoniae*. This page has information about the catalytic activity, cofactor, regulation, kinetics, localization, etc. etc. There are also links to a number of other databases and information about similar proteins.](https://img17.jpg)
+We enter our keyword query "ndm-1" into the search bar at the top of the page. However, we specifically want to find more information about NDM-1 from *K. pneumoniae*, so we next click "Advanced" (instead of "Search").
+```{r img14, fig.cap="A UniProt search for ndm-1"}
+knitr::include_graphics(rep("images/img14.JPG"))
+```
+We can add additional search terms to our query by clicking on the + icon. In this case, we want to restrict our search to *K. pneumoniae*, so we use Organism (arrow) and type in "Klebsiella". A drop-down list appears highlighting potential choices and in our case, we select "Klebsiella pneumoniae".
+```{r img15, fig.cap="Building a UniProt Advanced Search"}
+knitr::include_graphics(rep("images/img15.JPG"))
+```
+The results page brings up a number of proteins from *Klebsiella pneumoniae* that match our search. Note that there are additional options for filtering the search in the left-hand menu bar. For example, we might want to filter by "Reviewed" versus "Unreviewed" records. However, the NDM-1 protein that we are looking for is the top hit in the list.
+```{r img16, fig.cap="UniProt search results for ndm-1 proteins from Klebsiella pneumoniae"}
+knitr::include_graphics(rep("images/img16.JPG"))
+```
+The page for our protein, NDM-1 from *K. pneumoniae*. This page has information about the catalytic activity, cofactor, regulation, kinetics, localization, etc. etc. There are also links to a number of other databases and information about similar proteins.
+```{r img17, fig.cap="UniProt page for the K. pneumoniae NDM-1 protein"}
+knitr::include_graphics(rep("images/img17.JPG"))
+```
 </details>
 
-[^1]: Links to some key public databases
-
-The following are some databases that you may find useful while working on your capstone project. While we have attempted to include all of the databases you are likely to use, this is not an exhaustive list of all the public databases that exist in the biomedical sciences. Please send any suggestions for additional databases that should be included here, or report any broken links, to Dr. Morgan Feeney.
-
-- [BioCyc](https://biocyc.org/): BioCyc integrates genome data with a comprehensive body of additional data including metabolic reconstructions, regulatory networks, protein features, orthologs, gene essentiality, and atom mappings.
-- [Genbank](https://www.ncbi.nlm.nih.gov/genbank/):  the NIH genetic sequence database, an annotated collection of all publicly available DNA sequences
-- [Genomes OnLine Database (GOLD)](https://gold.jgi.doe.gov/): comprehensive access to information regarding genome and metagenome sequencing projects, and their associated metadata, around the world.
-- [Ensembl Genome Browser](https://www.ensembl.org/index.html): a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation
-- [IMG/M](https://img.jgi.doe.gov/): supports the annotation, analysis and distribution of microbial genome and microbiome datasets sequenced at DOE's Joint Genome Institute (JGI).
-- [Kyoto Encyclopedia of Genes and Genomes (KEGG)](https://www.genome.jp/kegg/): a database resource for understanding high-level functions and utilities of the biological system, such as the cell, the organism and the ecosystem, from molecular-level information, especially large-scale molecular datasets generated by genome sequencing and other high-throughput experimental technologies
-- [microbesonline](http://www.microbesonline.org/): A comparative functional genomic database and workbench with advanced tools for phylogenetic analysis and annotation, functional data storage/display/analysis, metabolic analysis and metafunctional genomics
-- [Pfam](http://pfam.xfam.org/):  large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)
-- [Protein Data Bank (PDB)](https://www.rcsb.org/): 3D structure data for large biological molecules (proteins, DNA, and RNA) 
-- [Rfam](https://rfam.xfam.org/): a collection of RNA families, each represented by multiple sequence alignments, consensus secondary structures and covariance models
-- [STRING](https://string-db.org/):  a database of known and predicted protein-protein interactions
-- [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra/): the largest publicly available repository of high throughput sequencing data
-- [Uniprot](https://www.uniprot.org/): a comprehensive, high-quality and freely accessible resource of protein sequence and functional information
-
-## Organism-specific databases
-
-- [EcoCyc](https://ecocyc.org/): database for the bacterium *Escherichia coli* K-12 MG1655
-- [FlyBase](http://flybase.org/): database of *Drosophila* Genes & Genomes
-- [Mouse Genome Informatics (MGI)](http://www.informatics.jax.org/): international database resource for the laboratory mouse, providing integrated genetic, genomic, and biological data to facilitate the study of human health and disease.
-- [MycoBrowser](https://mycobrowser.epfl.ch/): a comprehensive genomic and proteomic data repository for pathogenic mycobacteria
-- [PomBase](https://www.pombase.org/): comprehensive database for the fission yeast *Schizosaccharomyces pombe*, providing structural and functional annotation, literature curation and access to large-scale data sets
-- [Saccharomyces Genome Database (SGD)](https://www.yeastgenome.org/): comprehensive integrated biological information for the budding yeast *Saccharomyces cerevisiae* along with search and analysis tools to explore these data
-- [StrepDB](http://strepdb.streptomyces.org.uk/): the *Streptomyces* Annotation Server
-- [The Arabidopsis Information Resource (TAIR)](https://www.arabidopsis.org/): genetic and molecular biology data for the model higher plant *Arabidopsis thaliana*
-- [WormBase](https://wormbase.org/#012-34-5): accurate, current, accessible information concerning the genetics, genomics and biology of *C. elegans* and related nematodes
-- [XenBase](http://www.xenbase.org/entry/): resource that integrates all the diverse biological, genomic, genotype and phenotype data available from *Xenopus* research
-- [ZFin](http://zfin.org/): database of genetic and genomic data for the zebrafish (*Danio rerio*) as a model organism
-
-## Topic-specific databases
-
-- [Codon Usage Database](http://www.kazusa.or.jp/codon/): Database of codon usage tabulated from Genbank
-- [Comprehensive Antibiotic Resistance Database (CARD)](https://card.mcmaster.ca/): bioinformatic database of resistance genes, their products and associated phenotypes
-- [MetaCyc](https://metacyc.org/): a curated database of experimentally elucidated metabolic pathways from all domains of life
-- [The Restriction Enzyme Database (REBASE)](http://rebase.neb.com/rebase/rebase.html): a dynamic, curated database of restriction enzymes and related proteins
-
-
-
-<details>
-  <summary>Click to see links to additional databases</summary>
-Looking for a database not listed here? Try looking in the [NAR database list](https://www.oxfordjournals.org/nar/database/c) or the [Online Bioinformatics Resources Collection (OBRC)](https://www.hsls.pitt.edu/obrc/).
-</details>
 
 
 
