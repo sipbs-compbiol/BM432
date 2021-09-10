@@ -1,0 +1,104 @@
+---
+title: "Keeping a Lab Notebook to Document your Project"
+author: "Morgan Feeney, Leighton Pritchard"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<div id="summary">
+- Keeping a good lab notebook is an essential part of doing any kind of scientific research
+- Your lab notebook should record the objective, background, methods, results, and conclusions for any experiment or analysis
+</div>
+
+# Introduction
+
+Lab notebooks are an essential part of documenting research, enabling it to be replicated and validated. They provide a written record of experiments, including the details of any methods or reagents used, the results, and the calculations, explanations, and thoughts behind the experiment. 
+
+Lab notebooks should be kept for **every** type of project - lab-based projects, computational or bioinformatics projects, science communication, education, knowledge exchange, critical analysis, and systematic reviews.
+
+# Why you should keep a good lab notebook
+
+Keeping a good lab notebook is a gift to your future self - who will be trying to write a detailed and accurate materials and methods section in your thesis, and who will not remember the exact methods and results obtained many weeks before. Human memory is **incredibly** fallible, so it is important to keep contemporaneous records of your research. 
+
+```{r ideas, fig.cap="PhD comics: Fading, http://phdcomics.com/comics.php?f=1481"}
+knitr::include_graphics(rep("images/phd032312s.gif"))
+```
+Keeping a good lab notebook is also important for any colleagues working in the same lab, who will need to understand, replicate, or follow up on your work. 
+
+Finally, keeping a good lab notebook is important for legal reasons: in case of accusations of scientific misconduct, or to defend your intellectual property. Lab notebooks may be key pieces of evidence in court cases, e.g. over patent rights. 
+
+# Electronic versus Paper lab notebooks
+
+Lab notebooks can be kept in either hard-copy (paper) or electronic formats. You should discuss with your supervisor whether they have any particular requirements for how you keep your lab notebook.
+
+Paper notebooks should always be kept in indelible ink, and should be kept legible. Any mistakes should be crossed out cleanly and corrected on the next line/page (not erased with e.g. Tipex). They should be bound, with pages that are not easily removed or lost, and they should be durable.
+
+Electronic notebooks should allow you to create, import, store and retrieve all of the data types needed for your project. They should include time stamps recording data creation and modification, and audit trails that record any changes to entries. 
+
+# What to include in your lab notebook
+
+The contents of your lab notebook will vary based on your project type. (If you have any questions about the specifics of how to keep a lab notebook for your project, you should discuss them with your supervisor.) However, some general rules apply to all types of lab notebook:
+
+- Be as specific as possible - remember that your future self will need these details for writing up your thesis, and your colleagues may need to reproduce an experiment to validate your results. Therefore, you should include all of the details necessary to repeat the experiment/analysis.
+
+- Each entry should be dated using a consistent, easy to understand format.^[Note that a source of confusion (perhaps especially in international labs) can come from month-day-year versus day-month-year conventions. To avoid such confusion, we suggest that you adopt the habit of using ISO 8601 formatted dates, e.g. year-month-day.]
+
+- Entries should be broadly understandable (another researcher working in the same field should be able to read and understand your notebook) - so avoid specialized, idiosyncratic jargon and abbreviations. 
+
+## For experimental work (lab-based, bioinformatic, computational, etc.): 
+
+For each experiment, you should include:
+- Objective (why you did the experiment)
+- Background (any information the reader needs to understand the theoretical underpinnings/importance of the work, i.e. the rationale for performing the experiment)
+- Methods, including any deviations from the methods (a step-by-step description of how the experiment was done; details of any reagents used and the protocol(s)
+- Results (the data collected in the experiment - your observations)
+- Conclusions (the interpretation of the results;  may conclude the need to repeat the experiment and/or perform follow-up experiments)
+
+Someone reading the entry (perhaps yourself, in a few months' time!) should be able to understand what you did and why, and repeat the experiment **exactly** as you did it.
+
+## For science communication or education projects:
+- Keep track of any experiments you perform, as above
+  - Record the methods used to develop the outreach activity/resource
+- Use your lab notebook to log meetings, the results of beta testing/focus groups, and to reflect on and evaluate your project (its successes and/or failures)
+
+## For systematic reviews or statistical analyses: 
+- Record your data and the analytical pipelines performed on the data (cross-reference the location of the data, if it is a dataset saved elsewhere).
+- Keep track of any statistical tests performed, how they were done, and the results.
+- Record the objective/background/methods/results/conclusions for any analysis, as described above for experimental work.
+
+## Appending data to your lab notebook
+
+- In some cases, you may not be able to store data directly in your lab notebook (e.g., very large data files that cannot be printed and stored in a hardbound lab notebook, X-ray films, or other data that can't be added directly to your notebook.) 
+  - For electronic files, you should include a description of where the data are stored (e.g., a specific file path and file name). 
+  - For other data (e.g. X-ray films), you may store these in a separate binder, with clearly numbered pages and with clear instructions on how to find the data recorded in your lab notebook.
+
+# Ethics of keeping a lab notebook
+
+- A lab notebook should be an honest, factual record of what actually happened in your experiments. 
+
+- Data should never be erased or modified at a later point. 
+
+- All data should be recorded, even if an experiment "didn't work". Do not omit any data, even if you think they aren't important.
+
+- Notebooks should be kept up to date - they are a contemporaneous record of your experiments, do not trust your memory to be able to provide detailed procedural steps or results, even a few days after the experiment.  
+
+# "I want to learn more!"
+
+- [How to keep a lab notebook](https://www.sciencemag.org/careers/2019/09/how-keep-lab-notebook)
+
+- [How to pick an electronic lab notebook](https://www.nature.com/articles/d41586-018-05895-3)
+
+- [Lab notebooks - handwriting at the core of science](https://blogs.bl.uk/science/2019/01/lab-notebooks-handwriting-at-the-core-of-science.html) 
+
+
