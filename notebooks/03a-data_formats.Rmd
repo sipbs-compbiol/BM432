@@ -1,0 +1,188 @@
+---
+title: "Data Formats and File Formats"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<div id="summary">
+- Data formats and file formats determine how data can be used
+- Data formats can be *closed* and *proprietary* or *open*
+- Community and other international standards exist for some kinds of data
+- There are several factors that should guide your choice of data format
+- Avoid using proprietary data formats for exchange or storage of data
+- When requesting data, ask for it to be provided in an open format
+</div>
+
+# Proprietary and Open Formats
+
+## Proprietary data formats
+
+*Proprietary* data formats have a format defined and/or controlled by an individual or organisation, often to support their own software and possibly only readable or writable by that software. Examples of proprietary software include: Adobe's `.psd` files; Nikon's `.nef` files; and the `.mp3` audio format. The key feature of a proprietary format is that it is, or was, not intended to be publicly known, or to be used without a licence.
+
+Proprietary formats may be *closed proprietary*, in the sense that their specification and definition is a "trade secret" (like Adobe's `.psd` files), or *open proprietary*, where the specification is published but maintained by a private organisation, like the `.mp3` file format.
+
+## Open data formats
+
+*Open* data formats are defined by published, and public, specifications, often under control of a public community, or standards organisation. Open formats include `HTML`, `.png` image files, plain text formats, and the `.odf` OpenDocument format (an alternative to Microsoft's `.docx` files).
+
+Open formats are independent of any particular software tool or operating system, and are machine-readable, but may or may not be human-readable.
+
+<details>
+  <summary>(Click to toggle) A comparison of proprietary vs open data</summary>
+
+We saved a simple project `README` file - intended to introduce the repository containing these course materials - in four formats, to demonstrate some of the practical differences between proprietary and open formats. In each case, we're looking at the first few lines of the output file, to compare readability and data content.
+
+**Markdown (open)**
+
+The first file is written in Markdown, an open format with multiple different standards. It is plain-text, human readable, and can describe both metadata and data content.
+
+```bash
+$ head README.md
+---
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+# BM432
+
+Welcome to the BM432 computational biology repository!
+```
+
+**HTML (open)**
+
+HTML (HyperText Markup Language) is in some ways the "base language" of the web. It is plain text, human-readable, and can describe both metadata and data content.
+
+```bash
+$ head README.html
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+```
+
+**PDF (proprietary/open)**
+
+The PDF format has multiple versions, some of which are open, and some are proprietary. It can be considered as a hybrid open/proprietary format, and its main disadvantages are that it was designed to be read by specific software, and is often stored in a compressed form, making it more vulnerable to errors in file-copying that can render the file unusable.
+
+```bash
+$ head README.pdf
+%PDF-1.5
+%????
+15 0 obj
+<<
+/Length 1915      
+/Filter /FlateDecode
+>>
+stream
+xڽX]w?6}???I?(~???i7M?ԻY?m?>P$,aMZ?????0E2??8??3??{/@?m@??/??????XL?8???}?? c??(
+                                                                                ??????u???w???IP?"?R??9#9ǡ???h%?J??:??h?+?ܹ?
+ ??+u????-???Q?#6?8?C??T'{??3&??B??"?pѻ???~???j??ח?u??e/?,???6v??}?{?y\??C?S7Ft??&R??ƨ1?߽??$@??$J????]|3
+                                                                                                       *|?E
+                                                                                                           ???ﴲ?GT???-?b/ЧK?m?
+?߰??B??_??t?(&i?t??v??eX?9v?{~??o???Ґ??
+                                      ?0lYኧ???Ԡ+?ҫK?T???P??3P?????o[~?]?Y??D??k?????AvC??ή??O?We#??????@???????_hl?]???
+```
+
+**Word `.docx` (proprietary/open)**
+
+The Microsoft Word `.docx` format is also a mixture of proprietary and open formats. The specification has been made public, but the format again prioritises commercial software and is largely under the control of Microsoft. It is also stored in a compressed form, vulnerable to copy errors.
+
+```bash
+$ head README.docx 
+u*Se݋
+???I?8???2??}.^?6??L{!?^R?Ft???-Bb???k?t?+??+?w??=?? ???`??3?,0z???F??,zj?*??	?
+%R??U~ȍ??؋?%??{?Z?p{?x?(?? ?
+                            ?oB?Z??-,??b	I??#?6ϕ???R$??B >]$?????R/?S??}???.?`a???@??h??}?4??9),Ĳ??_???tA???.pR??T??A?t?ފK????a?*???e@?/?rCs?z3?/`?I?y??[??;h+Z(?oDZ]uŁ???h,?=Z????{?ou*S?=?^??
+                                                                            _rels/.rels???N1
+                                                                                            E?|E?}?S
+?f?A??C?|@?xj??B?{B@Q??2?????b??81h?V5(
+?O4L?rx妠֯?NaǶ,?G???Ȉ_?B6ܑhx???}?????u?ΩC{???M?~???S?y(?&?Q???Jo=?qF
+                                                                  ??4.??5?>??.K??}d????8?7u*Sa?)?J&word/document.xml?Z[W?8~?_??3&΅[???圲?Sh?????Zd?G????wF?)?&?dӗ8??????7??ۯ?$3n??jt???p?t"?t|??
+                                                                      ???????͊?+G`????(H?ˇ??e)Ϩ??9W?l?MF?4??\?$7?qkA^&;?(:?dT????#FO&??w???6B?K?.????T䶑?GAa԰f?m?ąLg?JJ}if̞?1?d3nލ֐??53?:"+K
+```
+</details>
+
+# Tabular Data
+
+Much of the data we work with can be represented in tabular format (see the [What is a Dataset? notebook](./03-dataset.html)). This kind of data can be handled intuitively in a spreadsheet application, like Microsoft Excel, Apple's Numbers, or Google Sheets. However, spreadsheets enable some bad data practices that are best avoided (see below).
+
+In general, so long as care is taken it is reasonable to collect, explore and examine data using spreadsheets, but the data itself is best stored as platform-independent plain text formats, such as `CSV` (Comma-Separated Variable) or `TSV` (Tab-Separated Variable) files, rather than proprietary file formats.
+
+## Spreadsheet Bad Practices
+
+<div id="warning">
+Spreadsheets are powerful and useful tools and, when handled with care, can add value to your work quickly.
+
+However, they can **enable and encourage bad practice** and, sometimes, **can make your results invalid without you noticing**.
+</div>
+
+### No separation of raw, cleaned and analysed data
+
+It is possible, and common, for people to read their raw data into a spreadsheet, modify the data in-place (data cleaning), and analyse the data in exactly the same worksheet. This goes against good data management principles (see the [Data Analysis notebook](./01-data_analysis.html)):
+
+- **keep raw data separate from "cooked" (cleaned/analysed) data**: being able to readily distinguish raw fromprocessed data makes your project workflow more transparent; combining the two in the same worksheet makes analyses harder to follow
+- **keep data logically separate from the analysis "code"**: if your analysis takes a data fiel as input, and produces an output file, it is clear what each part of the workflow is doing, and there is the potential for reusability of the analysis with a new or modified dataset. Spreadsheets combine the dataset with the analysis, making it harder to substitute in a new dataset and rerun the analysis, and sometimes even hard to understand the flow of the analysis itself.
+- Some spreadsheet software will allow the use of multiple *worksheets* within a *workbook*, but require saving those files in a proprietary, format that is tied to the specific spreadsheet package, limiting exchange.
+
+### Point-and-click interface
+
+It is convenient to be able to click on a cell and change its format, or the value. It's convenient to be able to move data around by clicking, and dragging the mouse pointer. But these are data bad practices.
+
+- **raw data should not be modified**: the spreadsheet interface makes it easy to modify raw data deliberately without any record, and possible to modify it accidentally - again without any record. Most disturbingly, some spreadsheet software, like Excel, can change your data silently, making your analyses invalid. [Excel is known to change gene names without warning](http://ziemann-lab.net/public/gene_name_errors/Report_2021-08.html).
+- **annotation and metadata should be explicit and transparent**: for instance, it's tempting to use spreadsheet colours, or fonts, to "annotate" your data - to indicate high, low, or "faulty" values, for instance, or to categorise groups. Unless there is a clear record of the meanings of those colours, the annotations may not be understandable to others. Some colour choices may be indistinguishable because of colour-blindness. If the file is saved in any way other than the proprietary spreadsheet format, it may be impossible to indicate those colours, potentially locking the data into a short-lived, proprietary format that is hard to share.
+
+### Closed, proprietary, compressed file formats
+
+By default, spreadsheet software will save your data as a proprietary format for quick reading, writing, and preservation of graphs. These formats are typically tied to the application and vary between versions, making them brittle against version changes, or across operating systems. They are not useful for long-term storage. Although these formats may preserve colour formatting, graphs, and other annotations, those features are not usually able to be extracted easily by other software tools.
+
+# Image Data
+
+# Specialised Data Formats
+
+# How Should I Choose Formats?
+
+There is no hard-and-fast rule for the most appropriate format(s) for your research data, though there are a number of considerations that can guide your choice (see below).
+
+<div id="note">
+For openness, transparency, and longevity, it is usually best to prioritise:
+
+- non-proprietary formats
+- unencrypted data formats
+- uncompressed data formats
+- formats that are common and widely-used in your field of work
+- open, standardised data formats
+- plain-text human readable formats (depending on data type)
+- formats that strongly associate data with corresponding metadata
+- formats that can be stored and accessed conveniently
+</div>
+
+## Choose data and file formats common in your field
+
+Each academic field tends to reach some kind of consensus on which formats are most commly or widely used. This may be, for example, because the data format expresses the data well, or because one or other software tool (and its associated file format) is very common.
+
+To maximise your ability to exchange data, you should choose data formats that are appropriate and common in your own field of research.
+
+## Choose a data and file format that will preserve your data for an appropriate time
+
+A critical question is: how long do you need your data to be readable and exchangeable? If you do not require ever to share your data, and it exists for a very short time, the format choice is governed entirely by the ability to store efficiently all the data you need. But the longer you need to keep your data, and the greater the need for exchangeability, the more you will want to consider open, standardised and well-documented file formats.
+
+Open, standardised formats are preferred for persistent storage because proprietary and closed formats may change specification without documentation, and so can become obsolete. It happens quite frequently that later versions of tools introduce features that cannot be read in earlier versions, or discontinue support for earlier features (e.g. [Microsoft Office compatibility changes](https://support.microsoft.com/en-gb/office/compatibility-changes-between-versions-692289af-b760-4698-8326-14b2edcd6552)).
+
