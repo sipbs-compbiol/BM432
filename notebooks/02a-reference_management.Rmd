@@ -123,6 +123,12 @@ It is your responsibility to critically evaluate the quality of the information 
 - In general, best practice is to cite the **original** publication of a particular discovery: give credit to the authors who did the work, instead of citing a secondary source or a review article. **It does not matter how long ago the original work was published.**
 - Make certain that the cited paper actually contains the information that you are citing - not a reference to another paper or work where that information can be found. 
 - Including a paper in your references implicitly indicates that you have read (and understood!) the paper in its entirety. It is therefore bad practice to cite works in a language that you do not read, even if another work has pointed you to that work as the primary source.
+
+<div align="center">
+```{r fake-journal, echo=FALSE, fig.cap="Caution: not all journals are created equal [(Brian McFadden)](http://brianmcfadden.org/)."}
+knitr::include_graphics("./images/blog_550.jpg")
+```
+</div>
 </details>
 
 ## When should I be citing a review instead of a paper?
