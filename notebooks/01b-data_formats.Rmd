@@ -16,14 +16,30 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Binary (if really necessary) vs Human-readable (better)
-Tabular data
-XLSX vs CSV vs TAB vs…
-Bitmap (not scalable) vs Vector (scalable) images
-TIFF files (preserve original data!)
-Specialised data examples
-FASTA vs FASTQ vs …
-BLAST outputs
-Image formats
-Survey data?
+
+<div id="summary">
+
+</div>
+
+# Data Formats 
+
+Depending on the type of project and the analysis you are doing, you may end up generating and dealing with a number of different data formats. 
+
+For example, you might analyse the size of DNA fragments using gel electrophoresis, 
+
+
+## Binary (if really necessary) vs Human-readable (better)
+## Tabular data
+### XLSX vs CSV vs TAB vs...
+## Image data
+### Bitmap (not scalable) vs Vector (scalable) images
+### TIFF files (preserve original data!)
+## Specialised data examples
+### FASTA vs FASTQ vs …
+### BLAST outputs
+### Survey data
+
+# How Should My Data Be Formatted? 
+
+# Converting Between Different Data Formats
 
