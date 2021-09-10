@@ -1,0 +1,29 @@
+---
+title: "Data Formats"
+author: "Morgan Feeney, Leighton Pritchard"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Binary (if really necessary) vs Human-readable (better)
+Tabular data
+XLSX vs CSV vs TAB vs…
+Bitmap (not scalable) vs Vector (scalable) images
+TIFF files (preserve original data!)
+Specialised data examples
+FASTA vs FASTQ vs …
+BLAST outputs
+Image formats
+Survey data?
+
