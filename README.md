@@ -53,6 +53,7 @@ The current versions of the notebook HTML pages are linked below, for convenienc
 - [01-Data Analysis in the Research Cycle](notebooks/01-data_analysis.html)
 - [02-Data and Project Management](notebooks/02-project_management.html)
 - [02a - Reference Management](notebooks/02a-reference_management.html)
+- [02b - Reproducibility, Replicability, and FAIR Guidelines](notebooks/02b-reference_management.html)
 - [03-What is a Dataset?](notebooks/03-dataset.html)
 - [04-An Introduction to Data Visualisation](notebooks/04-visualisation.html)
 - [05-How to Access Data from Public Databases](notebooks/05-public_databases.html)
