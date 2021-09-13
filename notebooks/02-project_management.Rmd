@@ -29,7 +29,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Mary, Mary, How Does Your Project Grow?
 
-```{r finaldoc, fig.cap="How document namestend to grow... [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1531)"}
+```{r finaldoc, fig.cap="How document names tend to grow... [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1531)"}
 knitr::include_graphics(rep("images/phd101212s.gif"))
 ```
 
@@ -107,7 +107,7 @@ The intent behind each directory in figure \@ref(fig:working-directory) is:
 - `WORKING_DIR/` is the *root* directory of the project.
   - Name this after your project
   - Everything related to the project (data, scripts, figures, notes to yourself, etc.) should be contained *below* this directory (perhaps in subdirectories)
-- `data/` is a subdirectory for stroing data.
+- `data/` is a subdirectory for storing data.
   - Should you stare only raw data, or raw and processed data? **That is your decision.**
   - Keep your data together with associated metadata (e.g. output spectra with the data files describing machine settings)
   - Use subfolders when sensible (e.g. `data/raw`, `data/intermediate`, `data/processed`, etc.)
@@ -124,13 +124,13 @@ The intent behind each directory in figure \@ref(fig:working-directory) is:
 
 ## Treat raw data as read-only
 
-Keeping your raw data in its original state **establishes provenance** and **enables reanalysis**.
+Keeping your raw data in its original state **establishes provenance** and **enables reanalysis**. This means that you will always have the original data (and be certain that it's the original data!), and you'll be able to return to it to repeat your analysis or carry out a different analysis as needed.
 
 <div id="warning">
 You should never modify your raw data files in-place. If you do so, it can be impossible to recover their original state, rendering the original data collection suspect and compromising the integrity of the entire project.
 </div>
 
-Keep raw data in a separate, clearly-labelled, subfolder of the project working directory. 
+Keep raw data in a separate, clearly-labeled, subfolder of the project working directory. 
 
 ## Clean raw data programmatically as part of the analysis chain
 
