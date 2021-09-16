@@ -1,0 +1,140 @@
+LOCUS       NC_011916               1473 bp    DNA     linear   CON 10-DEC-2020
+DEFINITION  Caulobacter crescentus NA1000, complete genome.
+ACCESSION   NC_011916 REGION: 5636..7108
+VERSION     NC_011916.1
+DBLINK      BioProject: PRJNA59307
+            BioSample: SAMN02604151
+KEYWORDS    RefSeq.
+SOURCE      Caulobacter vibrioides NA1000
+  ORGANISM  Caulobacter vibrioides NA1000
+            Bacteria; Proteobacteria; Alphaproteobacteria; Caulobacterales;
+            Caulobacteraceae; Caulobacter.
+REFERENCE   1  (bases 1 to 1473)
+  AUTHORS   Marks,M.E., Castro-Rojas,C.M., Teiling,C., Du,L., Kapatral,V.,
+            Walunas,T.L. and Crosson,S.
+  TITLE     The genetic basis of laboratory adaptation in Caulobacter
+            crescentus
+  JOURNAL   J. Bacteriol. 192 (14), 3678-3688 (2010)
+   PUBMED   20472802
+REFERENCE   2  (bases 1 to 1473)
+  CONSRTM   NCBI Genome Project
+  TITLE     Direct Submission
+  JOURNAL   Submitted (15-SEP-2020) National Center for Biotechnology
+            Information, NIH, Bethesda, MD 20894, USA
+REFERENCE   3  (bases 1 to 1473)
+  AUTHORS   Schrader,J., Viollier,P., Radhakrishnan,S., Ely,B. and Crosson,S.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (03-SEP-2016) Biochemistry and Molecular Biology,
+            University of Chicago, 929 E. 57th St. - GCIS W138, Chicago, IL
+            60637, USA
+  REMARK    Protein update by submitter
+REFERENCE   4  (bases 1 to 1473)
+  AUTHORS   Schrader,J., Zhou,B., Li,G.-W., Lasker,K., Long,T., Etheredge,L.,
+            Ely,B., McAdams,H., Weissman,J., Shapiro,L. and Crosson,S.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (08-FEB-2014) Biochemistry and Molecular Biology,
+            University of Chicago, 929 E. 57th St. - GCIS W138, Chicago, IL
+            60637, USA
+  REMARK    Protein update by submitter
+REFERENCE   5  (bases 1 to 1473)
+  AUTHORS   Crosson,S.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (18-APR-2013) Biochemistry and Molecular Biology,
+            University of Chicago, 929 E. 57th St. - W138, Chicago, IL 60637,
+            USA
+  REMARK    Protein update by submitter
+REFERENCE   6  (bases 1 to 1473)
+  AUTHORS   Crosson,S.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (11-OCT-2011) Biochemistry and Molecular Biology,
+            University of Chicago, 929 E. 57th St. - W138, Chicago, IL 60637,
+            USA
+  REMARK    Protein update by submitter.
+REFERENCE   7  (bases 1 to 1473)
+  AUTHORS   Marks,M.E., Teiling,C., Du,L., Kapatral,V., Walunas,T.L. and
+            Crosson,S.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (15-SEP-2010) Biochemistry and Molecular Biology,
+            University of Chicago, 929 E. 57th St., Chicago, IL 60637, USA
+  REMARK    Protein update by submitter
+REFERENCE   8  (bases 1 to 1473)
+  AUTHORS   Marks,M.E., Teiling,C., Du,L., Kapatral,V., Walunas,T.L. and
+            Crosson,S.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (28-JUL-2010) Biochemistry and Molecular Biology,
+            University of Chicago, 929 E. 57th St., Chicago, IL 60637, USA
+  REMARK    Protein update by submitter
+REFERENCE   9  (bases 1 to 1473)
+  AUTHORS   Marks,M.E., Teiling,C., Du,L., Kapatral,V., Walunas,T.L. and
+            Crosson,S.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (05-JAN-2009) Biochemistry and Molecular Biology,
+            University of Chicago, 929 E. 57th St., Chicago, IL 60637, USA
+COMMENT     PROVISIONAL REFSEQ: This record has not yet been subject to final
+            NCBI review. The reference sequence is identical to CP001340.
+            Bacterial strain Caulobacter crescentus NA1000 and source genomic
+            DNA are available from Crosson Lab, Department of Biochemistry and
+            Molecular Biology, The University of Chicago, 929 E. 57th St.,
+            Chicago, IL 60637.
+            COMPLETENESS: full length.
+FEATURES             Location/Qualifiers
+     source          1..1473
+                     /organism="Caulobacter vibrioides NA1000"
+                     /mol_type="genomic DNA"
+                     /strain="NA1000"
+                     /db_xref="taxon:565050"
+     gene            1..1473
+                     /gene="dnaA"
+                     /locus_tag="CCNA_00008"
+                     /experiment="gene is essential according to Tn-seq
+                     experiments of Christen, et al. (2011) Mol Syst Biol.
+                     30;7:528. doi: 10.1038/msb.2011.58"
+                     /db_xref="GeneID:7333149"
+     CDS             1..1473
+                     /gene="dnaA"
+                     /locus_tag="CCNA_00008"
+                     /experiment="EXISTENCE:LC-MS"
+                     /experiment="EXISTENCE:Ribosome profiling"
+                     /note="CC_0008"
+                     /codon_start=1
+                     /transl_table=11
+                     /product="chromosome replication initiator protein DnaA"
+                     /protein_id="YP_002515383.1"
+                     /db_xref="GeneID:7333149"
+                     /translation="MTMKGGVASQDFSAAIATACEPAANVWSKVCVALKRELGDAAFG
+                     SWIAPAMLREAATGDVVLVTSTGIARDWIRRSAWRRIGELWAAHDATGRRIDLKSRLE
+                     FEAAAGAYVEATPKAVAAEPIEIVLPVSTDAPTVVAPSAKSPRTQGLQERFTFETFVP
+                     GPANEFAHAVARRIANWADGHFNPVLFHGPYGFGKTHLLNALAWEAMRNAPEKRVVYL
+                     TAERFLSTFVRAVMDRQTAAFKEELRAADLLIIDDVHFIAGKQSTQEELFHTLTALVG
+                     EGGRVVFSADRPPSAMTEMDAHLRSHLSAGLVCGLEPADRNLRLGILERKIQTLGAAH
+                     GFEPSIRPEVMQFLADRFTDSVRELEGALNTLSARAGEGLSRMTLDEVQAILRPHLRS
+                     GEKRITIDDIQKATAEHYGMKQADLLSERRNRAVARPRQAAMWLAKQLTTRSLPDIGR
+                     RFGGRDHTTVLHAVRRIEALRAEDSALSHDLETLTRKLRG"
+ORIGIN      
+        1 atgaccatga agggcggggt tgccagccag gacttctcgg cggcgatcgc gacggcttgt
+       61 gagccggcgg cgaacgtctg gtcgaaggtt tgcgtggctt tgaagcgtga gctgggtgac
+      121 gcggccttcg ggtcgtggat cgcgcccgcc atgctgcgcg aagccgccac tggcgatgtc
+      181 gtcctggtga cgtcgacggg catcgcccgc gactggattc gccgcagcgc ctggcgccgg
+      241 atcggcgaac tctgggccgc ccatgatgcg acaggtcgtc gcatcgacct gaagtcgcgc
+      301 ctcgagttcg aagcggcggc cggcgcctat gtagaggcga cccccaaggc tgtcgccgcc
+      361 gaaccgatcg agattgtcct gcccgtctcc actgacgcgc cgacggtcgt cgcgcccagc
+      421 gccaagtcgc cccgcaccca aggcttgcag gagcgcttca ccttcgagac cttcgtcccg
+      481 ggtcccgcca acgagttcgc gcacgctgta gcgcgtcgga tcgccaactg ggcggacggt
+      541 cacttcaatc ctgtgctgtt ccacggcccg tacggttttg gcaaaacgca cttgctgaac
+      601 gccctggcct gggaggccat gcgcaacgcc ccggaaaagc gcgtggtcta tctgaccgcc
+      661 gagcgcttcc tgtcgacctt cgtgcgcgcc gtgatggatc gtcagaccgc ggccttcaag
+      721 gaagagctgc gcgccgctga tcttctgatc atcgacgacg tgcacttcat cgccggcaag
+      781 cagtcgaccc aggaagagct gttccacacc ctgaccgcgc tggtcgggga gggcggccgt
+      841 gtcgtgttct cagccgaccg tccgccgtcg gccatgaccg agatggacgc ccatctgcgc
+      901 tcgcatctgt cggcgggtct ggtctgcggt ctcgagccgg cggatcgcaa cctccgtctc
+      961 ggcatcctgg agcgcaagat ccagaccctg ggcgcggccc acggctttga gcccagcata
+     1021 cgccccgagg tcatgcagtt cctcgccgac cgtttcaccg acagcgtccg cgagctggaa
+     1081 ggcgcgctga acaccttgtc ggcccgcgcc ggcgaaggcc tctcgcgcat gaccctggat
+     1141 gaggtgcagg cgatcctgcg tccccacctg cggtcgggcg agaagcgcat caccatcgac
+     1201 gatattcaga aggccaccgc cgagcattac ggcatgaagc aggccgatct gcttagcgaa
+     1261 cgccgcaacc gcgccgtggc ccggccgcgt caggccgcca tgtggctggc caagcagctg
+     1321 accacccgtt cgctgccgga catcggccgt cgcttcggtg gtcgcgatca caccacggtc
+     1381 ctgcacgccg tccgtcggat cgaggccttg cgcgctgagg acagcgcctt gagccacgat
+     1441 ctggagaccc tgacgcgcaa gctgcggggc taa
+//
+

@@ -188,7 +188,54 @@ By default, spreadsheet software will save your data as a proprietary format for
 
 # Image Data
 
+Many biological experiments involve collecting image data (e.g., photographs of samples; gel pictures; micrographs captured by light or electron microscopy). 
+
+Common image data formats include: .tiff, .gif, .jpg, .png, .bmp, and so on. There are also a large number of proprietary image data formats (e.g. associated with a particular camera or software.)
+
+<div id="warning">
+There are very stringent rules governing the acceptable practices for handling image data.^[Cromey D. W. (2013). Digital images are data: and should be treated as such. Methods in molecular biology (Clifton, N.J.), 931, 1–27. https://doi.org/10.1007/978-1-62703-056-4_1]
+
+Manipulating an image (even seemingly harmless, "artistic" adjustments to scale the brightness or contrast) changes the data and can affect how these data are perceived and interpreted. 
+
+Therefore, you must always:
+- Save a copy of the original, unedited image
+- Record any adjustments that were made, and how they were made (some software will do this automatically). 
+  - Simple manipulations (e.g., cropping to remove irrelevant parts of the image, careful adjustments of brightness and contrast applied to the entire image) are usually acceptable.         - Manipulations specific to one part of the image, or that duplicate part of an image, are questionable at best - and usually completely unethical.
+- Be sure to compare the original and processed image, to ensure that the manipulations do not alter the data. 
+
+See the [Image integrity and standards, Nature journals](https://www.nature.com/nature-portfolio/editorial-policies/image-integrity) for an example of the rules that journals set out to ensure that image data is acquired and processed appropriately. If you do not follow such guidelines, your data will be unpublishable.
+</div>
+
+## Image Compression
+
+Image files can be very large - and some experiments (e.g., time-lapse microscopy) involve the acquisition of hundreds of thousands of images. There are algorithms which can compress these files into smaller files - these generally fall into two categories, *lossless* and *lossy*. Lossy compression, as the name implies, results in the loss of some of the original data (often resulting in a smaller image file than lossless compression, which preserves all of the image data.)
+
+For example, micrograph files are commonly captured as .tiff files. It may be tempting to compress these, for example, to .jpg files in order to save space. However, this is an example of lossy compression and therefore the temptation should be avoided! Always retain the original .tiff files from your experiments. (Your data management plan should take into account the storage requirements for acquiring and preserving such large amounts of data.)
+
 # Specialised Data Formats
+
+There are a number of specialised data formats that you may encounter during the course of your project or your further studies. The following is not an exhaustive discussion of all possible file formats used in biological experiments, but is intended as a guide to some of the common fomats that you may encounter.
+
+## DNA or amino acid sequence files
+
+Common formats for these sequence files include FASTA (.fasta) and Genbank (.gbk) files... #addmorehere
+
+FASTA files are text files, with a simple header, while Genbank files generally contain much more detailed information (annotation, references, remarks, etc.)
+
+As an example, consider the [.fasta](assets/data/example-sequence-files/C_crescentus-DnaA_NC_011916.fasta) and [.gbk](assets/data/example-sequence-files/C_crescentus-DnaA_NC_011916.gbk) files for the **Caulobacter crescentus** gene **dnaA**.
+
+```{r seq1, fig.cap="A comparison of .fasta and .gbk files for the **Caulobacter crescentus** gene **dnaA**"}
+knitr::include_graphics(rep("images/fasta-vs-genbank.png"))
+```
+
+## Coordinate files
+
+PDB files and mmCIF files
+
+## Raw sequencing reads
+
+FASTQ files
+ABI files
 
 # How Should I Choose Formats?
 
@@ -205,6 +252,8 @@ For openness, transparency, and longevity, it is usually best to prioritise:
 - plain-text human readable formats (depending on data type)
 - formats that strongly associate data with corresponding metadata
 - formats that can be stored and accessed conveniently
+- formats that are compatible with downstream analyses
+- formats that are acceptable to scientific publishers (e.g., for journal deposition requirements)
 </div>
 
 ## Choose data and file formats common in your field
@@ -218,4 +267,3 @@ To maximise your ability to exchange data, you should choose data formats that a
 A critical question is: how long do you need your data to be readable and exchangeable? If you do not require ever to share your data, and it exists for a very short time, the format choice is governed entirely by the ability to store efficiently all the data you need. But the longer you need to keep your data, and the greater the need for exchangeability, the more you will want to consider open, standardised and well-documented file formats.
 
 Open, standardised formats are preferred for persistent storage because proprietary and closed formats may change specification without documentation, and so can become obsolete. It happens quite frequently that later versions of tools introduce features that cannot be read in earlier versions, or discontinue support for earlier features (e.g. [Microsoft Office compatibility changes](https://support.microsoft.com/en-gb/office/compatibility-changes-between-versions-692289af-b760-4698-8326-14b2edcd6552)).
-
