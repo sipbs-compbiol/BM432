@@ -26,17 +26,13 @@ knitr::opts_chunk$set(echo = FALSE)
 
 We have covered the [basics of reference management](/02a-reference_management.html), including the factors that influence your choice of reference management software, what references  you should be citing, and what referencing style you should use. This part of the workshop is a practical guide on how to use reference management software to organize your references and insert citations and a bibliography into your thesis, using Endnote and Mendeley as examples.
 
-# Endnote 
+The reference library and Word file we are using are (provide links here)
 
-Please see the [Strathclyde Library guide to using Endnote](https://guides.lib.strath.ac.uk/c.php?g=653772&p=4589573) for more information about how to download Endnote for Windows or Mac, and how to use it.
+# How to obtain a citation file (any software)
 
-Worked examples here are using Endnote X8.2 on a Windows machine - some of the details may vary if you are using a different system. 
+## From PubMed 
 
-In these examples, we are getting the citation file directly from PubMed, but note that many/most journals will also allow you to download a citation file for an article (the details of how this works vary from one journal to another).
-
-The EndNote library and Word file we are using are (provide links here)
-
-## How to import a reference into your Endnote library from PubMed
+You can get citation files directly from PubMed. This will likely be an option for most of the articles you wish to cite.
 
 ### Option 1: the "Cite" action
 
@@ -60,11 +56,34 @@ We can also download the reference by clicking on "Send to" in the bar above the
 knitr::include_graphics("./images/Endnote-Fig3.JPG")
 ```
 
-Having downloaded the reference using either of the above options, double-click on the file to open it.
+## From the journal website
 
-Endnote should now open automatically (if it is not already open). 
+Many/most journals will also allow you to download a citation file for an article (the details of how this works vary from one journal to another).
 
-The reference will initially appear in your library under "Imported References."](https://Endnote-Fig4.jpg)
+To give just one example, clicking on "Citation tools" from a journal article published in PNAS, brings up a menu that gives you the option of downloading the citation file in a variety of formats. 
+
+```{r citation-tools, echo=FALSE, fig.cap="PNAS citation tools menu"}
+knitr::include_graphics("./images/PNAS-citation-tools.JPG")
+```
+
+## Manually 
+
+In some instances, you may need to create a citation file manually (if no citation file exists, e.g. if you are citing a personal communication). In these cases, your only option is to create the file manually and populate it with the correct details yourself. 
+
+# Endnote 
+
+Please see the [Strathclyde Library guide to using Endnote](https://guides.lib.strath.ac.uk/c.php?g=653772&p=4589573) for more information about how to download Endnote for Windows or Mac, and how to use it.
+
+Worked examples here are using Endnote X8.2 on a Windows machine - some of the details may vary if you are using a different system. 
+
+## How to import a reference into your Endnote library
+
+Having downloaded the reference file using any of the above options, you will want to open it in Endnote. You can do this in a number of different ways:
+- by double-clicking on the file to open it, if Endnote is set as the default program to open this type of file (Endnote should open automatically if it is not already open)
+- dragging the file into Endnote (from the downloads folder or wherever you have saved it)
+- right-clicking the file and selecting Open (if Endnote is your default), or Open with (and selecting Endnote) 
+
+The reference will initially appear in your library under "Imported References."
 
 ```{r Endnote4, echo=FALSE, fig.cap="The new reference appears under Imported References when it is opened"}
 knitr::include_graphics("./images/Endnote-Fig4.JPG")
@@ -164,11 +183,76 @@ Where you have groups of citations enclosed within a single set of brackets, it 
 knitr::include_graphics("./images/Endnote-Fig15.JPG")
 ```
 
+# Mendeley
+
+You can download [Mendeley Desktop](https://www.mendeley.com/download-desktop-new) or [Mendeley Reference Manager](https://www.mendeley.com/reference-management/reference-manager) from the web; please refer to their website from installation instructions and FAQ, etc. 
+
+You will also want to download the MS Word Plugin, if you are using Mendeley with Word. 
+
+A number of useful [help guides](https://www.mendeley.com/guides) are available online. 
+
+<div id="warning">
+Note that you may run into some issues if you have multiple reference managers interfacing with Word (e.g., if Endnote and Mendeley both have add-ons running in Word) - if you run into problems, you may need to disable or uninstall one of the programs.
+</div>
+
+Worked examples here are using Mendeley Desktop v 1.19.8 on a Windows machine - some of the details may vary if you are using a different system. 
+
+## How to import a reference into your Mendeley library 
+
+If you have downloaded a PDF file of the article you wish to reference, you can add the PDF, and an automatically generated reference, to your Mendeley library simply by dragging the file into Mendeley Desktop. (The program includes a built-in PDF viewer, so you can read your article in Mendeley as well as record your notes on it.)
+
+You can also use reference files downloaded from PubMed or journal websites, as described above. Once you have downloaded the file for the article you wish to reference, you will want to open it in Mendeley. You can do this in a number of different ways:
+- by double-clicking on the file to open it, if Mendeley is set as the default program to open this type of file (Mendeley should open automatically if it is not already open)
+- dragging the file into Mendeley (from the downloads folder or wherever you have saved it)
+- right-clicking the file and selecting Open (if Mendeley is your default), or Open with (and selecting Mendeley)
+
+## How to insert a citation from Mendeley in your Word document
 
 
 
+```{r Mendeley1, echo=FALSE, fig.cap="caption"}
+knitr::include_graphics("./images/Mendeley-fig1.JPG")
+```
 
+```{r Mendeley2, echo=FALSE, fig.cap="caption"}
+knitr::include_graphics("./images/Mendeley-fig2.JPG")
+```
 
+```{r Mendeley3, echo=FALSE, fig.cap="caption"}
+knitr::include_graphics("./images/Mendeley-fig3.JPG")
+```
+
+```{r Mendeley4, echo=FALSE, fig.cap="caption"}
+knitr::include_graphics("./images/Mendeley-fig4.JPG")
+```
+
+```{r Mendeley5, echo=FALSE, fig.cap="caption"}
+knitr::include_graphics("./images/Mendeley-fig5.JPG")
+```
+
+```{r Mendeley6, echo=FALSE, fig.cap="caption"}
+knitr::include_graphics("./images/Mendeley-fig6.JPG")
+```
+
+```{r Mendeley7, echo=FALSE, fig.cap="caption"}
+knitr::include_graphics("./images/Mendeley-fig7.JPG")
+```
+
+```{r Mendeley8, echo=FALSE, fig.cap="caption"}
+knitr::include_graphics("./images/Mendeley-fig8.JPG")
+```
+
+## How to change the output style of your references
+
+<div id="note">
+You can format your references for your thesis in either [Harvard](https://guides.lib.strath.ac.uk/referencing_guide/harvard) or [Vancouver](https://guides.lib.strath.ac.uk/referencing_guide/vancouver) style. 
+</div>
+
+## How to correct some common errors
+
+### Formatting errors
+
+### Deleting citations
 
 
 
