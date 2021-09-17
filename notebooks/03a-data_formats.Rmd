@@ -171,7 +171,7 @@ However, they can **enable and encourage bad practice** and, sometimes, **can ma
 
 It is possible, and common, for people to read their raw data into a spreadsheet, modify the data in-place (data cleaning), and analyse the data in exactly the same worksheet. This goes against good data management principles (see the [Data Analysis notebook](./01-data_analysis.html)):
 
-- **keep raw data separate from "cooked" (cleaned/analysed) data**: being able to readily distinguish raw fromprocessed data makes your project workflow more transparent; combining the two in the same worksheet makes analyses harder to follow
+- **keep raw data separate from "cooked" (cleaned/analysed) data**: being able to readily distinguish raw from processed data makes your project workflow more transparent; combining the two in the same worksheet makes analyses harder to follow
 - **keep data logically separate from the analysis "code"**: if your analysis takes a data field as input, and produces an output file, it is clear what each part of the workflow is doing, and there is the potential for reusability of the analysis with a new or modified dataset. Spreadsheets combine the dataset with the analysis, making it harder to substitute in a new dataset and rerun the analysis, and sometimes even hard to understand the flow of the analysis itself.
 - Some spreadsheet software will allow the use of multiple *worksheets* within a *workbook*, but require saving those files in a proprietary, format that is tied to the specific spreadsheet package, limiting exchange.
 
@@ -216,26 +216,43 @@ For example, micrograph files are commonly captured as .tiff files. It may be te
 
 There are a number of specialised data formats that you may encounter during the course of your project or your further studies. The following is not an exhaustive discussion of all possible file formats used in biological experiments, but is intended as a guide to some of the common fomats that you may encounter.
 
-## DNA or amino acid sequence files
+## Nucleotide and amino acid sequence files
 
-Common formats for these sequence files include FASTA (.fasta) and Genbank (.gbk) files... #addmorehere
+Common formats for these sequence files include FASTA (.fasta) and Genbank (.gbk) files... #addmorehere?
 
 FASTA files are text files, with a simple header, while Genbank files generally contain much more detailed information (annotation, references, remarks, etc.)
 
-As an example, consider the [.fasta](assets/data/example-sequence-files/C_crescentus-DnaA_NC_011916.fasta) and [.gbk](assets/data/example-sequence-files/C_crescentus-DnaA_NC_011916.gbk) files for the **Caulobacter crescentus** gene **dnaA**.
+As an example, consider the [.fasta](assets/data/example-sequence-files/C_crescentus-DnaA_NC_011916.fasta) and [.gbk](assets/data/example-sequence-files/C_crescentus-DnaA_NC_011916.gbk) files for the *Caulobacter crescentus* gene *dnaA*.
 
-```{r seq1, fig.cap="A comparison of .fasta and .gbk files for the **Caulobacter crescentus** gene **dnaA**"}
+Note that while Genbank files usually describe a single biological molecule (nucleotide or amino acid), FASTA files can contain the sequences of multiple molecules, each labelled with their own FASTA header.
+
+```{r seq1, fig.cap="A comparison of .fasta and .gbk files for the *Caulobacter crescentus* gene *dnaA*"}
 knitr::include_graphics(rep("images/fasta-vs-genbank.png"))
 ```
 
-## Coordinate files
+## Structure files
 
-PDB files and mmCIF files
+The current standard format for biological macromolecule structure files is the [PDBx/mmCIF](https://www.wwpdb.org/documentation/file-format) format (before 2012, it was the PDB format; older structures may still be in this format.) [Documentation and FAQ](https://mmcif.wwpdb.org/) are available.
 
 ## Raw sequencing reads
 
-FASTQ files
-ABI files
+If you are doing experiments that involve DNA sequencing, your data will be generated in different formats depending on the sequencing technology you use. Some commonly used formats include FASTQ and ABI files. 
+
+### FASTQ files
+
+As the name suggests, FASTQ files are similar to FASTA files; however, FASTQ files include quality scores that reflect the quality of the base call. 
+
+### ABI files
+
+If you sequence any samples using Sanger sequencing, the raw sequence data is usually in the ABI file format: this contains the chromatogram showing the peaks generated during the sequencing run. 
+
+You will likely also receive a FASTA file containing the bases called during the sequencing run - however, you should always examine the raw data (the chromatogram) carefully. 
+
+In the figure below, you can see an example of heterozygosity - the sequencing read is relatively clean and most peaks are well-defined and correctly called, but in some cases there are mixed peaks (for example, peak 358 with A/G peaks). Peak-calling software are not well-equipped to deal with mixed peaks, and so it is important that you examine the sequence chromatograms manually. 
+
+```{r abi, fig.cap="An example of a DNA chromatogram showing heterozygosity (Figure from Mallet 2019, 10.11646/zootaxa.4679.3.11)"}
+knitr::include_graphics(rep("images/heterozygous_chromatograph.png"))
+```
 
 # How Should I Choose Formats?
 
@@ -259,6 +276,8 @@ For openness, transparency, and longevity, it is usually best to prioritise:
 ## Choose data and file formats common in your field
 
 Each academic field tends to reach some kind of consensus on which formats are most commonly or widely used. This may be, for example, because the data format expresses the data well, or because one or other software tool (and its associated file format) is very common.
+
+These often may be codified, for example by journal or database policies specifying which file formats are acceptable for submission. If you do not pay attention to these policies, your data will not be correctly formatted for publication.
 
 To maximise your ability to exchange data, you should choose data formats that are appropriate and common in your own field of research.
 
