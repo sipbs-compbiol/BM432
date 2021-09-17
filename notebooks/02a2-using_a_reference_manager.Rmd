@@ -1,0 +1,174 @@
+---
+title: "How to Use Reference Management Software"
+author: "Morgan Feeney, Leighton Pritchard"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<div id="summary">
+- This workshop summarises how to use reference management software to:
+  - Build a reference library
+  - Insert references into a Word document
+  - Change the output style (formatting of the citations and bibliography)
+  - Correct some commonly encountered errors
+</div>
+
+We have covered the [basics of reference management](/02a-reference_management.html), including the factors that influence your choice of reference management software, what references  you should be citing, and what referencing style you should use. This part of the workshop is a practical guide on how to use reference management software to organize your references and insert citations and a bibliography into your thesis, using Endnote and Mendeley as examples.
+
+# Endnote 
+
+Please see the [Strathclyde Library guide to using Endnote](https://guides.lib.strath.ac.uk/c.php?g=653772&p=4589573) for more information about how to download Endnote for Windows or Mac, and how to use it.
+
+Worked examples here are using Endnote X8.2 on a Windows machine - some of the details may vary if you are using a different system. 
+
+In these examples, we are getting the citation file directly from PubMed, but note that many/most journals will also allow you to download a citation file for an article (the details of how this works vary from one journal to another).
+
+The EndNote library and Word file we are using are (provide links here)
+
+## How to import a reference into your Endnote library from PubMed
+
+### Option 1: the "Cite" action
+
+We have found a reference that we want to add to our Endnote library via a PubMed search. To add this reference, we will click the blue button on the right-hand side labelled "Cite".
+
+```{r Endnote1, echo=FALSE, fig.cap="A PubMed page for a journal article, with a blue arrow indicating the Cite button"}
+knitr::include_graphics("./images/Endnote-Fig1.JPG")
+```
+
+This brings up a pop-up window, which by default gives the reference in APA format (you could copy the reference from this box, if you wished to.) We will download the reference by clicking on "Download .nbib".
+
+```{r Endnote2, echo=FALSE, fig.cap="The pop-up Cite menu for our journal article, with a blue arrow indicating the Download .nbib option"}
+knitr::include_graphics("./images/Endnote-Fig2.JPG")
+```
+
+### Option 2: Use "Send to"
+
+We can also download the reference by clicking on "Send to" in the bar above the reference, and then clicking on "Citation manager".
+
+```{r Endnote3, echo=FALSE, fig.cap="Using Send to: Citation manager to obtain the reference for our journal article, with a blue arrow indicating the Citation manager option that should be clicked"}
+knitr::include_graphics("./images/Endnote-Fig3.JPG")
+```
+
+Having downloaded the reference using either of the above options, double-click on the file to open it.
+
+Endnote should now open automatically (if it is not already open). 
+
+The reference will initially appear in your library under "Imported References."](https://Endnote-Fig4.jpg)
+
+```{r Endnote4, echo=FALSE, fig.cap="The new reference appears under Imported References when it is opened"}
+knitr::include_graphics("./images/Endnote-Fig4.JPG")
+```
+
+You can see all of the references in your library by clicking on "All References" in the menu at the right.
+
+```{r Endnote5, echo=FALSE, fig.cap="The imported reference highlighted in All References"}
+knitr::include_graphics("./images/Endnote-Fig5.JPG")
+```
+
+If you wish, you can attach the PDF of the paper to the reference record in Endnote, as a way to easily organize and find the paper files. You can do this by selecting the reference in your library and then clicking References > File Attachments > Attach File, and choosing the correct file.
+
+You can also attach a file by double-clicking on the reference to open it, and clicking on the paperclip icon.
+
+```{r Endnote6, echo=FALSE, fig.cap="The reference for the Meehan et al. article"}
+knitr::include_graphics("./images/Endnote-Fig6.JPG")
+```
+
+## How to insert a citation from Endnote in your Word document
+
+Option 1: Add a citation through Endnote
+
+First, position the cursor at the position in the text where you want to insert a citation. Next, open Endnote, select the reference you wish to cite, and click on the " button (indicated by a blue arrow.
+
+```{r Endnote7, echo=FALSE, fig.cap="Inserting a reference into word using the \" button"}
+knitr::include_graphics("./images/Endnote-Fig7.JPG")
+```
+
+Endnote will automatically add the citation at the position where your cursor was ((Bardwell et al., 1991) in this example). It will also add the reference to your list of references cited, at the end of the document.](https://Endnote-Fig8.jpg)
+
+```{r Endnote8, echo=FALSE, fig.cap="The new citation inserted into our text"}
+knitr::include_graphics("./images/Endnote-Fig8.JPG")
+```
+
+Option 2: Add a citation through Word
+
+You can also add a citation in Word, using the Endnote menu in the ribbon at the top. First place your cursor at the correct position in the text and then click on "Insert Citation".
+
+```{r Endnote9, echo=FALSE, fig.cap="Inserting a reference into word by clicking on \" Insert citation\" (indicated by a blue arrow)"}
+knitr::include_graphics("./images/Endnote-Fig9.JPG")
+```
+
+This will bring up a dialog box, where you can search for the publication that you wish to cite (in this case, we searched based on the last name of the first author). This brings up the correct reference, which you can then cite by clicking on the "insert" button.
+
+```{r Endnote10, echo=FALSE, fig.cap="Searching for the reference that you wish to cite in Word and inserting it by clicking on the insert button (indicated by a blue arrow)."}
+knitr::include_graphics("./images/Endnote-Fig7.JPG")
+```
+
+As with the previous option, this will insert the citation in the text and add the reference to the bibliography at the end of the document.
+
+```{r Endnote11, echo=FALSE, fig.cap="The updated Word document, with the citation in the text and the new reference added to the bibliography"}
+knitr::include_graphics("./images/Endnote-Fig11.JPG")
+```
+
+## How to change the output style of your references
+
+<div id="note">
+You can format your references for your thesis in either [Harvard](https://guides.lib.strath.ac.uk/referencing_guide/harvard) or [Vancouver](https://guides.lib.strath.ac.uk/referencing_guide/vancouver) style. 
+</div>
+
+You can select a different style for your references by clicking on the "Style" drop-down menu in the Endnote menu bar, and choosing your preferred option.
+
+```{r Endnote12, echo=FALSE, fig.cap="Changing Endnote's output style (in this case to Vancouver, indicated with a blue arrow)"}
+knitr::include_graphics("./images/Endnote-Fig12.JPG")
+```
+
+This will automatically change the format of your citations and reference list to the desired output format, as shown here.
+
+```{r Endnote13, echo=FALSE, fig.cap="The Word document with citations and bibliography now in Vancouver style"}
+knitr::include_graphics("./images/Endnote-Fig13.JPG")
+```
+
+You can also change the output style directly in Endnote, by going to Edit > Output Styles and selecting your desired style.
+
+## How to correct some common errors
+
+### Formatting errors
+
+Do not trust Endnote to preserve text formatting or any special characters correctly. (In the example above, notice that it has not formatted the species name, *Escherichia coli* in italics as it should have.)
+
+You can correct any errors by editing the reference directly in Endnote (i.e. adding italics where appropriate). You can italicize text within the reference list directly in Word, if you wish, but these changes may be lost when the citations and bibliography are updated.
+
+```{r Endnote14, echo=FALSE, fig.cap="The Endnote reference formatted correctly. Note that the species name has been italicized (indicated with an arrow). The buttons for editing text formatting are indicated with a blue box."}
+knitr::include_graphics("./images/Endnote-Fig14.JPG")
+```
+
+### Deleting citations
+
+You may occasionally insert the wrong citation by accident, or find that you have changed your text and therefore need to remove a citation. This is quite straightforward.
+
+For a single citation alone in the text, you can remove the citation by simply deleting the text in Word. 
+
+Where you have groups of citations enclosed within a single set of brackets, it is easiest to use the "Edit and Manage Citations" tool found in the Endnote ribbon. Click on "Edit Reference" and select "Remove Citation".
+
+```{r Endnote15, echo=FALSE, fig.cap="Removing a reference in Word. The \"Edit and Manage Citations\" button is indicated with a blue arrow. The Remove Citation option, in the Edit Reference menu, is highlighted."}
+knitr::include_graphics("./images/Endnote-Fig15.JPG")
+```
+
+
+
+
+
+
+
+
+
