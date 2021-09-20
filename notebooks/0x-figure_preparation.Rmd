@@ -1,0 +1,74 @@
+---
+title: "Data Visualization: preparing your figures for an audience"
+author: "Morgan Feeney, Leighton Pritchard"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<div id="summary">
+- Your figures should be clear and informative, allowing the reader to easily and quickly understand the data that you present.
+- Design decisions, including layout and the use of white space, colour choices, font size and choice, all matter in terms of making your figure clear and easy to interpret.
+
+</div>
+
+# Introduction
+
+You are the author of your figures: not their intended audience. It is important, when you create any figure, to take a few moments to consider how a naive audience (one who hasn't seen the figure before) will perceive it. 
+
+It is also essential that you consider *accessibility*: is your figure accessible to a broad audience? Or does it rely on niche jargon specific to a particular field, colour palettes that are difficult/impossible for some readers to see, and/or fonts that are difficult for some readers to read?
+
+Unfortunately, many scientific figures are poorly designed. They are difficult to interpret, confuse the reader, and/or distract from the message that the authors mean to convey.
+
+```{r finaldoc, fig.cap="A picture with a thousand words... [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1926)"}
+knitr::include_graphics(rep("images/phd022417s.gif"))
+```
+
+<div id="warning">
+Do not mislead your audience!
+
+</div>
+
+
+# Figure aesthetics
+
+Your audience will form an impression of your figure within the first 30 seconds (or less) of looking at it. 
+
+# Colors
+
+Do not use colour for the sake of using colour.^[For practical reasons, if nothing else: print journals usually charge additional money to print colour figures.] Poor colour choices can distort our visual perception of the data, making it harder for the reader to correctly interpret a figure. In the example shown below, it is much easier to see the differences in height clearly when the chart is in gray; using colours, here, can distort our perceptions.
+
+```{r finaldoc, fig.cap="Pointless use of colour, From: [Junk Charts](https://junkcharts.typepad.com/junk_charts/2021/06/distorting-perception-versus-distorting-the-data.html)"}
+knitr::include_graphics(rep("colour_pointless.png"))
+```
+
+## Colour-blind friendly palettes
+
+## Contrast
+
+# Text 
+
+## Labels
+
+## Font choices
+
+
+
+# White space
+
+# Remove distractions
+
+# Figure legends
+
+
+
