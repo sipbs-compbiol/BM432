@@ -222,7 +222,7 @@ Common formats for these sequence files include FASTA (.fasta) and Genbank (.gbk
 
 FASTA files are text files, with a simple header, while Genbank files generally contain much more detailed information (annotation, references, remarks, etc.)
 
-As an example, consider the [.fasta](assets/data/example-sequence-files/C_crescentus-DnaA_NC_011916.fasta) and [.gbk](assets/data/example-sequence-files/C_crescentus-DnaA_NC_011916.gbk) files for the *Caulobacter crescentus* gene *dnaA*.
+As an example, consider the [FASTA](./data_formats/C_crescentus-DnaA_NC_011916.fasta) and [Genbank](./data_formats/C_crescentus-DnaA_NC_011916.gb) files for the *Caulobacter crescentus* gene *dnaA*.
 
 Note that while Genbank files usually describe a single biological molecule (nucleotide or amino acid), FASTA files can contain the sequences of multiple molecules, each labelled with their own FASTA header.
 
