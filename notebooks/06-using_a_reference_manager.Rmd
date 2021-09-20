@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = FALSE)
   - Correct some commonly encountered errors
 </div>
 
-We have covered the [basics of reference management](./02a-reference_management.html), including the factors that influence your choice of reference management software, what references  you should be citing, and what referencing style you should use. This part of the workshop is a practical guide on how to use reference management software to organize your references and insert citations and a bibliography into your thesis, using Endnote and Mendeley as examples.
+We have covered the [basics of reference management](./05-reference_management.html), including the factors that influence your choice of reference management software, what references  you should be citing, and what referencing style you should use. This part of the workshop is a practical guide on how to use reference management software to organize your references and insert citations and a bibliography into your thesis, using Endnote and Mendeley as examples.
 
 The reference library and Word file we are using are available for you to download, if you would like to follow along with this tutorial:
 

@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - Treat raw data as **read-only**
   - Place cleaned data in a separate file/folder
   - Place output/analysed data in a separate file/folder
-- Clean your data in an automated, reproducible way^[We will work with [`OpenRefine`](https://openrefine.org/) as a tool for data cleaning, in the workshop.].
+- Clean your data in an automated, reproducible way^[We will work with [`OpenRefine`](https://openrefine.org/) as a tool for data cleaning, in the workshop in week 4].
 - Store all data and analysis in a human-readable format
 - Automate your analysis as much as possible
 </div>
@@ -69,7 +69,7 @@ You will probably never know more about the files you're creating than at the ti
 
 Your goal is to make the analysis clear enough to be repeated.
 
-- [Reproducibility, repeatability, and FAIR research](./02b-reproducibility.html)
+- [Reproducibility, repeatability, and FAIR research](./03-reproducibility.html)
 
 In general, if you can name all files and folders to be self-describing, it makes everyone's life easier, including your own. A file called `analysis.doc` could contain anything, but if the file was called `2021-08-21_geldoc_sampleABC.doc` you could probably guess that it was a geldoc image for sample `ABC`, taken on 31st August 2021. A similar principle works for naming folders. A folder called `mass_spec` data suggests it contains mass spectrometry data, but `2021-05-15_ms_sampleABC` makes it clearer which sample was run, and when.
 
@@ -98,7 +98,7 @@ If you have all project files under a single working directory, then you can alw
 It's a good starting point, but something else might be more appropriate for your own work.
 </div>
 
-```{r working-directory, fig.cap="An example working directory structure. For your own work, a different structure may be appropriated"}
+```{r working-directory, fig.cap="An example working directory structure. For your own work, a different structure may be appropriate"}
 knitr::include_graphics(rep("images/working-directory-structure.png"))
 ```
 
@@ -139,7 +139,7 @@ Most of the time, scientific data is *dirty*, by which we mean it is not exactly
 Manual modification and cleaning of data tends to not be reproducible. It can be difficult to remember (or even express) the complex operations involved in removing outliers, fixing typographical errors, or the many other operations that go into cleaning a dataset. For that reason, it is far preferable to automate the process as much as possible.
 
 <div ide="note">
-We will cover one of the tools available for automated and reproducible data-cleaning ([`OpenRefine`](https://openrefine.org/)), in the workshop.
+We will cover one of the tools available for automated and reproducible data-cleaning ([`OpenRefine`](https://openrefine.org/)), in the workshop in week 4.
 </div>
 
 <div id="warning">
