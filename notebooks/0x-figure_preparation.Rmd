@@ -30,8 +30,8 @@ It is also essential that you consider *accessibility*: is your figure accessibl
 
 Unfortunately, many scientific figures are poorly designed. They are difficult to interpret, confuse the reader, and/or distract from the message that the authors mean to convey.
 
-```{r finaldoc, fig.cap="A picture with a thousand words... [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1926)"}
-knitr::include_graphics(rep("images/phd022417s.gif"))
+```{r 1000words, fig.cap="A picture with a thousand words... [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1926)"}
+knitr::include_graphics(rep("./images/phd022417s.gif"))
 ```
 
 <div id="warning">
@@ -42,19 +42,81 @@ Do not mislead your audience!
 
 # Figure aesthetics
 
-Your audience will form an impression of your figure within the first 30 seconds (or less) of looking at it. 
+Your audience will form an impression of your figure within the first 30 seconds (or less) of looking at it. First impressions matter - and you want that first impression to be pleasant, not an exercise in confusion or frustration.
+
+The example below shows what a lot of work reading a figure can be, if a reader has to move their gaze back and forth between the key and the graph in order to figure out what the different colours represent and what the data are. The same principle applies to looking back and forth between the figure and the figure legend. It's hard work that the reader shouldn't have to do: make it easy for them to see and interpret the data.
+
+```{r eyeroll, fig.cap="Pointless use of colour, From: [Junk Charts](https://junkcharts.typepad.com/junk_charts/2021/04/come-si-dice-donut-in-italiano.htmll)"}
+knitr::include_graphics(rep("./images/tracing-eye-movement.png"))
+```
 
 # Colors
 
+It is very tempting to use colour in scientific figures, and the use of colour can, indeed, help to visualize data. But there are a number of important factors to consider when choosing to use colour in a figure.
+
+Consider how the reader will perceive the colours that you are using: 
+
+- Do the colours help to illuminate key aspects of your data? Or do they distract from and/or distort the data? 
+- Will all readers be able to clearly perceive differences between the colours you are using? 
+- Do the colour choices correspond with our natural and/or cultural associations with those colours? (e.g., in general darker colours = more; blue = water; etc.)
+
+```{r colour1, fig.cap="Choosing colours for a scientific figure, From: [Errant Science](https://blogs.egu.eu/divisions/gd/2017/08/23/the-rainbow-colour-map/)"}
+knitr::include_graphics(rep("./images/colour-choices.jpg"))
+```
+
 Do not use colour for the sake of using colour.^[For practical reasons, if nothing else: print journals usually charge additional money to print colour figures.] Poor colour choices can distort our visual perception of the data, making it harder for the reader to correctly interpret a figure. In the example shown below, it is much easier to see the differences in height clearly when the chart is in gray; using colours, here, can distort our perceptions.
 
-```{r finaldoc, fig.cap="Pointless use of colour, From: [Junk Charts](https://junkcharts.typepad.com/junk_charts/2021/06/distorting-perception-versus-distorting-the-data.html)"}
-knitr::include_graphics(rep("colour_pointless.png"))
+```{r colour2, fig.cap="Pointless use of colour can distort our perception of the data, From: [Junk Charts](https://junkcharts.typepad.com/junk_charts/2021/06/distorting-perception-versus-distorting-the-data.html)"}
+knitr::include_graphics(rep("./images/colour_pointless.png"))
 ```
+
+Moreover, colours can distract the reader. In the example below, we naturally try to find meaning in the colours (what do all the green-coloured countries have in common?) - but the colours don't have any meaning, so this distracts the reader for no purpose.
+
+```{r colour3, fig.cap="Different colours in a figure chosen for no particular reason, From: [Junk Charts](https://junkcharts.typepad.com/junk_charts/2020/02/too-many-colors-on-a-chart-is-bad-but-why.html)"}
+knitr::include_graphics(rep("./images/colour-differences.png"))
+```
+
+Be intentional with your use of colour: use colours to focus the reader's attention on important differences in your data. 
+
+## Colour differences and gradients, oh my!
+
+If you are going to use colour in your figures, the question becomes: which colour(s)? The choice of colour usually depends on the underlying data that you are presenting. 
+
+As a general rule, use sequential palettes (gradients) to present quantitative data. These make it easier for readers to order the data. Avoid any thresholds (jumps between colours), as these can make data points seem artificially far apart.
+
+#addmorehere?
+
+```{r colour4, fig.cap="Ordering data: gradient versus different colours, From: D. Borland and R. Taylor II, \"Rainbow Color Map (Still) Considered Harmful\" in IEEE Computer Graphics and Applications, vol. 27, no. 02, pp. 14-17, 2007."}
+knitr::include_graphics(rep("./images/g20141.gif"))
+```
+
+On the other hand, for categorical data, using a colour palette without an obvious order makes sense. Choose colours that can be easily distinguished from one another.
 
 ## Colour-blind friendly palettes
 
-## Contrast
+When choosing colour palettes, it is important to keep in mind that your reader may perceive colour differently than you do. Red-green colourblindness is common, but it is important to note that it is not the only form of colourblindness. 
+
+Unfortunately, red and green are commonly used together in certain types of biological images, perhaps especially in microscopy (e.g., immunofluorescence images). These micrographs are particularly difficult to view and understand for individuals with certain forms of colourblindness, as illustrated in the figure below that simulates protanophy and deuteranophy. 
+
+```{r colour5, fig.cap="Red-green colours in biological images, From: [Color Universal Design](https://jfly.uni-koeln.de/color/)"}
+knitr::include_graphics(rep("./images/colour-blindness1.jpg"))
+```
+
+This problem can be easily addressed by using colourblind-friendly colour combinations; for example, by substituting magenta instead of red, as shown below. 
+
+```{r colour6, fig.cap="Red-green versus magenta-green versions of the same images, From: [Color Universal Design](https://jfly.uni-koeln.de/color/)"}
+knitr::include_graphics(rep("./images/magentagreen.jpg"))
+```
+
+Where possible, add textures, symbols or labels (in addition to colour), to improve the accessibility and readability of your figures.
+
+Many software include options to check whether your images are colourblind-accessible. There are also online tools that simulate colourblindness, which can be helpful in checking whether your figures are colourblind-accessible, for instance: 
+
+- [Coblis](https://www.color-blindness.com/coblis-color-blindness-simulator/)
+- [ColorOracle](https://colororacle.org/)
+
+See [Picking a colour scale for scientific graphics](https://betterfigures.org/2015/06/23/picking-a-colour-scale-for-scientific-graphics/) for more advice.
+
 
 # Text 
 
@@ -64,11 +126,29 @@ knitr::include_graphics(rep("colour_pointless.png"))
 
 
 
-# White space
+# Negative space
+
+Negative space is the space between elements in your figure (also known as whitespace). It helps to frame the elements, and when used effectively, can help draw the reader's attention to particular elements.^[[Points of View: Negative Space](https://www.nature.com/articles/nmeth0111-5)] 
+
+Data that is too crowded is harder for the reader to view and interpret correctly. It can feel claustrophobic, too. Give your figures a little space to breathe.
 
 # Remove distractions
 
 # Figure legends
 
 
+<div id="note">
+In summary, these are Morgan and Leighton's top 10 tips for preparing good figures:
+1. Every figure should tell a clear, easy-to-read, story.
+2. Use colour carefully, and for good reasons. 
+</div>
 
+# Further reading
+
+- [Junk Charts](https://junkcharts.typepad.com/)
+
+- [Nature Methods: Points of View columns](http://blogs.nature.com/methagora/2013/07/data-visualization-points-of-view.html)
+
+- Rougier NP, Droettboom M, Bourne PE (2014) Ten Simple Rules for Better Figures. PLOS Computational Biology 10(9): e1003833. https://doi.org/10.1371/journal.pcbi.1003833
+
+- Jambor H, Antonietti A, Alicea B, Audisio TL, Auer S, et al. (2021) Creating clear and informative image-based figures for scientific publications. PLOS Biology 19(3): e3001161. https://doi.org/10.1371/journal.pbio.3001161
