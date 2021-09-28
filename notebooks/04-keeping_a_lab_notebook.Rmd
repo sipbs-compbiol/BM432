@@ -29,9 +29,11 @@ Lab notebooks should be kept for **every** type of project - lab-based projects,
 
 # Why you should keep a good lab notebook
 
-Keeping a good lab notebook is a gift to your future self - who will be trying to write a detailed and accurate materials and methods section in your thesis, and who will not remember the exact methods and results obtained many weeks before. Human memory is **incredibly** fallible, so it is important to keep contemporaneous records of your research. 
+Keeping a good lab notebook is a gift to your future self - who will be trying to write a detailed and accurate materials and methods section in your thesis, and who will not remember the exact methods and results obtained many weeks before. 
 
-```{r ideas, fig.cap="PhD comics: Fading, http://phdcomics.com/comics.php?f=1481"}
+Human memory is **incredibly** fallible, so it is important to keep contemporaneous records of your research. 
+
+```{r ideas, fig.cap="[PhD comics: Fading](http://phdcomics.com/comics.php?f=1481)"}
 knitr::include_graphics(rep("images/phd032312s.gif"))
 ```
 Keeping a good lab notebook is also important for any colleagues working in the same lab, who will need to understand, replicate, or follow up on your work. 
@@ -59,6 +61,7 @@ The contents of your lab notebook will vary based on your project type. (If you 
 ## For experimental work (lab-based, bioinformatic, computational, etc.): 
 
 For each experiment, you should include:
+
 - Objective (why you did the experiment)
 - Background (any information the reader needs to understand the theoretical underpinnings/importance of the work, i.e. the rationale for performing the experiment)
 - Methods, including any deviations from the methods (a step-by-step description of how the experiment was done; details of any reagents used and the protocol(s)
@@ -73,15 +76,16 @@ Someone reading the entry (perhaps yourself, in a few months' time!) should be a
 - Use your lab notebook to log meetings, the results of beta testing/focus groups, and to reflect on and evaluate your project (its successes and/or failures)
 
 ## For systematic reviews or statistical analyses: 
-- Record your data and the analytical pipelines performed on the data (cross-reference the location of the data, if it is a dataset saved elsewhere).
-- Keep track of any statistical tests performed, how they were done, and the results.
-- Record the objective/background/methods/results/conclusions for any analysis, as described above for experimental work.
+- Record your data and the analytical pipelines performed on the data (cross-reference the location of the data, if it is a dataset saved elsewhere)
+- Keep track of any statistical tests performed, how they were done, and the results
+- Record the objective/background/methods/results/conclusions for any analysis, as described above for experimental work
 
 ## Appending data to your lab notebook
 
-- In some cases, you may not be able to store data directly in your lab notebook (e.g., very large data files that cannot be printed and stored in a hardbound lab notebook, X-ray films, or other data that can't be added directly to your notebook.) 
-  - For electronic files, you should include a description of where the data are stored (e.g., a specific file path and file name). 
-  - For other data (e.g. X-ray films), you may store these in a separate binder, with clearly numbered pages and with clear instructions on how to find the data recorded in your lab notebook.
+In some cases, you may not be able to store data directly in your lab notebook (e.g., very large data files that cannot be printed and stored in a hardbound lab notebook, X-ray films, or other data that can't be added directly to your notebook.) 
+
+- For electronic files, you should include a description of where the data are stored (e.g., a specific file path and file name). 
+- For other data (e.g. X-ray films), you may store these in a separate binder, with clearly numbered pages and with clear instructions on how to find the data recorded in your lab notebook.
 
 # Ethics of keeping a lab notebook
 
