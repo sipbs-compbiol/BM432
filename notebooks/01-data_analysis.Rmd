@@ -74,7 +74,7 @@ The **Produce** phase is really a companion to the *Explore* and *Refine* phases
 <div id="note">
 You should always be recording your work and preparing it for future consumption by yourself, or by others.
 
-An essential skill for this is [**data management**](./02-data_management.html)
+An essential skill for this is [**data management**](./02-project_management.html)
 </div>
 
 
