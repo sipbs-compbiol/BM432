@@ -87,7 +87,7 @@ Name your project's working directory after the project.
 
 <details>
   <summary>Why is a single working directory useful on remote servers? (click to expand)</summary>
-If you have all project files under a single working directory, then you can always use relative filenames within that working directory. This allows you to transfer analyses between computers and servers, and still be sure your code and analysis will run.
+If you have all project files under a single working directory, then you can always use relative filenames^[[Relative filenames versus absolute filenames](https://en.wikipedia.org/wiki/Path_(computing)#Absolute_and_relative_paths)] within that working directory. This allows you to transfer analyses between computers and servers, and still be sure your code and analysis will run.
 </details>
 
 ### An example directory structure
@@ -108,7 +108,7 @@ The intent behind each directory in figure \@ref(fig:working-directory) is:
   - Name this after your project
   - Everything related to the project (data, scripts, figures, notes to yourself, etc.) should be contained *below* this directory (perhaps in subdirectories)
 - `data/` is a subdirectory for storing data.
-  - Should you stare only raw data, or raw and processed data? **That is your decision.**
+  - Should you store only raw data, or raw and processed data? **That is your decision.**
   - Keep your data together with associated metadata (e.g. output spectra with the data files describing machine settings)
   - Use subfolders when sensible (e.g. `data/raw`, `data/intermediate`, `data/processed`, etc.)
 - `data_output/` could be a place to write analysis output.

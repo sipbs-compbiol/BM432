@@ -320,7 +320,7 @@ Figure 1.2: How project files tend to grow… <a href="http://phdcomics.com/comi
 <summary>
 Why is a single working directory useful on remote servers? (click to expand)
 </summary>
-If you have all project files under a single working directory, then you can always use relative filenames within that working directory. This allows you to transfer analyses between computers and servers, and still be sure your code and analysis will run.
+If you have all project files under a single working directory, then you can always use relative filenames<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> within that working directory. This allows you to transfer analyses between computers and servers, and still be sure your code and analysis will run.
 </details>
 <div id="an-example-directory-structure" class="section level3" number="2.2.1">
 <h3><span class="header-section-number">2.2.1</span> An example directory structure</h3>
@@ -343,7 +343,7 @@ Figure 2.1: An example working directory structure. For your own work, a differe
 </ul></li>
 <li><code>data/</code> is a subdirectory for storing data.
 <ul>
-<li>Should you stare only raw data, or raw and processed data? <strong>That is your decision.</strong></li>
+<li>Should you store only raw data, or raw and processed data? <strong>That is your decision.</strong></li>
 <li>Keep your data together with associated metadata (e.g. output spectra with the data files describing machine settings)</li>
 <li>Use subfolders when sensible (e.g. <code>data/raw</code>, <code>data/intermediate</code>, <code>data/processed</code>, etc.)</li>
 </ul></li>
@@ -371,7 +371,7 @@ Figure 2.1: An example working directory structure. For your own work, a differe
 </div>
 <div id="clean-raw-data-programmatically-as-part-of-the-analysis-chain" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Clean raw data programmatically as part of the analysis chain</h2>
-<p>Most of the time, scientific data is <em>dirty</em>, by which we mean it is not exactly in the form necessary for analysis<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Cleaning scientific data is part of the analysis process, and can require quite sophisticated choices. Should you, for instance, remove missing values or record them as <code>Null</code>? All of these decisions are part of your analysis.</p>
+<p>Most of the time, scientific data is <em>dirty</em>, by which we mean it is not exactly in the form necessary for analysis<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. Cleaning scientific data is part of the analysis process, and can require quite sophisticated choices. Should you, for instance, remove missing values or record them as <code>Null</code>? All of these decisions are part of your analysis.</p>
 <p>Manual modification and cleaning of data tends to not be reproducible. It can be difficult to remember (or even express) the complex operations involved in removing outliers, fixing typographical errors, or the many other operations that go into cleaning a dataset. For that reason, it is far preferable to automate the process as much as possible.</p>
 <div ide="note">
 <p>We will cover one of the tools available for automated and reproducible data-cleaning (<a href="https://openrefine.org/"><code>OpenRefine</code></a>), in the workshop in week 4.</p>
@@ -384,7 +384,7 @@ Figure 2.1: An example working directory structure. For your own work, a differe
 </div>
 <div id="automate-your-analysis" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> Automate your analysis</h2>
-<p>As with data cleaning, manual analysis can sometimes be<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> not entirely reproducible. Especially when dealing with large datasets, it can be very difficult to be consistent with manual analysis. For very large datasets, manual analysis may not be possible.</p>
+<p>As with data cleaning, manual analysis can sometimes be<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> not entirely reproducible. Especially when dealing with large datasets, it can be very difficult to be consistent with manual analysis. For very large datasets, manual analysis may not be possible.</p>
 <div id="note">
 <p>Automating your analyses is outwith the scope of these workshops, but there are many very good online resources that can help you get started.</p>
 </div>
@@ -476,8 +476,9 @@ Figure 2.2: <a href="https://xkcd.com/1179/">XKCD 1179:</a> ISO 8601. (Randall M
 <hr />
 <ol>
 <li id="fn1"><p>We will work with <a href="https://openrefine.org/"><code>OpenRefine</code></a> as a tool for data cleaning, in the workshop in week 4<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>It is sometimes argued that ≈80% of data analysis is spent on the process of cleaning and preparing data.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>Some would say <a href="https://mikecroucher.github.io/MLPM_talk/"><em>frequently is</em></a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://en.wikipedia.org/wiki/Path_(computing)#Absolute_and_relative_paths">Relative filenames versus absolute filenames</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>It is sometimes argued that ≈80% of data analysis is spent on the process of cleaning and preparing data.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Some would say <a href="https://mikecroucher.github.io/MLPM_talk/"><em>frequently is</em></a><a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
