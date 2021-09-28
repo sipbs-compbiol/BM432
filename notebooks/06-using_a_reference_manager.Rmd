@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = FALSE)
   - Correct some commonly encountered errors
 </div>
 
-We have covered the [basics of reference management](./05-reference_management.html), including the factors that influence your choice of reference management software, what references  you should be citing, and what referencing style you should use. This part of the workshop is a practical guide on how to use reference management software to organize your references and insert citations and a bibliography into your thesis, using Endnote and Mendeley as examples.
+We have covered the [basics of reference management](./05-reference_management.html), including the factors that influence your choice of reference management software, what references  you should be citing, and what referencing style you should use. This part of the workshop is a practical guide on how to use reference management software to organize your references and insert citations and a bibliography into your thesis, using Endnote and Mendeley as examples.^[You are free to use any reference management software you like; however, it is outside the scope of this workshop to cover every single software option.]
 
 The reference library and Word file we are using are available for you to download, if you would like to follow along with this tutorial:
 
@@ -107,7 +107,7 @@ If you wish, you can attach the PDF of the paper to the reference record in Endn
 
 You can also attach a file by double-clicking on the reference to open it, and clicking on the paperclip icon.
 
-```{r Endnote6, echo=FALSE, fig.cap="The reference for the Meehan et al. article"}
+```{r Endnote6, echo=FALSE, fig.cap="The reference for the Meehan et al. article. Note the paperclip icon in the bar at the top of the window (click to attach a file)."}
 knitr::include_graphics("./images/Endnote-Fig6.JPG")
 ```
 
@@ -121,7 +121,7 @@ First, position the cursor at the position in the text where you want to insert 
 knitr::include_graphics("./images/Endnote-Fig7.JPG")
 ```
 
-Endnote will automatically add the citation at the position where your cursor was ((Bardwell et al., 1991) in this example). It will also add the reference to your list of references cited, at the end of the document.
+Endnote will automatically add the citation at the position where your cursor was (it added the Bardwell et al., 1991 citation in this example). It will also add the reference to your list of references cited, at the end of the document.
 
 ```{r Endnote8, echo=FALSE, fig.cap="The new citation inserted into our text"}
 knitr::include_graphics("./images/Endnote-Fig8.JPG")
@@ -131,11 +131,11 @@ Option 2: Add a citation through Word
 
 You can also add a citation in Word, using the Endnote menu in the ribbon at the top. First place your cursor at the correct position in the text and then click on "Insert Citation".
 
-```{r Endnote9, echo=FALSE, fig.cap="Inserting a reference into word by clicking on \" Insert citation\" (indicated by a blue arrow)"}
+```{r Endnote9, echo=FALSE, fig.cap="Inserting a reference into word by clicking on \"Insert citation\" (indicated by a blue arrow)"}
 knitr::include_graphics("./images/Endnote-Fig9.JPG")
 ```
 
-This will bring up a dialog box, where you can search for the publication that you wish to cite (in this case, we searched based on the last name of the first author). This brings up the correct reference, which you can then cite by clicking on the "insert" button.
+This will bring up a dialog box, where you can search for the publication that you wish to cite (in this case, we searched based on the last name of the first author). This brings up the correct reference, which you can then cite by clicking on the "insert citation" button.
 
 ```{r Endnote10, echo=FALSE, fig.cap="Searching for the reference that you wish to cite in Word and inserting it by clicking on the insert button (indicated by a blue arrow)."}
 knitr::include_graphics("./images/Endnote-Fig7.JPG")
@@ -169,7 +169,7 @@ knitr::include_graphics("./images/Endnote-Fig13.JPG")
 
 You can also change the output style directly in Endnote, by going to Edit > Output Styles and selecting your desired style.
 
-## How to correct some common errors
+## How to correct some common Endnote errors
 
 ### Formatting errors
 
@@ -195,14 +195,14 @@ knitr::include_graphics("./images/Endnote-Fig15.JPG")
 
 # Mendeley
 
-You can download [Mendeley Desktop](https://www.mendeley.com/download-desktop-new) or [Mendeley Reference Manager](https://www.mendeley.com/reference-management/reference-manager) from the web; please refer to their website from installation instructions and FAQ, etc. 
+You can download [Mendeley Desktop](https://www.mendeley.com/download-desktop-new) or [Mendeley Reference Manager](https://www.mendeley.com/reference-management/reference-manager) from the web; please refer to their website for installation instructions and FAQ, etc. 
 
 You will also want to download the MS Word Plugin, if you are using Mendeley with Word. 
 
 A number of useful [help guides](https://www.mendeley.com/guides) are available online. 
 
 <div id="warning">
-Note that you may run into some issues if you have multiple reference managers interfacing with Word (e.g., if Endnote and Mendeley both have add-ons running in Word) - if you run into problems, you may need to disable or uninstall one of the programs.
+Note that you may run into some issues if you have multiple reference managers interfacing with Word (e.g., if Endnote and Mendeley both have add-ons running in Word). If you run into problems, you may need to disable or uninstall one of the add-ons.
 </div>
 
 
