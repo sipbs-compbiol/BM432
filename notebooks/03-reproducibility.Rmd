@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Reproducibility and Replicability
 
-Scientific and medical research depends on us all as scientists generating robust and reliable new knowledge. With technological advances such as high-throughput assays and genomics, we are producing data and publications at a much faster rate than ever before. Research is increasingly interdisciplinary, and the questions and systems we investigate are ever mnore complex. The demands on time and effort to ensure the credibility of published science are huge, and it is essential for us as scientists to take personal responsibility to make our research *reproducible* and *replicable*^[Begley, CA, & Ioannidis, JPA (2015) "Reproducibility in Science" *Circulation Research* **116**:116–126].
+Scientific and medical research depends on us all as scientists generating robust and reliable new knowledge. With technological advances such as high-throughput assays and genomics, we are producing data and publications at a much faster rate than ever before. Research is increasingly interdisciplinary, and the questions and systems we investigate are ever more complex. The demands on time and effort to ensure the credibility of published science are huge, and it is essential for us as scientists to take personal responsibility to make our research *reproducible* and *replicable*^[Begley, CA, & Ioannidis, JPA (2015) "Reproducibility in Science" *Circulation Research* **116**:116–126].
 
 There are two distinct concepts encapsulated in the terms *reproducibility* and *replicability*:
 
@@ -54,7 +54,7 @@ Both validation and independent verification benefit from the original work bein
   - in a laboratory context, this has equivalence to recording the manufacturer and batch number of commercial kits and reagents, and the manufacturer and model number of apparatus
 4. Always Store Raw Data behind Plots
 5. Connect Textual Statements to Underlying Results
-6. Provide Public Access to [Data,] Scripts, Runs, and Results
+6. Provide Public Access to Data, Scripts, Runs, and Results
 
 <div align="center">
 ```{r write-it-down, echo=FALSE, fig.cap="[Adam Savage](https://en.wikipedia.org/wiki/Adam_Savage) knows the difference. And now so do you."}
