@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = FALSE)
 <div id="summary">
 - Your figures should be clear and informative, allowing the reader to easily and quickly understand the data that you present.
 - Design decisions, including layout and the use of white space, colour choices, font size and choice, all matter in terms of making your figure clear and easy to interpret.
-
+- Your figures should be designed with accessibility in mind: for example, you should use colourblind-friendly colour palettes, and dyslexia-friendly fonts. 
 </div>
 
 # Introduction
@@ -83,8 +83,6 @@ If you are going to use colour in your figures, the question becomes: which colo
 
 As a general rule, use sequential palettes (gradients) to present quantitative data. These make it easier for readers to order the data. Avoid any thresholds (jumps between colours), as these can make data points seem artificially far apart.
 
-#addmorehere?
-
 ```{r colour4, fig.cap="Ordering data: gradient versus different colours, From: D. Borland and R. Taylor II, \"Rainbow Color Map (Still) Considered Harmful\" in IEEE Computer Graphics and Applications, vol. 27, no. 02, pp. 14-17, 2007."}
 knitr::include_graphics(rep("./images/g20141.gif"))
 ```
@@ -133,7 +131,7 @@ In this figure showing a DNase I footprinting experiment, the labels on the righ
 
 However, the lanes are labelled only with numbers - the reader has to read and understand the legend, and then look back and forth between the legend and t he figure, to determine which sample is in each of the lanes. Where possible, it is better to label the data with brief, descriptive names (giving more detail in the figure legend if necessary).
 
-```{r DNAseI, fig.cap="DNase I footprint example: FIG. 4. DNase I footprint of NACWT and NACL111K bound to the nac promoter region. Radioactively labeled pCB1426 DNA was digested with DNase I in the presence of NACWT (lanes 2 to 6 [0, 0.9, 1.4, 2.2, and 4.4 pmol, respectively]) or NACL111K (lanes 7 to 11 [4.7, 9.5, 12.6, 12.6, and 25.2 pmol, respectively]). Lane 1 is the radiolabeled DNA without any DNase I treatment. Lane G is the G ladder. The solid line on the right of the footprint is the region protected by both NACWT and NACL111K. Arrowheads indicate the regions of DNase I hypersensitivity by NACWT, NACL111K, or both. From: [Rosario and Bender, 2020](https://doi.org/10.1128/JB.187.24.8291-8299.2005)"}
+```{r DNAseI, out.width="30%", out.height="30%", fig.cap="Figure example (DNase I footprint), with the figure legend: FIG. 4. DNase I footprint of NACWT and NACL111K bound to the nac promoter region. Radioactively labeled pCB1426 DNA was digested with DNase I in the presence of NACWT (lanes 2 to 6 [0, 0.9, 1.4, 2.2, and 4.4 pmol, respectively]) or NACL111K (lanes 7 to 11 [4.7, 9.5, 12.6, 12.6, and 25.2 pmol, respectively]). Lane 1 is the radiolabeled DNA without any DNase I treatment. Lane G is the G ladder. The solid line on the right of the footprint is the region protected by both NACWT and NACL111K. Arrowheads indicate the regions of DNase I hypersensitivity by NACWT, NACL111K, or both. From: [Rosario and Bender, 2020](https://doi.org/10.1128/JB.187.24.8291-8299.2005)"}
 knitr::include_graphics(rep("./images/DNaseI-footprint.jpeg"))
 ```
 
@@ -142,7 +140,6 @@ However, labels can also become unwieldy, as shown in the pie chart below. This 
 ```{r shakespeare, fig.cap="Pie chart showing causes of death in Shakespeare plays, From: [JunkCharts](https://junkcharts.typepad.com/junk_charts/2016/03/which-way-to-die-the-bard-asked-onelesspie.html)"}
 knitr::include_graphics(rep("./images/Shakespeare-deaths.png"))
 ```
-
 
 ## Font choices
 
@@ -163,15 +160,6 @@ It is often tempting to present *all* of the data (it might be useful! you gener
 
 - *Do* include the key data and all of the controls necessary to understand and interpret those data.
 - *Don't* include any data that you do not discuss in the text of your thesis. 
-
-# Figure legends
-
-
-<div id="note">
-In summary, these are Morgan and Leighton's top 10 tips for preparing good figures:
-1. Every figure should tell a clear, easy-to-read, story.
-2. Use colour carefully, and for good reasons. 
-</div>
 
 # Further reading
 
