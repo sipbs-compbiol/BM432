@@ -1,0 +1,298 @@
+---
+title: "Where Does the Normal Distribution Come From?"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output:
+  bookdown::html_document2:
+    css: css/rmd_style.css
+    theme: lumen
+    toc: yes
+    toc_float:
+      toc_collapsed: no
+    number_sections: yes
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(ggplot2)
+
+# BG color for plots - should match .figure and .caption classes in rmd_style.css
+figbg = "whitesmoke"
+```
+
+<div id="summary">
+- Like most statistical distributions, the Normal distribution represents the outcome of a process, equivalent to a real-world activity
+- The process used to generate a normal distribution is:
+  - Create a large dataset of (continuous) values; this has a (true) mean
+  - Repeatedly subsample that set of values, and calculate the mean of each subsample
+  - The means of the subsamples are estimates of the *true* mean
+- The distribution of subsample means is a Normal distribution
+- **The Normal distribution corresponds to repeated estimations of the same (true) continuous variable**
+</div>
+
+# Introduction
+
+In many introductory treatments of statistics there is little focus on why the common statistical distributions are good representations (or not) of real processes. Knowing what kind of statistical distribution is likely to result from the measurements or processes used in an experiment can help with design and interpretation of an experiment, and reduce the chance you are using an inappropriate statistical analysis.
+
+In this interactive session, you will be explore one of several processes that can generate data approximating a Normal Distribution, to see what kind of effect varying the properties of the generating process has on the final data distribution.
+
+# Generating a Normal Distribution
+
+Normal Distributions arise as the result of a number of different processes, such as
+
+- repeated physical measurements of the same thing
+  - the errors in measurement are randomly-distributed, but tend to more frequently be close to the true measurement than far from it; the shape made by the repeated measurement is often Normal
+- repeatedly estimating the mean of a population by calculating the means of random subsamples
+  - each subsample mean is more likely to be close to the true mean of the population than far from it; the shape of the subsample means is approximately Normal
+
+<div id="note">
+Here, we will explore the process of *subsampling a population* to estimate a mean value.
+</div>
+
+## Create a dataset of values
+
+We begin by generating a population (dataset) of numbers. These are not, themselves, Normally-distributed. Here, for example, we generate a number of randomly-chosen values that are uniformly-distributed between an upper and lower limit. The true mean should be around the halfway point between these two values.
+
+```{r static-sample, echo=FALSE, fig.cap="100 uniformly-distributed random numbers between -45 and -15. The true mean is expected to be close to -30, and the actual value is shown in the figure."}
+data = data.frame(vals=runif(100, -45, -15))
+mu = mean(data$vals)
+
+p = ggplot(data, aes(x=vals))                                    # set up the ggplot with data
+p = p + geom_histogram(aes(y=..density..),                           # add a historgram layer
+                       fill="cornflowerblue")
+p = p + annotate("text",
+                 x=mu, y=0, size=10,
+                 label=paste("TRUE MEAN, µ=", format(round(mu, 2), nsmall=2)))
+p = p + xlim(-50, -10)             # set x-axis limits
+p = p + xlab("value") + ylab("frequency")                # add axis labels
+p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                             color = figbg))
+p   
+```
+
+## Estimate the mean of the data using subsamples of the original dataset
+
+The dataset in Figure \@ref(fig:static-sample) contains 100 uniformly-distributed values.
+
+```{r sample-vals, echo=FALSE}
+data$vals
+```
+
+We can choose 10 of these, randomly.
+
+```{r subsample-vals, echo=FALSE}
+subsample = replicate(1, sample(data$vals, 10))
+subsample
+```
+
+And calculate the mean as `r format(round(mean(subsample), 2), nsmall=2)`. This is a single *point estimate* of the mean of the original dataset. It is (probably…) not exactly the same as the true mean in the dataset of Figure \@ref(fig:static-sample), but it is likely to be fairly close.
+
+It turns out that if we take many subsamples and calculate their mean, even though none of the means are likely to be the true mean of the original distribution, the subsample means tend to be close to the true mean. And they fall around the true mean in a Bell Curve: the Normal Distribution, as shown in Figure \@ref(fig:static-normal).
+
+```{r static-normal, echo=FALSE, fig.cap="1000 subsamples of 10 numbers randomly chosen from the original population. The true mean is expected to be close to -30, and the estimated mean using the means of subsamples is shown in the figure. The distribution of subsampled means follows a Normal Distribution."}
+subsamples = data.frame(vals=replicate(1000, sample(data$vals, 10)))
+means = data.frame(vals=colMeans(subsamples))
+mu = mean(means$vals)
+std = sd(means$vals)
+
+breaks = seq(mu - 3 * std, mu + 3 * std, by=max(1, std/8))      # set up the breakpoints between bars in the histogram
+ytop = 1.3 * max(density(means$vals)$y)
+        
+p = ggplot(means, aes(x=vals))                                    # set up the ggplot with data
+p = p + geom_histogram(aes(y=..density..),                           # add a historgram layer
+                       breaks=breaks,
+                       fill="cornflowerblue")
+p = p + stat_function(fun=dnorm, args=list(mean=mu, sd=std),          # add a layer with the Normal curve 
+                      geom="line")
+p = p + annotate("segment",                                          # show the mean as a dashed line
+                 x=mu, xend=mu, y=0, yend=0.9 * ytop,
+                 colour="darkorange1", size=1, linetype="dashed")
+p = p + annotate("segment",                                          # show standard deviations as dotted lines
+                 x=c(mu-2*std, mu-std, mu+std, mu+2*std),
+                 xend=c(mu-2*std, mu-std, mu+std, mu+2*std),
+                 y=c(0), yend=c(0.9 * ytop),
+                 colour="goldenrod", size=1, linetype="dotted")
+p = p + annotate("text",                                             # annotate the lines
+                 x=c(mu-2*std, mu-std, mu, mu+std, mu+2*std),
+                 y=c(0.95 * ytop),
+                 colour="darkorange3",
+                 label=c("µ - 2σ", "µ - σ", paste("µ=", format(round(mu, 2), nsmall=2)), "µ + σ", "µ + 2σ"))
+p = p + annotate("text",
+                 x=mu, y=0, size=10,
+                 label=paste("ESTIMATED MEAN, µ=", format(round(mu, 2), nsmall=2)))
+p = p + xlim(mu - max(5, 3 * std), mu + max(5, 3 * std))             # set x-axis limits
+p = p + ylim(0, ytop)
+p = p + xlab("measured variable") + ylab("frequency")                # add axis labels
+p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                             color = figbg))
+p 
+```
+
+<details>
+  <summary>Click here to toggle information about The Wisdom of the Crowd</summary>.
+There's a surprising effect that if you ask many people for an estimate of some quantity, the mean of their guesses will tend to be very close to the true value, even though no guess may be very accurate on its own. This is the result of the same process that we describe above.
+
+- [The Wisdom of the Crowd](https://www.youtube.com/watch?v=iOucwX7Z1HU)
+</details>
+
+# Interactive Example
+
+## Upper Panel
+
+In the first panel, the sliders define the original population of values. These values are Uniformly-distributed between the limits of the range you define.
+
+- **Number of datapoints**: the total number of datapoints in the population.
+- **Range of datapoints**: the upper and lower limits of the population
+
+Clicking on the `Resample` button will generate a new population with the same settings as in the sliders. This will update both the population and the resamplingin the panel below.
+
+## Lower Panel
+
+In the second panel, the sliders define how subsamples are taken from the original population.
+
+- **Number of subsamples**: the number of times the original population is sampled
+- **Datapoints in each subsample**: each subsample of the original population will take this many values
+
+Clicking on the `Resample` button will take a new set of subsamples from the original population, but it will not change the original population.
+
+## Interactive Panels
+
+```{r base-samples, echo=FALSE}
+fluidPage(
+  mainPanel(
+    span("The panel below shows the distribution of values in the original population")
+  )
+)
+
+inputPanel(
+  sliderInput("n_points",
+              "Number of datapoints:",
+              min = 200,
+              max = 500,
+              value = 350),
+  
+    sliderInput("min_max",
+              "Range of datapoints:",
+              min = -1000,
+              max = 1000,
+              value = c(-200, 200)),
+  
+  actionButton("resample", "Resample")
+)
+  
+dist_data = eventReactive(c(input$resample, input$n_points, input$min_max),
+                         data.frame(vals=runif(input$n_points, input$min_max[1], input$min_max[2])),
+                         ignoreNULL=FALSE)
+
+renderPlot({
+        n_points = input$n_points
+        data = dist_data()
+        mu = mean(data$vals)
+        std = sd(data$vals)
+  
+        breaks = seq(mu - 3 * std, mu + 3 * std, by=max(1, std/8))      # set up the breakpoints between bars in the histogram
+        
+        ytop = 1.3 * max(density(data$vals)$y)
+        
+        p = ggplot(data, aes(x=vals))                                    # set up the ggplot with data
+        p = p + geom_histogram(aes(y=..density..),                           # add a historgram layer
+                               breaks=breaks,
+                               fill="cornflowerblue")
+        p = p + annotate("segment",                                          # show the mean as a dashed line
+                         x=mu, xend=mu, y=0, yend=0.9 * ytop,
+                         colour="darkorange1", size=1, linetype="dashed")
+        p = p + annotate("segment",                                          # show standard deviations as dotted lines
+                         x=c(mu-2*std, mu-std, mu+std, mu+2*std),
+                         xend=c(mu-2*std, mu-std, mu+std, mu+2*std),
+                         y=c(0), yend=c(0.9 * ytop),
+                         colour="goldenrod", size=1, linetype="dotted")
+        p = p + annotate("text",                                             # annotate the lines
+                         x=c(mu-2*std, mu-std, mu, mu+std, mu+2*std),
+                         y=c(0.95 * ytop),
+                         colour="darkorange3",
+                         label=c("µ - 2σ", "µ - σ", paste("µ=", format(round(mu, 2), nsmall=2)), "µ + σ", "µ + 2σ"))
+        p = p + annotate("text",
+                         x=0, y=0, size=10,
+                         label=paste("TRUE MEAN, µ=", format(round(mu, 2), nsmall=2)))
+        p = p + xlim(-1000, 1000)             # set x-axis limits
+        p = p + xlab("measured variable") + ylab("frequency")                # add axis labels
+        p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                                     color = figbg))
+        p    
+})
+
+fluidPage(
+  mainPanel(
+    span("The panel below shows the distribution of means of the subsamples used")
+  )
+)
+
+inputPanel(
+  sliderInput("n_subsamples",
+              "Number of subsamples:",
+              min = 3,
+              max = 1000,
+              value = 10),
+  
+    sliderInput("subsample_size",
+              "Datapoints in each subsample:",
+              min = 3,
+              max = 100,
+              value = 25),
+  
+  actionButton("re_subsample", "Resample")
+)
+
+subsamples = eventReactive(c(input$n_subsamples, input$subsample_size, input$re_subsample,
+                             input$resample, input$n_points, input$min_max),
+                           data.frame(vals=replicate(input$n_subsamples, sample(dist_data()$vals, input$subsample_size))),
+                           ignoreNULL=FALSE)
+
+renderPlot({
+        means = data.frame(vals=colMeans(subsamples()))
+        mu = mean(means$vals)
+        std = sd(means$vals)
+
+        breaks = seq(mu - 3 * std, mu + 3 * std, by=max(1, std/8))      # set up the breakpoints between bars in the histogram
+        ytop = 1.3 * max(density(means$vals)$y)
+        
+        p = ggplot(means, aes(x=vals))                                    # set up the ggplot with data
+        p = p + geom_histogram(aes(y=..density..),                           # add a historgram layer
+                               breaks=breaks,
+                               fill="cornflowerblue")
+        p = p + stat_function(fun=dnorm, args=list(mean=mu, sd=std),          # add a layer with the Normal curve 
+                              geom="line")
+        p = p + annotate("segment",                                          # show the mean as a dashed line
+                         x=mu, xend=mu, y=0, yend=0.9 * ytop,
+                         colour="darkorange1", size=1, linetype="dashed")
+        p = p + annotate("segment",                                          # show standard deviations as dotted lines
+                         x=c(mu-2*std, mu-std, mu+std, mu+2*std),
+                         xend=c(mu-2*std, mu-std, mu+std, mu+2*std),
+                         y=c(0), yend=c(0.9 * ytop),
+                         colour="goldenrod", size=1, linetype="dotted")
+        p = p + annotate("text",                                             # annotate the lines
+                         x=c(mu-2*std, mu-std, mu, mu+std, mu+2*std),
+                         y=c(0.95 * ytop),
+                         colour="darkorange3",
+                         label=c("µ - 2σ", "µ - σ", paste("µ=", format(round(mu, 2), nsmall=2)), "µ + σ", "µ + 2σ"))
+        p = p + annotate("text",
+                         x=mu, y=0, size=10,
+                         label=paste("ESTIMATED MEAN, µ=", format(round(mu, 2), nsmall=2)))
+        p = p + xlim(mu - max(200, 3 * std), mu + max(200, 3 * std))             # set x-axis limits
+        p = p + ylim(0, ytop)
+        p = p + xlab("measured variable") + ylab("frequency")                # add axis labels
+        p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                                     color = figbg))
+        p    
+        
+})
+```
+
+<div id="questions">
+1. How does changing the **number** of datapoints in the *original population* affect the accuracy of the mean estimated in the lower panel?
+2. How does changing the **range** of datapoints in the *original population* affect the accuracy of the mean estimated in the lower panel?
+3. How does changing the number of **subsamples** affect the accuracy of the mean estimated in the lower panel?
+4. How does changing the number of **datapoints per subsample** affect the accuracy of the mean estimated in the lower panel?
+5. If you can only make 90 measurements, should you choose to take 3 subsamples with 30 datapoints in each, or 30 subsamples with 3 datapoints in each? Why would you make that choice?
+</div>

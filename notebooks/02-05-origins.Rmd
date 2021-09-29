@@ -1,0 +1,385 @@
+---
+title: "Where Do Statistical Distributions Come From?"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library("ggplot2")
+library("latex2exp")
+
+# BG color for plots - should match .figure and .caption classes in rmd_style.css
+figbg = "whitesmoke"
+```
+
+<div id="summary">
+- Statistical distributions are models of real processes
+- The different distributions you meet represent distinct processes, or alternative measurements of those processes
+- Each distribution represents the expected probability outcome of an infinite number of repeated actions
+  - We can model these processes to obtain statistical distributions
+  - Normal Distributions represent the expected distribution of an infinite number of measurements of a real value
+  - An infinite number of coin tosses produces two distributions
+    - The Binomial Distribution represents how many heads (or tails) we should expect to occur in a certain number of coin tosses
+    - The Negative Binomial Distributions represents how many coin tosses we would expect to make in order to obtain a certain number of heads (or tails)
+  - Events occuring at a set average rate produce two distributions
+    - The Exponential Distribution represents the probability that a process will take a certain amount of time to complete, or that a certain amount of time will elapse between consecutive events
+    - The Poisson Distribution represents the probability that an event will happen a certain number of times in a given period, or something will occur a certain amount of times in a given space
+- **These distributions are used as models of real data, in *parametric tests***
+</div>
+
+# Introduction
+
+Statistical distributions, such as the Normal, Binomial, and Poisson distributions are often presented in statistical texts without an explanation of their origins, or what they represent. This is unfortunate, as knowing the *processes* that generate a distribution gives insight into how, why, and when those distributions are useful and appropriate for an analysis.
+
+This notebook summarises common statistical distributions, and links out to interactive sessions that illustrate how statistical distributions are generated from simple processes. Specifically:
+
+<div id="note">
+- Normal distributions are produced when we make the repeated measurements (or *estimates*) of a quantity
+  - Normal distributions are good for estimating measurement errors, and the "true mean" values of observations
+
+- Binomial and Negative Binomial distributions are produced when we count positive and negative outcomes in a series of tests
+  - These distributions are good for studying trials or tests with binary outcomes (e.g. "success" or "failure")
+
+- Exponential and Poisson distributions are produced when processes take an average amount of time to complete
+  - These distributions are good for studying process that may take a variable amount of time to reach an end point - such as survival data - or produce a variable number of events in a set amount of time, or a predefined region of space.
+</div>
+
+This notebook provides static information, and you will get the most out of it if you follow the links to the interactive examples to see how each distribution can be generated from a simple process.
+
+
+# The Normal Distribution
+
+The Normal Distribution (also known as the *Gaussian Distribution* or *Bell Curve*) is probably the most common statistical distribution you will meet. Many statistical methods *assume* that the data being fed into them is Normally-distributed (or, at least, that the errors involved in measuring the data that are fed into them are Normally-distributed). Due to the many ways in which Normal distributions can arise when we make measurements in experiments, this is often a reasonable assumption to make. Among the ways in which data tends to form a Normal distribution are:
+
+- repeated physical measurements of the same thing
+  - here, the errors in measurement are randomly-distributed, but tend to more frequently be close to the true measurement than far from it; the shape made by the repeated measurement is often Normal
+- repeatedly estimating the mean of a population by calculating the means of random subsamples
+  - here, each subsample mean is more likely to be close to the true mean of the population than far from it; the shape of the subsample means is approximately Normal
+
+<div id="note">
+Please take some time to explore how the Normal distribution arises naturally out of estimating the mean value of a population, using the link below.
+
+- [4a. Where Does the Normal Distribution Come From? **INTERACTIVE SESSION**](https://mp429.shinyapps.io/04a-generate_normal/)
+
+In this session, you can explore the way in which the variation in how we measure a value (or estimate a mean) affects Normal distribution that results.
+</div>
+
+You met a Normal distribution in Notebook 01 ("Why Do We Do Statistics"), and it's reproduced here in Figure \@ref(fig:model-normal)
+
+```{r model-normal, echo=FALSE, fig.cap="Two hundred 'measured' data values (histogram) and the corresponding Normal distribution model (curve) generating those values. The modelled distribution is entirely described by the parameters: mean=10 (µ) and standard deviation=3 (σ). We can see here that the frequency of real data values don't match the curve exactly; the model simplifies our representation of the 'noisy' data. The dashed line represents the mean value of the model, and the dotted lines represents values at +/- one and two standard deviations from the mean."}
+mu = 10                          # define mean of distribution
+sd = 3                           # define standard deviation of distribution
+breaks = seq(0, 20, by=0.4)      # set up the breakpoints between bars in the histogram
+
+dfm_hist = data.frame(vals=rnorm(200, mean=mu, sd=sd))               # create a data frame
+
+p = ggplot(dfm_hist, aes(x=vals))                                    # set up the ggplot with data
+p = p + geom_histogram(aes(y=..density..),                           # add a historgram layer
+                       breaks=breaks,
+                       fill="cornflowerblue")
+p = p + stat_function(fun=dnorm, args=list(mean=mu, sd=sd),          # add a layer with the Normal curve 
+                      geom="line")
+p = p + annotate("segment",                                          # show the mean as a dashed line
+                 x=mu, xend=mu, y=0, yend=0.2,
+                 colour="darkorange1", size=1, linetype="dashed")
+p = p + annotate("segment",                                          # show standard deviations as dotted lines
+                 x=c(mu-2*sd, mu-sd, mu+sd, mu+2*sd),
+                 xend=c(mu-2*sd, mu-sd, mu+sd, mu+2*sd),
+                 y=c(0, 0, 0, 0), yend=c(0.2, 0.2, 0.2, 0.2),
+                 colour="goldenrod", size=1, linetype="dotted")
+p = p + annotate("text",                                             # annotate the lines
+                 x=c(mu-2*sd, mu-sd, mu, mu+sd, mu+2*sd),
+                 y=c(0.21, 0.21, 0.21, 0.21, 0.21),
+                 colour="darkorange3",
+                 label=c("µ - 2σ", "µ - σ", "µ", "µ + σ", "µ + 2σ"))
+p = p + xlim(mu - 3 * sd, mu + 3 * sd)                               # set x-axis limits
+p = p + xlab("measured variable") + ylab("frequency")                # add axis labels
+p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                             color = figbg))
+p                                                                    # show plot
+```
+
+Important features of the Normal distribution include:
+
+- the Normal distribution is *continuous*
+- there is a single "peak" (the distribution is unimodal)
+- the peak occurs at the *mean* value of the distribution
+  - the peak is also at the *median* value of the distribution
+  - the mean, median and mode are all identical
+- the distribution is left-right symmetrical about the mean.
+
+<div id="note">
+- The *location* of a Normal distribution is described by its mean (µ)
+- The *spread* of a Normal distribution is described by its standard deviation (σ)
+
+The earlier interactive session allowed you to explore the way in which the parameters of a statistical distribution alter its shape, and how well it appears to represent observed data.
+
+- [1a. Exploring a Statistical Distribution **INTERACTIVE SESSION**](https://mp429.shinyapps.io/01a-sampling/)
+</div>
+
+<div id="warning">
+**Not all data is Normally-distributed.**
+
+You should check all necessary assumptions before performing a statistical test - this often means testing your dataset for "Normality."
+</div>
+
+<div id="questions">
+1. What other natural processes might correspond to a normal distribution?
+2. Why do you think these processes fit this distribution?
+</div>
+
+
+# The Binomial Distribution
+
+Many other natural random processes (and experimental observations) are not *continuous*, but instead have discrete outcomes. For instance, a coin toss can be only Heads or Tails - there are no intermediate values. Many experiments are set up in a similar way, to have an outcome that is either "success" (Heads) or "failure" (Tails). The statistics of coin tosses are a good substitute for the statistics of these kinds of experiments.
+
+Coin tosses are an example of a *Binomial (two-number) Experiment*, also known as a *Bernoulli Trial*. These kinds of processes have the following properties:
+
+- There are two and only two outcomes for each experiment (or trial). Call these "success" and "failure" (though the names are not important; "Heads" and "Tails" will do).
+- The experiment is repeated a certain number of times, $n$
+- Each experiment's results are completely independent of the others (i.e. no individual experiment's result influences any of the others)
+- The probability of any single experiment being a success is represented as $p$, and the probability of failure is $q = 1 - p$.
+
+<div id="note">
+There are two *parameters* for this process: the number of trials $n$, and the probability of success on any individual trial, $p$.
+</div>
+
+For a fair coin, $p = q = 0.5$, and we can flip it $n=30$ times, to obtain three different runs of trials, calling `T` for Tails, and `H` for Heads:
+
+- `r sample(c("H","T"), size=30, prob=c(0.5, 0.5), replace=TRUE)`
+- `r sample(c("H","T"), size=30, prob=c(0.5, 0.5), replace=TRUE)`
+- `r sample(c("H","T"), size=30, prob=c(0.5, 0.5), replace=TRUE)`
+
+Each of these runs is independent, and gives us a potentially different number of successes (Heads), each time.
+
+The *Binomial Distribution* is the pattern we get if we repeat runs with this number of coin tosses with this fair coin an infinite number of times, and count successes. Figure \@ref(fig:model-binom) shows the binomial distribution for 30 tosses of a fair coin (orange dots), and the pattern we get from 200 runs of tossing such a coin 30 times (blue bars).
+
+```{r model-binom, echo=FALSE, fig.cap="Two hundred 'measured' data values (histogram) and the corresponding Binomial distribution model (dots) generating those values. The modelled distribution is entirely described by the parameters: number of trials n=30, and probability of success p=0.5. The frequencies of observed data values don't match the curve exactly; as for the Normal distribution the model simplifies our representation of the 'noisy' data. The dashed line represents the expected mean value of the model."}
+size = 30
+prob = 0.5
+breaks = 0:30      # set up the breakpoints between bars in the histogram
+
+dfm_hist = data.frame(vals=rbinom(200, size, prob))               # create a data frame
+
+p = ggplot(dfm_hist, aes(x=vals))                                    # set up the ggplot with data
+p = p + geom_histogram(aes(y=..density..),                           # add a historgram layer
+                       dodge=0,
+                       center=0, binwidth=1,
+                       fill="cornflowerblue", color="black")
+p = p + geom_point(data=data.frame(x=breaks, y=dbinom(breaks, size, prob)),
+                   aes(x=x, y=y),
+                   size=7, alpha=0.6,
+                   color="darkorange3")
+p = p + annotate("segment",                                          # show the expected value as a dashed line
+                 x=size * prob, xend=size * prob,
+                 y=0, yend=0.25,
+                 colour="darkorange1", size=1, linetype="dashed")
+p = p + annotate("text",                                             # annotate the lines
+                 x=size * prob,
+                 y=0.26,
+                 colour="darkorange3",
+                 label=TeX("n$\\times p"))
+p = p + xlab("measured variable") + ylab("frequency")                # add axis labels
+p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                             color = figbg))
+p                                                                    # show plot
+```
+
+The Binomial Distribution can vary in shape, and the mean, median and mode of the distribution can take different values in the same distribution.
+
+<div id="note">
+The Binomial Distribution is *discrete*  - only whole numbers (integers) of successes are produced.
+</div>
+
+<div id="questions">
+1. What other natural processes might correspond to a binomial distribution?
+2. Why do you think these processes fit this distribution?
+</div>
+
+
+# The Negative Binomial Distribution
+
+The Negative Binomial distribution is generated by exactly the same coin-toss Bernoulli Trial process as the Binomial distribution. But this time, instead of counting the successes we observe in a given number of trials, we count the number of successes we observe before a prescribed number of failures $n$ is seen. As before, the probability of success is represented by the value $p$.
+
+- There are two and only two outcomes for each trial: "success" and "failure"
+- Trials are performed until a fixed, predefined number of failures $n$ are observed
+- Each trial's result is completely independent of all other trials
+- The probability of any single experiment being a success is represented as $p$, and the probability of failure is $1 = 1 - p$.
+
+<div id="note">
+There are two *parameters* for this process: the number of failures we're waiting for $n$, and the probability of success on any individual trial, $p$.
+
+**The expected mean and mode values for this distribution are different.**
+</div>
+
+<div id="warning">
+Statistical texts vary in how they define the Negative Binomial Distribution. Some define $p$ as the probability of success; others define it as the probability of failure. Some define $n$ as the number of successess; others as the number of failures. There are also other differences in how this distribution can be derived.
+
+**Take care when reading other texts that you understand their choice of parametrisation.**
+</div>
+
+```{r model-negbinom, echo=FALSE, fig.cap="Two hundred 'measured' data values (histogram) and the corresponding Negative Binomial distribution model (dots) generating those values. The modelled distribution is entirely described by the parameters: number of failures n=6, and probability of success p=0.5. The frequencies of observed data values don't match the curve exactly; as for the Normal distribution the model simplifies our representation of the 'noisy' data. The dashed line represents the expected mean value of the distribution."}
+prob = 0.5
+size = 6
+breaks = 0:25      # set up the breakpoints between bars in the histogram
+expect = size  * prob / (1 - prob)
+
+dfm_hist = data.frame(vals=rnbinom(200, size=size, prob=prob))               # create a data frame
+
+p = ggplot(dfm_hist, aes(x=vals))                                    # set up the ggplot with data
+p = p + geom_histogram(aes(y=..density..),                           # add a historgram layer
+                       center=0, binwidth=1,
+                       fill="cornflowerblue", color="black")
+p = p + geom_point(data=data.frame(x=breaks,
+                                   y=dnbinom(breaks, size=size, prob=prob)),
+                   aes(x=x, y=y),
+                   size=7, alpha=0.6,
+                   color="darkorange3")
+p = p + annotate("segment",                                          # show the expected value as a dashed line
+                 x=expect, xend=expect,
+                 y=0, yend=0.19,
+                 colour="darkorange1", size=1, linetype="dashed")
+p = p + annotate("text",                                             # annotate the lines
+                 x=expect,
+                 y=0.2,
+                 colour="darkorange3",
+                 label=TeX("$\\frac{pn}{1-p}"))
+p = p + xlab("measured variable") + ylab("frequency")                # add axis labels
+p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                             color = figbg))
+p                                                                    # show plot
+```
+
+The Negative Binomial Distribution can take a number of shapes, and the mean, median and mode can be quite different, even in the same distribution.
+
+<div id="note">
+The Negative Binomial Distribution is *discrete*  - only whole numbers (integers) of successes are produced.
+</div>
+
+<div id="questions">
+1. What other natural processes might correspond to a negative binomial distribution?
+2. Why do you think these processes fit this distribution?
+</div>
+
+# The Exponential Distribution
+
+Exponential distributions are generated by *Poisson processes*. These are processes for which:
+
+- each event occurs singly (i.e. one at a time, never simultaneously)
+- the average rate of occurrence of events is constant
+- all events are independent of each other: there is no interaction between past and future events
+
+Many natural processes may approximate *Poisson processes*, including:
+
+- time to failure of electrical or electronic equipment
+  - e.g. hard drives, or light bulbs
+- customers arriving at a shop
+- the timings of earthquakes
+- arrivals at an A&E department
+- power cuts
+
+Each event is *discrete*, but the distribution of waiting time between events is *continuous* and random, with an average value (the "average rate").
+
+<div id="questions">
+1. Are all the processes in the list good candidates to be Poisson processes?
+2. For those that are not so good candidates, what properties of the events make them not such a good fit?
+</div>
+
+The exponential distribution describes the *waiting time* between events in a Poisson process.
+
+<div id="note">
+There is a single parameter for this process: the *rate* at which events occur, 𝛌. (You can think of this as the number of events per unit time)
+</div>
+
+
+```{r model-exp, echo=FALSE, fig.cap="Two hundred 'measured' data values (histogram) and the corresponding Exponential distribution model (curve) generating those values. The modelled distribution is entirely described by the rate parameter𝛌=0.5. The frequencies of observed data values don't match the curve exactly; as for the Normal distribution the model simplifies our representation of the 'noisy' data. The dashed line represents the expected mean value of the model (1/𝛌)"}
+lambda = 0.5
+breaks = seq(0, 12, b=0.25)      # set up the breakpoints between bars in the histogram
+expect = 1 / lambda
+
+dfm_hist = data.frame(vals=rexp(200, rate=lambda))               # create a data frame
+
+p = ggplot(dfm_hist, aes(x=vals))                                    # set up the ggplot with data
+p = p + geom_histogram(aes(y=..density..),                           # add a historgram layer
+                       breaks=breaks,
+                       fill="cornflowerblue", color="black")
+p = p + stat_function(fun=dexp, args=list(rate=lambda),          # add a layer with the Normal curve 
+                      geom="line", color="darkorange3",
+                      lwd=2)
+p = p + annotate("segment",                                          # show the expected value as a dashed line
+                 x=expect, xend=expect,
+                 y=0, yend=0.46,
+                 colour="darkorange1", size=1, linetype="dashed")
+p = p + annotate("text",                                             # annotate the lines
+                 x=expect,
+                 y=0.5,
+                 colour="darkorange3",
+                 label=TeX("$\\frac{1}{\\lambda}$"))
+p = p + xlab("measured variable") + ylab("frequency")                # add axis labels
+p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                             color = figbg))
+p                                                                    # show plot
+```
+
+<div id="warning">
+The "tail" of the Exponential distribution can be quite long. A distribution with a small average waiting time may still contain several representatives with very long waiting times.
+</div>
+
+# The Poisson Distribution
+
+The Poisson Distribution is - as you might have guessed - related to the Exponential distribution. It is produced by the same kind of processes - Poisson processes - but instead of describing the waiting times between successive events, it describes the number of events we would expect to occur in a unit of time.
+
+<div id="note">
+There is a single parameter for this process, and it is the same one as for the Exponential distribution: the average *rate* at which events occur, 𝛌. (You can think of this as the number of events per unit time)
+</div>
+
+
+```{r model-pois, echo=FALSE, fig.cap="Two hundred 'measured' data values (histogram) and the corresponding Poisson distribution model (dots) generating those values. The modelled distribution is entirely described by the rate parameter 𝛌=3. The frequencies of observed data values don't match the curve exactly; as for the Normal distribution the model simplifies our representation of the 'noisy' data. The dashed line represents the expected mean value of the model (𝛌)"}
+lambda = 3
+breaks = 0:15
+expect = lambda
+
+dfm_hist = data.frame(vals=rpois(200, lambda=lambda))               # create a data frame
+
+p = ggplot(dfm_hist, aes(x=vals))                                    # set up the ggplot with data
+p = p + geom_histogram(aes(y=..density..),                           # add a historgram layer
+                       center=0, binwidth=1,
+                       fill="cornflowerblue", color="black")
+p = p + geom_point(data=data.frame(x=breaks,
+                                   y=dpois(breaks, lambda=lambda)),
+                   aes(x=x, y=y),
+                   size=7, alpha=0.6,
+                   color="darkorange3")
+p = p + annotate("segment",                                          # show the expected value as a dashed line
+                 x=expect, xend=expect,
+                 y=0, yend=0.34,
+                 colour="darkorange1", size=1, linetype="dashed")
+p = p + annotate("text",                                             # annotate the lines
+                 x=expect,
+                 y=0.35,
+                 colour="darkorange3",
+                 label=TeX("$\\lambda$"))
+p = p + xlab("measured variable") + ylab("frequency")                # add axis labels
+p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                             color = figbg))
+p                                                                    # show plot
+```
+
+<div id="warning">
+The *rate* at which events occur, 𝛌, is a continuous variable, but the Poisson Distribution is **discrete** and describes the counts of events in a unit of time.
+</div>
+
+<div id="warning">
+**Poisson processes are more general than just intervals of time**
+
+We talk about Poisson processes as being a rate per unit *time*, but Poisson processes can also be *spatial* and occur over a unit *length* (like distances between cars in a lane of traffic), *area* (like counts of tourists in George Square at a given point in time), or *volume* (like the number of raisins in a Christmas pudding).
+</div>
