@@ -57,7 +57,7 @@ The current versions of the notebook HTML pages are linked below, for convenienc
 - [03-Reproducibility, Replicability, and FAIR Guidelines](notebooks/03-reproducibility.html)
 - [04-Keeping a Lab Notebook to Document Your Project](notebooks/04-keeping_a_lab_notebook.html)
 - [05-Reference Management](notebooks/05-reference_management.html)
-- [06-How to Use Reference Management Software](notebooks/06-reference_management.html)
+- [06-How to Use Reference Management Software](notebooks/06-using_a_reference_manager.html)
 
 ### Session 2 (Tursday October 14th)
 
