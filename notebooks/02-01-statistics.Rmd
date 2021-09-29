@@ -1,0 +1,384 @@
+---
+title: "Why Do We Do Statistics?"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library("DT")
+library("dplyr")
+library("ggplot2")
+
+# BG color for plots - should match .figure and .caption classes in rmd_style.css
+figbg = "whitesmoke"
+```
+
+> A major point, on which I cannot yet hope for universal agreement, is that our focus must be on questions, not models […] Models can - and will - get us into deep troubles if we expect them to tell us what the unique proper questions are. - J.W. Tukey (1977)
+
+<div id="summary">
+- Statistics is a science that aims to solve researchers' problems by analysing data
+  - The value of statistics is in giving quantitative answers to questions
+  - Whether the question is well-defined, or the statistical method well-chosen, is another matter.
+- This workshop aims to help you develop an intuition for critical interpretation of literature, and so you can choose approaches for your own research, but it **does not focus on theory or mathematical formalism**
+</div>
+
+
+# Introduction
+
+The emphasis of this workshop is to introduce, or reintroduce, common statistical tools and ideas, and help you develop an insight into how they work and when they should - and perhaps also when they ought not to - be applied. This is not a formal mathematical presentation of statistical methods, or statistical *theory*. Rather, this workshop is a primer that describes and discusses how and why statistical methods are applied to answer research questions, and prompts you to critically interpret their application and interpretation in the literature.
+
+Although we will not dive into theory or mathematics in detail, you should understand that these methods are mathematical, and are not constructed in an *ad hoc* way. There is sound theory behind them, even when we might criticise a particular application of a method.
+
+## What You Should Expect From This Workshop
+
+The workshop is presented in a *flipped* format. That is, the homework comes *before* the class, and we use an online Zoom session to work though *your* questions and discussions prompted by the material.
+
+This material is broken up into notebooks (like this one) which you should read. Each notebook should be digestible as a standalone piece of material (though they should be read more-or-less in order). You should attempt the exercises in each notebook and - ideally - also work through all the interactive sessions.
+
+The interactive sessions are linked to from the main notebooks. The materials are all presented online, but you may run them on your own computer if you install [`RStudio` Desktop](https://rstudio.com/products/rstudio/download/) - a free IDE (Integrated Development Environment).
+
+You will not be expected to write your own code in `R`, only to understand the statistical methods, decide which are appropriate to answer any questions you are given, apply the methods, and interpret the answers you get.
+
+<div id="warning">
+**Please be aware that technical questions about `RStudio` etc. will not be addressed in the live online Zoom session**. If you encounter technical difficulties you should email one of the workshop presenters when you encounter the problem.
+</div>
+
+## A Quick Word About Statistical Computing
+
+The implementation of statistical methods is handled almost exclusively by computers, these days. This is true to the extent that a purely mathematical - or an intuition-led (like this workshop) - approach is insufficient. The same statistical model might be implemented computationally in more than one way, and the differences between those approaches can matter very greatly.
+
+The best way to explore and understand statistics is *via* computing tools. `R` is the most common environment for statistical analysis in scientific research. Gaining some familiarity with `R` will help your research, and maybe even your future employability. In any case, it encourages the kind of good practice we would like to see the scientists of tomorrow adopt:
+
+1. **Use the command-line**. There are point-and-click tools like Excel, GenStat, and MINITAB, which can perform statistical analyses. But these do not encourage best practice for reproducibility and ethics. With those tools, it is often impossible to reproduce the exact series of clicks, drags, and button-pushes that generated a result. With `R` each action is implemented as a command in a script, and this documents itself to the extent that the analysis should be replicable just by re-running the same script on the same data.
+2. **Use open-source, free, public tools**. `R` is, itself, open-source - as are nearly all the statistical packages you can use with `R`. This has two main benefits. Firstly, many eyes can inspect the code for errors or problems, and improve it over time. The tools become more robust over time, unlike proprietary tools where errors and mistakes may not be easily spotted, or ever fixed. Secondly, it encourages a wider user-base and community which, as it grows, includes more people who can help improve tools like `R` and its packages, but also help out with *your* use of `R`.
+3. **Use version control**. Version control is a way to ensure a "chain of custody" of analyses and data, like preserving evidence in a criminal case. It is best-practice for computational work of all kinds, and is naturally supported in `RStudio` (though we'll not talk about it in detail, here).
+
+In the spirit of openness, each notebook will have a section where you can read and inspect the `R` code used in it. In addition, all this material is developed openly and can be downloaded from `GitHub`, and run on your own computer. If you like, you can suggest modifications and extra material through the website linked below:
+
+- [https://github.com/widdowquinn/MP429](https://github.com/widdowquinn/MP429) - `GitHub` repository
+- [Issues page for questions, suggestions, etc.](https://github.com/widdowquinn/MP429/issues)
+
+
+
+# Why Do We Do Statistics?
+
+*Statistics* is a science that aims to solve problems and answer questions mathematically, by representing and analysing *data*.
+
+Statistics is applicable to any field that collects data, including medicine, biology, chemistry, engineering, and social sciences. The nature of data can be complex, and there are always some practical questions that can only be answered by the application of statistical methods and *models* to that data.
+
+<div id="note">
+We are often concerned with the "truth" of some answer to our scientific questions. For instance does our drug, when administered, produce a measurable effect? How much active compound should we expect to find in each mass-produced capsule?
+
+But statistical models are neither true nor false. They are tools, or *constructs*, that we have developed to enable us to answer our questions. They are powerful tools, for sure, able to carry out exact calculations (nearly) the same way every time. But they are not *wise*. They do not know when the context they are being used in is inappropriate. They do not know what your question was or even what question you really meant to ask. They are procedures that operate on data. They will give you answers, but they may not give you good answers, or even the answer to the question you thought you were asking. A large part of the skill of statistics is framing an appropriate question, and understanding which *tool* is appropraite for that question.
+</div>
+
+## The hypothesis-testing decision tree
+
+Many courses will teach a "Hypothesis Testing Decision Tree," or something similar (see below). This may look familiar to you. 
+
+![A Hypothesis Testing Decision Tree, image linked from Pirk *et al.* (2013) *J. Apic. Res.* doi:10.3896/IBRA.1.52.4.13](https://www.researchgate.net/profile/Christian-Pirk/publication/256303889/figure/fig5/AS:392777901854729@1470656957861/A-basic-decision-tree-on-how-to-select-the-appropriate-statistical-test-is-shown_W640.jpg)
+
+These flowcharts do not encourage much in the way of thought about the underlying structures, models and processes of these methods. Some people might see this flowchart and think that the small collection of tests shown in it will do for all circumstances (which is not true).
+
+The classical statistical methods shown in these flowcharts are often appropriate, but can sometimes be inflexible and fragile: unable to adapt to novel contexts not met by their assumptions; and failing in unpredictable ways when they meet those contexts. These novel contexts may arise in your research, and flowcharts like these don't tell you where the boundaries of applicability are. This is why it is important to understand your question, your data, and the methods themselves.
+
+## Statistics is a toolbox, not a hammer
+
+Statistics is a toolbox containing many tools that will make your life easier if you know when they should be used. 
+
+In this workshop, we aim to give you some intuition, insight and tools to help you understand common statistical methods you might encounter, why they are used and - occasionally - why they perhaps should not have been used. It's perhaps true that you can't truly understand a statistical approach unless you understand the mathematics behind it - and sometimes the computational implementation, too - but you can get a long way by exploring examples. We hope to help you explore enough examples that you can follow the reasoning behind the use of statistical approaches, and know when to use them yourself. The flowchart above is, in some ways, a toolbox containing only hammers.
+
+One of our goals is to encourage you to look beyond a rote application of "The Null Ritual" (coined in [Gigerenzer (2004) *J. Socio-Econ.* doi:10.1016/j.socec.2004.09.033](https://doi.org/10.1016/j.socec.2004.09.033)), as though it's a hammer and every problem is a nail to be hammered down.
+
+The Null Ritual runs like this: 
+
+1. Set up a statistical null hypothesis of "no mean difference" or "zero correlation." Don't specify the predictions of your research hypothesis or of any alternative substantive hypotheses.
+2. Use 5% as a convention for rejecting the null. If significant, accept your research hypothesis. Report the result as *p*<0.05, *p*<0.01, or *p*<0.001 (whichever comes next to the obtained *p*-value).
+3. Always perform this procedure.
+
+<div id="warning">
+You will see this ritual practised mechanically in many published papers. **It is a bad habit in science.** 
+
+The Null Ritual is frequently observed in publications where Null Hypothesis Significance Testing (NHST) has been performed. We will explore NHST in more detail, and describe alternative approaches to both NHST and the Null Ritual during the workshop.
+</div>
+
+<div id="note">
+Ths workshop does not attempt to teach you the "right" way to do statistics, in the sense of "use tool X for problem Y".
+
+The truth is that there is no recipe for the "right" way to do statistics. And there is no shortcut for understanding the question you wish to ask with your experiment, or whether your chosen statistical method is likely to actually answer that question.
+
+We are instead trying to help explore some *statistical thinking*, in terms of understanding the bases of common statistical tools, their applications, and their limitations. This will help you determine whether a particular approach can answer a stated question. Sometimes, you might find you need to learn how to use a new tool.
+
+**Whichever tool you use, understanding your own experiment and data or, if you're critically assessing someone else's research, understanding their experiment and data, should be the foundational starting point for all analyses.**
+</div>
+
+<details>
+  <summary>Click to toggle some advice about learning more about statistics</summary>
+If I were to recommend three tools to learn, and a book to learn them from, I would point you to Richard McElreath's *Statistical Rethinking*, which covers:
+
+1. Bayesian data analysis
+2. Multilevel models
+3. Model comparison using information criteria
+
+You can find this book in the [Strathclyde Library](https://suprimo.lib.strath.ac.uk/permalink/f/2esacs/SUALMA5174624020002996).
+</details>
+
+
+# What Does Statistics Do, Anyway?
+
+When researchers carry out experiments, they typically collect *data* for that experiment. This data usually involves at least two *measurements* of each of a number of individuals (or *experimental units*). Sometimes "individuals" means actual individual people, but it might also mean individual medications, groups of people, or something else, depending on context.
+
+Often, one of the measurements is treated as a *response variable* - some kind of *outcome* that the researcher is interested in. For instance, if we were to measure pupil dilation as a result of administering a medication, we would treat the amount of dilation as the *response variable*. In terms of experimental design, the researcher is attempting to determine how the response variable *depends on* - or is *explained by* the other measured variables. The response variable is sometimes called the *dependent variable* because it *depends on* the other variables in the experiment.
+
+The measured variables that might *explain* the behaviour of the response variable (i.e. those variables on which the dependent variable might depend) are called *explanatory variables*. For instance, the pupil dilation in our example might depend on: the amount of drug given; the sex of the patient; the age of the patient; whether the drug was delivered orally or intravenously; and so on. Explanatory variables in an experiment might be *measured* (i.e. properties of the individual that are observed, like patient sex) or *assigned* (e.g. the researcher gives a drug or a placebo to different groups of individuals). As the explanatory variables are considered not to depend on the other variables in the experiment, you may see them called *independent variables*.
+
+```{r plant-growth, echo=FALSE}
+datatable(PlantGrowth, width=400,
+          caption="Table 1: Data from an experiment assessing the effect of two treatment conditions on crop yield, in comparison to a 'control' (no treatment). `weight` is the response variable, `group` is the (assigned) explanatory variable.")
+```
+
+## Understanding and Prediction
+
+Statistics allows us to calculate answers to many kinds of questions. These often belong to one of two key types: *understanding* questions, and *prediction* questions.
+
+- *understanding* questions might take the form of determining whether changing the value of an *explanatory* variable affects the value of the *response* variable. The question might be asking whether changing the *explanatory variable* affects the *response variable* at all or, if it does, how much of en effect there is.
+- *prediction* questions also need to determine a similar relationship between *explanatory* and *response* variables, but they then seek to use those relationships to *predict* responses of individuals. These predictions are made on the basis of measurements of the explanatory variables that might be made at some other time.
+
+## Models
+
+In all questions, whether for understanding or prediction, we rely on *modelling* the behaviours of the variables we measure, and modelling the interactions between those variables - such as the way that explanatory variables influence the response variable value. Modelling is a broad, complex field, but for the purpose of this workshop we can consider *models* to be simplified representations of data, and of the relationships between data. In this workshop, we'll mostly be considering two main kinds of model.
+
+### Representing data with a model
+
+Firstly, although we measure data in our experiments, some statistical approaches (called *parametric* methods) do not use the raw data directly to calculate their result. Instead, they use the data to calculate values that are *parameters* of a *distribution* (e.g. *mean* and *standard deviation*), such as a Normal or Poisson distribution. The corresponding distribution is an idealised *model* of the measurements, and it simplifies our calculations to use these models to represent our data, in place of the actual individual datapoints. 
+
+<div id="note">
+If you have ever performed a *t*-test or similar statistical analysis, based on the means and standard deviations of two datasets, you were doing exactly this!
+
+The means and standard deviations you used in your *t*-test were parameters that described an idealised model of your data, in place of using the raw measurements themselves.
+</div>
+
+<details>
+  <summary>Click to toggle a wee bit of historical context</summary>
+Statistical approaches can be computationally expensive. So, before computational approaches were common, we used to rely on books of *statistical tables* that contained precomputed values for statistical distributions. Being able to model our rough, raw data as these distributions meant that we could then use the values from the statistical tables to represent our data. This simplified matters very greatly and, naturally, the teaching of statistics (especially applied statistics) focused on methods that could use the values in these tables. These methods are the "classical" statistical tests. They could be performed readily, so they were taught.
+
+Today, computationally-expensive approaches like Monte Carlo methods and Bayesian statistics have been made much more accessible, and are readily applied to more complex datasets and questions than could be used with the classical methods.
+</details>
+
+A key concern in *parametric* methods is ensuring that the choice of model distribution to represent an experimental dataset is appropriate, and we will spend some time in the workshop notebooks exploring how common distributions represent data. In Figure \@ref(fig:model-normal) below, we can see a curve describing the expected distribution of frequencies of values for a Normal distribution, and a single dataset of 200 datapoints sampled from that distribution. Notice that the sampled data does not follow the shape of the curve exactly.
+
+Statistical methods that use the data directly and do not represent it as an idealised model are called *nonparametric* methods. You will meet both kinds of approach in this workshop.
+
+```{r model-normal, echo=FALSE, fig.cap="Two hundred 'measured' data values (histogram) and the corresponding Normal distribution model (curve) generating those values. The modelled distribution is entirely described by the parameters: mean=10 (µ) and standard deviation=3 (σ). We can see here that the frequency of real data values don't match the curve exactly; the model simplifies our representation of the 'noisy' data. The dashed line represents the mean value of the model, and the dotted lines represents values at +/- one and two standard deviations from the mean."}
+mu = 10                          # define mean of distribution
+sd = 3                           # define standard deviation of distribution
+breaks = seq(0, 20, by=0.4)      # set up the breakpoints between bars in the histogram
+
+dfm_hist = data.frame(vals=rnorm(200, mean=mu, sd=sd))               # create a data frame
+
+p = ggplot(dfm_hist, aes(x=vals))                                    # set up the ggplot with data
+p = p + geom_histogram(aes(y=..density..),                           # add a historgram layer
+                       breaks=breaks,
+                       fill="cornflowerblue")
+p = p + stat_function(fun=dnorm, args=list(mean=mu, sd=sd),          # add a layer with the Normal curve 
+                      geom="line")
+p = p + annotate("segment",                                          # show the mean as a dashed line
+                 x=mu, xend=mu, y=0, yend=0.2,
+                 colour="darkorange1", size=1, linetype="dashed")
+p = p + annotate("segment",                                          # show standard deviations as dotted lines
+                 x=c(mu-2*sd, mu-sd, mu+sd, mu+2*sd),
+                 xend=c(mu-2*sd, mu-sd, mu+sd, mu+2*sd),
+                 y=c(0, 0, 0, 0), yend=c(0.2, 0.2, 0.2, 0.2),
+                 colour="goldenrod", size=1, linetype="dotted")
+p = p + annotate("text",                                             # annotate the lines
+                 x=c(mu-2*sd, mu-sd, mu, mu+sd, mu+2*sd),
+                 y=c(0.21, 0.21, 0.21, 0.21, 0.21),
+                 colour="darkorange3",
+                 label=c("µ - 2σ", "µ - σ", "µ", "µ + σ", "µ + 2σ"))
+p = p + xlim(mu - 3 * sd, mu + 3 * sd)                               # set x-axis limits
+p = p + xlab("measured variable") + ylab("frequency")                # add axis labels
+p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                             color = figbg))
+p                                                                    # show plot
+```
+
+<div id="note">
+Please take some time to explore a statistical distribution interactively in your browser, at the link below.
+
+- [1a. Exploring a Statistical Distribution **INTERACTIVE SESSION**](https://mp429.shinyapps.io/01a-sampling/)
+
+In this session, you can explore the way in which the parameters of a statistical distribution alter its shape, and how well it appears to represent measured data.
+</div>
+
+<div id="warning">
+**BEWARE OF HISTOMANCY!**
+
+One strategy for choosing a distribution to represent your data is to plot a histogram of that data and, by looking at it, choose an appropriately-shaped distribution that looks "similar". In his book *Statistical Rethinking*, Richard McElreath refers to this as "Histomancy", by analogy to haruspicy, necromancy and other fake magic arts that claimed to disclose hidden truths by looking at entrails, or speaking with the dead.
+
+As you will have seen from the interactive session, even data that is drawn specifically from a Normal Distribution does not always look like a Normal Distribution when presented as a histogram. In general, it may very well be that a given choice of distribution is good or poor, but the appropriateness cannot be determined only by examining histograms, or by guesswork. We need to apply sound principles to our choice of statistical methods, and this workshop will attempt to give you some intuitions about those choices.
+</div>
+
+### Representing a relationship with a model
+
+Secondly, the actual relationship between explanatory and response variables can be described by a simplified representation of that relationship: this is also a *model*. For example, if we suspect that the amount of sunlight received by a plant influences its growth, we might try to fit a linear regression between measured values of "plant height" (response variable) and "hours of sunlight received" (explanatory variable). Here, the line of best-fit is a *model* of the relationship between those variables, reflecting our *belief* in a linear relationship between the two variables. The inferred values of *intercept* and *gradient* (or *slope*) for this line are *parameters* of that model.
+
+<div id="note">
+A researcher's choice of model (and of statistical method) embodies a set of beliefs about the processes that generated their data. In effect, they represent the researchers' beliefs about the natural world or, at least, about the experiment that was performed.
+</div>
+
+```{r model-relationship, echo = FALSE, fig.cap="Thirty datapoints indicating a relationship between an explanatory variable and a response variable. Datapoints are shown as blue dots. The relationship is modelled by the orange straight line (obtained with linear regression) that has gradient and intercept as shown in the figure. The model simplifies our representation of the noisy relationship between the measured and response variables, and implies that the researcher believes the relationship between the explanatory and response variables is best described by a straight line."}
+n_samples = 30       # number of measured samples
+
+# parameters for linear relationship
+slope = 1.7          # slope of relationship
+intcp = 5            # intercept of relationship
+
+# parameters for measurement noise; assumed to be Normally distributed
+# note, our representation of noise is also a model
+mu = 0               # mean measurement error
+std = 8              # standard deviation of measurement error
+
+# generate x values
+data = data.frame(x=runif(n_samples, 0.4, 20))
+# generate "true" y values
+data = data %>% mutate(y=(x * slope) + intcp)
+# generate "measured" y values
+data = data %>% mutate(ym = y + rnorm(n_samples, mu, std))
+
+# predict linear relationship
+fitlm = lm(ym ~ x, data=data)       # fit a straight line
+m_coeff = fitlm$coefficients[2]     # gradient
+c_coeff = fitlm$coefficients[1]     # intercept
+data$predlm = predict(fitlm)        # add datapoints corresponding to line
+predslm = predict(fitlm, interval="confidence")  # obtain confidence intervals
+data = cbind(data, predslm)         # complete dataset
+
+# plot relationships
+p = ggplot(data, aes(x=x, y=ym))
+p = p + geom_point(colour="cornflowerblue")
+#p = p + geom_ribbon(aes(ymin=lwr, ymax=upr), alpha=0.15)
+p = p + geom_line(aes(y=predlm), size=1, colour="darkorange3")
+p = p + annotate("text",                                             # annotate the model
+                 x=2,
+                 y=40,
+                 hjust=0,
+                 colour="darkorange3",
+                 label=paste("gradient = ", format(round(m_coeff, 2), nsmall=2),
+                             ", intercept = ", format(round(c_coeff, 2), nsmall=2)))
+p = p + xlab("explanaotry variable") + ylab("response variable")        # add axis labels
+p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                             color = figbg))
+
+p
+```
+
+Much of statistical analysis of *relationships* between variables is about estimating (or *fitting*) the values of parameters for these models, and exploring the implications of the *fitted* parameters resulting parametrised models.
+
+<div id="note">
+Please take some time to explore a statistical relationship interactively in your browser, at the link below.
+
+- [1b. Exploring a Statistical Relationship **INTERACTIVE SESSION**](https://mp429.shinyapps.io/01b-linear/)
+
+In this session, you can explore the way in which the parameters of a statistical model alter how well it appears to fit measured data, what we mean by a "good" and "bad" fit, and how we represent that.
+</div>
+
+
+# `R` code used in this notebook
+
+<details>
+  <summary>Click to toggle `R` code for Figure 3.1</summary>
+  
+The `R` code below plots the Normal distribution from figure 2.1, with a random sampling of 200 "measured" variables from this distribution, using `ggplot2`.
+
+```r
+mu = 10                          # define mean of distribution
+sd = 3                           # define standard deviation of distribution
+breaks = seq(0, 20, by=0.4)      # set up the breakpoints between bars in the histogram
+
+dfm_hist = data.frame(vals=rnorm(200, mean=mu, sd=sd))               # create a data frame
+
+p = ggplot(dfm_hist, aes(x=vals))                                    # set up the ggplot with data
+p = p + geom_histogram(aes(y=..density..),                           # add a histogram layer
+                       breaks=breaks,
+                       fill="cornflowerblue")
+p = p + stat_function(fun=dnorm, args=list(mean=mu, sd=sd),          # add Normal curve layer
+                      geom="line")
+p = p + annotate("segment",                                          # show mean as dashed line
+                 x=mu, xend=mu, y=0, yend=0.2,
+                 colour="darkorange1", size=1, linetype="dashed")
+p = p + annotate("segment",                                          # show std devs as dotted lines
+                 x=c(mu-2*sd, mu-sd, mu+sd, mu+2*sd),
+                 xend=c(mu-2*sd, mu-sd, mu+sd, mu+2*sd),
+                 y=c(0, 0, 0, 0), yend=c(0.2, 0.2, 0.2, 0.2),
+                 colour="goldenrod", size=1, linetype="dotted")
+p = p + annotate("text",                                             # annotate the lines
+                 x=c(mu-2*sd, mu-sd, mu, mu+sd, mu+2*sd),
+                 y=c(0.21, 0.21, 0.21, 0.21, 0.21),
+                 colour="darkorange3",
+                 label=c("µ - 2σ", "µ - σ", "µ", "µ + σ", "µ + 2σ"))
+p = p + xlim(mu - 3 * sd, mu + 3 * sd)                               # set x-axis limits
+p = p + xlab("measured variable") + ylab("frequency")                # add axis labels
+p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                             color = figbg))
+p                                                                    # show plot
+```
+</details>
+
+<details>
+  <summary>Click to toggle `R` code for Figure 3.2</summary>
+  
+The `R` code below plots the linear relationship from figure 3.2, with a random sampling of 30 "measured" variables, using `ggplot2`.
+```r
+n_samples = 30       # number of measured samples
+
+# parameters for linear relationship
+slope = 1.7          # slope of relationship
+intcp = 5            # intercept of relationship
+
+# parameters for measurement noise; assumed to be Normally distributed
+# note, our representation of noise is also a model
+mu = 0               # mean measurement error
+std = 8              # standard deviation of measurement error
+
+# generate x values
+data = data.frame(x=runif(n_samples, 0.4, 20))
+# generate "true" y values
+data = data %>% mutate(y=(x * slope) + intcp)
+# generate "measured" y values
+data = data %>% mutate(ym = y + rnorm(n_samples, mu, std))
+
+# predict linear relationship
+fitlm = lm(ym ~ x, data=data)       # fit a straight line
+m_coeff = fitlm$coefficients[2]     # gradient
+c_coeff = fitlm$coefficients[1]     # intercept
+data$predlm = predict(fitlm)        # add datapoints corresponding to line
+predslm = predict(fitlm, interval="confidence")  # obtain confidence intervals
+data = cbind(data, predslm)         # complete dataset
+
+# plot relationships
+p = ggplot(data, aes(x=x, y=ym))
+p = p + geom_point(colour="cornflowerblue")
+#p = p + geom_ribbon(aes(ymin=lwr, ymax=upr), alpha=0.15)
+p = p + geom_line(aes(y=predlm), size=1, colour="darkorange3")
+p = p + annotate("text",                                             # annotate the model
+                 x=2,
+                 y=40,
+                 hjust=0,
+                 colour="darkorange3",
+                 label=paste("gradient = ", format(round(m_coeff, 2), nsmall=2),
+                             ", intercept = ", format(round(c_coeff, 2), nsmall=2)))
+p = p + xlab("measured variable") + ylab("response variable")        # add axis labels
+p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                             color = figbg))
+
+p
+```

@@ -1,0 +1,703 @@
+---
+title: "Hypothesis Testing"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library("dplyr")
+library("ggplot2")
+library("kableExtra")
+library("knitr")
+library("latex2exp")
+
+# BG color for plots - should match .figure and .caption classes in rmd_style.css
+figbg = "whitesmoke"
+```
+
+# Introduction
+
+Much of practical statistics in the literature still revolves around the idea of the *Null Hypothesis Significance Test*. This is on the face of it quite similar to Karl Popper's idea of *falsification* being an important characteristic of a useful experiment. 
+
+## Falsificationism
+
+The idea behind *falsificationism* and hypothesis testing is straightforward:
+
+- We propose a hypothesis $H$
+- We show that hypothesis $H$ *necessarily* implies the existence of observation $D$
+- We look for the existence of $D$
+
+If we look for $D$ and don't find it, we can then state that $H$ is false.
+
+<div id="warning">
+If we look for $D$ and find it, this **does not imply that $H$ is true**! $D$ might also be the result of other hypotheses that are not compatible with $H$.
+</div>
+
+A classic example of this kind of logic is the *Black Swan*.
+
+> Until Australia was discovered, no-one in Western Europe knew of the existence of black swans. It was therefore reasonable to hold the hypothesis (the *null hypothesis* $H_0$) that "all swans are white."
+>
+> $$H_0: \textrm{All swans are white}$$
+>
+>On arriving in Australia, explorers observed swans with black feathers, immediately disproving hypothesis $H_0$. But before travelling to Australia, no amount of observations of white swans could prove that hypothesis to be true (indeed, it was false - black swans existed regardless of whether Western explorers had seen them!). However, it only took one observation of a black swan to prove the hypothesis to be false.
+
+It's tempting to think that this mode of logic - pose questions as hypotheses to be falsified absolutely - is a reliable basis for making scientific progress. But, although it is important, it has significant limitations.
+
+1. The experiments we conduct are represented as models when we test them; these models may not correspond exactly to the data or to the experimental system. The imperfection of that correspondence may be important.
+2. Most of the questions we ask as scientists are not "logically discrete." They cannot be framed as hypotheses that can be contradicted by a single example
+3. Observations are prone to error
+4. Quantitative hypotheses do not concern total presence or absence
+  
+For example, many scientific hypotheses do not resemble "all swans are white" but are more like:
+
+$$H_0: \textrm{80% of swans are white}$$
+
+or
+
+$$H_0: \textrm{Black swans are rare}$$
+
+How are we to falsify these hypotheses? How do we even agree on what "rare" means? It has suddenly become much more difficult than finding a single black swan.
+
+It might be argued that these are not good hypotheses. But if that is so, most important scientific hypotheses are also not good hypotheses.
+
+<div id="questions">
+1. Can you think of an interesting and useful scientific hypothesis that is easy to falsify?
+1. Can you think of an interesting and useful scientific hypothesis that is difficult to falsify?
+</div>
+
+## Competing hypotheses
+
+As we cannot absolutely falsify most hypotheses, we instead approach falsificationism by defining *competing hypotheses* $H_1$ and $H_2$, and desiging experiments that can differentiate between them. But it is rare that this differentiation is absolute. We can only make *probabilistic* statements about which of the competing hypotheses is most likely to be true, to some level of confidence.
+
+This approach can be summarised as *Neyman-Pearson Decision Theory*:
+
+1. Set up two statistical hypotheses $H_1$ and $H_2$
+2. Decide on *error rates* - how willing you are to accept false positives or false negatives - and a sample size, based on cost-benefit analysis (for instance, controlling error rate takes more datapoints and is more expensive, or ethically hard to justify); this defines a *rejection region* for $H_1$ and $H_2$
+3. If the data falls in the *rejection region* for $H_1$, accept $H_2$.
+
+Here:
+
+- false positive means accepting $H_2$ in error
+- false negative means accepting $H_1$ in error
+
+<div id="note">
+When we "accept" a hypothesis it doesn't mean that we believe it, only that we behave as if it were true
+</div>
+
+You may be more familiar with *Fisher's Null Hypothesis Testing*:
+
+1. Set up a statistical *null hypothesis* $H_0$ (this need not be a nil hypothesis, i.e. zero difference)
+2. Report the exact level of *statistical* significance (e.g. $p=0.051$ or $p=0.049$). Do not arbitrarily use a 5% threshold, and do not talk about accepting or rejecting a hypothesis.
+3. Only use this procedure if you know very little about the problem at hand.
+
+<div id="warning">
+Another approach, which does not match either of these approaches exactly, is characterised as **The Null Ritual**:
+
+1. Set up a statistical null hypothesis of "no mean difference" or "zero correlation." Don't specify the predictions of your research hypothesis or of any alternative substantive hypotheses.
+2. Use 5% as a convention for rejecting the null. If significant, accept your research hypothesis. Report the result as *p*<0.05, *p*<0.01, or *p*<0.001 (whichever comes next to the obtained *p*-value).
+3. Always perform this procedure.
+
+The Null Ritual is frequently observed in publications where Null Hypothesis Significance Testing (NHST) has been performed. **It is a bad habit in science.**
+
+Scientists and statisticians often argue, sometimes quite loudly, about the "correct" way to conduct statistical testing. It is a complex and nuanced topic, with many contrasting opinions.
+</div>
+
+<div id="questions">
+1. How would you describe the differences between the Neyman-Pearson Decision Theory approach, and Fisher's Hypothesis Testing?
+2. Can you think of a scientific question that would be more suitable for one of these approaches than the other?
+</div>
+
+# Confidence Intervals
+
+So far, when we have estimated the values of model parameters, such as the mean value in a set of datapoints, we have stated a *point estimate*: a single numerical value. It is more appropriate to acknowledge that our estimate is uncertain, and provide instead a range of plausible values that the parameter could take.
+
+<div id="note">
+You have seen an example of this in the interactive notebook "Exploring a Statistical Relationship"
+</div>
+
+## Empirical Confidence Interval
+
+Let's say that we have sampled 250 datapoints from a uniform distribution of integers with lower limit -40 and upper limit +60 (see figure \@ref(fig:uniform-ci)). We know that the mean of this population is exactly 10.
+
+```{r uniform-ci, echo=FALSE, fig.cap="Histogram of 250 datapoints sampled from a uniform distribution with limits (-40, 60), showing a point estimate of the mean."}
+data = data.frame(vals=runif(250, -40, 60))
+mu = mean(data$vals)
+ytop = 1.3 * max(density(data$vals)$y)
+
+p = ggplot(data, aes(x=vals)) +
+  geom_histogram(aes(y=..density..),
+                 fill="cornflowerblue") +
+  annotate("segment",
+           x=mu, xend=mu,
+           y=0, yend=0.9 * ytop,
+           colour="darkorange1", size=1, linetype="dashed") +
+  annotate("text",
+           x=mu, y=0.95 * ytop,
+           colour="darkorange3",
+           label= paste("µ=", format(round(mu, 2), nsmall=2))) +
+  xlab("value") + ylab("frequency") +               # add axis labels
+  theme(plot.background = element_rect(fill = figbg,           # colour background
+                                       color = figbg))
+p
+```
+
+We can repeat this sampling 1000 times, to obtain 1000 different estimates of the the mean, and calculate *quantiles* (specifically: *percentiles*) for these values by ordering all of the estimates and reporting those at percentage intervals from the smallest to the largest estimate.
+
+```{r emp-ci, echo=FALSE}
+samples = data.frame(vals=replicate(1000, mean(runif(250, -40, 60))))
+quantiles = quantile(samples$vals, probs=c(0, 0.025, 0.05, 0.1, 0.25, 0.50, 0.75, 0.90, 0.95, 0.975, 1))
+kable(quantiles, digits=2, col.names="estimate") %>% kable_styling("striped")
+```
+
+The smallest and largest estimates of the mean are `r round(quantiles[["0%"]], 2)` and `r round(quantiles[["100%"]], 2)` (the 0% and 100% percentiles), so we know that all estimates lie between those two limits (inclusive). As 100% of estimates lie in this range, we might call this our *100% Confidence Interval*: `r round(quantiles[["0%"]], 2)`-`r round(quantiles[["100%"]], 2)` - we are absolutely confident that the true mean lies in this range.
+
+In practice, the convention is more often to report 95%, 90%, or 50% confidence intervals. These are the quantile/percentile ranges (2.5%-97.5%), (5%-95%), and (25%-75%). They are tabulated below for this data, and shown in Figure \@ref(fig:empirical-ci)
+
+- 95% C.I.: `r round(quantiles[["2.5%"]], 2)`-`r round(quantiles[["97.5%"]], 2)`
+- 90% C.I.: `r round(quantiles[["5%"]], 2)`-`r round(quantiles[["95%"]], 2)`
+- 50% C.I.: `r round(quantiles[["25%"]], 2)`-`r round(quantiles[["75%"]], 2)`
+
+<div id="note">
+- As the confidence level gets larger (50% to 90% to 95%), the limits of the confidence interval range also get larger.
+- In this case, each interval contains what we know to be the true mean of the population: 10.
+- Each confidence interval is approximately symmetric about the median value (`r round(quantiles[["50%"]], 2)`)
+- The more datapoints you have, the narrower (more accurate) your confidence intervals will be
+
+These are **empirical confidence intervals**, because they are determined directly from our list of estimated means.
+</div>
+
+```{r empirical-ci, echo=FALSE, fig.cap="Confidence intervals from 1000 different estimates of the mean of a uniform distribution with limits (-40, 60), shown against a histogram of all estimates."}
+p = ggplot(samples, aes(x=vals)) +
+  geom_histogram(aes(y=..density..),
+                 fill="cornflowerblue") +
+  annotate("segment",
+           x=10, xend=10,
+           y=0, yend=0.21,
+           colour="darkorange1", size=1, linetype="dashed") +
+  annotate("text",
+           x=10, y=0.22,
+           colour="darkorange3",
+           label="true µ=10") +
+  annotate("pointrange",
+           xmin=quantiles[["2.5%"]], xmax=quantiles[["97.5%"]],
+           x=quantiles[["50%"]], y=0.05, alpha=0.4) + 
+  annotate("text",
+           x=mu, y=0.04,
+           label="95% CI") +
+  annotate("pointrange",
+           xmin=quantiles[["5%"]], xmax=quantiles[["95%"]],
+           x=quantiles[["50%"]], y=0.1, alpha=0.4) + 
+  annotate("text",
+           x=mu, y=0.09,
+           label="90% CI") +
+  annotate("pointrange",
+           xmin=quantiles[["25%"]], xmax=quantiles[["75%"]],
+           x=quantiles[["50%"]], y=0.15, alpha=0.4) + 
+  annotate("text",
+           x=mu, y=0.14,
+           label="50% CI") +
+  xlab("value") + ylab("frequency") +               # add axis labels
+  theme(plot.background = element_rect(fill = figbg,           # colour background
+                                       color = figbg))
+p
+```
+
+## Normal Distribution Confidence Intervals
+
+We can define similar Confidence Intervals when we model our data using a parametric distribution, like a Normal Distribution. As this distribution is completely described by an equation that is *parameterised* by $\mu$ and $\sigma$ (the mean, and standard deviation), it is straightforward to calculate the corresponding quantiles/percentiles.
+
+```{r normal-cis, echo=FALSE, fig.cap="Normal Distribution with mean 0, standard distribution 1, showing 50%, 90%, and 95% Confidence Intervals"}
+mu = 0
+std = 1
+
+p = ggplot() +
+  stat_function(fun=dnorm, args=list(mean=mu, sd=std), geom="line") +
+  xlim(-4, 4) +
+  annotate("pointrange",
+           xmin=qnorm(0.025), xmax=qnorm(0.975),
+           x=qnorm(0.5), y=dnorm(qnorm(0.975)), alpha=0.4) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.975))-0.01,
+           label="95% CI") +
+  annotate("pointrange",
+           xmin=qnorm(0.05), xmax=qnorm(0.95),
+           x=qnorm(0.5), y=dnorm(qnorm(0.95)), alpha=0.4) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.95))-0.01,
+           label="90% CI") +
+  annotate("pointrange",
+           xmin=qnorm(0.25), xmax=qnorm(0.75),
+           x=qnorm(0.5), y=dnorm(qnorm(0.25)), alpha=0.4) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.25))-0.01,
+           label="50% CI") +
+  theme(plot.background = element_rect(fill = figbg,           # colour background
+                                       color = figbg))
+
+
+p
+```
+
+As with empirical confidence intervals:
+
+- as confidence level gets larger, the limits of the confidence interval extend further from the central value (which, for a Normal Distribution is the mean, median, and mode value).
+- all confidence intervals contain, and are symmetric about the central value
+
+<div id="note">
+In the context of a Normal Distribution, the Confidence Interval may be interpreted in a number of ways, and you will probably see them all in the literature. For instance:
+
+- The CI represents the "*central mass*" of the distribution. For example, 95% of all values in the distribution can be found in the 95% CI. Likewise, 50% of all values in the distribution can be found in the 50% CI.
+  - So, if we were to make 100 observations we should expect 95% of those observations to lie within the 95% confidence interval. We can *predict* likely future values.
+- If our distribution represents a sampled/observed dataset, we can interpret a CI to be our confidence that the *mean* of the distribution lies in that range
+  - For example, we would be "95% confident" that the mean value of our data lay in the 95% CI for our observations.
+</div>
+
+One way you might see the confidence interval used is to report a researcher's confidence that their estimate of the mean of their dataset is accurate:
+
+> We sampled 30 lobsters from the site and measured claw size. We estimated the mean claw length to be 5.3cm (95%CI: 4.3-6.3)
+
+This implies that the researchers calculated a mean and standard deviation for their dataset, and used these to find the 2.5% and 97.5% percentiles for the corresponding Normal Distribution.
+
+<div id="note">
+Back in the old days, we used to use books of *statistical tables* which had these numbers pre-printed in a form we could use for calculations. Packages like `R` make generating these numbers trivial, today.
+
+![Statistical table of Normal Distribution percentiles. Betsy Farber & Ron Larson (CC-BY 4.0)](https://upload.wikimedia.org/wikipedia/commons/2/2d/TABELA_DE_DISTRIBUI%C3%87%C3%83O_NORMAL_DE_Z-0.png)
+</div>
+
+# Hypothesis Testing (and $P$-Values)
+
+The concept of Confidence Intervals is central to classical statistical Hypothesis Testing. Suppose we have a hypothesis such as:
+
+$$H_0: \textrm{The average length of lobster claws is 5cm}$$
+
+and we *assume* that lobster claw lengths are Normally-Distributed.
+
+<div id="warning">
+Statistical analyses always come with assumptions. These may or may not be clearly stated in the literature.
+
+Even for the simple hypothesis above, we make the assumption that our data are Normally distributed. This is reasonable here because we are making multiple measurements of "the same thing" in a population (see Notebook 04: "Where Do Statistical Distributions Come From?") but, if we were counting spots on lobsters, this would be an inappropriate assumption (that data would be better represented by a Poisson Distribution).
+</div>
+
+Having made our measurements, we end up with a mean claw length of 5.7cm, and a standard deviation of 0.4cm. This parametrises the distribution shown in Figure \@ref(fig:normal-lobster).
+
+```{r normal-lobster, echo=FALSE, fig.cap="Normal Distribution obtained from lobster claw measurements having mean 5.7cm and standard deviation of 0.4cm, showing 50%, 90%, and 95% Confidence Intervals, and our hypothesis mean H_0=5"}
+mu = 5.7
+std = 0.4
+
+p = ggplot() +
+  stat_function(fun=dnorm, args=list(mean=mu, sd=std), geom="line") +
+  xlim(4, 7.5) +
+  annotate("pointrange",
+           xmin=qnorm(0.025, mu, std), xmax=qnorm(0.975, mu, std),
+           x=qnorm(0.5, mu, std), y=dnorm(qnorm(0.975, mu, std), mu, std), alpha=0.4) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.975, mu, std), mu, std)-0.01,
+           label="95% CI") +
+  annotate("pointrange",
+           xmin=qnorm(0.05, mu, std), xmax=qnorm(0.95, mu, std),
+           x=qnorm(0.5, mu, std), y=dnorm(qnorm(0.95, mu, std), mu, std), alpha=0.4) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.95, mu, std), mu, std)-0.01,
+           label="90% CI") +
+  annotate("pointrange",
+           xmin=qnorm(0.25, mu, std), xmax=qnorm(0.75, mu, std),
+           x=qnorm(0.5, mu, std), y=dnorm(qnorm(0.25, mu, std), mu, std), alpha=0.4) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.25, mu, std), mu, std)-0.01,
+           label="50% CI") +
+  annotate("segment",                                          # show the mean as a dashed line
+            x=5, xend=5, y=0, yend=0.75,
+            colour="darkorange1", size=1, linetype="dashed") +
+  annotate("text",
+           x=5, y=0.76,
+           label=TeX("$H_0$"), color="darkorange3") +
+  theme(plot.background = element_rect(fill = figbg,           # colour background
+                                       color = figbg))
+
+
+p
+```
+
+<div id="questions">
+1. Should we accept hypothesis $H_0$ (i.e. is the average length of a lobster claw 5cm)?
+2. How did you decide on your answer for question 1 is correct?
+</div>
+
+## P-values
+
+The lobster claw example in Figure \@ref(fig:normal-lobster) illustrates many of the difficulties with probabilistic statements about hypotheses. We might reasonably take any of a number of positions on our answer:
+
+- The mean of our measurements was 5.7, and this is not the same as 5, so we **should not** accept $H_0$
+- The 95% confidence interval for our measurements includes the value 5, so we **should** (provisionally) accept $H_0$
+- The 90% confidence interval for our measurements do not include the value 5, so we **should not** accept $H_0$
+
+But why should we pick either 90% or 95%? It's not obvious that one is automatically better than the other.
+
+<div id="warning">
+You will probably have encountered ideas like "P<0.05", "95% significance", "5% significance", and so on, and seen them used as if they were a universal threshold for statistical "truth." There is, in fact, **no universal threshold** for statistical significance. We are free to make our own choice, but we must state our choice and our reasons for it.
+</div>
+
+The two different approaches to hypothesis testing we encountered above would suggest two different approaches to making this choice.
+
+The *Neyman-Pearson* approach would have us decide how willing we are to incorrectly say that we do not accept $H_0$. If, for some reason, we could argue that we would only accept $H_0$ if it fell within the 90% confidence interval, we would declare this *before conducting the experiment*, and make a decision once we had calculated the mean and standard deviation from the sample.
+
+<div id="note">
+This is what *should* be happening in papers where authors report values like "P<0.05." They should have decided before the experiment that P<0.05 was an important threshold, and explained their reasoning. Unfortunately, that is not often the case, in practice.
+</div>
+
+The alternative *Fisher's Null Hypothesis* approach would have us report a *P-value*, and leave it at that. We would not choose to accept *or* reject the hypothesis, but the P-value would be a piece of evidence to help us argue our case in the paper, and to help the reader decide whether they believed our argument.
+
+<div id="note">
+This is what is happening in papers where the authors report P-values as precise numbers, e.g. "P=0.0314".
+</div>
+
+
+### So what is a P-value?
+
+<div id="note">
+P-values are closely related to Confidence Intervals. They are effectively two ways of looking at the same thing.
+</div>
+
+To see this, consider how we defined both the empirical and Normal 95% Confidence Intervals:
+
+- both CIs are the *middle* 95% of the datasets, with 2.5% of each dataset to the left of it, and 2.5% to the right.
+- to find the 95% CI for the empirical dataset, we looked at the 2.5% percentile, and the 97.5% percentile, and took these as the boundaries of the confidence interval.
+
+```{r ci-quantiles, echo=FALSE, fig.cap="The 95% CI for a Normal Distribution with mean 0 and standard deviation equal to 1 contains 95% of the data and extends from the 2.5% to 97.5% percentiles."}
+mu = 0
+std = 1
+
+xmin = mu - 4 * std
+xmax = mu + 4 * std
+
+data = data.frame(x=seq(xmin, xmax, by=0.01)) %>%
+   mutate(y=dnorm(x, mu, std))
+
+shade_curve = function(data, zstart, zend, fill="#00998a", alpha=0.5) {
+  geom_area(data=subset(data,
+                        x >= mu + zstart * std & x < mu + zend * std),
+            aes(x=x, y=y), fill=fill, color=NA, alpha=alpha)
+}
+
+p = ggplot() +
+  stat_function(fun=dnorm, args=list(mean=mu, sd=std), geom="line") +
+  xlim(xmin, xmax) +
+  annotate("pointrange",
+           xmin=qnorm(0.025, mu, std), xmax=qnorm(0.975, mu, std),
+           x=qnorm(0.5, mu, std), y=dnorm(qnorm(0.975, mu, std), mu, std), alpha=0.4) + 
+  shade_curve(data, zstart=qnorm(0.025, mu, std), zend=qnorm(0.975, mu, std)) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.975, mu, std), mu, std)-0.01,
+           label="95% CI") +
+  annotate("pointrange",
+           xmin=qnorm(0.05, mu, std), xmax=qnorm(0.95, mu, std),
+           x=qnorm(0.5, mu, std), y=dnorm(qnorm(0.95, mu, std), mu, std), alpha=0.4) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.95, mu, std), mu, std)-0.01,
+           label="90% CI") +
+  annotate("pointrange",
+           xmin=qnorm(0.25, mu, std), xmax=qnorm(0.75, mu, std),
+           x=qnorm(0.5, mu, std), y=dnorm(qnorm(0.25, mu, std), mu, std), alpha=0.4) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.25, mu, std), mu, std)-0.01,
+           label="50% CI") +
+  annotate("segment",
+           x=qnorm(0.025, mu, std), xend=qnorm(0.025, mu, std),
+           y=0, yend=dnorm(qnorm(0.025, mu, std), mu, std)) +
+  annotate("text",
+           x=qnorm(0.025, mu, std), y=-0.01,
+           label="2.5%") +
+  annotate("segment",
+           x=qnorm(0.975, mu, std), xend=qnorm(0.975, mu, std),
+           y=0, yend=dnorm(qnorm(0.975, mu, std), mu, std)) +
+  annotate("text",
+           x=qnorm(0.975, mu, std), y=-0.01,
+           label="97.5%") +
+  theme(plot.background = element_rect(fill = figbg,           # colour background
+                                       color = figbg))
+
+
+p
+```
+
+Conversely, the areas outside the 95% CI each contain 2.5% of the data (one portion to the left, one to the right). 
+
+<div id="note">
+Each of these excluded regions is called a *tail*.
+</div>
+
+```{r ci-areas-outer, echo=FALSE, fig.cap="The 95% CI for a Normal Distribution excludes 5% of the data in the distribution: 2.5% to the left, and 2.5% to the right"}
+mu = 0
+std = 1
+
+xmin = mu - 4 * std
+xmax = mu + 4 * std
+
+p = ggplot() +
+  stat_function(fun=dnorm, args=list(mean=mu, sd=std), geom="line") +
+  xlim(xmin, xmax) +
+  annotate("pointrange",
+           xmin=qnorm(0.025, mu, std), xmax=qnorm(0.975, mu, std),
+           x=qnorm(0.5, mu, std), y=dnorm(qnorm(0.975, mu, std), mu, std), alpha=0.4) + 
+  shade_curve(data, zstart=qnorm(0, mu, std), zend=qnorm(0.025, mu, std)) + 
+  shade_curve(data, zstart=qnorm(0.975, mu, std), zend=qnorm(1, mu, std)) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.975, mu, std), mu, std)-0.01,
+           label="95% CI") +
+  annotate("pointrange",
+           xmin=qnorm(0.05, mu, std), xmax=qnorm(0.95, mu, std),
+           x=qnorm(0.5, mu, std), y=dnorm(qnorm(0.95, mu, std), mu, std), alpha=0.4) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.95, mu, std), mu, std)-0.01,
+           label="90% CI") +
+  annotate("pointrange",
+           xmin=qnorm(0.25, mu, std), xmax=qnorm(0.75, mu, std),
+           x=qnorm(0.5, mu, std), y=dnorm(qnorm(0.25, mu, std), mu, std), alpha=0.4) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.25, mu, std), mu, std)-0.01,
+           label="50% CI") +
+  annotate("segment",
+           x=qnorm(0.025, mu, std), xend=qnorm(0.025, mu, std),
+           y=0, yend=dnorm(qnorm(0.025, mu, std), mu, std)) +
+  annotate("text",
+           x=qnorm(0.025, mu, std), y=-0.01,
+           label="2.5%") +
+  annotate("segment",
+           x=qnorm(0.975, mu, std), xend=qnorm(0.975, mu, std),
+           y=0, yend=dnorm(qnorm(0.975, mu, std), mu, std)) +
+  annotate("text",
+           x=qnorm(0.975, mu, std), y=-0.01,
+           label="97.5%") +
+  annotate("segment",                                          # show the mean as a dashed line
+            x=-2.5, xend=-2.5, y=0, yend=0.3,
+            colour="darkorange1", size=1, linetype="dashed") +
+  annotate("text",
+           x=-2.5, y=0.31,
+           label=TeX("$A=-2.5$"), color="darkorange3") +
+  annotate("segment",                                          # show the mean as a dashed line
+            x=1.5, xend=1.5, y=0, yend=0.3,
+            colour="darkorange1", size=1, linetype="dashed") +
+  annotate("text",
+           x=1.5, y=0.31,
+           label=TeX("$B=1.5$"), color="darkorange3") +
+  theme(plot.background = element_rect(fill = figbg,           # colour background
+                                       color = figbg))
+
+
+p
+```
+
+
+As we have noted, Confidence Intervals for a distribution can be interpreted in a number of different ways. The way we want to focus on now is this:
+
+- **If we randomly sampled numbers from this distribution over and over again, 95% of the numbers we sampled would be found within the 95% Confidence Interval**
+
+The converse of this is:
+
+- **If we randomly sampled numbers from this distribution over and over again, 5% of the numbers we sampled would be found outwith the 95% Confidence Interval**
+
+For the 95% CI, the P-value threshold is 100% - 95% = *5%*. We could say, "any number found in the two *tails* of Figure \@ref(fig:ci-areas-outer) has less than 5% probability of being sampled," and we would express this as "P<0.05" of sampling one of those numbers.
+
+<div id="note">
+So far we have only considered P-value *thresholds*, but each number we might choose to check against the distribution will have a P-value. The P-value is the *probability with which that number **or a more extreme value** would be expected to be drawn from the distribution*.
+
+If it helps, you can think of this as what the P-value threshold would be if the boundaries of the tails were such that one fell at that number.
+
+**A small P-value suggests that the hypothesis is likely to be untrue** - but it may just mean that an unlikely event occurred. There are no firm rules for how small "small" is, in this context.
+</div>
+
+#### Using the P-value
+
+Considering the situation in Figure \@ref(fig:ci-areas-outer), imagine two experimenters $A$ and $B$ each independently select a number and want to determine the probability that their number came from the distribution. Their hypothesis is:
+
+$$H_0: \textrm{My number comes from the distribution in the figure}$$
+
+<div id="note">
+
+</div>
+
+Experimenter $A$ selected the number -2.5. 
+
+- This value falls in the left tail, so if we were using a P<0.05 threshold, we would conclude that this number was unlikely to come from the distribution, and we might choose to *reject* $H_0$. 
+- If we were using the actual P-value (P=`r round(2*pnorm(-2.5, 0, 1), 4)`) we would conclude that, because this is a small value, there is *reasonably strong evidence against this number being drawn from the distribution* in the figure.
+
+Experimenter $B$, however selected the number 1.5. 
+
+- This value falls within the 95% CI, so if we were using a P<0.05 threshold, we would conclude that this number could have come from the distribution, so there are no strong grounds to reject the distribution, and we might choose to *accept* $H_0$. 
+- If we were using the actual P-value (P=`r round(2*(1-pnorm(1.5, 0, 1)), 4)`) we would conclude that, because this is a moderately large value, there is *relatively little evidence against this number being drawn from the distribution* in the figure.
+
+
+### One-tailed vs Two-tailed Distributions
+
+We have looked at Confidence Intervals, which are symmetric about the mean of the distribution, and result in *two tails*, one on either side. This represents a situation where we want to know the probability that a number in the distribution is close to the mean, or far away from it. Numbers in the CI are close to the mean; numbers not in the CI are far from the mean, or *extreme*.
+
+<div id="note">
+In this situation, we consider *extreme* values as belonging to either of the two tails and, when we test to see if a value is in one of those tails, we call it a **two-tailed test**.
+</div>
+
+But what if we want to know the probability of a number being *extreme*ly low, or *extreme*ly high (with P<0.05)? In this case, we want to consider only a *single* tail containing the lowest (Figure \@ref(fig:ci-areas-left-tail)) or highest (Figure \@ref(fig:ci-areas-right-tail)) 5% of values for the distribution. We find this by looking at the corresponding *percentile* of values in the distribution (here, 5% or 95%).
+
+```{r ci-areas-left-tail, echo=FALSE, fig.cap="The 5% left-tail of the Normal Distribution with mean 0 and standard deviation equal to 1."}
+mu = 0
+std = 1
+
+xmin = mu - 4 * std
+xmax = mu + 4 * std
+
+p = ggplot() +
+  stat_function(fun=dnorm, args=list(mean=mu, sd=std), geom="line") +
+  xlim(xmin, xmax) +
+  annotate("pointrange",
+           xmin=qnorm(0.025, mu, std), xmax=qnorm(0.975, mu, std),
+           x=qnorm(0.5, mu, std), y=dnorm(qnorm(0.975, mu, std), mu, std), alpha=0.4) + 
+  shade_curve(data, zstart=qnorm(0, mu, std), zend=qnorm(0.05, mu, std)) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.975, mu, std), mu, std)-0.01,
+           label="95% CI") +
+  annotate("pointrange",
+           xmin=qnorm(0.05, mu, std), xmax=qnorm(0.95, mu, std),
+           x=qnorm(0.5, mu, std), y=dnorm(qnorm(0.95, mu, std), mu, std), alpha=0.4) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.95, mu, std), mu, std)-0.01,
+           label="90% CI") +
+  annotate("pointrange",
+           xmin=qnorm(0.25, mu, std), xmax=qnorm(0.75, mu, std),
+           x=qnorm(0.5, mu, std), y=dnorm(qnorm(0.25, mu, std), mu, std), alpha=0.4) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.25, mu, std), mu, std)-0.01,
+           label="50% CI") +
+  annotate("segment",
+           x=qnorm(0.05, mu, std), xend=qnorm(0.05, mu, std),
+           y=0, yend=dnorm(qnorm(0.05, mu, std), mu, std)) +
+  annotate("text",
+           x=qnorm(0.05, mu, std), y=-0.01,
+           label="5%") +
+  theme(plot.background = element_rect(fill = figbg,           # colour background
+                                       color = figbg))
+
+
+p
+```
+
+```{r ci-areas-right-tail, echo=FALSE, fig.cap="The 5% right-tail of the Normal Distribution with mean 0 and standard deviation equal to 1."}
+mu = 0
+std = 1
+
+xmin = mu - 4 * std
+xmax = mu + 4 * std
+
+p = ggplot() +
+  stat_function(fun=dnorm, args=list(mean=mu, sd=std), geom="line") +
+  xlim(xmin, xmax) +
+  annotate("pointrange",
+           xmin=qnorm(0.025, mu, std), xmax=qnorm(0.975, mu, std),
+           x=qnorm(0.5, mu, std), y=dnorm(qnorm(0.975, mu, std), mu, std), alpha=0.4) + 
+  shade_curve(data, zstart=qnorm(0.95, mu, std), zend=qnorm(1, mu, std)) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.975, mu, std), mu, std)-0.01,
+           label="95% CI") +
+  annotate("pointrange",
+           xmin=qnorm(0.05, mu, std), xmax=qnorm(0.95, mu, std),
+           x=qnorm(0.5, mu, std), y=dnorm(qnorm(0.95, mu, std), mu, std), alpha=0.4) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.95, mu, std), mu, std)-0.01,
+           label="90% CI") +
+  annotate("pointrange",
+           xmin=qnorm(0.25, mu, std), xmax=qnorm(0.75, mu, std),
+           x=qnorm(0.5, mu, std), y=dnorm(qnorm(0.25, mu, std), mu, std), alpha=0.4) + 
+  annotate("text",
+           x=mu, y=dnorm(qnorm(0.25, mu, std), mu, std)-0.01,
+           label="50% CI") +
+  annotate("segment",
+           x=qnorm(0.95, mu, std), xend=qnorm(0.95, mu, std),
+           y=0, yend=dnorm(qnorm(0.95, mu, std), mu, std)) +
+  annotate("text",
+           x=qnorm(0.95, mu, std), y=-0.01,
+           label="95%") +
+  annotate("segment",                                          # show the mean as a dashed line
+            x=-2.5, xend=-2.5, y=0, yend=0.3,
+            colour="darkorange1", size=1, linetype="dashed") +
+  annotate("text",
+           x=-2.5, y=0.31,
+           label=TeX("$A=-2.5$"), color="darkorange3") +
+  annotate("segment",                                          # show the mean as a dashed line
+            x=2, xend=2, y=0, yend=0.3,
+            colour="darkorange1", size=1, linetype="dashed") +
+  annotate("text",
+           x=2, y=0.31,
+           label=TeX("$B=2$"), color="darkorange3") +
+  theme(plot.background = element_rect(fill = figbg,           # colour background
+                                       color = figbg))
+
+
+p
+```
+
+<div id="note">
+In this situation, we consider *extreme* values as belonging to only *one* of the two tails and, when we test to see if a value is in one of those tails, we call it a **one-tailed test**.
+</div>
+
+#### Using the P-value
+
+Considering the situation in Figure \@ref(fig:ci-areas-right-tail), imagine two experimenters $A$ and $B$ each independently select a number and want to determine the probability that their number came from the distribution. Their hypothesis is:
+
+$$H_0: \textrm{My number comes from the distribution in the figure}$$
+
+In this case, the test is a *one-tailed* test because we only consider a value to be extreme if it is *too large*.
+
+Experimenter $A$ selected the number -2.5. 
+
+- This value does not fall in the tail, so if we were using a P<0.05 threshold, we would conclude that this number is likely to have come from the distribution, and we might choose to *accept* $H_0$. 
+- If we were using the actual P-value (P=`r round(1- pnorm(-2.5, 0, 1), 4)`) we would conclude that, because this is a small value, there is *very strong evidence that this number could be drawn from the distribution* in the figure.
+
+Experimenter $B$, however selected the number 2. 
+
+- This value falls within the right-tail, so if we were using a P<0.05 threshold, we would conclude that this number is unlikely to have come from the distribution, so we might choose to *reject* $H_0$. 
+- If we were using the actual P-value (P=`r round(1-pnorm(2, 0, 1), 4)`) we would conclude that, because this is a fairly small value, there is a *moderate amount of evidence against this number being drawn from the distribution* in the figure.
+
+<div id="warning">
+Many statistical tests - such as the Student's *t*-test, and Chi-squared ($\chi^2$) test - involve generation of a *test statistic*, which is then compared against a statistical distribution to determine a *P-value*. This works in a similar manner to the tests in figures \@ref(fig:ci-areas-outer) and \@ref(fig:ci-areas-right-tail).
+</div>
+
+# Examples
+
+The examples below describe how we might write down the hypotheses for an experiment, for statistical hypothesis testing.
+
+## Testing the mean rate of absorption of a drug - 1
+
+We require to test whether the mean rate of absorption is close to a particular value: 1.5mg/h (perhaps because we want to be certain about rate of uptake in a patient). We measure the rate of absorption, and assume that (i) the data is Normally Distributed, and (ii) no alternative mean has been suggested.
+
+In this case, we can set our hypothesis to be:
+
+$$H_0: \textrm{The mean rate of absorption is 1.5mg/h}$$
+
+and then perform a two-tailed $t$-test against an assumed mean value of 1.5, because we want to check if our data is extremely *high* **or** extremely *low*.
+
+## Testing the mean rate of absorption of a drug - 2
+
+We require to test whether the mean rate of absorption is slower than a particular value: 1.5mg/h (because faster absorption may result in kidney or liver damage, for example). We measure the rate of absorption, and assume that (i) the data is Normally Distributed, and (ii) no alternative mean has been suggested.
+
+In this case, we can set our hypothesis to be:
+
+$$H_0: \textrm{The mean rate of absorption is greater than 1.5mg/h}$$
+
+and then perform a one-tailed $t$-test against an assumed mean value of 1.5, because we want to check if our data is extremely *high*.
+
+## Testing the effectiveness of a painkilling drug
+
+We require to test whether our new drug A is equivalent to the current best treament available: drug B. We will be measuring pain on a continuous scale for, assuming that the data is Normally-distributed. We have the same number of patients, matched for the same backgrounds and characteristics, being treated with each drug. Each patient receives one and only one drug.
+
+Here, we can set our hypothesis to be:
+
+$$H_0: \textrm{There is no difference between the effectiveness of the two treatments}$$
+
+and then perform a *two-tailed, two-sample t-test* on the two datasets. In this case we would be checking to see if the mean difference between each dataset mean is *extreme*ly different from zero (in either positive or negative direction).

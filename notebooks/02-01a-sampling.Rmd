@@ -1,0 +1,174 @@
+---
+title: "Exploring a Statistical Distribution"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output:
+  bookdown::html_document2:
+    css: css/rmd_style.css
+    theme: lumen
+    toc: yes
+    toc_float:
+      toc_collapsed: no
+    number_sections: yes
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(ggplot2)
+library(readr)
+
+# BG color for plots - should match .figure and .caption classes in rmd_style.css
+figbg = "whitesmoke"
+```
+
+<div id="summary">
+- Many distributions are parametrised by calculating from a *central value* and measure of *dispersion*
+- These statistical distributions are *approximations to*/*models of* the measured data
+</div>
+
+# Introduction
+
+In the first notebook ("Why Do We Do Statistics"), Figure 3.1 showed a Normal distribution, and some data that were sampled from that normal distribution. This is reproduced below as Figure \@ref(fig:model-normal).
+
+```{r model-normal, echo=FALSE, fig.cap="Two hundred measured data values (histogram) and the corresponding Normal distribution model (curve) of those values. The modelled distribution is entirely described by the parameters: mean=10 (µ) and standard deviation=3 (σ). We can see here that the frequency of real data values don't match the curve exactly; the model simplifies our representation of the 'noisy' data. The dashed line represents the mean value of the model, and the dotted lines represents values at +/- one and two standard deviations from the mean."}
+mu = 10                          # define mean of distribution
+sd = 3                           # define standard deviation of distribution
+breaks = seq(0, 20, by=0.4)      # set up the breakpoints between bars in the histogram
+
+dfm_hist = data.frame(vals=rnorm(200, mean=mu, sd=sd))               # create a data frame
+
+p = ggplot(dfm_hist, aes(x=vals))                                    # set up the ggplot with data
+p = p + geom_histogram(aes(y=..density..),                           # add a historgram layer
+                       breaks=breaks,
+                       fill="cornflowerblue")
+p = p + stat_function(fun=dnorm, args=list(mean=mu, sd=sd),          # add a layer with the Normal curve 
+                      geom="line")
+p = p + annotate("segment",                                          # show the mean as a dashed line
+                 x=mu, xend=mu, y=0, yend=0.2,
+                 colour="darkorange1", size=1, linetype="dashed")
+p = p + annotate("segment",                                          # show standard deviations as dotted lines
+                 x=c(mu-2*sd, mu-sd, mu+sd, mu+2*sd),
+                 xend=c(mu-2*sd, mu-sd, mu+sd, mu+2*sd),
+                 y=c(0, 0, 0, 0), yend=c(0.2, 0.2, 0.2, 0.2),
+                 colour="goldenrod", size=1, linetype="dotted")
+p = p + annotate("text",                                             # annotate the lines
+                 x=c(mu-2*sd, mu-sd, mu, mu+sd, mu+2*sd),
+                 y=c(0.21, 0.21, 0.21, 0.21, 0.21),
+                 colour="darkorange3",
+                 label=c("µ - 2σ", "µ - σ", "µ", "µ + σ", "µ + 2σ"))
+p = p + xlim(mu - 3 * sd, mu + 3 * sd)                               # set x-axis limits
+p = p + xlab("measured variable") + ylab("frequency")                # add axis labels
+p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                             color = figbg))
+p                                                                    # show plot
+```
+
+This plot shows a *Normal Distribution* as the black curve. This Normal Distribution is one of several common statistical distributions, and is a *model* of the actual data that was measured. It is used so often because it provides a very good approximate model for many practical situations, such as experimental observations of a value.
+
+The black curve in Figure 1.1 describes a distribution of data that has a particular *mean* (central value), and *standard deviation* (dispersion). It represents how we would expect our measured data data to look if it were produced by the model; the curve shows the probability with which we could expect to see each measured data value.
+
+<div id="note">
+- In our measured data we should expect to see values that are close to the mean more frequently than those that are distant from the mean.
+- The standard deviation describes *how* frequently we should expect to see values that are a particular distance from the mean.
+</div>
+
+The observed data itself is shown as the histogram. Each bar in the histogram indicates how often a value in the *range* of the bar (e.g. one bar might represent measurements with values between 16 and 16.5) was observed In an ideal world we might expect the observed data to correspond exactly to the model, so that each histogram bar would stop just as it touched the black curve. However, nature has randomness, or *stochasticity*, as do measurements made by humans and machines, so the measured data very rarely follows the shape of a statistical distribution exactly. The model is an *approximation* to the data.
+
+# An Interactive Distribution
+
+In the interactive plot below, you can gain some intuition about the relationships between an observed dataset, its size, and the corresponding Normal distribution (its mean and standard deviation). Use the *sliders* to vary three key parameters relating measured data to a Normal Distribution:
+
+- The number of measured datapoints
+- The mean of the Normal distribution, $\mu$. This is considered the distribution's *central value*.
+- The standard deviation of the Normal distribution, $\mu$. This represents the distribution's *dispersion*.
+
+The `RESAMPLE` button will choose a different set of "observed" values that belong to the same Normal distribution, with parameters being the currently-selected slider settings.
+
+<div id="questions">
+Use the interactive plot below to vary the values of each of these parameters, and explore the following questions:
+
+1. How well does the *fit* of the curve match the dataset as you vary the number of measured datapoints?
+2. Does the curve ever exactly match the histogram data?
+3. How did you decide, for yourself, whether the curve fit the histogram well, or poorly?
+4. How does changing the mean of the distribution affect the shape of the curve?
+5. How does changing the standard deviation of the distribution affect the shape of the curve?
+</div>
+
+```{r dist-samples, echo=FALSE}
+inputPanel(
+  sliderInput("n_samples",
+              "Number of measured datapoints:",
+              min = 1,
+              max = 1000,
+              value = 50),
+  
+  sliderInput("mu", label = "Distribution mean:",
+              min = -20, max = 20, value = 10, step = 0.5),
+
+  sliderInput("sd", label = "Distribution standard deviation:",
+              min = 0.5, max = 10, value = 3, step = 0.5),
+  
+  actionButton("redraw", "Resample")
+  
+)
+
+dfm_hist = eventReactive(c(input$redraw, input$n_samples,
+                           input$mu, input$sd),
+                         data.frame(vals=rnorm(input$n_samples, mean=input$mu, sd=input$sd)),
+                         ignoreNULL=FALSE)
+
+renderPlot({
+        mu = input$mu
+        sd = input$sd
+        n_samples = input$n_samples
+  
+        breaks = seq(mu - 3 * sd, mu + 3 * sd, by=min(0.4, sd/10))      # set up the breakpoints between bars in the histogram
+        
+        p = ggplot(dfm_hist(), aes(x=vals))                                    # set up the ggplot with data
+        p = p + geom_histogram(aes(y=..density..),                           # add a historgram layer
+                               breaks=breaks,
+                               fill="cornflowerblue")
+        p = p + stat_function(fun=dnorm, args=list(mean=mu, sd=sd),          # add a layer with the Normal curve 
+                              geom="line")
+        p = p + annotate("segment",                                          # show the mean as a dashed line
+                         x=mu, xend=mu, y=0, yend=0.2,
+                         colour="darkorange1", size=1, linetype="dashed")
+        p = p + annotate("segment",                                          # show standard deviations as dotted lines
+                         x=c(mu-2*sd, mu-sd, mu+sd, mu+2*sd),
+                         xend=c(mu-2*sd, mu-sd, mu+sd, mu+2*sd),
+                         y=c(0, 0, 0, 0), yend=c(0.2, 0.2, 0.2, 0.2),
+                         colour="goldenrod", size=1, linetype="dotted")
+        p = p + annotate("text",                                             # annotate the lines
+                         x=c(mu-2*sd, mu-sd, mu, mu+sd, mu+2*sd),
+                         y=c(0.21, 0.21, 0.21, 0.21, 0.21),
+                         colour="darkorange3",
+                         label=c("µ - 2σ", "µ - σ", "µ", "µ + σ", "µ + 2σ"))
+        p = p + xlim(mu - max(5, 3 * sd), mu + max(5, 3 * sd))                               # set x-axis limits
+        p = p + xlab("measured variable") + ylab("frequency")                # add axis labels
+        p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                                     color = figbg))
+        p  
+    })
+```
+
+# Central Value and Dispersion
+
+Many (but not all) statistical distributions can be described completely in terms of two values, or *parameters*:
+
+- a **central value**, or *location*, which usually represents the "most likely" or "most common" value in the data
+- a measure of **dispersion**, *spread*, or variance of data about the central value
+
+<div id="warning">
+These terms may have different names and precise meanings, depending on the statistical distribution you work with.
+</div>
+
+Many statistical methods require you to calculate *central values* (e.g mean) and *dispersions* (e.g. standard deviation) for your data. The reason for this is to translate the "noisy" measured dataset into a "clean" model representation as a statistical distribution, so that calculations can be made using those models.
+
+# Sample Size
+
+In general, and as you will have seen in your experimentation, if you are able to measure more datapoints it becomes easier to determine whether the statistical model you choose is a *good fit* for your data.
+
+<div id="note">
+We will be exploring a number of statistical distributions, how to select an appropriate distribution for your data, and determine whether it fits your data well, in other notebooks in this workshop.
+</div>

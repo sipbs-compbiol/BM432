@@ -1,0 +1,452 @@
+---
+title: "Exploring a Statistical Relationship"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output:
+  bookdown::html_document2:
+    css: css/rmd_style.css
+    theme: lumen
+    toc: yes
+    toc_float:
+      toc_collapsed: no
+    number_sections: yes
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(ggplot2)
+library(ggpubr)
+library(dplyr)
+
+# BG color for plots - should match .figure and .caption classes in rmd_style.css
+figbg = "whitesmoke"
+```
+
+<div id="summary">
+- Relationships between variables can be estimated statistically by *fitting* a *model* of the relationship
+- Statistical models are *approximations to*/*models of* the relationship between the data
+  - Models represent only a statistical relationship, they do not directly demonstrate a physical or mechanistic relationship between variables
+  - If a model is based on a mechanism justified in other ways, the statistical relationship may lend support to that mechanism being plausible (or maybe refute it…)
+- For a given model, the optimal parameterisation is the one that fits the data best; but that model may not be the one that fits the data best.
+- **The quality of fit of a model, and the uncertainty in the model's fit to the data, should always be reported.**
+- There are two kinds of uncertainty for a model fit:
+  - Uncertainty that the model describes the data (goodness of fit)
+  - Uncertainty that the "best" parameters of a specific model are optimal (confidence intervals in the parameters)
+</div>
+
+# Introduction
+
+In the first notebook ("Why Do We Do Statistics"), Figure 3.2 showed a plot of a *response variable* against an *explanatory variable*, and a linear regression on that data. This is reproduced below as Figure \@ref(fig:model-relationship).
+
+
+```{r model-relationship, echo = FALSE, fig.cap="Thirty datapoints indicating a relationship between an explanatory variable and a response variable. Datapoints are shown as blue dots. The relationship is modelled by the orange straight line (obtained with linear regression) that has gradient and intercept as shown in the figure. The model simplifies our representation of the noisy relationship between the measured and response variables."}
+n_samples = 30       # number of measured samples
+
+# parameters for linear relationship
+slope = 1.7          # slope of relationship
+intcp = 5            # intercept of relationship
+
+# parameters for measurement noise; assumed to be Normally distributed
+# note, our representation of noise is also a model
+mu = 0               # mean measurement error
+std = 8              # standard deviation of measurement error
+
+# generate x values
+data = data.frame(x=runif(n_samples, 0.4, 20))
+# generate "true" y values
+data = data %>% mutate(y=(x * slope) + intcp)
+# generate "measured" y values
+data = data %>% mutate(ym = y + rnorm(n_samples, mu, std))
+
+# predict linear relationship
+fitlm = lm(ym ~ x, data=data)       # fit a straight line
+m_coeff = fitlm$coefficients[2]     # gradient
+c_coeff = fitlm$coefficients[1]     # intercept
+data$predlm = predict(fitlm)        # add datapoints corresponding to line
+predslm = predict(fitlm, interval="confidence")  # obtain confidence intervals
+data = cbind(data, predslm)         # complete dataset
+
+# plot relationships
+p = ggplot(data, aes(x=x, y=ym))
+p = p + geom_point(colour="cornflowerblue")
+#p = p + geom_ribbon(aes(ymin=lwr, ymax=upr), alpha=0.15)
+p = p + geom_line(aes(y=predlm), size=1, colour="darkorange3")
+p = p + annotate("text",                                             # annotate the model
+                 x=2,
+                 y=40,
+                 hjust=0,
+                 colour="darkorange3",
+                 label=paste("gradient = ", format(round(m_coeff, 2), nsmall=2),
+                             ", intercept = ", format(round(c_coeff, 2), nsmall=2)))
+p = p + xlab("explanatory variable") + ylab("response variable")        # add axis labels
+p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                             color = figbg))
+
+p
+```
+
+Linear regression is probably familiar to you. It is a very common instance of a *statistical model*. The usual way you might see a statistical model being used is:
+
+1. Obtain a dataset
+2. Propose a mathematical relationship between one or more explanatory variables and one or more response variables (this may be based on a hypothesised mechanism by which the *explanatory variable* produces the *response variable*, such as the Michaelis-Menten model for enzymes)
+3. Find the *optimal* version of the proposed mathematical relationship using statistical and mathematical approaches to choose the "best" model parameters - this is called *fitting* the model to the data
+4. Report the optimal version of the model, and the *uncertainty* about how "optimal" it is
+
+<div id="warning">
+Publications may sometimes forget to report step (4). **It is best practice always to report the uncertainty in your model**. You will notice that Figure \@ref(fig:model-relationship) does not report any uncertainty - but Figure \@ref(fig:model-cis) does.
+</div>
+
+## What is the model?
+
+In the case of Figure \@ref(fig:model-relationship) we have proposed a linear relationship. By *linear*, we mean that the proposed relationship follows the equation of a straight line ($y = mx + c$) where $y$ is the response variable; $x$ is the explanatory variable; $m$ is the gradient of the line; and $c$ is the intercept on the $y$-axis (the value $y$ would take if $x$ were zero). $m$ and $c$ are the parameters of the model; the line is completely defined by the choice of $m$ and $c$.
+
+$$\textrm{response variable} = m \times \textrm{explanatory variable} + c$$
+
+<div id="note">
+If we were exploring the relationship between exposure to sunlight and plant growth, we might *interpret* these parameters so that $m$ = "average additional growth per hour of sunlight", and $c$ = "average baseline growth in the absence of sunlight."
+
+We could use the same model to fit datasets from other experiements; the mathematical processes would be the same, even though the numbers and *interpretation* would be different.
+</div>
+
+<div id="questions">
+This is not the only possible model we could have fit to the data.
+
+1. What other models can you think of that we might have tried to fit?
+2. Do you think any of those models might have fit better than this *linear* model?
+3. Why do you think they might have fit better - or not?
+</div>
+
+# An Interactive Model
+
+In the interactive plot below, you can gain some intuition about how the size of a dataset affects the ability to fit a linear model, and what a "good fit" looks like. Use the *sliders* to vary the parameters of a linear model, and see the effect of changing those parameters on the model *fit*.
+
+- The gradient of the model line
+- The intercept of the model line
+- Number of datapoints
+
+The `RESAMPLE` button will choose a different set of "experimental" values that may give a different relationship between the *explanatory* and *response* variables.
+
+The blue points represent the "experimental" data, the thick orange line is the model relating the *explanatory variable* to the *response variable*, and the thin orange lines joining the model to the datapoints represent the *residuals*. The *residual* is the numerical difference between the model's prediction of the response variable, and the actual measured response value.
+
+<div id="questions">
+Use the interactive plot below to vary the values of each of these parameters, and explore the following questions:
+
+1. How well does the model appear to describe the data (how good is the *visual fit* of the model) as you vary the model parameters, and how do you decide whether a fit is "good" or "bad"?
+2. How do the residual plots vary, as you change model parameters?
+3. What do the residual plots look like, when you think you have found the best fit?
+4. How do the residual and variance values change as your model appears to fit "well" or "poorly"?
+5. Does the line ever exactly match the data?
+6. Does the number of datapoints matter? Why do you think that?
+</div>
+
+```{r model-interact, echo = FALSE}
+h4("Model parameters")
+
+fluidRow(
+  column(3,
+         sliderInput("n_samples",
+                     "Number of datapoints:",
+                     min = 3,
+                     max = 100,
+                     value = 3)
+         ),
+  column(3,
+    sliderInput("m", label = "Line gradient:",
+                min = -3, max = 3, value = 0, step = 0.01)
+    ),
+
+  column(3,
+    sliderInput("c", label = "Line intercept:",
+                min = 0, max = 50, value = 25, step = 0.1)
+    ),
+  
+  column(3,
+    tags$table(style="width:100%",
+             tags$tr(tags$td(style="width:50%",
+                             align="center",
+                             valign="center",
+                             actionButton("redraw", "Resample"),
+                             ))
+    )
+  )
+)
+
+n_samples = 30       # number of measured samples
+
+# parameters for linear relationship
+slope = 1.7          # slope of relationship
+intcp = 5            # intercept of relationship
+
+# parameters for measurement noise; assumed to be Normally distributed
+# note, our representation of noise is also a model
+mu = 0               # mean measurement error
+std = 8              # standard deviation of measurement error
+
+dfm_data = eventReactive(c(input$redraw, input$n_samples),
+                         data.frame(x=runif(input$n_samples, 0.4, 20)) %>%
+                           mutate(y=(x * slope) + intcp) %>%
+                           mutate(ym = y + rnorm(input$n_samples, mu, std)),
+                         ignoreNULL=FALSE)
+
+dfm_resids = eventReactive(c(input$redraw, input$n_samples, input$m, input$c), {
+  y_mean = mean(dfm_data()$ym)
+  data.frame(y_line=dfm_data()$x * input$m + input$c) %>%
+    mutate(y_resid=dfm_data()$ym - y_line) %>%
+    mutate(y_resid2=y_resid^2)%>%
+    mutate(yvar_meas=dfm_data()$ym-y_mean) %>%
+    mutate(yvar_meas2=yvar_meas^2) %>%
+    mutate(yvar_mod=y_line-y_mean) %>%
+    mutate(yvar_mod2=yvar_mod^2)
+  },
+  ignoreNULL=FALSE)
+
+fluidRow(
+  column(12,
+         renderPlot({
+           data = dfm_data()
+           resids = dfm_resids()
+           
+           # generate x,y values for user-specified line
+           fit = data.frame(x=seq(0.4, 20, by=0.1)) %>%
+             mutate(y=((x * input$m) + input$c))
+           
+           # plot relationships and gradient
+           p1 = ggplot(data, aes(x=x, y=ym))
+           p1 = p1 + geom_point(colour="cornflowerblue")
+           # p = p + geom_ribbon(aes(ymin=lwr, ymax=upr), alpha=0.15)
+           p1 = p1 + geom_line(data=fit, aes(x=x, y=y), size=1, colour="darkorange3")
+           p1 = p1 + annotate("segment",
+                              x=data$x, xend=data$x,
+                              y=pmin(50, pmax(0, resids$y_line)), yend=data$ym,
+                              colour="goldenrod", line="solid", size=0.5)
+           p1 = p1 + ylim(0, 50) + xlim(0, 22)
+           p1 = p1 + xlab("explanatory variable") + ylab("response variable")        # add axis labels
+           p1 = p1 + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                                          color = figbg))
+           p1
+           })
+         ), style="background-color: whitesmoke;"
+  )
+
+fluidRow(
+  column(4,
+    fluidRow(
+         renderPlot({
+           # generate "true" y values
+           data = dfm_data() %>% mutate(y=(x * slope) + intcp)
+           # generate "measured" y values
+           data = data %>% mutate(ym = y + rnorm(input$n_samples, mu, std))
+           # generate x,y values for user-specified line
+           fit = data.frame(x=seq(0.4, 20, by=0.1)) %>%
+             mutate(y=((x * input$m) + input$c))
+           
+           # Calculate residuals
+           resids = data.frame(y_line=data$x * input$m + input$c) %>%
+             mutate(y_resid=data$ym - y_line) %>%
+             mutate(y_resid2=y_resid^2)
+           
+           p3 = ggplot(resids, aes(x=y_resid))
+           p3 = p3 + geom_histogram(fill="cornflowerblue", bins=60)
+           p3 = p3 + xlim(min(-30, min(resids$y_resid)), max(30, max(resids$y_resid)))
+           p3 = p3 + xlab("residual") + ylab("count")        # add axis labels
+           p3 = p3 + theme(plot.background = element_rect(fill = figbg,
+                                                          color = figbg))
+           p3           
+         }, height=200)
+         )
+    ),
+
+  column(4,
+    fluidRow(
+         renderPlot({
+           data = dfm_data()
+           resids = dfm_resids()
+           
+           p2 = ggplot(resids, aes(x=y_resid2))
+           p2 = p2 + geom_histogram(fill="cornflowerblue", bins=60)
+           p2 = p2 + xlim(0, max(500, max(resids$y_resid2)))
+           p2 = p2 + xlab("residual^2") + ylab("count")        # add axis labels
+           p2 = p2 + theme(plot.background = element_rect(fill = figbg,
+                                                          color = figbg))
+           p2
+           }, height=200)
+         )
+    ),
+  
+  column(4,
+         fluidRow(
+           h5("Parameters, Residuals, & Variance:"),
+           renderText({
+             paste("gradient = ", format(input$m, nsmall=2),
+                   ", intercept = ", format(input$c, nsmall=2))
+             }),
+           ),
+         
+         fluidRow(
+           renderText({
+             paste("sum of residuals: ", format(round(sum(dfm_resids()$y_resid), 2), nsmall=2))
+             }),
+           ),
+         
+         fluidRow(
+           renderText({
+             paste("sum of squares of residuals: ", format(round(sum(dfm_resids()$y_resid2), 2), nsmall=2))
+             }),
+           ),
+         
+         fluidRow(
+           renderText({
+             paste("variance in data", format(round(sum(dfm_resids()$yvar_meas2), 2), nsmall=2))
+             }),
+           ),
+
+         fluidRow(
+           renderText({
+             paste("variance in model wrt data", format(round(sum(dfm_resids()$yvar_mod2), 2), nsmall=2))
+             }),
+           ),
+                           
+         fluidRow(
+           renderText({
+             paste("ratio of variances", format(round(sum(dfm_resids()$yvar_mod2)/sum(dfm_resids()$yvar_meas2), 2), nsmall=2))
+             }),
+           ),
+         
+         fluidRow(
+           renderText({
+             paste("r^2 for data:", format(round(cor(dfm_data()$x, dfm_data()$ym), 2), nsmall=2))
+             }),
+           ),
+         
+
+    ), style="background-color: whitesmoke;"
+  )
+```
+
+## How well does the model fit?
+
+In the exercise above, you have explored points 1-3 from the list of instructions on how to use a statistical model. You have a dataset, a proposed relationship, and you have tried to find an optimal fit of the model to the data. But we have not considered point 4: "Report the *uncertainty* about how 'optimal' the final version of the model is."
+
+Looking at the graph above, it's natural to think that a "better" fit of a model would mean there was less difference between the values the model predicts, and the values that were actually "measured" in the "experiment." A *perfect* fit would see the line of the model pass through each datapoint exactly: the model would explain all of the response variable values in terms of the explanatory variable.
+
+<div id="warning">
+We are talking here about alternative parameters for the *same model*, not deciding whether one model is better than another. These processes are different.
+
+For instance, we could form an equation that would make a line pass through every measured response value ("Connecting Lines" in the cartoon below). It would *fit* the data perfectly. But it may not be a good description of the mechanism that relates the *explanatory variable* to the *response variable*. For good science we require that our models are *plausible* and useful. Models should represent and maybe help explain important features of reality; but we don't expect them to *perfectly* explain data.
+
+We should always try to fit *plausible* models; we should **not** always try to find a model that fits perfectly, and then attempt to bend our understanding of reality to explain why  the choice of model.
+
+![XKCD 2048: Curve-fitting methods and the messages they send](https://imgs.xkcd.com/comics/curve_fitting.png)
+</div>
+
+In the exercise above, it is unlikely that you could have found a straight line that passed through all the sampled datapoints. But you probably found many lines that appeared to describe the data about as well as each other. These probably had gradients near a value of 1.7 and intercepts near a value of 5.
+
+Visually, you would have seen that the "good" fits of the line had *residuals* that fell above and below the line - the line passed through "the middle" of the dataset. You probably noticed that the sizes of the residuals (and lengths of the lines) varied; there were probably more short lines than long lines.
+
+<div id="note">
+We should expect that measurements of a value - such as the explanatory or response variables - are not exact. There may be variation in the system being measured, and there will also be *error* in most measurements. For example, when weighing out a compound, the exact mass of a compound might fall between the levels of precision of the balance: the balance may report a mass of 1.4356g, but the true mass could be 1.43563.
+
+Generally, the best we can expect is that a model produces predictions that are *close to* observations of the response variable.
+</div>
+
+<details>
+  <summary>Click to toggle a short explanation of how residuals relate to optimal parameters</summary>
+  
+In general, we choose the "best" or *optimal* parameters for a model by finding the parameters that result in the smallest difference between the predicted model result (the straight line) and the observed data. Mathematically, we can use the values of the residuals to calculate this. In *linear least squares regression* we find the best fit by minimising the *sum of squares of residuals*. This is equivalent to finding the line that has the smallest overall difference between its predictions, and the actual measured values. You probably found that your best fit line had the smallest sum of squares of residuals you could get by moving the sliders.
+</details>
+
+### Representing model uncertainty: Pearson correlation coefficients, $r^2$, and variability
+
+#### Pearson correlation coefficient
+
+You will probably have come across the idea of a *correlation coefficient* before, and seen this reported as $r$ or $r^2$ (the *Pearson correlation coefficient*). The *correlation coefficient* describes the linear correlation between two variables: the extent to which one variable *tracks* another according to a straight line (a linear model). It always has a value between 0 (no correlation) and 1 (perfect correlation; all points on a straight line). The *Pearson correlation coefficient* is reported in the interactive diagram above as "r^2 for data".
+
+#### Goodness of fit
+
+It is unusual in the natural world, and in experiments, to find perfect linear correlation between any two variables. This is in part because because measurements always involve uncertainty, and in part because natural systems tend not to be homogeneous - they are often collections of slightly different individuals; or a single individual may vary slightly over time. If there was truly a linear relationship between two variables, in a real system we wouldn't see a straight line exactly - we would see datapoints scattered about a straight line. The datapoints would not be exactly correlated and, as a result, we find the observed $r^2$value for two variables is usually between 0 and 1, but not exactly 0 or 1.
+
+When we fit a model to some observed data for two variables, as with the linear model above, we are attempting to explain the relationship between those variables. But even if we have the exact true model of the relationship, the natural *variability* of the system and the measurements we make means our model will not be an exact fit. To assess the quality or *uncertainty* of our model fit, we consider how well our optimal model choice *explains* the *variability* in the dataset.
+
+We think of the dataset as having some quantity that measures its overall *variability* (also referred to as *spread* or *dispersion*). For a linear model we can represent that by the way each measured *response variable* differs from the average value for the response variables; we call this the **total variability**. We can calculate a similar value for the values of the response variable predicted by our *fitted* linear model; this is the **model variability**. We can then compare these values:
+
+$$\textrm{goodness of fit} \approx \frac{\textrm{model variability}}{\textrm{total variability}}$$
+
+- If the model fits perfectly, then the *model variability* will be the same as the *total variability*, our *goodness of fit* equals 1, and we say that the model "explains all the variability in the data."
+- If the model doesn't describe the data exactly, then *model variability* is less than the *total variability*, our *goodness of fit* is less than 1, and we say that the model "explains some of the variability in the data."
+
+<div id="note">
+The *goodness of fit* is often used as a percentage. For instance, if our goodness of fit is 0.73, we might say "the model explains 73% of the variance in the dataset."
+</div>
+
+This value, *goodness of fit* or *explained variance*, represents uncertainty in the model fit. It recognises that although this is the "optimal" fit for a model with this structure, there is still variability in the data that goes unexplained. Without doing more work, we can't know whether that variability could be captured by improving the model (to represent the mechanism of the system being studied better) or if this is truly *irreducible variability* caused by inexact measurement, or stochastic variation in the system. 
+
+This measure represents the uncertainty we have that our model describes the data well.
+
+<div id="note">
+The "goodness of fit" is shown in the interactive model above as "*ratio of variances*".
+
+You probably noticed that when you found your optimal model, this value was that same as "*r^2 for data*". This is because the *Pearson correlation coefficient* is mathematically equivalent to this measure of goodness of fit, for the optimal least-squares linear regression.
+</div>
+
+### Representing model uncertainty: Parameter estimates
+
+When you explored the interactive model, you probably found that - even if there was an obviously optimal choice - there were several choices of gradient and intercept that gave reasonably good results. Maybe you thought that, if the data had been even slightly different, one of those other pretty good choices might have been "optimal?"
+
+This is a different kind of uncertainty than the uncertainty represented by *goodness of fit* above. It does not represent our uncertainty that the "optimal" model describes the data. Instead it represents the *uncertainty we have that we found the optimal model, at all*.
+
+Typically, we represent this uncertainty with *confidence intervals* for each parameter of the model. Here we would need a confidence interval for the fitted gradient, and a confidence interval for the fitted intercept. We might also represent this uncertainty in the form of a *ribbon* on our graph showing the fitted model, as below in Figure \@ref(fig:model-cis). The ribbon shows the area covered by all of the *plausible* lines that could fit our data. Here, *plausible* lines are all the lines that could be described by parameter settings in the 95% confidence intervals.
+
+```{r model-cis, echo = FALSE, fig.cap="Thirty datapoints indicating a relationship between an explanatory variable and a response variable. Datapoints are shown as blue dots. The relationship is modelled by the orange straight line (obtained with linear regression) that has gradient and intercept as shown in the figure. The uncertainty in our fitted model parameters is shown as a ribbon representing a 95% confidence interval for the fitted line."}
+n_samples = 30       # number of measured samples
+
+# parameters for linear relationship
+slope = 1.7          # slope of relationship
+intcp = 5            # intercept of relationship
+
+# parameters for measurement noise; assumed to be Normally distributed
+# note, our representation of noise is also a model
+mu = 0               # mean measurement error
+std = 8              # standard deviation of measurement error
+
+# generate x values
+data = data.frame(x=runif(n_samples, 0.4, 20))
+# generate "true" y values
+data = data %>% mutate(y=(x * slope) + intcp)
+# generate "measured" y values
+data = data %>% mutate(ym = y + rnorm(n_samples, mu, std))
+
+# predict linear relationship
+fitlm = lm(ym ~ x, data=data)       # fit a straight line
+m_coeff = fitlm$coefficients[2]     # gradient
+c_coeff = fitlm$coefficients[1]     # intercept
+data$predlm = predict(fitlm)        # add datapoints corresponding to line
+predslm = predict(fitlm, interval="confidence")  # obtain confidence intervals
+data = cbind(data, predslm)         # complete dataset
+cis = confint(fitlm)                # confidence intervals for fit
+
+# plot relationships
+p = ggplot(data, aes(x=x, y=ym))
+p = p + geom_point(colour="cornflowerblue")
+p = p + geom_ribbon(aes(ymin=lwr, ymax=upr), alpha=0.15)
+p = p + geom_line(aes(y=predlm), size=1, colour="darkorange3")
+p = p + annotate("text",                                             # annotate the model
+                 x=2,
+                 y=40,
+                 hjust=0,
+                 vjust=0,
+                 colour="darkorange3",
+                 label=paste("gradient = ", format(round(m_coeff, 2), nsmall=2),
+                             "(95% CI: ", format(round(cis[2], 2), nsmall=2), "-", format(round(cis[4], 2), nsmall=2),
+                             "), intercept = ", format(round(c_coeff, 2), nsmall=2),
+                             "(95% CI: ", format(round(cis[1], 2), nsmall=2), "-", format(round(cis[3], 2), nsmall=2), ")"))
+p = p + xlab("explanatory variable") + ylab("response variable")        # add axis labels
+p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
+                                             color = figbg))
+
+p
+```
+
+<div id="note">
+It is good practice always to show the uncertainty in model fits, both graphically (as with the ribbon in \@ref(fig:model-cis)) and as confidence intervals in estimated parameters for the model.
+</div>

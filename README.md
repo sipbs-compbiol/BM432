@@ -61,10 +61,14 @@ The current versions of the notebook HTML pages are linked below, for convenienc
 
 ### Session 2 (Tursday October 14th)
 
+- [01-What is Statistics?](notebooks/02-01-statistics.html)
+  - [01a-Exploring a Statistical Distribution](https://sipbs-bm432.shinyapps.io/02-01a-sampling/)
+  - [01b-Exploring a Statistical Relationship](https://sipbs-bm432.shinyapps.io/02-01b-linear/)
 - [03-What is a Dataset?](notebooks/03-dataset.html)
 - [04-Data Formats and File Formats](notebooks/03a-data_formats.html)
 - [05-Where Do Statistical Distributions Come From?](notebooks/02-05-origins.html)
   - [05a-Where Does the Normal Distribution Come From?](https://sipbs-bm432.shinyapps.io/02-05a-generate_normal/)
+- [06-Hypothesis Testing](notebooks/02-06-nhst.html)
 
 ### Session 3 (Tursday October 21st)
 
