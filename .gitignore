@@ -1,4 +1,8 @@
+# R Project files
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+
+# rsconnect publication data
+notebooks/rsconnect/

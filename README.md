@@ -50,6 +50,8 @@ To download and use the materials for this workshop on your own computer, please
 
 The current versions of the notebook HTML pages are linked below, for convenience:
 
+### Session 1 (Tursday October 7th)
+
 - [01-Data Analysis in the Research Cycle](notebooks/01-data_analysis.html)
 - [02-Data and Project Management](notebooks/02-project_management.html)
 - [03-Reproducibility, Replicability, and FAIR Guidelines](notebooks/03-reproducibility.html)
@@ -57,7 +59,13 @@ The current versions of the notebook HTML pages are linked below, for convenienc
 - [05-Reference Management](notebooks/05-reference_management.html)
 - [06-How to Use Reference Management Software](notebooks/06-reference_management.html)
 
--------
+### Session 2 (Tursday October 14th)
+
 - [03-What is a Dataset?](notebooks/03-dataset.html)
+- [04-Data Formats and File Formats](notebooks/03a-data_formats.html)
+
+### Session 3 (Tursday October 21st)
+
 - [04-An Introduction to Data Visualisation](notebooks/04-visualisation.html)
+  - [04a-Better Tools Than Barcharts (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-04a-barchart/)
 - [05-How to Access Data from Public Databases](notebooks/05-public_databases.html)

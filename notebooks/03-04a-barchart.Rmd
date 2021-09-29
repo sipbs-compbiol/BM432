@@ -1,0 +1,436 @@
+---
+title: "Better Tools Than Barcharts"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output:
+  bookdown::html_document2:
+    css: css/rmd_style.css
+    theme: lumen
+    toc: yes
+    toc_float:
+      toc_collapsed: no
+    number_sections: yes
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library("DT")
+library("datasets")
+library("dplyr")
+library("GGally")
+library("ggplot2")
+library("ggridges")
+library("readr")
+library("stringr")
+library("tidyr")
+
+# BG color for plots - should match .figure and .caption classes in rmd_style.css
+figbg = "whitesmoke"
+
+data = anscombe
+colnames(data) = c("dosage.1", "dosage.2", "dosage.3", "dosage.4", "effect.1", "effect.2", "effect.3", "effect.4")
+```
+
+# Introduction
+
+Figures are key components of scientific publications and presentations. They relate the data supporting conclusions to the reader in an immediate manner, conveying a message about the work before the reader can inspect the paper, in detail. They are central elements in the *storytelling* aspect of a paper and, just as poor visualisation choices can mask the important messages in the paper, cynical choices can exaggerate the quality of the story, as well. You saw examples of good and poor presentational choices in notebook 03: "An Introduction to Data Visualisation."
+
+In this interactive session, you will have the opportunity to generate multiple visualisations of the same dataset, and decide for yourself which tell the most appropriate story about the data.
+
+# The Dataset
+
+Over the course of a small study, you have attempted to evaluate the effect of some drug on four different matched groups of 11 individuals. You varied the dosages such that the *average* (mean) dosage per individual was the identical for each group, and the observed *average* (mean) effect of the drug turned out to be identical for each group.
+
+```{r datatable-summary-mean, echo=FALSE}
+colMeans(data)
+```
+
+So did the standard deviation for each group:
+
+```{r datatable-summary-sd, echo=FALSE}
+apply(data, 2, sd)
+```
+
+When you check to see if the data might be correlated, you find that all the dosages and effects have essentially *identical coefficients of correlation*!
+
+- group 1: $r^2$ = `r cor(data$dosage.1, data$effect.1)`
+- group 2: $r^2$ = `r cor(data$dosage.2, data$effect.2)`
+- group 3: $r^2$ = `r cor(data$dosage.3, data$effect.3)`
+- group 4: $r^2$ = `r cor(data$dosage.4, data$effect.4)`
+
+But, when you look at the dataset, there appears to be more variation than these numbers suggest:
+
+```{r datatable, echo=FALSE}
+datatable(data)
+```
+
+In the panels below, you will have opportunity to change visuallisation types to see which, if any, are appropriate to understand and present the data.
+
+# Visualisations
+
+## Visualising dosage and effect data separately
+
+```{r interact-1, echo = FALSE}
+# Reformat data into tidy format
+dosages = anscombe %>%
+  select(x1, x2, x3, x4) %>%
+  gather(key="cohort", value="dosage") %>%
+  mutate(cohort=str_replace(cohort, "x", ""))
+effects = anscombe %>%
+  select(y1, y2, y3, y4) %>%
+  gather(key="cohort", value="effect") %>%
+  mutate(cohort=str_replace(cohort, "y", ""))
+data = dosages %>% mutate(effect = effects$effect)
+data$cohort = as.factor(data$cohort)
+
+
+summary_data = data.frame(cohort=c(1, 2, 3, 4),
+                          mean.dosage=colMeans(anscombe[1:4]),
+                          sd.dosage=apply(anscombe[1:4], 2, sd),
+                          mean.effect=colMeans(anscombe[5:8]),
+                          sd.effect=apply(anscombe[5:8], 2, sd))
+summary_data = summary_data %>%
+  mutate(sd.dosage.min = mean.dosage - sd.dosage) %>%
+  mutate(sd.dosage.max = mean.dosage + sd.dosage) %>%
+  mutate(sd.effect.min = mean.effect - sd.effect) %>%
+  mutate(sd.effect.max = mean.effect + sd.effect)
+summary_data$cohort = as.factor(summary_data$cohort)
+
+plot_dosage_bar = function(){
+    ggplot(summary_data, aes(x=cohort, y=mean.dosage, fill=cohort)) +
+    geom_bar(stat="identity") +
+    ylim(0, 15) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+plot_dosage_bar_errors = function(){
+    ggplot(summary_data, aes(x=cohort, y=mean.dosage, fill=cohort)) +
+    geom_bar(stat="identity") +
+    geom_errorbar(aes(ymin = sd.dosage.min, ymax = sd.dosage.max), width = 0.25, lwd=1) +
+    ylim(0, 15) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+
+plot_dosage_univ_scatter = function(){
+    ggplot(data, aes(x=cohort, y=dosage, color=cohort)) +
+    geom_jitter(width=0.1, height=0, size=4, alpha=0.6) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+plot_dosage_boxplot = function(){
+    ggplot(data, aes(x=cohort, y=dosage, fill=cohort)) +
+    geom_boxplot(width=0.3, height=0) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+plot_dosage_violinplot = function(){
+    ggplot(data, aes(x=cohort, y=dosage, fill=cohort)) +
+    geom_violin(width=0.3, height=0) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+plot_dosage_bardata = function(){
+    ggplot(summary_data, aes(x=cohort, y=mean.dosage, fill=cohort)) +
+    geom_bar(stat="identity") +
+    geom_errorbar(aes(ymin = sd.dosage.min, ymax = sd.dosage.max), width = 0.25, lwd=1) +
+    geom_jitter(data=data, aes(x=cohort, y=dosage), width=0.3, height=0, size=4, alpha=0.6) +
+    ylim(0, 15) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+plot_dosage_boxdata = function(){
+    ggplot(data, aes(x=cohort, y=dosage, fill=cohort)) +
+    geom_boxplot(width=0.3, height=0, outlier.shape=NA) +
+    geom_jitter(width=0.1, height=0, size=4, alpha=0.6) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+plot_dosage_violindata = function(){
+    ggplot(data, aes(x=cohort, y=dosage, fill=cohort)) +
+    geom_violin(width=0.3, height=0) +
+    geom_jitter(width=0.1, height=0, size=4, alpha=0.6) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+plot_dosage = function(vistype){
+  switch(vistype,
+         bar = plot_dosage_bar(),
+         bar_errors = plot_dosage_bar_errors(),
+         univ_scatter = plot_dosage_univ_scatter(),
+         boxplot = plot_dosage_boxplot(),
+         violinplot = plot_dosage_violinplot(),
+         bardata = plot_dosage_bardata(),
+         boxdata = plot_dosage_boxdata(),
+         violindata = plot_dosage_violindata(),
+         plot_dosage_bar())
+}
+
+
+
+plot_effect_bar = function(){
+    ggplot(summary_data, aes(x=cohort, y=mean.effect, fill=cohort)) +
+    geom_bar(stat="identity") +
+    ylim(0, 15) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+plot_effect_bar_errors = function(){
+    ggplot(summary_data, aes(x=cohort, y=mean.effect, fill=cohort)) +
+    geom_bar(stat="identity") +
+    geom_errorbar(aes(ymin = sd.effect.min, ymax = sd.effect.max), width = 0.25, lwd=1) +
+    ylim(0, 15) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+
+plot_effect_univ_scatter = function(){
+    ggplot(data, aes(x=cohort, y=effect, color=cohort)) +
+    geom_jitter(width=0.1, height=0, size=4, alpha=0.6) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+plot_effect_boxplot = function(){
+    ggplot(data, aes(x=cohort, y=effect, fill=cohort)) +
+    geom_boxplot(width=0.3, height=0) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+plot_effect_violinplot = function(){
+    ggplot(data, aes(x=cohort, y=effect, fill=cohort)) +
+    geom_violin(width=0.3, height=0) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+plot_effect_bardata = function(){
+    ggplot(summary_data, aes(x=cohort, y=mean.effect, fill=cohort)) +
+    geom_bar(stat="identity") +
+    geom_errorbar(aes(ymin = sd.effect.min, ymax = sd.effect.max), width = 0.25, lwd=1) +
+    geom_jitter(data=data, aes(x=cohort, y=effect), width=0.3, height=0, size=4, alpha=0.6) +
+    ylim(0, 15) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+plot_effect_boxdata = function(){
+    ggplot(data, aes(x=cohort, y=effect, fill=cohort)) +
+    geom_boxplot(width=0.3, height=0, outlier.shape=NA) +
+    geom_jitter(width=0.1, height=0, size=4, alpha=0.6) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+plot_effect_violindata = function(){
+    ggplot(data, aes(x=cohort, y=effect, fill=cohort)) +
+    geom_violin(width=0.3, height=0) +
+    geom_jitter(width=0.1, height=0, size=4, alpha=0.6) +
+    scale_color_brewer(palette="Set1") +
+    scale_fill_brewer(palette="Set1") +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = figbg, color = figbg))
+}
+
+plot_effect = function(vistype){
+  switch(vistype,
+         bar = plot_effect_bar(),
+         bar_errors = plot_effect_bar_errors(),
+         univ_scatter = plot_effect_univ_scatter(),
+         boxplot = plot_effect_boxplot(),
+         violinplot = plot_effect_violinplot(),
+         bardata = plot_effect_bardata(),
+         boxdata = plot_effect_boxdata(),
+         violindata = plot_effect_violindata(),
+         plot_effect_bar())
+}
+
+
+# Shiny code below
+
+sidebarLayout(
+  sidebarPanel(
+    radioButtons("vistype", "Visualisation Type:",
+                 c("Bar" = "bar",
+                   "Bar with Errors" = "bar_errors",
+                   "1D Scatterplot" = "univ_scatter",
+                   "Box Plot" = "boxplot",
+                   "Violin Plot" = "violinplot",
+                   "Bar + data" = "bardata",
+                   "Box + Data" = "boxdata",
+                   "Violin + Data" = "violindata"
+                 )
+                )
+  ),
+  
+  mainPanel(
+    tabsetPanel(type="tabs",
+                tabPanel("Dosage", renderPlot(
+                  {
+                   plot_dosage(input$vistype)
+                  }
+                )
+              ),
+              tabPanel("Effect", renderPlot(
+                  {
+                    plot_effect(input$vistype)
+                  }
+                )
+              )
+            )
+  )
+)
+```
+
+<div id="questions">
+1. Did any of the visualisations give a good summary account of the data, and why did you think so?
+2. Did any of the visualisations give a poor summary account of the data, and why did you think so?
+3. If someone presented a bar chart as a summary of measurements in a dataset, would you think that was a reliable visual representation?
+4. What kinds of problems in these datasets were disguised by each visualisation approach?
+</div>
+
+## Visualising the relationships between dosage and effect data
+
+```{r interact-2, echo = FALSE}
+lm_results = list(lm(effect ~ dosage, data=data %>% filter(cohort==1)),
+               lm(effect ~ dosage, data=data %>% filter(cohort==2)),
+               lm(effect ~ dosage, data=data %>% filter(cohort==3)),
+               lm(effect ~ dosage, data=data %>% filter(cohort==4)))
+df_text = data.frame(cohort = c(1, 2, 3, 4),
+                     label = c(paste("effect = ", format(round(lm_results[[1]]$coefficients[1], 4), nsmall=4), " * dosage + ", format(round(lm_results[[1]]$coefficients[2], 4), nsmall=4)),
+                               paste("effect = ", format(round(lm_results[[2]]$coefficients[1], 4), nsmall=4), " * dosage + ", format(round(lm_results[[2]]$coefficients[2], 4), nsmall=4)),
+                               paste("effect = ", format(round(lm_results[[3]]$coefficients[1], 4), nsmall=4), " * dosage + ", format(round(lm_results[[3]]$coefficients[2], 4), nsmall=4)),
+                               paste("effect = ", format(round(lm_results[[4]]$coefficients[1], 4), nsmall=4), " * dosage + ", format(round(lm_results[[4]]$coefficients[2], 4), nsmall=4))
+                               )
+)
+df_text$cohort = as.factor(df_text$cohort)
+
+
+plot_regression = function(){
+  ggplot(data, aes(x=dosage, y=effect, color=cohort)) +
+    geom_smooth(method="lm", level=0) +
+    geom_text(data=df_text,
+              mapping=aes(label=label, x=-Inf, y=11),
+              hjust=-0.1, vjust=-1) +
+    facet_wrap(~cohort, ncol=2)
+}
+
+
+plot_ribbon = function(){
+  ggplot(data, aes(x=dosage, y=effect, color=cohort)) +
+    geom_smooth(method="lm") +
+    geom_text(data=df_text,
+              mapping=aes(label=label, x=-Inf, y=11),
+              hjust=-0.1, vjust=-1) +
+    facet_wrap(~cohort, ncol=2)
+}
+
+
+plot_scatter = function(){
+  ggplot(data, aes(x=dosage, y=effect, color=cohort)) +
+    geom_point(size=5, alpha=0.7) +
+    facet_wrap(~cohort, ncol=2)
+}
+
+plot_regscat = function(){
+  ggplot(data, aes(x=dosage, y=effect, color=cohort)) +
+    geom_smooth(method="lm", level=0) +
+    geom_point(size=5, alpha=0.7) +
+    geom_text(data=df_text,
+              mapping=aes(label=label, x=-Inf, y=11),
+              hjust=-0.1, vjust=-1) +
+    facet_wrap(~cohort, ncol=2)
+}
+
+plot_regribscat = function(){
+  ggplot(data, aes(x=dosage, y=effect, color=cohort)) +
+    geom_smooth(method="lm") +
+    geom_point(size=5, alpha=0.7) +
+    geom_text(data=df_text,
+              mapping=aes(label=label, x=-Inf, y=11),
+              hjust=-0.1, vjust=-1) +
+    facet_wrap(~cohort, ncol=2)
+}
+
+plot_relation = function(vistype){
+  switch(vistype,
+         regression = plot_regression(),
+         ribbon = plot_ribbon(),
+         scatter = plot_scatter(),
+         regscat = plot_regscat(),
+         regribscat = plot_regribscat(),
+         plot_regression()
+         )
+}
+
+sidebarLayout(
+  sidebarPanel(
+    radioButtons("rvistype", "Visualisation Type:",
+                 c("Regression" = "regression",
+                   "Regression and ribbon" = "ribbon",
+                   "Scatterplots" = "scatter",                   
+                   "Regression and scatter" = "regscat",
+                   "Regression, ribbon, and scatter" = "regribscat"
+                 )
+                )
+  ),
+  
+  mainPanel(
+    renderPlot(
+                  {
+                   plot_relation(input$rvistype)
+                  }
+                )
+            )
+  )
+```
+
+<div id="questions">
+1. Do the fitted linear regressions differ by cohort?
+2. Are the linear regressions a good fit for the relationship between dosage and effect, in each case?
+3. Does the plotted uncertainty in the linear regression capture the variation between the real data, and linear regression?
+4. Are there any signs of systematic problems in the data?
+5. What kind of visualisation is most helpful for this dataset?
+</div>
