@@ -75,3 +75,18 @@ The current versions of the notebook HTML pages are linked below, for convenienc
 - [04-An Introduction to Data Visualisation](notebooks/04-visualisation.html)
   - [04a-Better Tools Than Barcharts (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-04a-barchart/)
 - [05-How to Access Data from Public Databases](notebooks/05-public_databases.html)
+
+--------------
+
+## Example Lab Notebooks
+
+- [File 1](assets/pdfs/lab_notebooks/example_lab_notebook_file_1.pdf)
+- [File 2](assets/pdfs/lab_notebooks/example_lab_notebook_file_2.pdf)
+- [File 3](assets/pdfs/lab_notebooks/example_lab_notebook_file_3.pdf)
+- [File 4](assets/pdfs/lab_notebooks/example_lab_notebook_file_4.pdf)
+
+---------------
+
+## PowerPoint Slides
+
+- [Workshop 1](assets/powerpoints/Project_Management_workshop_MFandLP.pptx)
