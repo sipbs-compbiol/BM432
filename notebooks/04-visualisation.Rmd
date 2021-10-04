@@ -323,7 +323,7 @@ p
 ```
 </div>
 
-In Figure \@ref(fig:hist) the histograms for the three species are presented, and overlaid. This has the advantage that the histogram values (datapoints in each bin) can be read easily from the y-axis, and the shape of the histogram of the distribution is not distorted for each species. Howevere there is a disadvantage that each bar may obscure others behind it. An attempt has been made in this figure to reduce this problem with the use of *transparancy* (also known as *alpha channel*), but the image is still not very clear.
+In Figure \@ref(fig:hist) the histograms for the three species are presented, and overlaid. This has the advantage that the histogram values (datapoints in each bin) can be read easily from the y-axis, and the shape of the histogram of the distribution is not distorted for each species. However there is a disadvantage that each bar may obscure others behind it. An attempt has been made in this figure to reduce this problem with the use of *transparancy* (also known as *alpha channel*), but the image is still not very clear.
 
 The "neatness" of a histogram is essentially controlled by a single parameter: the *bin width*. This defines the width of the bars in the histogram. Too small, and each bar has a count of one (also known as a *rug plot*). Too large, and the shape of the data is masked.
 
@@ -618,7 +618,7 @@ Dot charts represent all the same information as Bar Charts, with less ink. (Her
 p = ggplot(titanic %>% group_by(Class) %>% summarise(n = sum(Freq)),
            aes(y=Class, x=n, color=Class, fill=Class)) +
   geom_point(size=10) + 
-  xlim(0, 900) + ylab("Passengers") +
+  xlim(0, 900) + ylab("Class") +
   scale_fill_brewer(palette="Set2") +
   scale_color_brewer(palette="Set2") +
   theme(legend.position = "none",
