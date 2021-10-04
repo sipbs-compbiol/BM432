@@ -150,7 +150,7 @@ datatable(PlantGrowth, width=400,
 
 Statistics allows us to calculate answers to many kinds of questions. These often belong to one of two key types: *understanding* questions, and *prediction* questions.
 
-- *understanding* questions might take the form of determining whether changing the value of an *explanatory* variable affects the value of the *response* variable. The question might be asking whether changing the *explanatory variable* affects the *response variable* at all or, if it does, how much of en effect there is.
+- *understanding* questions might take the form of determining whether changing the value of an *explanatory* variable affects the value of the *response* variable. The question might be asking whether changing the *explanatory variable* affects the *response variable* at all or, if it does, how much of an effect there is.
 - *prediction* questions also need to determine a similar relationship between *explanatory* and *response* variables, but they then seek to use those relationships to *predict* responses of individuals. These predictions are made on the basis of measurements of the explanatory variables that might be made at some other time.
 
 ## Models
@@ -159,7 +159,7 @@ In all questions, whether for understanding or prediction, we rely on *modelling
 
 ### Representing data with a model
 
-Firstly, although we measure data in our experiments, some statistical approaches (called *parametric* methods) do not use the raw data directly to calculate their result. Instead, they use the data to calculate values that are *parameters* of a *distribution* (e.g. *mean* and *standard deviation*), such as a Normal or Poisson distribution. The corresponding distribution is an idealised *model* of the measurements, and it simplifies our calculations to use these models to represent our data, in place of the actual individual datapoints. 
+Firstly, although we measure data in our experiments, some statistical approaches (called *parametric* methods) do not use the raw data directly to calculate their result. Instead, they use the data to calculate values that are *parameters* of a *distribution* (e.g. *mean* and *standard deviation*), such as a Normal or Poisson distribution.^[[Normal distribution](https://en.wikipedia.org/wiki/Normal_distribution)] The corresponding distribution is an idealised *model* of the measurements, and it simplifies our calculations to use these models to represent our data, in place of the actual individual datapoints. 
 
 <div id="note">
 If you have ever performed a *t*-test or similar statistical analysis, based on the means and standard deviations of two datasets, you were doing exactly this!
@@ -178,7 +178,7 @@ A key concern in *parametric* methods is ensuring that the choice of model distr
 
 Statistical methods that use the data directly and do not represent it as an idealised model are called *nonparametric* methods. You will meet both kinds of approach in this workshop.
 
-```{r model-normal, echo=FALSE, fig.cap="Two hundred 'measured' data values (histogram) and the corresponding Normal distribution model (curve) generating those values. The modelled distribution is entirely described by the parameters: mean=10 (µ) and standard deviation=3 (σ). We can see here that the frequency of real data values don't match the curve exactly; the model simplifies our representation of the 'noisy' data. The dashed line represents the mean value of the model, and the dotted lines represents values at +/- one and two standard deviations from the mean."}
+```{r model-normal, echo=FALSE, fig.cap="Two hundred 'measured' data values (histogram) and the corresponding Normal distribution model (curve) generating those values. The modelled distribution is entirely described by the parameters: mean=10 (µ) and standard deviation=3 (σ). We can see here that the frequency of real data values don't match the curve exactly; the model simplifies our representation of the 'noisy' data. The dashed line represents the mean value of the model, and the dotted lines represent values at +/- one and two standard deviations from the mean."}
 mu = 10                          # define mean of distribution
 sd = 3                           # define standard deviation of distribution
 breaks = seq(0, 20, by=0.4)      # set up the breakpoints between bars in the histogram
@@ -274,7 +274,7 @@ p = p + annotate("text",                                             # annotate 
                  colour="darkorange3",
                  label=paste("gradient = ", format(round(m_coeff, 2), nsmall=2),
                              ", intercept = ", format(round(c_coeff, 2), nsmall=2)))
-p = p + xlab("explanaotry variable") + ylab("response variable")        # add axis labels
+p = p + xlab("explanatory variable") + ylab("response variable")        # add axis labels
 p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
                                              color = figbg))
 
