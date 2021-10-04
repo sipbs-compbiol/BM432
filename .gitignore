@@ -6,3 +6,7 @@
 
 # rsconnect publication data
 notebooks/rsconnect/
+
+# Endnote support files
+*endnote.Data/
+*backup.enl
