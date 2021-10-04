@@ -122,7 +122,7 @@ p                                                                    # show plot
 <div id="note">
 Please take some time to explore a statistical distribution interactively in your browser, at the link below.
 
-- [1a. Exploring a Statistical Distribution **INTERACTIVE SESSION**](https://mp429.shinyapps.io/01a-sampling/)
+- [2a. Exploring a Statistical Distribution **INTERACTIVE SESSION**](https://sipbs-bm432.shinyapps.io/02-01a-sampling/)
 
 In this session, you can explore the way in which the parameters of a statistical distribution alter its shape, and how well it appears to represent measured data.
 </div>
@@ -196,7 +196,7 @@ Much of statistical analysis of *relationships* between variables is about estim
 <div id="note">
 Please take some time to explore a statistical relationship interactively in your browser, at the link below.
 
-- [1b. Exploring a Statistical Relationship **INTERACTIVE SESSION**](https://mp429.shinyapps.io/01b-linear/)
+- [2b. Exploring a Statistical Relationship **INTERACTIVE SESSION**](https://sipbs-bm432.shinyapps.io/02-02b-linear/)
 
 In this session, you can explore the way in which the parameters of a statistical model alter how well it appears to fit measured data, what we mean by a "good" and "bad" fit, and how we represent that.
 </div>
