@@ -23,7 +23,8 @@ figbg = "whitesmoke"
 ```
 
 <div id="summary">
-- Data is typically collected into tables where **rows are observations**, and **columns are variables**.
+- Data should be collected into tables where **rows are observations**, and **columns are variables**.
+  - There should be one datapoint per cell
 - Variables may be numerical or categorical.
 - Numerical variables may be continuous or discrete.
 - Categorical variables may have an implicit ordering ("ordinal"), or no implicit ordering ("factors").
@@ -47,7 +48,11 @@ Data comes in many forms, but in science we nearly always want our data to be we
 
 An *observation* is the act of collecting one or more *measurements* of, or from, an "experimental unit." 
 
-What constitutes an experimental unit depends on the nature of the experiment. For example, if you measured the [BMI](https://www.nhs.uk/live-well/healthy-weight/bmi-calculator/) of each patient in a GP's surgery, the experimental unit would be the patient (and the patient's BMI would be a *variable*). On the other hand, if you were tracking the concentration of a compound in blood samples taken from a single patient over a period of time, each blood sample could be an experimental unit.
+What constitutes an experimental unit depends on the nature of the experiment. For example, if you measured the [BMI](https://www.nhs.uk/live-well/healthy-weight/bmi-calculator/) of each patient in a GP's surgery, the experimental unit would be the patient (and the patient's BMI would be a *variable*). On the other hand, if you were tracking the concentration of a compound in blood samples taken from a single patient over a period of time, each blood sample could be considered as an experimental unit.
+
+<div id="note">
+A key step in experimental design is identifying which parts of the experiment are *observations* and which are *variables*.
+</div>
 
 ## Variables, Features and Measurements
 
@@ -70,9 +75,9 @@ The terms *variable*, *feature* and *measurement* may often be used interchangea
 
 ## Data Tables
 
-By convention, we represent data in *tables* so that *rows* represent *observations*, and *columns* represent *variables*.
+By convention, we represent data in *tables* so that *rows* represent *observations*, and *columns* represent *variables*, and there is a *single value in each cell*.
 
-```{r datatable, fig.cap="Example table showing the layout of observations, variables, and measurements"}
+```{r datatable, echo=FALSE, fig.cap="Example table showing the layout of observations, variables, and measurements"}
 knitr::include_graphics(rep("images/obs_var_table.png"))
 ```
 
@@ -93,7 +98,7 @@ datatable(iris)
 We can visualise relationships between the variables of the iris data with a *pairs plot*, which gives us a rich visual overview of the relationships in our dataset.
 
 <div id="note">
-We will explore data visualisation later in the workshop.
+We will explore data visualisation later in these workshops.
 </div>
 
 ```{r iris-pairs, echo=FALSE, fig.cap="Pairs plot of `iris` data, providing an overview of relationships between variables.", fig.width=10, fig.height=10}
@@ -185,7 +190,7 @@ With discrete data, every state of the property is different and separate; inter
 <details>
   <summary>The difference between discrete and continuous data (click to expand)</summary>
 
-The difference between discrete and continuous data is why it's sometimes reported that "the average person in the UK has fewer than two legs". An individual may have zero, one or two legs, and many more people have two legs than not. Most people you will meet ("the average person") are likely to have exactly two legs, rather than one. But calculating an average number of legs using the formula 
+The difference between discrete and continuous data is why it sounds wrong when people say (correctly) that "the average person in the UK has fewer than two legs". An individual may have zero, one or two legs, and many more people have two legs than not. Most people you will meet ("the average person") are likely to have exactly two legs, rather than one. But calculating an average number of legs using the formula 
 
 $$\textrm{average number of legs} = \frac{\textrm{total number of legs}}{\textrm{total number of people}}$$
 
@@ -206,7 +211,7 @@ It can be a warning sign that something is not right with an analysis if a calcu
 
 ## Categorical Data
 
-*Categorical data* is data that can be divided up into a finite set of *categories*. There may be few categories (e.g. "has diabetes" and "does not have diabetes") or many (such as nationality, sex, age group, make of car, and so on).
+*Categorical data* is data that can be divided up into a finite set of *categories*. There may be few categories (e.g. "has diabetes" and "does not have diabetes") or many (such as nationality, gender, age group, make of car, and so on).
 
 But, as with numerical data, it's a little more complicated than that.
 
@@ -220,7 +225,11 @@ Other categories however may have an implicit ranking - like "large", "medium", 
 
 ### Ordinal Data
 
-In a competition, individuals might finish first, second, third and so on. These rankings are often treated as numbers, but they are in fact *categories*, and they should always be treated as categorical data, not as numerical data. We might consider that those who finish first are "better" or "more" in some way than those who finish second or third. There is a natural ordering to these categories, which we want to consider in our analyses - but we can't rightly treat `1`, `2` and `3` as the whole numbers $1$, $2$ and $3$ - they are instead treated as labels.
+In a competition, individuals might finish first, second, third and so on. These rankings are often treated as numbers, but they are in fact *categories*, and they should always be treated as categorical data, not as numerical data. We might consider that those who finish first are "better than" or "greater than" in some way than those who finish second or third. There is a natural ordering to these categories, which we want to consider in our analyses - but we can't rightly treat `1`, `2` and `3` as the whole numbers $1$, $2$ and $3$ - they are instead treated as *labels* with an ordering.
+
+<div id="note">
+What this means is that it would be wrong to just use the numbers in calculations. For instance, if the three top finishers were 1st, 2nd and 3rd (or, 1, 2 and 3), it makes no sense to say their average position is $\frac{1 + 2 + 3}{3} = 2$.
+</div>
 
 Similarly, we often divide populations into age ranges, rather than using an accurate age. These ranges are categories too, and there is an implicit ordering: "70+" is *older than* "55-70" is *older than* "45-55". Here, the categories are ordered, but they are not the same size, and we can't treat them as numerical values without taking more care.
 
