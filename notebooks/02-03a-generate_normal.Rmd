@@ -23,23 +23,23 @@ figbg = "whitesmoke"
 
 <div id="summary">
 - Like most statistical distributions, the Normal distribution represents the outcome of a process, equivalent to a real-world activity
-- The process used to generate a normal distribution is:
-  - Create a large dataset of (continuous) values; this has a (true) mean
-  - Repeatedly subsample that set of values, and calculate the mean of each subsample
+- One process that can be used to generate a normal distribution is:
+  - Create a large dataset (population) of values; this has a (true) mean
+  - Repeatedly subsample that set of values, and calculate the mean of each subsample.
   - The means of the subsamples are estimates of the *true* mean
-- The distribution of subsample means is a Normal distribution
-- **The Normal distribution corresponds to repeated estimations of the same (true) continuous variable**
+- The distribution of subsample means (estimates of the "true" mean) is a Normal distribution
+- **The Normal distribution corresponds to repeated estimations of the same value**
 </div>
 
 # Introduction
 
-In many introductory treatments of statistics there is little focus on why the common statistical distributions are good representations (or not) of real processes. Knowing what kind of statistical distribution is likely to result from the measurements or processes used in an experiment can help with design and interpretation of an experiment, and reduce the chance you are using an inappropriate statistical analysis.
+In many introductory treatments of statistics there is little focus on why the common statistical distributions are good representations (or not...) of real processes. Knowing what kind of statistical distribution is likely to result from the measurements you made, or processes that were being measured, in your experiment can help with design and interpretation of that experiment, and reduce the chance you are using an inappropriate statistical analysis.
 
-In this interactive session, you will be explore one of several processes that can generate data approximating a Normal Distribution, to see what kind of effect varying the properties of the generating process has on the final data distribution.
+In this interactive session, you will explore one of several processes that can generate data approximating a Normal Distribution, to see what kind of effect varying the properties of the generating process has on the final data distribution. The processes you will vary are similar to those you can vary in many experimental designs: the number of replicate experiments (number of subsamples), and number of individual measurements in each experiment (datapoints in each subsample).
 
 # Generating a Normal Distribution
 
-Normal Distributions arise as the result of a number of different processes, such as
+Normal Distributions can arise as the result of any of a number of different processes, such as
 
 - repeated physical measurements of the same thing
   - the errors in measurement are randomly-distributed, but tend to more frequently be close to the true measurement than far from it; the shape made by the repeated measurement is often Normal
@@ -52,18 +52,27 @@ Here, we will explore the process of *subsampling a population* to estimate a me
 
 ## Create a dataset of values
 
-We begin by generating a population (dataset) of numbers. These are not, themselves, Normally-distributed. Here, for example, we generate a number of randomly-chosen values that are uniformly-distributed between an upper and lower limit. The true mean should be around the halfway point between these two values.
+We begin by generating a population (dataset) of numbers. These are not, themselves, Normally-distributed. Here, for example, we generate a number of randomly-chosen values that are Uniformly-distributed^[https://mathworld.wolfram.com/UniformDistribution.html] between an upper and lower limit. The true mean should be around the halfway point between these two values.
 
 ```{r static-sample, echo=FALSE, fig.cap="100 uniformly-distributed random numbers between -45 and -15. The true mean is expected to be close to -30, and the actual value is shown in the figure."}
 data = data.frame(vals=runif(100, -45, -15))
 mu = mean(data$vals)
+ytop = 1.3 * max(density(data$vals)$y)
 
 p = ggplot(data, aes(x=vals))                                    # set up the ggplot with data
 p = p + geom_histogram(aes(y=..density..),                           # add a historgram layer
                        fill="cornflowerblue")
+p = p + annotate("segment",                                          # show the mean as a dashed line
+                 x=mu, xend=mu, y=0, yend=0.9 * ytop,
+                 colour="darkorange1", size=1, linetype="dashed")
 p = p + annotate("text",
                  x=mu, y=0, size=10,
                  label=paste("TRUE MEAN, µ=", format(round(mu, 2), nsmall=2)))
+p = p + annotate("text",                                             # annotate the lines
+                 x=mu,,
+                 y=0.95 * ytop,
+                 colour="darkorange3",
+                 label=paste("µ=", format(round(mu, 2), nsmall=2)))
 p = p + xlim(-50, -10)             # set x-axis limits
 p = p + xlab("value") + ylab("frequency")                # add axis labels
 p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
@@ -73,23 +82,28 @@ p
 
 ## Estimate the mean of the data using subsamples of the original dataset
 
-The dataset in Figure \@ref(fig:static-sample) contains 100 uniformly-distributed values.
+The dataset in Figure \@ref(fig:static-sample) contains 100 uniformly-distributed values (listed below).
 
 ```{r sample-vals, echo=FALSE}
 data$vals
 ```
 
-We can choose 10 of these, randomly.
+We can choose 10 of these, randomly, and calculate a mean.
 
 ```{r subsample-vals, echo=FALSE}
 subsample = replicate(1, sample(data$vals, 10))
 subsample
 ```
 
-And calculate the mean as `r format(round(mean(subsample), 2), nsmall=2)`. This is a single *point estimate* of the mean of the original dataset. It is (probably…) not exactly the same as the true mean in the dataset of Figure \@ref(fig:static-sample), but it is likely to be fairly close.
+Here, we calculate the mean as `r format(round(mean(subsample), 2), nsmall=2)`. This is a single *point estimate* of the mean of the original dataset. It is (probably…) not exactly the same as the true mean in the dataset of Figure \@ref(fig:static-sample), but it is likely to be fairly close.
 
-It turns out that if we take many subsamples and calculate their mean, even though none of the means are likely to be the true mean of the original distribution, the subsample means tend to be close to the true mean. And they fall around the true mean in a Bell Curve: the Normal Distribution, as shown in Figure \@ref(fig:static-normal).
+<div id="note">
+The process of estimating the mean of the original dataset by calculating the mean of a subsample is analagous to many measurements you will make in the course of an experiment.
+</div>
 
+It turns out that if we take many subsamples and calculate their mean, even though none of the means are likely to be the *true* mean of the original distribution, the subsample means do tend to be close to the true mean. And they fall around the true mean in a Bell Curve: the Normal Distribution, as shown in Figure \@ref(fig:static-normal). In particular, the *mean* of the estimates tends to be close to the true mean.
+
+<div align="center">
 ```{r static-normal, echo=FALSE, fig.cap="1000 subsamples of 10 numbers randomly chosen from the original population. The true mean is expected to be close to -30, and the estimated mean using the means of subsamples is shown in the figure. The distribution of subsampled means follows a Normal Distribution."}
 subsamples = data.frame(vals=replicate(1000, sample(data$vals, 10)))
 means = data.frame(vals=colMeans(subsamples))
@@ -128,15 +142,18 @@ p = p + theme(plot.background = element_rect(fill = figbg,           # colour ba
                                              color = figbg))
 p 
 ```
+</div>
 
 <details>
   <summary>Click here to toggle information about The Wisdom of the Crowd</summary>.
-There's a surprising effect that if you ask many people for an estimate of some quantity, the mean of their guesses will tend to be very close to the true value, even though no guess may be very accurate on its own. This is the result of the same process that we describe above.
+There's a surprising effect that if you ask many people for an estimate of some quantity, the mean of their guesses will tend to be very close to the true value, even though no guess may be very accurate on its own. This is the result of the same process that we describe above. The video below describes this phenomenon.
 
 - [The Wisdom of the Crowd](https://www.youtube.com/watch?v=iOucwX7Z1HU)
 </details>
 
 # Interactive Example
+
+The interactive example is intended to help you develop an intuition for how changing the number of subsamples (analogous to the number of replicate experiments) and number of datapoints per subsample (number of individuals in an experiment) affects the accuracy of your experimental measurement.
 
 ## Upper Panel
 
@@ -296,3 +313,4 @@ renderPlot({
 4. How does changing the number of **datapoints per subsample** affect the accuracy of the mean estimated in the lower panel?
 5. If you can only make 90 measurements, should you choose to take 3 subsamples with 30 datapoints in each, or 30 subsamples with 3 datapoints in each? Why would you make that choice?
 </div>
+
