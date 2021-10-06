@@ -61,21 +61,26 @@ The current versions of the notebook HTML pages are linked below, for convenienc
 
 ### Session 2 (Thursday October 14th)
 
-- [01-What is Statistics?](notebooks/02-01-statistics.html)
-- [02-What Does Statistics Do, Anyway?](notebooks/02-02-statistics.html)
-  - [02a-Exploring a Statistical Distribution (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/02-02a-sampling/)
-  - [02b-Exploring a Statistical Relationship (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/02-02b-linear/)
-- [03-Where Do Statistical Distributions Come From?](notebooks/02-03-origins.html)
-  - [03a-Where Does the Normal Distribution Come From? (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/02-03a-generate_normal/)
-- [04-What is a Dataset?](notebooks/02-04-dataset.html)
-- [05-Data Formats and File Formats](notebooks/02-05-data_formats.html)
-- [06-Hypothesis Testing](notebooks/02-06-nhst.html)
+- [01-What is a Dataset?](notebooks/02-01-dataset.html)
+- [02-Data Formats and File Formats](notebooks/02-02-data_formats.html)
+- [03-How to Access Data from Public Databases](notebooks/02-03-public_databases.html)
 
 ### Session 3 (Thursday October 21st)
 
-- [04-An Introduction to Data Visualisation](notebooks/04-visualisation.html)
-  - [04a-Better Tools Than Barcharts (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-04a-barchart/)
-- [05-How to Access Data from Public Databases](notebooks/05-public_databases.html)
+- [01-What is Statistics?](notebooks/03-01-statistics.html)
+- [02-What Does Statistics Do, Anyway?](notebooks/03-02-statistics.html)
+  - [02a-Exploring a Statistical Distribution (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-02a-sampling/)
+  - [02b-Exploring a Statistical Relationship (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-02b-linear/)
+- [03-An Introduction to Data Visualisation](notebooks/03-04-visualisation.html)
+  - [04-Better Tools Than Barcharts (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-04a-barchart/)
+- [04-Preparing Your Figures For An Audience](notebooks/03-04-figure_preparation.html)
+
+### Supplementary Information
+
+- [01-Where Do Statistical Distributions Come From?](notebooks/supp-origins.html)
+  - [01a-Where Does the Normal Distribution Come From? (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/supp-generate_normal/)
+- [02-Hypothesis Testing](notebooks/supp-nhst.html)
+
 
 --------------
 
