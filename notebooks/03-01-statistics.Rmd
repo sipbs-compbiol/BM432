@@ -34,23 +34,9 @@ figbg = "whitesmoke"
 
 # Introduction
 
-The goal of this workshop is to introduce, or reintroduce, common statistical tools and ideas, and help you develop an insight into *how* they work and *when* they should - and perhaps also when they ought not to - be applied. This is not a formal mathematical presentation of statistical methods, or statistical *theory*. Rather, this workshop is a primer that describes and discusses how and why statistical methods are applied to answer research questions, and prompts you to critically interpret their application and interpretation in the literature.
+The goal of this part of the workshop is to introduce, or reintroduce, common statistical tools and ideas, and help you develop insight into *how* they work and *when* they should - and perhaps also when they ought not to - be applied. This is not a formal mathematical presentation of statistical methods, or statistical *theory*. Rather, this workshop is a primer that describes and discusses how and why statistical methods are applied to answer research questions, and prompts you to critically interpret their application and interpretation in the literature and your own work.
 
-Although we will not dive into theory or mathematics in detail, you should understand that these methods *are* mathematical, and are not constructed in an *ad hoc* way. There is sound theory behind them, even when we might criticise a particular application of a method.
-
-## What You Should Expect From This Workshop
-
-The workshop is presented in a *flipped* format. That is, the homework comes *before* the class, and we use an online Zoom session to work though *your* questions and discussions prompted by the material.
-
-This material is broken up into notebooks (like this one) which you should read. Each notebook should be digestible as a standalone piece of material (though they should be read more-or-less in order). You should attempt the exercises in each notebook and - ideally - also work through all the interactive sessions.
-
-The interactive sessions are linked to from the main notebooks. The materials are all presented online, but you may run them on your own computer if you install [`RStudio` Desktop](https://rstudio.com/products/rstudio/download/) - a free IDE (Integrated Development Environment) and download the source code.
-
-You will not be expected to write your own code in `R`, only to understand the statistical methods, decide which are appropriate to answer any questions you are given, apply the methods, and interpret the answers you get.
-
-<div id="warning">
-**Please be aware that technical questions about `RStudio` etc. will not be addressed in the live online Zoom session**. If you encounter technical difficulties you should email one of the workshop presenters when you encounter the problem.
-</div>
+Although we will not dive into theory or mathematics in detail, you should understand that statistical methods *are* mathematical in nature, and are not constructed in an *ad hoc* way. There is sound theory behind them, even when we might criticise particular application of a method.
 
 ## A Quick Word About Statistical Computing
 
@@ -64,8 +50,8 @@ The best way to explore and understand statistics is *via* computing tools. `R` 
 
 In the spirit of openness, each notebook will have a section where you can read and inspect the `R` code used in it. In addition, all this material is developed openly and can be downloaded from `GitHub`, and run on your own computer. If you like, you can suggest modifications and extra material through the website linked below:
 
-- [https://github.com/widdowquinn/MP429](https://github.com/widdowquinn/MP429) - `GitHub` repository
-- [Issues page for questions, suggestions, etc.](https://github.com/widdowquinn/MP429/issues)
+- [https://github.com/sipbs-compbiol/BM432](https://github.com/sipbs-compbiol/BM432) - `GitHub` repository
+- [Issues page for questions, suggestions, etc.](https://github.com/sipbs-compbiol/BM432/issues)
 
 
 
@@ -87,6 +73,10 @@ What is a *model*, though?
 In all these cases, a *model* is a **simplified representation** of something else. We do not expect every Swiss to eat exactly 22.36lb of chocolate a year, but it could greatly simplify some things to imagine that they do.
 
 We might want to simplify the "real thing" to make it easier for others to understand (like the tube map), but in statistics we often do this to make calculations easier, or possible at all.
+
+```{r karlin-quote, echo=FALSE, fig.cap="Models should be seen as a tool to help you understand research, not as a replacement for it."}
+knitr::include_graphics("images/models_sharpen_questions.jpg")
+```
 </div>
 
 <details>
@@ -100,9 +90,11 @@ But statistical models are neither true nor false. They are tools, or *construct
 
 Many courses will teach a "Hypothesis Testing Decision Tree," or something similar (see below). This may look familiar to you from courses you have studied before. 
 
-![A Hypothesis Testing Decision Tree, image linked from Pirk *et al.* (2013) *J. Apic. Res.* doi:10.3896/IBRA.1.52.4.13](https://www.researchgate.net/profile/Christian-Pirk/publication/256303889/figure/fig5/AS:392777901854729@1470656957861/A-basic-decision-tree-on-how-to-select-the-appropriate-statistical-test-is-shown_W640.jpg)
+```{r decision-tree, echo=FALSE, fig.cap="A Hypothesis Testing Decision Tree, image linked from Pirk *et al.* (2013) *J. Apic. Res.* [doi:10.3896/IBRA.1.52.4.13](https://doi.org/10.3896/IBRA.1.52.4.13)"}
+knitr::include_graphics(rep("https://www.researchgate.net/profile/Christian-Pirk/publication/256303889/figure/fig5/AS:392777901854729@1470656957861/A-basic-decision-tree-on-how-to-select-the-appropriate-statistical-test-is-shown_W640.jpg"))
+```
 
-These flowcharts do not encourage much in the way of thought about the underlying structures, models and processes of these methods. Some people might see this flowchart and think that the small collection of tests shown in it can give good answers in all circumstances (but this is not the case!).
+These flowcharts do not encourage much in the way of thought about the underlying structures, models and processes of these methods. Some people might presenmt this flowchart as if the small collection of tests shown in it can give good answers in all circumstances, but this is not the case!.
 
 The classical statistical methods shown in these flowcharts are often the most appropriate - that's why we teach them. But they can sometimes be inflexible and fragile, unable to adapt to novel contexts not met by their assumptions. They can fail in unpredictable ways when they meet contexts that don't fit the underlying assumptions of the method. These novel contexts *may* arise in your research, and flowcharts like these don't tell you where the boundaries of applicability are. This is why it is important to **understand your question, your data, and the methods themselves**.
 
@@ -110,7 +102,7 @@ The classical statistical methods shown in these flowcharts are often the most a
 
 Statistics is a toolbox containing many tools that will make your life easier if you know when they should be used. 
 
-In this workshop, we aim to give you some intuition, insight and tools to help you understand common statistical methods you might encounter, why they are used and - occasionally - why they perhaps should not have been used. It's perhaps true that you can't truly understand a statistical approach unless you understand the mathematics behind it - and sometimes the computational implementation, too - but you can get a long way by exploring examples. We hope to help you explore enough examples that you can follow the reasoning behind, and limitations of, some common statistical approaches, and know when to use them yourself. 
+In this workshop, we aim to help you develop some intuition, insight and tools to help you understand common statistical methods you might encounter, why they are used and - occasionally - why they perhaps should not have been used. It's perhaps true that you can't truly understand a statistical approach unless you understand the mathematics behind it - and sometimes the computational implementation, too - but you can get a long way by exploring examples. 
 
 One of our goals is to encourage you to look beyond a rote application of "The Null Ritual" (coined in [Gigerenzer (2004) *J. Socio-Econ.* doi:10.1016/j.socec.2004.09.033](https://doi.org/10.1016/j.socec.2004.09.033)), as though it's a hammer and every statistical problem is a nail to be hammered down flat (to *p*<0.05).
 
@@ -123,7 +115,7 @@ The Null Ritual runs like this:
 <div id="warning">
 You will see this ritual practised mechanically in many published papers. **It is a bad habit in science.** 
 
-The Null Ritual is frequently observed in publications where Null Hypothesis Significance Testing (NHST) has been performed. We will explore NHST in more detail, and describe alternative approaches to both NHST and the Null Ritual, later.
+The Null Ritual is frequently observed in publications where Null Hypothesis Significance Testing (NHST) has been performed. We explore NHST in more detail in some [supplementary material](./supp-origins.html).
 </div>
 
 <div id="note">
@@ -131,14 +123,14 @@ Ths workshop does not attempt to teach you the "right" way to do statistics, in 
 
 There is no recipe for the "right" way to do statistics. And there is no shortcut for *understanding the question* you wish to ask with your experiment, or whether your chosen statistical method is likely to actually answer that question.
 
-We are instead trying to help explore some *statistical thinking*, in terms of understanding the bases of common statistical tools, their applications, and their limitations. This will help you determine whether a particular approach can answer a stated question. Sometimes, you might find you need to learn how to use a new tool.
+We are instead trying to help explore some *statistical thinking*, in terms of understanding the bases of some common statistical tools, their applications, and their limitations. This will help you determine whether a particular approach can answer a stated question. Sometimes, you might find you need to learn how to use a new tool.
 
 **Whichever tool you use, understanding your own experiment and data or, if you're critically assessing someone else's research, understanding their experiment and data, should be the foundational starting point for all analyses.**
 </div>
 
 <details>
   <summary>Click to toggle some advice about learning more about statistics</summary>
-If I were to recommend three tools to learn, and a book to learn them from, I would point you to Richard McElreath's *Statistical Rethinking*, which covers:
+If I (LP) were to recommend three tools to learn, and a book to learn them from, I would point you to Richard McElreath's *Statistical Rethinking*, which covers:
 
 1. Bayesian data analysis
 2. Multilevel models
