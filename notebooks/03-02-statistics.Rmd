@@ -36,34 +36,31 @@ The measured variables that might *explain* the behaviour of the response variab
 
 <div id="note">
 - **Independent variable**: equivalent to *explanatory variable*. Often under the experimenter's direct control, and typically plotted on the $x$-axis.
-- **Dependent variable**: equivalent to *response variable*. Not under the experimenter's direct control, and usually considered an *outcome* of an experiment. Typically plotted on the $y$-axis.
+- **Dependent variable**: equivalent to *response variable*. Not under the experimenter's direct control, and usually considered an *outcome* of an experiment whose value is influenced by one or more *independent* variables. Typically plotted on the $y$-axis.
 
 *Explanatory* variables **explain** *response* variables.
 
 *Dependent* variables **depend on** *independent* variables.
 </div>
 
-<div align="center">
-```{r plant-growth, echo=FALSE}
-datatable(PlantGrowth, width=400,
-          caption="Table 1: Data from an experiment assessing the effect of two treatment conditions on crop yield, in comparison to a 'control' (no treatment). `weight` is the response variable, `group` is the (assigned) explanatory variable.")
+```{r plant-growth, echo=FALSE, fig.cap="Data from an experiment assessing the effect of two treatment conditions on crop yield, in comparison to a 'control' (no treatment). `weight` is the response variable, `group` is the (assigned) explanatory variable."}
+datatable(PlantGrowth, width=400)
 ```
-</div>
 
 ## "Understanding Questions" and "Prediction Questions"
 
 Statistics allows us to calculate answers to many kinds of questions. These often belong to one of two key types: *understanding* questions, and *prediction* questions.
 
-- ***understanding* questions** might take the form of determining whether changing the value of an *explanatory* variable affects the value of the *response* variable. The question might be asking whether changing the *explanatory variable* affects the *response variable* at all or, if it does, how much of an effect there is.
-- ***prediction* questions** also need to determine a similar relationship between *explanatory* and *response* variables, but they then seek to use those relationships to *predict* future responses of individuals that haven't been measured yet. These predictions will be made on the basis of measurements of explanatory variables obtained in the future.
+- ***understanding* questions** might take the form of determining whether changing the value of an *explanatory* variable affects the value of the *response* variable. The question might be asking whether changing the *explanatory variable* affects the *response variable* at all or, if it does, *how much* of an effect there is.
+- ***prediction* questions** also need to determine a similar relationship between *explanatory* and *response* variables, but they then seek to use those relationships to *predict* future behaviour that hasn't been measured yet.
 
 ## Models
 
-In all questions, whether for understanding or prediction, we rely on *modelling* the behaviours of the variables we measure, and modelling the interactions between those variables - such as the way that explanatory variables influence the response variable value. Modelling is a broad, complex field, but for the purpose of this workshop we can consider *models* to be simplified representations of data, and of the relationships between data. In this workshop, we'll mostly be considering two main kinds of model.
+In all questions, whether for understanding or prediction, we rely on *modelling*: modelling the behaviours of the variables we measure, and modelling the interactions between those variables - such as the way that explanatory variables influence the response variable value. Modelling is a broad, complex field, but for the purpose of this workshop we can consider *models* to be simplified representations of a system, including its data and relationships between elements of the system.
 
 ### Representing data with a model
 
-Firstly, although we measure data in our experiments, some statistical approaches (called *parametric* methods) do not use the raw data directly to calculate their result. Instead, they use the data to calculate values that are *parameters* of a *distribution* (e.g. *mean* and *standard deviation*). The corresponding distribution is an idealised *model* of the measurements, and it simplifies our calculations to use these models to represent our data with the model, ratehr than using the actual individual datapoints. 
+Firstly, although we measure data in our experiments, some statistical approaches (called *parametric* methods) do not use the raw data directly to calculate their result. Instead, they use the data to calculate values that are *parameters* of a *distribution* (e.g. *mean* and *standard deviation*). The corresponding distribution is an idealised *model* of the measurements, and it simplifies our calculations to use these models to represent our data with the model, instead of using the actual individual datapoints. 
 
 <div id="note">
 If you have ever performed a *t*-test or similar statistical analysis, based on the means and standard deviations of two datasets, you were using *models* of your data to calculate the statistical result.
@@ -73,18 +70,17 @@ The means and standard deviations you used in your *t*-test were parameters that
 
 <details>
   <summary>Click to toggle a wee bit of historical context</summary>
-Statistical approaches can be computationally expensive. So, before computational approaches were common, we used to rely on books of *statistical tables* that contained precomputed values for statistical distributions. Being able to model our rough, raw data as these distributions meant that we could then use the values from the statistical tables to represent our data "cleanly" and quickly. This simplified matters very much and, naturally, the teaching of statistics (especially applied statistics) focused on methods that could use the values in these tables. These methods are the "classical" statistical tests. They could be performed readily, so they were taught.
+Statistical approaches can be computationally expensive. So, before computational approaches were common, we used to rely on books of *statistical tables* that contained precomputed values for statistical distributions. Being able to model our rough, raw data as these distributions meant that we could then use the values from the statistical tables to represent our data "cleanly" and quickly. This simplified matters very much and, naturally, the teaching of statistics (especially applied statistics) focused on methods that could use the values in these tables. These methods are - broadly - the "classical" statistical tests you were probably first taught. In essence, these tests could be performed readily, so they were taught first.
 
 Today, computationally-expensive approaches like Monte Carlo methods and Bayesian statistics have been made much more accessible, can use the original data directly, and are readily applied to more complex datasets and questions than could be used with the classical methods.
 </details>
 
-A key concern in *parametric* methods is ensuring that the choice of model distribution to represent an experimental dataset is appropriate, and we will spend some time in the workshop notebooks exploring how common distributions represent data. Figure \@ref(fig:model-normal) below, shows a set of 200 measured datapoints and the frequency with which measurements were made, as a histogram. There is also a curve describing the expected distribution of frequencies of values (this is called a *Normal distribution*, we'll come back to this later). 
+A key concern in *parametric* methods is ensuring that the choice of model distribution to represent an experimental dataset is appropriate, and [a supplementary notebook explores how common distributions represent data](./supp-origins.html). Figure \@ref(fig:model-normal) below, shows a set of 200 measured datapoints and the frequency with which particular values were seen to occur, as a histogram. There is also a curve describing the expected distribution of frequencies of values (in this case, it is a *Normal distribution*). 
 
 Notice that the sampled data does not follow the shape of the curve exactly.
 
-Statistical methods that use a *model* (like a Normal distribution) to represent the data are called *parametric* methods. Those which use data directly and do not represent it as an idealised model are called *nonparametric* methods. We will describe both approaches in this workshop.
+Statistical methods that use a *model* (like a Normal distribution) to represent the data are called *parametric* methods. Those which use data directly and do not represent it as an idealised model are called *nonparametric* methods.
 
-<div align="center">
 ```{r model-normal, echo=FALSE, fig.cap="Two hundred 'measured' data values (histogram) and the corresponding Normal distribution model (curve) generating those values. The modelled distribution is entirely described by the *parameters*: mean=10 (µ) and standard deviation=3 (σ). We can see here that the frequency of real data values don't match the curve exactly; the model simplifies our representation of the 'noisy' data. The dashed line represents the mean value of the model, and the dotted lines represent values at +/- one and two standard deviations from the mean."}
 mu = 10                          # define mean of distribution
 sd = 3                           # define standard deviation of distribution
@@ -117,14 +113,13 @@ p = p + theme(plot.background = element_rect(fill = figbg,           # colour ba
                                              color = figbg))
 p                                                                    # show plot
 ```
-</div>
 
 <div id="note">
 Please take some time to explore a statistical distribution interactively in your browser, at the link below.
 
-- [2a. Exploring a Statistical Distribution **INTERACTIVE SESSION**](https://sipbs-bm432.shinyapps.io/02-01a-sampling/)
+- [03-02a. Exploring a Statistical Distribution **INTERACTIVE SESSION**](https://sipbs-bm432.shinyapps.io/03-02a-sampling/)
 
-In this session, you can explore the way in which the parameters of a statistical distribution alter its shape, and how well it appears to represent measured data.
+In this session, you can explore the way in which the parameters of a statistical distribution alter its shape, and how well the distribution appears to represent measured data, depending on how much data you are able to collect.
 </div>
 
 <div id="warning">
@@ -132,14 +127,18 @@ In this session, you can explore the way in which the parameters of a statistica
 
 One strategy for choosing a distribution to represent your data is to plot a histogram of that data and, by looking at it, choose an appropriately-shaped distribution that looks "similar". In his book *Statistical Rethinking*, Richard McElreath refers to this as "Histomancy", by analogy to haruspicy, necromancy and other fake magic arts that claimed to disclose hidden truths by looking at entrails, or speaking with the dead.
 
-As you will have seen from the interactive session, even data that is drawn specifically from a Normal Distribution does not always look like a Normal Distribution when presented as a histogram. In general, it may very well be that a given choice of distribution is good or poor, but an appropriate choice cannot be determined only by examining histograms, or by guesswork. We need to apply sound principles to our choice of statistical methods. In this workshop we attempt to help you develop some intuition about those choices.
+As you will have seen from the interactive session, even data that is drawn specifically from a Normal Distribution does not always look like a Normal Distribution when presented as a histogram. In general, it may very well be that a given choice of distribution is good or poor, but an appropriate choice cannot be determined only by examining histograms, or by guesswork. We need to apply sound principles to our choice of statistical methods.
+
+[One of the supplementary notebooks](./supp-origins.html) describes how the way you collect and measure data determines the appropriate statistical distribution.
 </div>
 
-Even an apparently simple process, like describing a dataset by its mean/average value and a standard deviation, is **modelling the dataset**.
+Remember, even an apparently simple process, like describing a dataset by its mean/average value and a standard deviation, is **modelling the dataset**.
 
 ### Representing a relationship with a model
 
-The actual relationship between explanatory and response variables (for example, increasing the explanatory variable - number of tins of beans - increases the response variable - weight of a shopping trolley) can be described by a simplified representation of that relationship: this is also a *model*. For example, if we suspect that the amount of sunlight received by a plant influences its growth, we might try to fit a linear regression between measured values of "plant height" (response variable) and "hours of sunlight received" (explanatory variable). Here, the line of best-fit is a *model* of the relationship between those variables, reflecting our *belief* in a linear relationship between the two variables. The inferred values of *intercept* and *gradient* (or *slope*) for this line are *parameters* of that model.
+The actual relationship between explanatory and response variables (for example, increasing the value of the explanatory variable increases the value of the response variable - like putting more tins of beans in a bag increases the weight of that bag) can often be described by a simplified representation of that relationship. This simplified relationship is also a *model*. 
+
+For example, if we suspect that the amount of sunlight received by a plant influences its growth, we might try to fit a straight line describing the relationship between measured values of "plant height" (response variable) and "hours of sunlight received" (explanatory variable). Here, the line of best-fit is a *model* of the relationship between those variables, reflecting our *belief* in a linear relationship between the two variables. The inferred values of *intercept* and *gradient* (or *slope*) for the straight line are *parameters* of the model describing the relationship.
 
 <div id="note">
 A researcher's choice of model (and of statistical method) embodies a set of beliefs about the processes that generated the data. In effect, they represent the researchers' beliefs about the natural world or, at least, about the experiment that was performed.
@@ -193,15 +192,17 @@ p
 
 Much of statistical analysis of *relationships* between variables is about estimating (or *fitting*) the values of parameters for these models, and exploring the implications of the *fitted* parameters that result.
 
+For example, if we fit a straight-line relationship to explain the change in weight of a bag filled with tins of beans, as we fill it with different numbers of tins, we would obtain a value for the gradient, and the intercept. The gradient might be interpreted as the average mass of a single tin of beans; the intercept might be interpreted as the mass of the empty bag. The parameters of the model are interpretable as real-world concepts.
+
 <div id="note">
 Please take some time to explore a statistical relationship interactively in your browser, at the link below.
 
-- [2b. Exploring a Statistical Relationship **INTERACTIVE SESSION**](https://sipbs-bm432.shinyapps.io/02-02b-linear/)
+- [03-2b. Exploring a Statistical Relationship **INTERACTIVE SESSION**](https://sipbs-bm432.shinyapps.io/03-02b-linear/)
 
 In this session, you can explore the way in which the parameters of a statistical model alter how well it appears to fit measured data, what we mean by a "good" and "bad" fit, and how we represent that.
 </div>
 
-Whenever we fit a curve to our data, the curve is a model and we are **representing the relationship between the data as a model**. The parameters (e.g. intercept and slope for a linear regression; exponent for an exponential curve) are then **estimated parameters for the model**.
+Whenever we fit a curve to our data, the curve is a model and we are **representing the relationship between the data as a model**. The parameters (e.g. intercept and slope for a linear regression; exponent for an exponential curve) are then **estimated parameters for the model**. A "good" model will have parameters that are understandable in terms of the real-world, or the system under study.
 
 # `R` code used in this notebook
 
