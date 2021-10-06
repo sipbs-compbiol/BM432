@@ -32,14 +32,20 @@ Much of practical statistics in the literature still revolves around the idea of
 
 The idea behind *falsificationism* and hypothesis testing is straightforward:
 
-- We propose a hypothesis $H$
-- We show that hypothesis $H$ *necessarily* implies the existence of observation $D$
-- We look for the existence of $D$
+- **Your experiment should be able to *disprove* your hypothesis, *not* merely confirm it.**
 
-If we look for $D$ and don't find it, we can then state that $H$ is false.
+This is stated formally as:
+
+- We propose a hypothesis $H$ (e.g. eating fish once a week for a year always increases IQ by at least 20 points)
+- We show that hypothesis $H$ *necessarily* implies the existence of observation $D$
+- We look for the existence of $D$ (e.g. we take people who have never eaten fish and measure their IQ; we then give them fish once per week for a year, and measure their IQ after the process)
+
+If we look for $D$ and don't find it (i.e. the people who ate fish do not show an increase in IQ of at least 20 points), we can then state that $H$ is false.
 
 <div id="warning">
-If we look for $D$ and find it, this **does not imply that $H$ is true**! $D$ might also be the result of other hypotheses that are not compatible with $H$.
+If we look for $D$ and find it (i.e. we do see the increase we're looking for in those who ate fish), this **does not imply that $H$ is true**! $D$ might also be the result of other hypotheses that are not compatible with $H$.
+
+Failing to refute a hypothesis leads to *provisional acceptance* of the hypothesis, not proof of the hypothesis.
 </div>
 
 A classic example of this kind of logic is the *Black Swan*.
@@ -52,10 +58,10 @@ A classic example of this kind of logic is the *Black Swan*.
 
 It's tempting to think that this mode of logic - pose questions as hypotheses to be falsified absolutely - is a reliable basis for making scientific progress. But, although it is important, it has significant limitations.
 
-1. The experiments we conduct are represented as models when we test them; these models may not correspond exactly to the data or to the experimental system. The imperfection of that correspondence may be important.
+1. The experiments we conduct are represented as *models* when we test them; these models may not correspond exactly to the data or to the experimental system. The imperfection of that correspondence may be important.
 2. Most of the questions we ask as scientists are not "logically discrete." They cannot be framed as hypotheses that can be contradicted by a single example
 3. Observations are prone to error
-4. Quantitative hypotheses do not concern total presence or absence
+4. Quantitative hypotheses do not always concern total presence or absence
   
 For example, many scientific hypotheses do not resemble "all swans are white" but are more like:
 
@@ -67,6 +73,10 @@ $$H_0: \textrm{Black swans are rare}$$
 
 How are we to falsify these hypotheses? How do we even agree on what "rare" means? It has suddenly become much more difficult than finding a single black swan.
 
+<div id="note">
+With our fish-eating IQ example, maybe our hypothesis should be something like: "eating fish once per week for a year usually increases IQ"? But what does "usually" mean in that case?
+</div>
+
 It might be argued that these are not good hypotheses. But if that is so, most important scientific hypotheses are also not good hypotheses.
 
 <div id="questions">
@@ -76,34 +86,38 @@ It might be argued that these are not good hypotheses. But if that is so, most i
 
 ## Competing hypotheses
 
-As we cannot absolutely falsify most hypotheses, we instead approach falsificationism by defining *competing hypotheses* $H_1$ and $H_2$, and desiging experiments that can differentiate between them. But it is rare that this differentiation is absolute. We can only make *probabilistic* statements about which of the competing hypotheses is most likely to be true, to some level of confidence.
+As we cannot absolutely falsify most hypotheses, we often instead define *competing hypotheses* $H_1$ (e.g. eating fish has no effect on IQ) and $H_2$ (eating fish increases IQ), and design experiments that can differentiate between them. But it is rare that this differentiation is absolute and able to exclude one possibility entirely. We can only make *probabilistic* statements about which of the competing hypotheses is most likely to be true, to some level of confidence.
 
-This approach can be summarised as *Neyman-Pearson Decision Theory*:
+<div id="note">
+In other words, we need statistics to tell us which hypothesis is most likely.
+</div>
+
+This approach is summarised formally as *Neyman-Pearson Decision Theory*:
 
 1. Set up two statistical hypotheses $H_1$ and $H_2$
-2. Decide on *error rates* - how willing you are to accept false positives or false negatives - and a sample size, based on cost-benefit analysis (for instance, controlling error rate takes more datapoints and is more expensive, or ethically hard to justify); this defines a *rejection region* for $H_1$ and $H_2$
-3. If the data falls in the *rejection region* for $H_1$, accept $H_2$.
+2. Decide on *error rates* - how willing you are to accept the *wrong answer* (i.e. false positives or false negatives) - and a sample size, based on cost-benefit analysis. For instance, controlling error rate takes more datapoints and is more expensive, or ethically hard to justify, and this constrains how certain we can be about our statistical result. These error rates define a *rejection region* for $H_1$ and $H_2$.
+3. If the data falls in the *rejection region* for $H_1$, we instead accept $H_2$.
 
+<div id="note">
 Here:
 
 - false positive means accepting $H_2$ in error
 - false negative means accepting $H_1$ in error
 
-<div id="note">
 When we "accept" a hypothesis it doesn't mean that we believe it, only that we behave as if it were true
 </div>
 
-You may be more familiar with *Fisher's Null Hypothesis Testing*:
+You may be more familiar with the same idea expressed as *Fisher's Null Hypothesis Testing*:
 
-1. Set up a statistical *null hypothesis* $H_0$ (this need not be a nil hypothesis, i.e. zero difference)
-2. Report the exact level of *statistical* significance (e.g. $p=0.051$ or $p=0.049$). Do not arbitrarily use a 5% threshold, and do not talk about accepting or rejecting a hypothesis.
+1. Set up a statistical *null hypothesis* $H_0$ (this *need not* be a nil hypothesis, i.e. zero difference between control and treatment, but often experiments are set up that way).
+2. Report the exact level of *statistical* significance of your result, given the null hypothesis (e.g. $p=0.051$ or $p=0.049$). **Do not** arbitrarily use a 5% threshold, and do not talk about accepting or rejecting a hypothesis.
 3. Only use this procedure if you know very little about the problem at hand.
 
 <div id="warning">
 Another approach, which does not match either of these approaches exactly, is characterised as **The Null Ritual**:
 
 1. Set up a statistical null hypothesis of "no mean difference" or "zero correlation." Don't specify the predictions of your research hypothesis or of any alternative substantive hypotheses.
-2. Use 5% as a convention for rejecting the null. If significant, accept your research hypothesis. Report the result as *p*<0.05, *p*<0.01, or *p*<0.001 (whichever comes next to the obtained *p*-value).
+2. Use 5% as an arbitrary convention for rejecting the null hypothesis. If the p-value is "significant", accept your research hypothesis, whatever it is. Report the result as *p*<0.05, *p*<0.01, or *p*<0.001 (whichever comes just above to the *p*-value you actually obtained).
 3. Always perform this procedure.
 
 The Null Ritual is frequently observed in publications where Null Hypothesis Significance Testing (NHST) has been performed. **It is a bad habit in science.**
@@ -118,7 +132,7 @@ Scientists and statisticians often argue, sometimes quite loudly, about the "cor
 
 # Confidence Intervals
 
-So far, when we have estimated the values of model parameters, such as the mean value in a set of datapoints, we have stated a *point estimate*: a single numerical value. It is more appropriate to acknowledge that our estimate is uncertain, and provide instead a range of plausible values that the parameter could take.
+So far, when we have estimated the values of model parameters, such as the mean value in a set of datapoints, we have usually stated a *point estimate*: a single numerical value. It is more appropriate to acknowledge that our estimate is uncertain, and provide instead a range of plausible values that the parameter could take and still describe the data well.
 
 <div id="note">
 You have seen an example of this in the interactive notebook "Exploring a Statistical Relationship"
@@ -158,7 +172,7 @@ quantiles = quantile(samples$vals, probs=c(0, 0.025, 0.05, 0.1, 0.25, 0.50, 0.75
 kable(quantiles, digits=2, col.names="estimate") %>% kable_styling("striped")
 ```
 
-The smallest and largest estimates of the mean are `r round(quantiles[["0%"]], 2)` and `r round(quantiles[["100%"]], 2)` (the 0% and 100% percentiles), so we know that all estimates lie between those two limits (inclusive). As 100% of estimates lie in this range, we might call this our *100% Confidence Interval*: `r round(quantiles[["0%"]], 2)`-`r round(quantiles[["100%"]], 2)` - we are absolutely confident that the true mean lies in this range.
+The smallest and largest estimates of the mean are `r round(quantiles[["0%"]], 2)` and `r round(quantiles[["100%"]], 2)` (the 0% and 100% percentiles), so we know that all our estimates lie between those two limits (inclusive). As 100% of estimates lie in this range, we might call this our *100% Confidence Interval*: `r round(quantiles[["0%"]], 2)`-`r round(quantiles[["100%"]], 2)` - **we are absolutely confident that the true mean lies in this range**.
 
 In practice, the convention is more often to report 95%, 90%, or 50% confidence intervals. These are the quantile/percentile ranges (2.5%-97.5%), (5%-95%), and (25%-75%). They are tabulated below for this data, and shown in Figure \@ref(fig:empirical-ci)
 
@@ -170,7 +184,7 @@ In practice, the convention is more often to report 95%, 90%, or 50% confidence 
 - As the confidence level gets larger (50% to 90% to 95%), the limits of the confidence interval range also get larger.
 - In this case, each interval contains what we know to be the true mean of the population: 10.
 - Each confidence interval is approximately symmetric about the median value (`r round(quantiles[["50%"]], 2)`)
-- The more datapoints you have, the narrower (more accurate) your confidence intervals will be
+- The more datapoints you have, the narrower (more precise) your confidence intervals will be
 
 These are **empirical confidence intervals**, because they are determined directly from our list of estimated means.
 </div>
@@ -256,7 +270,7 @@ As with empirical confidence intervals:
 In the context of a Normal Distribution, the Confidence Interval may be interpreted in a number of ways, and you will probably see them all in the literature. For instance:
 
 - The CI represents the "*central mass*" of the distribution. For example, 95% of all values in the distribution can be found in the 95% CI. Likewise, 50% of all values in the distribution can be found in the 50% CI.
-  - So, if we were to make 100 observations we should expect 95% of those observations to lie within the 95% confidence interval. We can *predict* likely future values.
+  - So, if we were to make 100 observations we should expect 95% of those observations to lie within the 95% confidence interval. **This means that we can *predict* likely future values drawn from the same distribution**.
 - If our distribution represents a sampled/observed dataset, we can interpret a CI to be our confidence that the *mean* of the distribution lies in that range
   - For example, we would be "95% confident" that the mean value of our data lay in the 95% CI for our observations.
 </div>
@@ -270,26 +284,30 @@ This implies that the researchers calculated a mean and standard deviation for t
 <div id="note">
 Back in the old days, we used to use books of *statistical tables* which had these numbers pre-printed in a form we could use for calculations. Packages like `R` make generating these numbers trivial, today.
 
-![Statistical table of Normal Distribution percentiles. Betsy Farber & Ron Larson (CC-BY 4.0)](https://upload.wikimedia.org/wikipedia/commons/2/2d/TABELA_DE_DISTRIBUI%C3%87%C3%83O_NORMAL_DE_Z-0.png)
+```{r fig-stat-tabs, echo=FALSE, fig.cap="Statistical table of Normal Distribution percentiles"}
+knitr::include_graphics(rep("https://s3-us-west-2.amazonaws.com/courses-images/wp-content/uploads/sites/1985/2017/06/13215826/normal01.jpeg"))
+```
 </div>
+
 
 # Hypothesis Testing (and $P$-Values)
 
-The concept of Confidence Intervals is central to classical statistical Hypothesis Testing. Suppose we have a hypothesis such as:
+The concept of Confidence Intervals is central to classical statistical Hypothesis Testing. Suppose our researchers above have a hypothesis like:
 
 $$H_0: \textrm{The average length of lobster claws is 5cm}$$
 
-and we *assume* that lobster claw lengths are Normally-Distributed.
+and they *assume* that lobster claw lengths are Normally-distributed.
 
 <div id="warning">
 Statistical analyses always come with assumptions. These may or may not be clearly stated in the literature.
 
-Even for the simple hypothesis above, we make the assumption that our data are Normally distributed. This is reasonable here because we are making multiple measurements of "the same thing" in a population (see Notebook 04: "Where Do Statistical Distributions Come From?") but, if we were counting spots on lobsters, this would be an inappropriate assumption (that data would be better represented by a Poisson Distribution).
+Even for the simple hypothesis above, we make the assumption that our data are Normally distributed. This is reasonable here because we are making multiple measurements of "the same thing" in a population (see Notebook 02-03: "Where Do Statistical Distributions Come From?") but, if we were counting spots on lobsters, this would be an inappropriate assumption, because that data would be better represented by a Poisson Distribution.
 </div>
 
-Having made our measurements, we end up with a mean claw length of 5.7cm, and a standard deviation of 0.4cm. This parametrises the distribution shown in Figure \@ref(fig:normal-lobster).
+Having made our measurements, the researchers calculate a mean claw length of 5.7cm, and a standard deviation of 0.4cm. This parametrises the distribution shown in Figure \@ref(fig:normal-lobster).
 
-```{r normal-lobster, echo=FALSE, fig.cap="Normal Distribution obtained from lobster claw measurements having mean 5.7cm and standard deviation of 0.4cm, showing 50%, 90%, and 95% Confidence Intervals, and our hypothesis mean H_0=5"}
+<div align="center">
+```{r normal-lobster, echo=FALSE, fig.cap="Normal Distribution obtained from lobster claw measurements having mean 5.7cm and standard deviation of 0.4cm, showing 50%, 90%, and 95% Confidence Intervals, and our hypothesis mean $H_0=5$ (orange line)"}
 mu = 5.7
 std = 0.4
 
@@ -326,6 +344,7 @@ p = ggplot() +
 
 p
 ```
+</div>
 
 <div id="questions">
 1. Should we accept hypothesis $H_0$ (i.e. is the average length of a lobster claw 5cm)?
@@ -348,13 +367,13 @@ You will probably have encountered ideas like "P<0.05", "95% significance", "5% 
 
 The two different approaches to hypothesis testing we encountered above would suggest two different approaches to making this choice.
 
-The *Neyman-Pearson* approach would have us decide how willing we are to incorrectly say that we do not accept $H_0$. If, for some reason, we could argue that we would only accept $H_0$ if it fell within the 90% confidence interval, we would declare this *before conducting the experiment*, and make a decision once we had calculated the mean and standard deviation from the sample.
+The *Neyman-Pearson* approach would have us decide how willing we are to incorrectly say that we do not accept $H_0$. If, after calculating the cost-benefit analysis of number of samples and the consequences of getting the "wrong" answer, we decided that we would only accept $H_0$ if it fell within the 90% confidence interval, we would declare this *before conducting the experiment*. We would call our result once we had calculated the mean and standard deviation from the experimental sample.
 
 <div id="note">
-This is what *should* be happening in papers where authors report values like "P<0.05." They should have decided before the experiment that P<0.05 was an important threshold, and explained their reasoning. Unfortunately, that is not often the case, in practice.
+This is what *should* be happening in papers where authors report values like "the result was significant because P<0.05." **They should have decided before the experiment that P<0.05 was an important threshold, and explained their reasoning**. Unfortunately, that is not often the case, in practice.
 </div>
 
-The alternative *Fisher's Null Hypothesis* approach would have us report a *P-value*, and leave it at that. We would not choose to accept *or* reject the hypothesis, but the P-value would be a piece of evidence to help us argue our case in the paper, and to help the reader decide whether they believed our argument.
+The alternative *Fisher's Null Hypothesis* approach would have us report the calculated *P-value*, and leave it at that. We would not choose to accept *or* reject the hypothesis, but the P-value would be a piece of evidence to help us argue our case in the paper that the mean claw length was (or was not) 5cm, and to help the reader decide whether they believed our argument.
 
 <div id="note">
 This is what is happening in papers where the authors report P-values as precise numbers, e.g. "P=0.0314".
@@ -499,16 +518,16 @@ p
 
 As we have noted, Confidence Intervals for a distribution can be interpreted in a number of different ways. The way we want to focus on now is this:
 
-- **If we randomly sampled numbers from this distribution over and over again, 95% of the numbers we sampled would be found within the 95% Confidence Interval**
+- **If we randomly sampled numbers from this distribution over and over again, we would expect that 95% of the numbers we sampled would be found within the 95% Confidence Interval**
 
 The converse of this is:
 
-- **If we randomly sampled numbers from this distribution over and over again, 5% of the numbers we sampled would be found outwith the 95% Confidence Interval**
+- **If we randomly sampled numbers from this distribution over and over again, we would expect that 5% of the numbers we sampled would be found outwith the 95% Confidence Interval**
 
 For the 95% CI, the P-value threshold is 100% - 95% = *5%*. We could say, "any number found in the two *tails* of Figure \@ref(fig:ci-areas-outer) has less than 5% probability of being sampled," and we would express this as "P<0.05" of sampling one of those numbers.
 
 <div id="note">
-So far we have only considered P-value *thresholds*, but each number we might choose to check against the distribution will have a P-value. The P-value is the *probability with which that number **or a more extreme value** would be expected to be drawn from the distribution*.
+So far we have only considered P-value *thresholds*, but each number we might choose to check against the distribution will have a P-value associated with it. The P-value is the *probability with which that number **or a more extreme value** would be expected to be drawn from the distribution*.
 
 If it helps, you can think of this as what the P-value threshold would be if the boundaries of the tails were such that one fell at that number.
 
@@ -517,34 +536,41 @@ If it helps, you can think of this as what the P-value threshold would be if the
 
 #### Using the P-value
 
-Considering the situation in Figure \@ref(fig:ci-areas-outer), imagine two experimenters $A$ and $B$ each independently select a number and want to determine the probability that their number came from the distribution. Their hypothesis is:
+Considering Figure \@ref(fig:ci-areas-outer), imagine two experimenters $A$ and $B$ each independently select a number and want to determine the probability that their number came from the distribution. Their (null) hypothesis is:
 
 $$H_0: \textrm{My number comes from the distribution in the figure}$$
 
-<div id="note">
-
-</div>
-
-Experimenter $A$ selected the number -2.5. 
+**Experimenter $A$ selected the number -2.5.**
 
 - This value falls in the left tail, so if we were using a P<0.05 threshold, we would conclude that this number was unlikely to come from the distribution, and we might choose to *reject* $H_0$. 
 - If we were using the actual P-value (P=`r round(2*pnorm(-2.5, 0, 1), 4)`) we would conclude that, because this is a small value, there is *reasonably strong evidence against this number being drawn from the distribution* in the figure.
 
-Experimenter $B$, however selected the number 1.5. 
+**Experimenter $B$, however selected the number 1.5.**
 
 - This value falls within the 95% CI, so if we were using a P<0.05 threshold, we would conclude that this number could have come from the distribution, so there are no strong grounds to reject the distribution, and we might choose to *accept* $H_0$. 
 - If we were using the actual P-value (P=`r round(2*(1-pnorm(1.5, 0, 1)), 4)`) we would conclude that, because this is a moderately large value, there is *relatively little evidence against this number being drawn from the distribution* in the figure.
 
+<div id="note">
+Except for the detail that neither A or B actually *performed an experiment*, this is essentially the same process that goes on when you perform an experiment and test the value you measure against a (null) hypothesis.
+
+- Both A and B had a number.
+- Both A and B had a (null) hypothesis: the distribution in Figure \@ref(fig:ci-areas-outer)
+- Both A and B
+  - checked the number against the P<0.05 threshold to determine whether their number was likely to fall within the corresponding confidence interval
+  - calculated the exact P-value that their number would be drawn from the distribution
+  
+**In an experimental situation**, your hypothesis might be that application of a painkiller reduces perceived pain. So, you might measure the difference in subjective pain for a set of patients before and after administration of a painkiller, giving you a distribution of reported differences (like that in Figure \@ref(fig:ci-areas-outer)). You could then ask the question: "Is the value zero (corresponding to no change in pain) found within the appropriate confidence interval for my data?" If the value zero lay within that range, then you could not exclude the possibility that the painkiller has *no effect* on the perception of pain.
+</div>
 
 ### One-tailed vs Two-tailed Distributions
 
-We have looked at Confidence Intervals, which are symmetric about the mean of the distribution, and result in *two tails*, one on either side. This represents a situation where we want to know the probability that a number in the distribution is close to the mean, or far away from it. Numbers in the CI are close to the mean; numbers not in the CI are far from the mean, or *extreme*.
+We have looked at Confidence Intervals, which are symmetric about the mean of the distribution, and result in *two tails*, one on either side of the distribiution. This represents a situation where we want to know the probability that a number in the distribution is close to the mean, or far away from it. Numbers within the CI are close to the mean; numbers not in the CI are far from the mean, or *extreme*.
 
 <div id="note">
 In this situation, we consider *extreme* values as belonging to either of the two tails and, when we test to see if a value is in one of those tails, we call it a **two-tailed test**.
 </div>
 
-But what if we want to know the probability of a number being *extreme*ly low, or *extreme*ly high (with P<0.05)? In this case, we want to consider only a *single* tail containing the lowest (Figure \@ref(fig:ci-areas-left-tail)) or highest (Figure \@ref(fig:ci-areas-right-tail)) 5% of values for the distribution. We find this by looking at the corresponding *percentile* of values in the distribution (here, 5% or 95%).
+But what if we only want to know the probability of a number being *extreme*ly low, or *extreme*ly high (with P<0.05)? In this case, we might want to consider only a *single* tail containing the lowest (Figure \@ref(fig:ci-areas-left-tail)) or highest (Figure \@ref(fig:ci-areas-right-tail)) 5% of values for the distribution. We find this by looking at the corresponding *percentile* of values in the distribution (here, 5% or 95%).
 
 ```{r ci-areas-left-tail, echo=FALSE, fig.cap="The 5% left-tail of the Normal Distribution with mean 0 and standard deviation equal to 1."}
 mu = 0
@@ -648,24 +674,24 @@ In this situation, we consider *extreme* values as belonging to only *one* of th
 
 #### Using the P-value
 
-Considering the situation in Figure \@ref(fig:ci-areas-right-tail), imagine two experimenters $A$ and $B$ each independently select a number and want to determine the probability that their number came from the distribution. Their hypothesis is:
+Consider the situation in Figure \@ref(fig:ci-areas-right-tail). Imagine two experimenters $A$ and $B$ each independently select a number and want to determine the probability that their number **is larger than would be expected for any value in the distribution**. Their hypothesis is:
 
-$$H_0: \textrm{My number comes from the distribution in the figure}$$
+$$H_0: \textrm{My number is small enough that it could reasonably come from the distribution in the figure}$$
 
 In this case, the test is a *one-tailed* test because we only consider a value to be extreme if it is *too large*.
 
-Experimenter $A$ selected the number -2.5. 
+**Experimenter $A$ selected the number -2.5.**
 
-- This value does not fall in the tail, so if we were using a P<0.05 threshold, we would conclude that this number is likely to have come from the distribution, and we might choose to *accept* $H_0$. 
-- If we were using the actual P-value (P=`r round(1- pnorm(-2.5, 0, 1), 4)`) we would conclude that, because this is a small value, there is *very strong evidence that this number could be drawn from the distribution* in the figure.
+- This value does not fall in the right-hand tail, so if we were using a P<0.05 threshold, we would conclude that this number is not too large to have come from the distribution, and we might choose to *accept* $H_0$. 
+- If we were using the actual P-value (P=`r round(1- pnorm(-2.5, 0, 1), 4)`) we would conclude that, because this is a large value close to 1, there is *very strong evidence that this number is not larger than values from the distribution* in the figure.
 
-Experimenter $B$, however selected the number 2. 
+**Experimenter $B$, however selected the number 2.**
 
 - This value falls within the right-tail, so if we were using a P<0.05 threshold, we would conclude that this number is unlikely to have come from the distribution, so we might choose to *reject* $H_0$. 
-- If we were using the actual P-value (P=`r round(1-pnorm(2, 0, 1), 4)`) we would conclude that, because this is a fairly small value, there is a *moderate amount of evidence against this number being drawn from the distribution* in the figure.
+- If we were using the actual P-value (P=`r round(1-pnorm(2, 0, 1), 4)`) we would conclude that, because this is a fairly small value, there is a *moderate amount of evidence that this number is larger than any that would be drawn from the distribution* in the figure.
 
 <div id="warning">
-Many statistical tests - such as the Student's *t*-test, and Chi-squared ($\chi^2$) test - involve generation of a *test statistic*, which is then compared against a statistical distribution to determine a *P-value*. This works in a similar manner to the tests in figures \@ref(fig:ci-areas-outer) and \@ref(fig:ci-areas-right-tail).
+Many statistical tests - such as the Student's *t*-test, and Chi-squared ($\chi^2$) test - involve generation of a *test statistic* (the $t$ in $t$-test is a test statistic), which is then compared against a statistical distribution to determine a *P-value*. This works in a similar manner to the examples in figures \@ref(fig:ci-areas-outer) and \@ref(fig:ci-areas-right-tail).
 </div>
 
 # Examples
@@ -694,7 +720,7 @@ and then perform a one-tailed $t$-test against an assumed mean value of 1.5, bec
 
 ## Testing the effectiveness of a painkilling drug
 
-We require to test whether our new drug A is equivalent to the current best treament available: drug B. We will be measuring pain on a continuous scale for, assuming that the data is Normally-distributed. We have the same number of patients, matched for the same backgrounds and characteristics, being treated with each drug. Each patient receives one and only one drug.
+We require to test whether our new drug A is equivalent to the current best treatment available: drug B. We will be measuring pain on a continuous scale, assuming that the data is Normally-distributed. We have the same number of patients, matched for the same backgrounds and characteristics, being treated with each drug. Each patient receives one and only one drug.
 
 Here, we can set our hypothesis to be:
 
