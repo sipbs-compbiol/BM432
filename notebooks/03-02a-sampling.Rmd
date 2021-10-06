@@ -23,15 +23,12 @@ figbg = "whitesmoke"
 ```
 
 <div id="summary">
-- Many statistical distributions are parametrised by calculating a *central value* (e.g. a mean) and measure of *dispersion* (e.g. a standard deviation)
 - Statistical distributions are *models* that *approximate* measured data
+- Some statistical distributions can be parametrised by calculating a *central value* (e.g. a mean) and measure of *dispersion* (e.g. a standard deviation)
 </div>
 
 # Introduction
 
-In the second notebook ("What Does Statistics Do, Anyway?"), Figure 1.1 showed a set of data, and a curve that approximated that data. This is reproduced below as Figure \@ref(fig:model-normal).
-
-<div align="center">
 ```{r model-normal, echo=FALSE, fig.cap="Two hundred measured data values (histogram) and the corresponding Normal distribution model (curve) of those values. The modelled distribution is entirely described by the parameters: mean=10 (µ) and standard deviation=3 (σ). We can see here that the frequency of real data values don't match the curve exactly; the model simplifies our representation of the 'noisy' data. The dashed line represents the mean value of the model, and the dotted lines represent values at +/- one and two standard deviations from the mean."}
 mu = 10                          # define mean of distribution
 sd = 3                           # define standard deviation of distribution
@@ -64,25 +61,26 @@ p = p + theme(plot.background = element_rect(fill = figbg,           # colour ba
                                              color = figbg))
 p                                                                    # show plot
 ```
-</div>
 
-This plot shows a *Normal Distribution* as the black curve. This Normal Distribution is one of several common statistical distributions, and is a *model* of the actual data that was measured. It is used so often because it provides a very good approximate model for many practical situations, such as experimental observations of a measured value.
+Figure \@ref(fig:model-normal) shows a *Normal distribution* as the black curve. This Normal distribution is one of several common statistical distributions, and is a *model* of the actual data that was measured (blue histogram). The Normal distribution is used so often because it provides a very good approximate model for many practical situations, such as experimental observations of a measured value.
 
-The black curve in Figure 1.1 describes a distribution of data that has a particular *mean* (central value), and *standard deviation* (dispersion). The curve shows the *probability* with which we would expect to see each measured data value.
+The curve describes a distribution of data that has a particular *mean* (central value), and *standard deviation* (dispersion) and shows the *probability* with which we would expect to see each measured data value. Here, the mean and standard deviation of the data in the blue histogram can be calculated, and this used to generate the Normal distribution that models the data.
 
 <div id="note">
 - In our measured data we should expect to see values that are close to the mean more frequently than those that are distant from the mean.
-- The standard deviation describes *how* frequently we should expect the probability of seeing a particular value drop, as that values moves away from the mean (small standard deviation $\rightarrow$ fast drop-off; large standard deviation $\rightarrow$ slow drop-off).
+- The standard deviation describes *how* frequently we should expect the probability of seeing a particular value drop, as that value deviates from the mean (small standard deviation $\rightarrow$ fast drop-off in probability; large standard deviation $\rightarrow$ slow drop-off in probability).
 </div>
 
-The observed data itself is shown as the histogram. Each bar in the histogram indicates how many times a value in the *range* of the bar (e.g. one bar might represent measurements with values between 16 and 16.5) was observed. In an ideal world we might expect the observed data to correspond *exactly* to the model, so that each histogram bar would stop just as it touched the black curve. However, nature has randomness, or *stochasticity* - as do measurements made by humans and machines - so the measured data very rarely follows the shape of a statistical distribution exactly. In this way, the model is only an *approximation* to the data.
+The observed data itself is shown as the histogram. Each bar in the histogram indicates how many times a value in the *range* of the bar (e.g. one bar might represent measurements with values between 16 and 16.5) was observed. In an ideal world we might expect the observed data to correspond *exactly* to the model, so that each histogram bar would stop just as it touched the black curve. However, nature has randomness, or *stochasticity* - as do measurements made by humans and machines - so the measured data very rarely follows the shape of a statistical distribution exactly. In this way, the model is only ever expected to be an *approximation* to the data.
 
 # An Interactive Distribution
 
 In the interactive plot below, you can gain some intuition about the relationships between an observed dataset, its size, and the corresponding Normal distribution (and its parameters, the mean and standard deviation). 
 
 <div id="note">
-Here, we specify the *parameters* of the normal distribution, and then sample data from it. We are not fitting the curve to the data - we are sampling data as though the curve was the real *process* we were measuring. Any difference between the curve and the data is because we are sampling a finite number of measurements, not because we have chosen an inappropriate model.
+Here, we specify the *parameters* of the normal distribution, and then sample data from it. We are not fitting the curve to the data - we are sampling data as though the curve was the real *process* we were measuring. Any difference between the curve and the data is because we are sampling a finite number of measurements, not because we have chosen an inappropriate model to represent the dataset.
+
+**In this example the black curve represents the "true" distribution of the data; the blue histogram represents a *subsampling* from that distribution, and the red curve represents the distribution of the data modelled by the mean and standard deviation calculated from that subsampling.**
 </div>
 
 Use the *sliders* to vary three key parameters relating measured data to a Normal Distribution:
@@ -96,26 +94,29 @@ The `RESAMPLE` button will choose a different set of "observed" values that belo
 <div id="questions">
 Use the interactive plot below to vary the values of each of these parameters, and explore the following questions:
 
-1. How well does the *fit* of the curve match the dataset as you vary the number of measured datapoints?
-2. Does the curve ever exactly match the histogram data?
-3. How did you decide, for yourself, whether the curve fit the histogram well, or poorly?
-4. How does changing the mean of the distribution affect the shape of the curve?
-5. How does changing the standard deviation of the distribution affect the shape of the curve?
+1. How well does the black curve match the dataset (i.e. how well does it *fit*) as you vary the number of measured datapoints?
+2. Does the black curve ever exactly match the histogram data?
+3. How well does the red curve match the dataset (i.e. how well does it *fit*) as you vary the number of measured datapoints?
+4. Does the red curve ever exactly match the histogram data?
+5. How did you decide, for yourself, whether the curves fit the histogram well, or poorly?
+6. How does changing the mean of the distribution affect the shape of the black curve?
+7. How does changing the standard deviation of the distribution affect the shape of the black curve?
+8. The black curve represents the "true" distribution of the data, and the red dotted curve represents the model *inferred* from the subsample. How confident would you be that your model (red) matched the "correct" (black) Normal distribution if you measured three datapoints? How confident would you be if you measured 10,000?
 </div>
 
 ```{r dist-samples, echo=FALSE}
 inputPanel(
   sliderInput("n_samples",
               "Number of measured datapoints:",
-              min = 1,
-              max = 1000,
-              value = 50),
+              min = 3,
+              max = 100,
+              value = 3),
   
-  sliderInput("mu", label = "Distribution mean:",
+  sliderInput("mu", label = "True distribution mean:",
               min = -20, max = 20, value = 10, step = 0.5),
 
-  sliderInput("sd", label = "Distribution standard deviation:",
-              min = 0.5, max = 10, value = 3, step = 0.5),
+  sliderInput("sd", label = "True distribution std dev:",
+              min = 0.1, max = 10, value = 3, step = 0.1),
   
   actionButton("redraw", "Resample")
   
@@ -128,31 +129,43 @@ dfm_hist = eventReactive(c(input$redraw, input$n_samples,
 
 renderPlot({
         mu = input$mu
-        sd = input$sd
+        sdv = input$sd
         n_samples = input$n_samples
   
-        breaks = seq(mu - 3 * sd, mu + 3 * sd, by=min(0.4, sd/10))      # set up the breakpoints between bars in the histogram
+        breaks = seq(mu - 3 * sdv, mu + 3 * sdv, by=min(0.4, sdv/10))      # set up the breakpoints between bars in the histogram
         
-        p = ggplot(dfm_hist(), aes(x=vals))                                    # set up the ggplot with data
-        p = p + geom_histogram(aes(y=..density..),                           # add a historgram layer
+        data = dfm_hist()
+        
+        p = ggplot(data, aes(x=vals))                                  # set up the ggplot with data
+        p = p + geom_histogram(aes(y=..density..),                           # add a histogram layer
                                breaks=breaks,
                                fill="cornflowerblue")
-        p = p + stat_function(fun=dnorm, args=list(mean=mu, sd=sd),          # add a layer with the Normal curve 
+        p = p + stat_function(fun=dnorm, args=list(mean=mu, sd=sdv),          # add a layer with the Normal curve 
                               geom="line")
+        p = p + stat_function(fun=dnorm, args=list(mean=mean(data$vals),     # add layer with inferred curve
+                                                   sd=sd(data$vals)),
+                              linetype="dotted", size=2, colour="red")
+        p = p + annotate("text",
+                         x=mean(data$vals), y=0.3,
+                         colour="red",
+                         label=paste("Inferred mean: ",
+                                     format(round(mean(data$vals), 2), nsmall=2),
+                                     ", inferred s.d.: ",
+                                     format(round(sd(data$vals), 2), nsmall=2)))
         p = p + annotate("segment",                                          # show the mean as a dashed line
                          x=mu, xend=mu, y=0, yend=0.2,
                          colour="darkorange1", size=1, linetype="dashed")
         p = p + annotate("segment",                                          # show standard deviations as dotted lines
-                         x=c(mu-2*sd, mu-sd, mu+sd, mu+2*sd),
-                         xend=c(mu-2*sd, mu-sd, mu+sd, mu+2*sd),
+                         x=c(mu-2*sdv, mu-sdv, mu+sd, mu+2*sdv),
+                         xend=c(mu-2*sdv, mu-sdv, mu+sdv, mu+2*sdv),
                          y=c(0, 0, 0, 0), yend=c(0.2, 0.2, 0.2, 0.2),
                          colour="goldenrod", size=1, linetype="dotted")
         p = p + annotate("text",                                             # annotate the lines
-                         x=c(mu-2*sd, mu-sd, mu, mu+sd, mu+2*sd),
+                         x=c(mu-2*sdv, mu-sdv, mu, mu+sdv, mu+2*sdv),
                          y=c(0.21, 0.21, 0.21, 0.21, 0.21),
                          colour="darkorange3",
                          label=c("µ - 2σ", "µ - σ", "µ", "µ + σ", "µ + 2σ"))
-        p = p + xlim(mu - max(5, 3 * sd), mu + max(5, 3 * sd))                               # set x-axis limits
+        p = p + xlim(mu - max(5, 3 * sdv), mu + max(5, 3 * sdv))                               # set x-axis limits
         p = p + xlab("measured variable") + ylab("frequency")                # add axis labels
         p = p + theme(plot.background = element_rect(fill = figbg,           # colour background
                                                      color = figbg))

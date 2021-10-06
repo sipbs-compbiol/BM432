@@ -37,7 +37,7 @@ figbg = "whitesmoke"
 
 # Introduction
 
-In the second notebook ("What Does Statistics Do, Anyway?"), Figure 1.2 showed a plot of a *response variable* against an *explanatory variable*, and a linear regression on that data. This is reproduced below as Figure \@ref(fig:model-relationship).
+In the notebook "What Does Statistics Do, Anyway?", we showed a plot of a *response variable* against an *explanatory variable*, and a linear regression on that data. This is reproduced below as Figure \@ref(fig:model-relationship).
 
 <div align="center">
 ```{r model-relationship, echo = FALSE, fig.cap="Thirty datapoints indicating a relationship between an explanatory variable and a response variable. Datapoints are shown as blue dots. The relationship is modelled by the orange straight line (obtained with linear regression) that has gradient and intercept as shown in the figure. The model simplifies our representation of the noisy relationship between the measured and response variables."}
@@ -340,22 +340,22 @@ Looking at the graph above, it's natural to think that a "better" fit of a model
 </div>
 
 <div id="warning">
-We need to always be clear about whether we are considering alternative parameters for the *same model*, or deciding whether alternative models. The two situations are very different.
+We need to always be clear about whether we are considering alternative parameters for the *same model* (e.g. two linear regressions), or deciding **between** *alternative model formulations* (e.g. a linear and an exponential function). The two situations are different.
 
 For instance, we could form an equation that would make a line pass through every measured response value ("Connecting Lines" in the cartoon below, and the blue line in the image above). It would *fit* the data perfectly. But it may not be a good description of the mechanism that relates the *explanatory variable* to the *response variable*.
 
-For good science we require that our models are *plausible* and useful: they should represent the mechanism well, but they do not have to fit the data exactly. Models should represent and maybe help explain important features of reality; but we don't expect them to *perfectly* explain data.
+For good science we require that our models are *plausible* and useful: they should represent the mechanism well, but they do not have to fit the data or the mechanism exactly. Models should represent and maybe help explain important features of reality; but we don't expect them to *perfectly* explain data.
 
-We should always try to fit *plausible* models; we should **not** always try to find a model that fits perfectly, and then attempt to bend our understanding of reality to explain the choice of model.
+We should always try to fit *plausible* models; **we should not try to find a model that fits perfectly, and then attempt to bend our understanding of reality to explain the choice of model**.
 
-<div align="center">
-![XKCD 2048: Curve-fitting methods and the messages they send](https://imgs.xkcd.com/comics/curve_fitting.png)
-</div>
+```{r curve-fitting, echo=FALSE, fig.cap="[XKCD 2048](https://imgs.xkcd.com/comics/curve_fitting.png): Curve-fitting methods and the messages they send"}
+knitr::include_graphics(rep("https://imgs.xkcd.com/comics/curve_fitting.png"))
+```
 </div>
 
 In the exercise above, it is unlikely that you could have found a straight line that passed through all the sampled datapoints. But you probably found many lines that appeared to describe the data about as well as each other. These probably had gradients near a value of 1.7 and intercepts near a value of 5.
 
-Visually, you would have seen that the "good" fits of the line had *residuals* that fell above and below the line - the line passed through "the middle" of the dataset. You probably noticed that the sizes of the residuals (and lengths of the lines) varied; there were probably more short lines than long lines.
+Visually, you would have seen that the "good" fits of the line had *residuals* that fell both above and below the line - the line passed through "the middle" of the dataset. You probably noticed that the sizes of the residuals (and lengths of the lines) varied; there were probably more short lines than long lines.
 
 <div id="note">
 We should expect that measurements of a value - such as the explanatory or response variables - are not exact. There may be variation in the system being measured, and there will also be *error* in most measurements. For example, when weighing out a compound, the exact mass of a compound might fall between the levels of precision of the balance: the balance may report a mass of 1.4356g, but the true mass could be 1.43563.
@@ -373,20 +373,20 @@ In general, we choose the "best" or *optimal* parameters for a model by finding 
 
 #### Pearson correlation coefficient
 
-You will probably have come across the idea of a *correlation coefficient* before, and seen this reported as $r$ or $r^2$ (also known as the *Pearson correlation coefficient*). The *correlation coefficient* describes the linear correlation between two variables: the extent to which one variable *tracks* another according to a straight line (a linear model). It always has a value between 0 (no correlation) and 1 (perfect correlation; all points on a straight line). The *Pearson correlation coefficient* is reported in the interactive diagram above as "r^2 for data".
+You will probably have come across the idea of a *correlation coefficient* before, and seen this reported as $r$ or $r^2$ (also known as the *Pearson correlation coefficient*). The *correlation coefficient* describes the linear correlation between two variables: the extent to which one variable *tracks* another according to a straight line (a linear model). $r^2$ always has a value between 0 (no correlation) and 1 (perfect correlation; all points on a straight line). The *Pearson correlation coefficient* is reported in the interactive diagram above as "r^2 for data".
 
 <div id="warning">
 Be careful. You will have heard that "correlation is not causation", and that is certainly true. There is a [website dedicated to spurious correlations](https://www.tylervigen.com/spurious-correlations) where there is no actual mechanism linking the explanatory and response variables.
 
 <div align="center">
-![Spurious correlation between divorce rate in Maine and per capita margarine consumption. $r=0.992$](images/spurious_correlation.png)
+![Spurious correlation between divorce rate in Maine and per capita margarine consumption. $r^2=0.992$](images/spurious_correlation.png)
 </div>
 </div>
 
 <details>
   <summary>When to watch out for spurious correlations (Click to expand)</summary>
   
-In general, you should always be on guard for spurious correlations - they show up frequently. The main implication is that it is possible to propose a mechanism relating your explanatory and response variables, and "accidentally" find evidence that could support it. This is an example of something called [*confirmation bias*](https://www.bbc.co.uk/bitesize/articles/znbytrd), a logical fallacy that affects us all. Confirmation bias can be quite subtle, and a good way to guard against it - in this context - is to always be asking: "is there another explanation or mechanism that could produce similar results?" This is a kind of *falsification*, a concept we'll return to, later.
+In general, you should always be on guard for spurious correlations - they show up frequently. A key concern is that it is possible to propose a mechanism relating your explanatory and response variables, and "accidentally" find evidence that could support it. This is an example of something called [*confirmation bias*](https://www.bbc.co.uk/bitesize/articles/znbytrd), a logical fallacy that affects us all. Confirmation bias can be quite subtle, and a good way to guard against it - in this context - is to always be asking: "is there another explanation or mechanism that could produce similar results?" This is a kind of *falsification*, a concept covered in the [supplementary info on hypothesis testing](./supp-nhst.html).
 
 <div align="center">
 ```{r fig-smbc-confirmation, echo=FALSE, fig.cap="Cartoon linked from [Saturday Morning Breakfast Cereal](https://www.smbc-comics.com/comic/2011-11-28)"}
@@ -394,7 +394,7 @@ knitr::include_graphics(rep("https://www.smbc-comics.com/comics/20111127.gif"))
 ```
 </div>
 
-Another consequence of spurious correlations is that they can cause apparently "significant" results to show up more frequently than they should. This is especially problematic in high-throughput experiments, such as transcriptomics. In our experiment we might, for example, be looking for "correlated change" in gene transcript levels. If we were only testing for correlation between two genes, the $r^2$ correlation coefficient might be a good way to decide if that relationship was worth investigating further. However, if we are testing all pairwise correlations between 5,000 genes (a common number for bacteria), we would be testing 12,500,000 pairwise comparisons. By chance alone it is likely that some of these genes will be correlated, so we must use more sophisticated techniques to determine "true" co-transcription (such as multiple-test correction).
+Another consequence of spurious correlations is that they can cause apparently "significant" results to show up more frequently than they should. This is especially problematic in high-throughput experiments, such as transcriptomics. In our experiment we might, for example, be looking for "correlated change" in gene transcript levels. If we were only testing for correlation between two genes, the $r^2$ correlation coefficient might be a good way to decide if that relationship was worth investigating further. However, if we are testing all pairwise correlations between 5,000 genes (a common number for bacteria), we would be testing 12,500,000 pairwise comparisons. By chance alone it is likely that some of these genes will be correlated (at P<0.05, we would expect 625,000 such correlations!), so we must use more sophisticated techniques like multiple-test correction to determine "true" co-transcription.
 
 <div align="center">
 ```{r fig-xkcd-multiple-tests, echo=FALSE, fig.cap="Cartoon linked from [XKCD (Randall Monroe)](https://xkcd.com/882)"}
@@ -402,42 +402,12 @@ knitr::include_graphics(rep("https://imgs.xkcd.com/comics/significant.png"))
 ```
 </details>
 
-#### Goodness of fit
-
-It is unusual in the natural world, and in experiments, to find *perfect* linear correlation between any two variables, even when a linear relationship describes the relationship well. This is in part because because measurements always involve *uncertainty*, and in part because natural systems tend not to be homogeneous - they are often collections of slightly different individuals; or a single individual may vary slightly over time. If there was truly a linear relationship between two variables, in a real system we wouldn't see a straight line exactly - we would see datapoints scattered about a straight line. The datapoints would not be exactly correlated and, as a result, we find the observed $r^2$value for two variables is usually between 0 and 1, but not exactly 0 or 1.
-
-When we fit a model to some observed data for two variables, as with the linear model above, we are attempting to explain the relationship between those variables. But even if we have the exact true model of the relationship, the natural *variability* of the system and the measurements we make means our model will not be an exact fit. **To assess the quality or *uncertainty* of our model fit, we consider how well our optimal model choice *explains* the *variability* in the dataset**.
-
-We think of the dataset as having some quantity that measures its overall *variability* (also referred to as *spread* or *dispersion*). For a linear model we can represent that by the way each measured *response variable* differs from the average value for the response variables; we call this the **total variability**. We can calculate a similar value for the values of the response variable predicted by our *fitted* linear model; this is the **model variability**. We can then compare these values:
-
-$$\textrm{goodness of fit} \approx \frac{\textrm{model variability}}{\textrm{total variability}}$$
-
-- If the linear model fits perfectly, then the *model variability* will be the same as the *total variability*, our *goodness of fit* equals 1, and we say that the model "explains all the variability in the data."
-- If the linear model doesn't describe the data exactly, then *model variability* is less than the *total variability*, our *goodness of fit* is less than 1, and we say that the model "explains some of the variability in the data."
-
-<div id="note">
-The *goodness of fit* is often given as a percentage. For instance, if our goodness of fit is 0.73, we might say "the model explains 73% of the variance in the dataset." (Some would say "explains 73% of the data", but this statement is less accurate.)
-</div>
-
-This value, *goodness of fit* or *explained variance*, represents uncertainty in the model fit. It recognises that although this is the "optimal" fit for a model with this structure, there is still variability in the data that goes unexplained. Without doing more work, we can't know whether that variability could be captured by improving the model (for example, to represent the mechanism of the system being studied better) or if this is truly *irreducible variability* caused by inexact measurement, or stochastic variation in the system. 
-
-This measure represents the uncertainty we have that our model describes the data well.
-
-<div id="note">
-The "goodness of fit" is shown in the interactive model above as "*ratio of variances*".
-
-You probably noticed that when you found your optimal model, this value was that same as "*r^2 for data*". This is because the *Pearson correlation coefficient* is mathematically equivalent to this measure of goodness of fit, for the optimal least-squares linear regression.
-</div>
-
 ### Representing model uncertainty: Parameter estimates
 
-When you explored the interactive model, you probably found that - even if there was an obviously optimal choice - there were several choices of gradient and intercept that gave reasonably good results. Maybe you thought that, if the data had been even slightly different, one of those other pretty good choices might have been "optimal?"
-
-This is a different kind of uncertainty than the uncertainty represented by *goodness of fit* above. It does not represent our uncertainty that the "optimal" model describes the data. Instead it describes the uncertainty we have in the *optimal* fitted model parameters, and so **it represents the *uncertainty we have that we found the optimal model, at all***.
+When you explored the interactive model, you probably found that - even if there was an obviously optimal choice - there were several choices of gradient and intercept that gave reasonably good results. Maybe you thought that, if the data had been even slightly different, one of those other pretty good choices might have been "optimal?" This describes the uncertainty we have in the *optimal* fitted model parameters.
 
 Typically, we represent this uncertainty with *confidence intervals* for each parameter of the model. For a linear regression, we  need a confidence interval for the fitted gradient, and a confidence interval for the fitted intercept. We might represent this uncertainty in the form of a *ribbon* on our graph showing the fitted model, as below in Figure \@ref(fig:model-cis). The ribbon shows the area covered by all of the *plausible* lines that could fit our data. Here, *plausible* lines are all the lines that could be described by parameter settings in the 95% confidence intervals for fitted intercept and gradient.
 
-<div align="center">
 ```{r model-cis, echo = FALSE, fig.cap="Thirty datapoints indicating a relationship between an explanatory variable and a response variable. Datapoints are shown as blue dots. The relationship is modelled by the orange straight line (obtained with linear regression) that has gradient and intercept as shown in the figure. The uncertainty in our fitted model parameters is shown as a ribbon representing a 95% confidence interval for the fitted line."}
 n_samples = 30       # number of measured samples
 
@@ -487,7 +457,6 @@ p = p + theme(plot.background = element_rect(fill = figbg,           # colour ba
 
 p
 ```
-</div>
 
 <div id="note">
 It is good practice always to show the uncertainty in model fits, both graphically (as with the ribbon in \@ref(fig:model-cis)) and as confidence intervals in estimated parameters for the model.

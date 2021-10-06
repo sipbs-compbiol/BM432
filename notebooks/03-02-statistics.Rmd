@@ -194,6 +194,10 @@ Much of statistical analysis of *relationships* between variables is about estim
 
 For example, if we fit a straight-line relationship to explain the change in weight of a bag filled with tins of beans, as we fill it with different numbers of tins, we would obtain a value for the gradient, and the intercept. The gradient might be interpreted as the average mass of a single tin of beans; the intercept might be interpreted as the mass of the empty bag. The parameters of the model are interpretable as real-world concepts.
 
+```{r chippy-regression, echo=FALSE, fig.cap="Model parameters can be very helpful if they relate to real-world concepts or phenomena."}
+knitr::include_graphics("images/chippy_linear_regression.jpg")
+```
+
 <div id="note">
 Please take some time to explore a statistical relationship interactively in your browser, at the link below.
 
