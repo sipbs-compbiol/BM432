@@ -248,19 +248,44 @@ div.tocify {
 </div>
 
 
+<div id="summary">
+<ul>
+<li>Data is often messy and in a state where it cannot be analysed directly without “cleaning” it.</li>
+<li>It is important for reproducibility that what you do with your data is recorded.</li>
+<li>Using tools like <code>OpenRefine</code> can automate and simplify data cleaning, and provide a clear log of the actions that were taken.
+<ul>
+<li>Logs of data cleaning are valuable supplementary information.</li>
+</ul></li>
+<li>Data cleaning is often a repetitive task, for single steps (e.g. removing quotes), and for complete data-cleaning pipelines (e.g. cleaning the output from a specific machine). Tools like <code>OpenRefine</code> can automate this task and make it reproducible.</li>
+<li><code>OpenRefine</code> <em>specifically</em> requires that you write cleaned data to a new file. It aims to maintain <em>data integrity</em> and will not allow you to overwrite the original datafile.</li>
+</ul>
+</div>
 <div id="setup" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Setup</h1>
-<p>To participate in the workshop, or to work through the example in your own time, you will need the following:</p>
+<p>To participate in the workshop, or to work through the example in your own time, you will need the following on your own computer:</p>
 <ol style="list-style-type: decimal">
 <li>The <code>OpenRefine</code> software, installed on your computer</li>
-<li>The example dataset</li>
+<li>The example dataset <code>esoph.tab</code>, which can be downloaded to your computer using <a href="https://sipbs-compbiol.github.io/BM432/notebooks/data/esoph.tab">this link</a></li>
 </ol>
 <div id="note">
-<p>If you do not already have the <code>OpenRefine</code> software installed, please see the <a href="./configuration.html">configuration notebook</a> for a video and detailed instructions how to obtain and install the tool</p>
+<p>If you do not already have the <code>OpenRefine</code> software installed, please see the <a href="./configuration.html">configuration notebook</a> for detailed instructions how to obtain and install the tool on your operating system.</p>
 </div>
 </div>
 <div id="introduction" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Introduction</h1>
+<p>Research data can be collected in a wide variety of ways. Sometimes it is handwritten after human measurement; sometimes it is an electronic file produced by a machine; or a hardcopy printout from some device. These outputs of primary data collection are often termed “raw” data. Raw data, it may not be in a format that can be analysed directly, for all sorts of different reasons. To make it usable for analysis, we must first “clean” it. In this part of the workshop, we will go through a process of “cleaning” data prior to analysis.</p>
+<p>We have a table of data in electronic format (filename: <code>esoph.tab</code>) that has been collected but is not yet in a form that can be analysed in the second half of the workshop. We will use a program called <code>OpenRefine</code> to standardise and clean this data.</p>
+<div id="openrefine" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> <code>OpenRefine</code></h2>
+<p><code>OpenRefine</code> is a Java program that runs locally on your own machine. It runs in your web browser, but no internet connection is required. No data or other information is sent to any remote servers. <code>OpenRefine</code> <em>preserves data integrity</em> and <strong>does not modify or overwrite your data file</strong>; all information is stored in a project file, which you can return to at any time, or use to export a new “clean” dataset.</p>
+<p>The actions recorded in your data cleaning activity can be “replayed” on a different dataset. In this way, <code>OpenRefine</code> is helpful for standardising and cleaning data for all similar datafiles in a project.</p>
+<div id="note">
+<p>You can find out more about <code>OpenRefine</code> at <a href="https://openrefine.org/">https://openrefine.org/</a>.</p>
+If you would like more practice, a longer workshop (from which some of this material was adapted) is provided by Data Carpentry at [<a href="https://datacarpentry.org/OpenRefine-ecology-lesson/" class="uri">https://datacarpentry.org/OpenRefine-ecology-lesson/</a>].
+<div>
+
+
+</div>
 </div>
 
 

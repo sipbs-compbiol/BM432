@@ -16,13 +16,21 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+<div id="summary">
+- Data is often messy and in a state where it cannot be analysed directly without "cleaning" it.
+- It is important for reproducibility that what you do with your data is recorded.
+- Using tools like `OpenRefine` can automate and simplify data cleaning, and provide a clear log of the actions that were taken.
+  - Logs of data cleaning are valuable supplementary information.
+- Data cleaning is often a repetitive task, for single steps (e.g. removing quotes), and for complete data-cleaning pipelines (e.g. cleaning the output from a specific machine). Tools like `OpenRefine` can automate this task and make it reproducible.
+- `OpenRefine` *specifically* requires that you write cleaned data to a new file. It aims to maintain *data integrity* and will not allow you to overwrite the original datafile.
+</div>
 
 # Setup
 
-To participate in the workshop, or to work through the example in your own time, you will need the following:
+To participate in the workshop, or to work through the example in your own time, you will need the following on your own computer:
 
 1. The `OpenRefine` software, installed on your computer
-2. The example dataset `esoph.tab`, which can be downloaded using [this link]()
+2. The example dataset `esoph.tab`, which can be downloaded to your computer using [this link](https://sipbs-compbiol.github.io/BM432/notebooks/data/esoph.tab)
 
 <div id="note">
 If you do not already have the `OpenRefine` software installed, please see the [configuration notebook](./configuration.html) for detailed instructions how to obtain and install the tool on your operating system.
@@ -30,3 +38,43 @@ If you do not already have the `OpenRefine` software installed, please see the [
 
 # Introduction
 
+Research data can be collected in a wide variety of ways. Sometimes it is handwritten after human measurement; sometimes it is an electronic file produced by a machine; or a hardcopy printout from some device. These outputs of primary data collection are often termed "raw" data. Raw data, it may not be in a format that can be analysed directly, for all sorts of different reasons. To make it usable for analysis, we must first "clean" it. In this part of the workshop, we will go through a process of "cleaning" data prior to analysis.
+
+We have a table of data in electronic format (filename: `esoph.tab`) that has been collected but is not yet in a form that can be analysed in the second half of the workshop. We will use a program called `OpenRefine` to standardise and clean this data.
+
+## `OpenRefine`
+
+`OpenRefine` is a Java program that runs locally on your own machine. It runs in your web browser, but no internet connection is required. No data or other information is sent to any remote servers. `OpenRefine` *preserves data integrity* and **does not modify or overwrite your data file**; all information is stored in a project file, which you can return to at any time, or use to export a new "clean" dataset.
+
+The actions recorded in your data cleaning activity can be "replayed" on a different dataset. In this way, `OpenRefine` is helpful for standardising and cleaning data for all similar datafiles in a project.
+
+<div id="note">
+OpenRefine is very powerful and can do much more than we will cover today. You can find out more about `OpenRefine` at [https://openrefine.org/](https://openrefine.org/).
+
+If you would like more practice using `penRefine`, a longer workshop (from which some of this material was adapted) is provided by Data Carpentry at [https://datacarpentry.org/OpenRefine-ecology-lesson/].
+<div>
+
+## `esoph.txt`
+
+<div id="warning">
+It is always good practice to know exactly where your dataset comes from, and what it represents. The nature and content of your dataset should guide your cleaning and analysis.
+</div>
+
+The file `esoph.txt` describes data from a case-control study of oesophageal cancer in Ille-et-Vilaine, France. The dataset is built-in dataset in `R`, and is derived from the publication below:
+
+> Breslow, N. E. and Day, N. E. (1980) Statistical Methods in Cancer Research. Volume 1: The Analysis of Case-Control Studies. IARC Lyon / Oxford University Press.
+
+The dataset was further modified by LP to introduce commonly-encountered issues when cleaning data, and can be downloaded from [this link](https://sipbs-compbiol.github.io/BM432/notebooks/data/esoph.tab)
+
+# Create a New Project
+
+- Start the `OpenRefine` program
+  - `OpenRefine` should start in your browser. If it does not, try one of the following links in your browser: [http://127.0.0.1:3333/](http://127.0.0.1:3333/) or [http://localhost:3333/](http://localhost:3333/), and see the [configuration page](https://sipbs-compbiol.github.io/BM432/notebooks/configuration.html).
+
+- Browse to the location of the `esoph.tab` file.
+  - If you have not done so already, you will need to download the dataset from [this link](https://sipbs-compbiol.github.io/BM432/notebooks/data/esoph.tab).
+
+- Create a new project
+  - Click `Create Project`
+  - Select `Get data from` $\rightarrow$ `This Computer`
+  
