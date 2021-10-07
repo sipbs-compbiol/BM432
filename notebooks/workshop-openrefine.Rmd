@@ -214,6 +214,7 @@ To make space, you may have to close the `agegp` facet
 <div id="questions">
 1. How many categories are there in the `alcgp` column?
 2. Do you notice any problems with the data? If so, what are they, and how would you fix them?
+</div>
 
 - Fixing the `alcgp` column
   - Click on the `Cluster` button in the `alcgp` facet
