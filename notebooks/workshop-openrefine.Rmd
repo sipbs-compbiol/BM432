@@ -38,9 +38,9 @@ If you do not already have the `OpenRefine` software installed, please see the [
 
 # Introduction
 
-Research data can be collected in a wide variety of ways. Sometimes it is handwritten after human measurement; sometimes it is an electronic file produced by a machine; or a hardcopy printout from some device. These outputs of primary data collection are often termed "raw" data. Raw data, it may not be in a format that can be analysed directly, for all sorts of different reasons. To make it usable for analysis, we must first "clean" it. In this part of the workshop, we will go through a process of "cleaning" data prior to analysis.
+Research data can be collected in a wide variety of ways. Sometimes it is handwritten after human measurement; sometimes it is an electronic file produced by a machine; or a hardcopy printout from some device. These outputs of primary data collection are often termed "raw" data. Raw data may not be in a format that can be analysed directly, for all sorts of different reasons. To make it usable for analysis, we must first "clean" it. In this part of the workshop, we will go through a process of "cleaning" data prior to analysis.
 
-We have a table of data in electronic format (filename: `esoph.tab`) that has been collected but is not yet in a form that can be analysed in the second half of the workshop. We will use a program called `OpenRefine` to standardise and clean this data.
+We have a table of data in electronic format (`esoph.tab`) that has been collected but is not yet in a form that can be analysed in the second half of the workshop. We will use a program called `OpenRefine` to standardise and clean this data.
 
 ## `OpenRefine`
 
@@ -51,10 +51,10 @@ The actions recorded in your data cleaning activity can be "replayed" on a diffe
 <div id="note">
 OpenRefine is very powerful and can do much more than we will cover today. You can find out more about `OpenRefine` at [https://openrefine.org/](https://openrefine.org/).
 
-If you would like more practice using `penRefine`, a longer workshop (from which some of this material was adapted) is provided by Data Carpentry at [https://datacarpentry.org/OpenRefine-ecology-lesson/].
+If you would like more practice using `penRefine`, a longer workshop (from which some of this material was adapted) is provided by Data Carpentry at [https://datacarpentry.org/OpenRefine-ecology-lesson](https://datacarpentry.org/OpenRefine-ecology-lesson/).
 </div>
 
-## `esoph.txt`
+## Dataset - `esoph.txt`
 
 <div id="warning">
 It is always good practice to know exactly where your dataset comes from, and what it represents. The nature and content of your dataset should guide your cleaning and analysis.
@@ -77,39 +77,43 @@ The dataset was further modified by LP to introduce commonly-encountered issues 
 # Create a New Project
 
 - Start the `OpenRefine` program
-  - `OpenRefine` should start in your browser. If it does not, try one of the following links in your browser: [http://127.0.0.1:3333/](http://127.0.0.1:3333/) or [http://localhost:3333/](http://localhost:3333/), and see the [configuration page](https://sipbs-compbiol.github.io/BM432/notebooks/configuration.html).
+- `OpenRefine` should start in your browser. If it does not, try one of the following links in your browser: [http://127.0.0.1:3333/](http://127.0.0.1:3333/) or [http://localhost:3333/](http://localhost:3333/), and see the [configuration page](https://sipbs-compbiol.github.io/BM432/notebooks/configuration.html).
 
-![]()
+```{r or-welcome, echo=FALSE, fig.cap="OpenRefine landing page."}
+knitr::include_graphics("images/openrefine_welcome.png")
+```
 
 - Browse to the location of the `esoph.tab` file.
-  - If you have not done so already, you will need to download the dataset from [this link](https://sipbs-compbiol.github.io/BM432/notebooks/data/esoph.tab).
+- If you have not done so already, you will need to download the dataset from [this link](https://sipbs-compbiol.github.io/BM432/notebooks/data/esoph.tab).
 
 - Start a new project
-  - Click `Create Project`.
-  - Select `Get data from` $\rightarrow$ `This Computer`.
-  
-![]()
-  
-- Load in the data
-  - Click `Browse` and select the file `esoph.tab`.
-  - Click `Open` or double-click the `esoph.tab` filename.
-  - Click `Next>>`
+- Click `Create Project`.
+- Select `Get data from` $\rightarrow$ `This Computer`.
 
-![]()
+```{r or-getdata, echo=FALSE, fig.cap="OpenRefine data file selection."}
+knitr::include_graphics("images/openrefine_getdata.png")
+```
+
+- Load in the data
+- Click `Browse` and select the file `esoph.tab`.
+- Click `Open` or double-click the `esoph.tab` filename.
+- Click `Next>>`
 
 At this point, `OpenRefine` shows a preview of the data. This is a good point to pause and inspect the data to see if `OpenRefine` understood the columns, rows and headers correctly.
 
-![]()
+```{r or-preview, echo=FALSE, fig.cap="OpenRefine data preview."}
+knitr::include_graphics("images/openrefine_parse.png")
+```
 
 <div id="questions">
-1. How many lines of data are identified by `OpenRefine`?
-2. How does `OpenRefine` handle the column header row?
+  1. How many lines of data are identified by `OpenRefine`?
+  2. How does `OpenRefine` handle the column header row?
 </div>
-
+  
 <div id="warning">
 If you inspect the `esoph.tab` file in `Notepad` or some other application, you will see that line 28 is incorrectly formatted, because there are two tab characters between the first and second columns:
-
-```text
+  
+  ```text
 "35-44"	"40-79"	"20-29"	1	14
 "35-44"	"40-79"	"30+"	0	8
 "35-44"	"80-119"	"0-9g/day"	0	11
@@ -120,7 +124,7 @@ If you inspect the `esoph.tab` file in `Notepad` or some other application, you 
 
 `OpenRefine` can detect problems like this automatically, and correct them in the preview, as it does here for `esoph.tab`.
 </div>
-
+  
 <div id="note">
 This is your first chance to change some of `OpenRefine`'s settings to control how it processes (or *parses*) your data.
 
@@ -131,7 +135,7 @@ If everything looks OK, you can create the project. But something *doesn't* quit
 
 <div id="warning">
 **There are blank rows in the file.**
-
+  
 These rows carry no data and do not help the downstream analysis. They have possibly been introduced as a guide to the reader's eye, so they can see the gaps between age divisions. They are, however, not meaningful in the analysis we want to perform, and should be removed.
 
 **In general, data tables should not contain cosmetic features like font differences, colours, or blank rows or columns for the sake of "readability" or to carry information."" Such decoration should be cleaned from the dataset.
@@ -141,7 +145,9 @@ These rows carry no data and do not help the downstream analysis. They have poss
   - Uncheck the box next to `Store blank rows`
   - The preview may update automatically, but if it does not, click `Update Preview`
 
-![]()
+```{r or-preclean, echo=FALSE, fig.cap="OpenRefine data preview with cleaning on import."}
+knitr::include_graphics("images/openrefine_preview_updated.png")
+```
 
 <div id="questions">
 1. How many rows of data does `OpenRefine` now show?
@@ -153,7 +159,9 @@ These rows carry no data and do not help the downstream analysis. They have poss
 
 `OpenRefine` now presents its main window with an overview of your data.
 
-![]()
+```{r or-overview, echo=FALSE, fig.cap="OpenRefine data overview."}
+knitr::include_graphics("images/openrefine_loaded.png")
+```
 
 # Faceting data
 
@@ -169,12 +177,14 @@ These rows carry no data and do not help the downstream analysis. They have poss
   - Click the down arrow next to `agegp` and choose `Facet` $\rightarrow$ `Text facet`.
   - The left panel now contains every unique value in the `agegp` column, and a count of the number of times they occur.
   
-![]()
+```{r or-facets, echo=FALSE, fig.cap="OpenRefine faceting view."}
+knitr::include_graphics("images/openrefine_facets.png")
+```
   
 <div id="questions">
 1. How many unique values are there in the `agegp` column?
 2. Do you notice any problems with the data? If so, what are they, and how would you fix them?
-<div>
+</div>
 
 - Fixing the `agegp` column
   - The `45_54` values look to be in error. An underscore (`_`) has been used in place of a dash (`-`).
@@ -186,7 +196,7 @@ These rows carry no data and do not help the downstream analysis. They have poss
   
 <div id="questions">
 1. How many unique values are there in the `agegp` column, now?
-<div>
+</div>
 
 # Clustering data
 
@@ -251,6 +261,10 @@ There are several issues with data in `tobgp`, and we can fix them all using fac
 2. Which columns were modified?
 3. How many cells were modified each time?
 </div>
+
+```{r or-undo, echo=FALSE, fig.cap="OpenRefine Undo/Redo view."}
+knitr::include_graphics("images/openrefine_undo.png")
+```
 
 You can move forwards and backwards in the cleaning process to see the state of the data each time, by clicking on the steps in the left panel.
 
