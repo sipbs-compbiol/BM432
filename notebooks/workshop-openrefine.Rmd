@@ -138,7 +138,7 @@ If everything looks OK, you can create the project. But something *doesn't* quit
   
 These rows carry no data and do not help the downstream analysis. They have possibly been introduced as a guide to the reader's eye, so they can see the gaps between age divisions. They are, however, not meaningful in the analysis we want to perform, and should be removed.
 
-**In general, data tables should not contain cosmetic features like font differences, colours, or blank rows or columns for the sake of "readability" or to carry information."" Such decoration should be cleaned from the dataset.
+**In general, data tables should not contain cosmetic features like font differences, colours, or blank rows or columns for the sake of "readability" or to carry information.** Such decoration should be cleaned from the dataset.
 </div>
 
 - Remove blank rows from the dataset
