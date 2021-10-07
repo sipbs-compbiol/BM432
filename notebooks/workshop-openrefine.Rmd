@@ -1,0 +1,32 @@
+---
+title: "Cleaning Data With OpenRefine"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+# Setup
+
+To participate in the workshop, or to work through the example in your own time, you will need the following:
+
+1. The `OpenRefine` software, installed on your computer
+2. The example dataset `esoph.tab`, which can be downloaded using [this link]()
+
+<div id="note">
+If you do not already have the `OpenRefine` software installed, please see the [configuration notebook](./configuration.html) for detailed instructions how to obtain and install the tool on your operating system.
+</div>
+
+# Introduction
+

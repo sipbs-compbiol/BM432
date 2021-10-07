@@ -145,7 +145,7 @@ Please follow the instructions below to obtain and install `OpenRefine` for your
   
 1. Check that you have either Firefox, Chrome, or Microsoft Edge installed and set as your default browser. **NOTE: `OpenRefine` will run in your default browser.**
 2. Download the latest version of `OpenRefine` from [https://openrefine.org/download.html](https://openrefine.org/download.html).
-3. Create a new directory callled `OpenRefine`
+3. Create a new directory called `OpenRefine`
 4. Unzip the downloaded file into the `OpenRefine` directory (e.g. right-click on the file and select `Extract...`).
 5. Go to the newly-created `OpenRefine` directory.
 6. Launch OpenRefine by clicking `openrefine.exe`.
@@ -160,7 +160,7 @@ If you are using a different browser, or if `OpenRefine` does not automatically 
   
 1. Check that you have either Firefox, Chrome, or Microsoft Edge installed and set as your default browser. **NOTE: `OpenRefine` will run in your default browser.**
 2. Download the latest version of `OpenRefine` from [https://openrefine.org/download.html](https://openrefine.org/download.html).
-3. Create a new directory callled `OpenRefine`
+3. Create a new directory called `OpenRefine`
 4. Unzip the downloaded file into the `OpenRefine` directory (e.g. double-click on the compressed file).
 5. Go to the newly-created `OpenRefine` directory.
 6. Drag the `OpenRefine` icon into your `Applications` folder
