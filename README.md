@@ -96,3 +96,9 @@ The current versions of the notebook HTML pages are linked below, for convenienc
 ## PowerPoint Slides
 
 - [Workshop 1](assets/powerpoints/Project_Management_workshop_MFandLP.pptx)
+
+---------------
+
+## Workshop Demos
+
+- [`OpenRefine`](notebooks/workshop-openrefine.html)
