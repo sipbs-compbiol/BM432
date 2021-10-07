@@ -280,12 +280,56 @@ div.tocify {
 <p><code>OpenRefine</code> is a Java program that runs locally on your own machine. It runs in your web browser, but no internet connection is required. No data or other information is sent to any remote servers. <code>OpenRefine</code> <em>preserves data integrity</em> and <strong>does not modify or overwrite your data file</strong>; all information is stored in a project file, which you can return to at any time, or use to export a new “clean” dataset.</p>
 <p>The actions recorded in your data cleaning activity can be “replayed” on a different dataset. In this way, <code>OpenRefine</code> is helpful for standardising and cleaning data for all similar datafiles in a project.</p>
 <div id="note">
-<p>You can find out more about <code>OpenRefine</code> at <a href="https://openrefine.org/">https://openrefine.org/</a>.</p>
-If you would like more practice, a longer workshop (from which some of this material was adapted) is provided by Data Carpentry at [<a href="https://datacarpentry.org/OpenRefine-ecology-lesson/" class="uri">https://datacarpentry.org/OpenRefine-ecology-lesson/</a>].
-<div>
-
-
+<p>OpenRefine is very powerful and can do much more than we will cover today. You can find out more about <code>OpenRefine</code> at <a href="https://openrefine.org/">https://openrefine.org/</a>.</p>
+<p>If you would like more practice using <code>penRefine</code>, a longer workshop (from which some of this material was adapted) is provided by Data Carpentry at [<a href="https://datacarpentry.org/OpenRefine-ecology-lesson/" class="uri">https://datacarpentry.org/OpenRefine-ecology-lesson/</a>].</p>
 </div>
+</div>
+<div id="esoph.txt" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> <code>esoph.txt</code></h2>
+<div id="warning">
+<p>It is always good practice to know exactly where your dataset comes from, and what it represents. The nature and content of your dataset should guide your cleaning and analysis.</p>
+</div>
+<p>The file <code>esoph.txt</code> describes data from a case-control study of oesophageal cancer in Ille-et-Vilaine, France. The dataset is built-in dataset in <code>R</code>, and is derived from the publication below:</p>
+<blockquote>
+<p>Breslow, N. E. and Day, N. E. (1980) Statistical Methods in Cancer Research. Volume 1: The Analysis of Case-Control Studies. IARC Lyon / Oxford University Press.</p>
+</blockquote>
+<p>The dataset was further modified by LP to introduce commonly-encountered issues when cleaning data, and can be downloaded from <a href="https://sipbs-compbiol.github.io/BM432/notebooks/data/esoph.tab">this link</a></p>
+</div>
+</div>
+<div id="create-a-new-project" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Create a New Project</h1>
+<ul>
+<li>Start the <code>OpenRefine</code> program
+<ul>
+<li><code>OpenRefine</code> should start in your browser. If it does not, try one of the following links in your browser: <a href="http://127.0.0.1:3333/">http://127.0.0.1:3333/</a> or <a href="http://localhost:3333/">http://localhost:3333/</a>, and see the <a href="https://sipbs-compbiol.github.io/BM432/notebooks/configuration.html">configuration page</a>.</li>
+</ul></li>
+<li>Browse to the location of the <code>esoph.tab</code> file.
+<ul>
+<li>If you have not done so already, you will need to download the dataset from <a href="https://sipbs-compbiol.github.io/BM432/notebooks/data/esoph.tab">this link</a>.</li>
+</ul></li>
+<li>Start a new project
+<ul>
+<li>Click <code>Create Project</code>.</li>
+<li>Select <code>Get data from</code> <span class="math inline">\(\rightarrow\)</span> <code>This Computer</code>.</li>
+</ul></li>
+<li>Load in the data
+<ul>
+<li>Click <code>Browse</code> and select the file <code>esoph.tab</code>.</li>
+<li>Click <code>Open</code> or double-click the <code>esoph.tab</code> filename.</li>
+<li>Click <code>Next&gt;&gt;</code></li>
+</ul></li>
+</ul>
+<p>At this point, <code>OpenRefine</code> shows a preview of the data. This is a good point to pause and inspect the data to see if <code>OpenRefine</code> understood the columns, rows and headers correctly.</p>
+<div id="note">
+<p>This is your first chance to change some of <code>OpenRefine</code>’s settings to control how it processes (or <em>parses</em>) your data.</p>
+<p>To change the options, modify the settings in <code>Parse data as</code> <span class="math inline">\(\rightarrow\)</span> <code>CSV / TSV / separator-based files</code> and click <code>Update Preview</code> (at the bottom right).</p>
+</div>
+<ul>
+<li>Create the project
+<ul>
+<li>If everything looks OK, click <code>Create Project&gt;&gt;</code> (at the top right).</li>
+</ul></li>
+</ul>
 </div>
 
 
