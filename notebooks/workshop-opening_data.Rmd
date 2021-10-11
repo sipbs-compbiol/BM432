@@ -354,9 +354,9 @@ To generate a set of descriptive statistics for a data column:
 `Minitab` doesn't put these values in the spreadsheet, but it does show a nicely-formatted table with a number of descriptive statistics. You can switch between views on the data by clicking on previous steps in the `Navigator` (on the left, by default).
 
 ```{r fig-minitab-summary2, echo=FALSE, fig.caption="Generating a single-column summary with Minitab."}
-knitr::include_graphics("images/minitab-04_summary1.png")
-knitr::include_graphics("images/minitab-05_summary2.png")
-knitr::include_graphics("images/minitab-06_summary3.png")
+knitr::include_graphics("images/minitab-07_summary4.png")
+knitr::include_graphics("images/minitab-08_summary5.png")
+knitr::include_graphics("images/minitab-09_summary6.png")
 ```
 
 <div id="questions">
@@ -367,3 +367,110 @@ knitr::include_graphics("images/minitab-06_summary3.png")
 ### Summary statistics for qualitative data
 
 We will again try to obtain case and control counts, conditioned on the `alcgp` category.
+
+1. Click on `Graphs` $\rightarrow$ `Bar Chart`
+2. Select `Mean or other function of a continuous variable`
+3. Click on `Multiple Y variables` $\rightarrow$ `Clustered`
+4. Choose `ncases` and `ncontrols` as the continuous variables
+5. Choose `alcgp` as the categorical variable
+6. Select `Sum` as the function
+
+```{r fig-minitab-summary3, echo=FALSE, fig.caption="Generating a pivot view Minitab."}
+knitr::include_graphics("images/minitab-10_summary7.png")
+knitr::include_graphics("images/minitab-11_summary8.png")
+knitr::include_graphics("images/minitab-12_summary9.png")
+knitr::include_graphics("images/minitab-13_summary10.png")
+```
+
+`Minitab`, unlike `Excel`, shows both the tabular summary and the bar graph visualisation in the upper panel.
+
+<div id="questions">
+1. Was the data import and summary process easier and more convenient in `Excel` or `Minitab`? Why do you think that was?
+</div>
+
+# `R`
+
+`R` is a general programming language, designed to be used by statisticians and data scientists. Unlike `Excel` and `Minitab` it is free and open-source. `RStudio` is a free, open-source integrated development environment (IDE) designed for use with `R`. It has powerful version control and project management features, and a very large number of third-party libraries are available for statistical, bioinformatics, and other activities. It is the *de facto* language of choice for much statistical and bioinformatics work in academia.
+
+## Loading data
+
+1. Start `RStudio`
+2. In the `Files` panel, navigate to the location of the `esoph-tab.tsv` file
+3. Click on the `esoph-tab.tsv` file
+
+<div id="note">
+Clicking on the `esoph-tab.tsv` file shows the contents of the file in a navigation window (top left by default), but **does not load or import the dataset**
+</div>
+
+```{r fig-r-view, echo=FALSE, fig.caption="The RStudio window, when viewing the data file."}
+knitr::include_graphics("images/r-01_view_data.png")
+```
+
+<div id="warning">
+Working in `R`/`RStudio` is unlike working in a point-and-click environment such as `Excel` or `Minitab`. Commands are issued by typing them in the `Console` window (bottom left, by default) or by writing and running scripts.
+
+**Today, we will write and run a simple script**
+</div>
+
+Before we load the data, we need to make sure we are in the correct working directory, and create an empty script.
+
+1. In the `Files` panel, click `More`
+2. Click `Set as Working Directory`
+
+```{r fig-r-setwd, echo=FALSE, fig.caption="Set waorking directory in R."}
+knitr::include_graphics("images/r-02_setwd.png")
+```
+
+<div id="note">
+In the `Console` window, you should see that a command has been run.
+</div>
+
+To create an empty script:
+
+1. Click on `File` $\rightarrow$ `New File` $\rightarrow$ `R Script`
+
+This will start a new file in the top left `Editor` panel. It will be called `Untitled1`. 
+
+```{r fig-r-newscript, echo=FALSE, fig.caption="Start a new blank script."}
+knitr::include_graphics("images/r-03_newscript.png")
+```
+
+To load the data from `esoph-tab.tsv` we need to use the command `read.table()`. Type the text below into the empty panel `Untitled1`:
+
+```R
+# Load Oesophagus case/control data
+# First row is a header
+data = read.table("esoph-tab.tsv", header=TRUE, sep="\t")
+```
+
+Then click `Run`. This will bring up a "Save File" dialogue. Save the file as `summarise_esoph.R`
+
+```{r fig-r-load-save, echo=FALSE, fig.caption="Write, run and save the script."}
+knitr::include_graphics("images/r-04_load.png")
+knitr::include_graphics("images/r-05_save.png")
+```
+
+<div id="note">
+You can get help on any `R` command by typing its name into the search field of the `Help` panel (bottom left, by default)
+</div>
+
+Here, it's worth breaking down what you've written in the script. The first two lines start with the "hash"/"pound"/octothorpe character. This means that the line is a *comment* and not treated like a command. This is one way in which we annotate and document our code, so it is understandable when we return to it in future (and so others can understand it).
+
+The data is loaded on line three: `data = read.table("esoph-tab.tsv", header=TRUE, sep="\t")`. This does the following:
+
+- It opens (`read.table()`) the file `esoph-tab.tsv`
+  - It tells `R` that the first line of the file/first row of the table is a header (`header=TRUE`)
+  - It tells `R` that the separator/delimiter is a tab character (`sep="\t"`)
+- It places the data into a *variable*^[You can think of a variable as a box with a label on it. The label is the variable name (here, `data`), and the contents of the box are the data that was loaded. When you want to talk about the box or its contents, you can do so with the variable name.] so we can use it.
+
+<div id="note">
+When the data is loaded, the `Environment` panel (top right, by default) shows that `data` exists, with 88 observations of 5 variables.
+
+- Click on the triangle next to `data`: this shows a summary of the dataset
+- Click on the name `data`: this shows the data values in spreadsheet format in the `Editor` panel
+  - **You cannot edit data in the spreadsheet view**
+</div>
+
+```{r fig-r-load-save, echo=FALSE, fig.caption="Viewing the dataset in R's spreadsheet view."}
+knitr::include_graphics("images/r-06_viewdata.png")
+```
