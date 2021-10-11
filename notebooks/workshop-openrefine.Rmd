@@ -51,16 +51,16 @@ The actions recorded in your data cleaning activity can be "replayed" on a diffe
 <div id="note">
 OpenRefine is very powerful and can do much more than we will cover today. You can find out more about `OpenRefine` at [https://openrefine.org/](https://openrefine.org/).
 
-If you would like more practice using `penRefine`, a longer workshop (from which some of this material was adapted) is provided by Data Carpentry at [https://datacarpentry.org/OpenRefine-ecology-lesson](https://datacarpentry.org/OpenRefine-ecology-lesson/).
+If you would like more practice using `OpenRefine`, a longer workshop (from which some of this material was adapted) is provided by Data Carpentry at [https://datacarpentry.org/OpenRefine-ecology-lesson](https://datacarpentry.org/OpenRefine-ecology-lesson/).
 </div>
 
-## Dataset - `esoph.txt`
+## Dataset - `esoph.tab`
 
 <div id="warning">
 It is always good practice to know exactly where your dataset comes from, and what it represents. The nature and content of your dataset should guide your cleaning and analysis.
 </div>
 
-The file `esoph.txt` describes data from a case-control study of oesophageal cancer in Ille-et-Vilaine, France. The dataset is built-in dataset in `R`, and is derived from the publication below:
+The file `esoph.tab` describes data from a case-control study of oesophageal cancer in Ille-et-Vilaine, France. The dataset is built-in dataset in `R`, and is derived from the publication below:
 
 > Breslow, N. E. and Day, N. E. (1980) Statistical Methods in Cancer Research. Volume 1: The Analysis of Case-Control Studies. IARC Lyon / Oxford University Press.
 
