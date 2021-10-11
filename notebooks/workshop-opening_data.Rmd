@@ -1,0 +1,156 @@
+---
+title: "Cleaned Data, Three Ways"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<div id="summary">
+- Plain text files in a common, open, non-proprietary file format are best practice
+  - these kinds file formats enable *exchangeability* and give greatest flexibility for choice of tools/programs for downstream analysis
+- There are many good tools for data analysis, including:
+  - `Excel` is a general spreadsheet tool, with some statistical capability
+  - `Minitab` is a general-purpose statistical package, with an intuitive graphical interface
+  - `R` is a general-purpose programming language with an emphasis on statistics and data science
+- `Minitab` and `R` have modes of operation that enforce good data practice; `Excel` does not
+- `R` has an extremely wide range of libraries and packages for specialised and advanced statistical analysis, which are not available in either `Minitab` or `Excel`
+</div>
+
+# Setup
+
+To participate in this workshop or to work through the example in your own time, you will need the following on your own computer:
+
+1. The cleaned `OpenRefine` dataset from the ["Cleaning Data With OpenRefine" workshop](./workshop-openrefine.html): `esoph-tab.tsv` (or whatever you named it)
+2. Microsoft `Excel` (you have a licence for this *via* the university)
+3. `Minitab` (you have a licence for this *via* the university)
+4. `R` and `RStudio`
+
+<div id="note">
+Please see the [configuration notebook](./configuration.html) for help and guidance on setting up `R` and `RStudio`.
+
+To download and install the latest versions of `Excel` and `Minitab` please visit the [university's IT pages](https://www.strath.ac.uk/professionalservices/is/software/).
+</div>
+
+# Introduction
+
+Data can be collected, stored, and analysed in a variety of ways, using a wide range of tools. We do not prescribe any particular approach, other than to note best practices for `FAIR` and op science prefer open, plain-text, human-readable non-proprietary data formats that are shared in public repositories. The best tool for data analysis for *your* work may differ depending on your area, and from project to project. Most good tools will allow you to read and write data in exchangeable formats compatible with `FAIR` and open science. In this workshop we will explore three common tools: `Excel`, `Minitab` and `R`, and use these to open and analyse our cleaned dataset `esoph-tab.tsv` from the earlier workshop.
+
+# `Excel`
+
+Microsoft `Excel` is almost ubiquitous. It is now available free of charge as a cloud service, as part of `Office365`^[https://office.live.com/start/Excel.aspx]. Alternatives to `Excel`, such as `Google Sheets`^[Google Sheets is a cloud-based spreadsheet package, free for personal use] and `Libre Office`^[[Libre Office](https://www.libreoffice.org/) is a free, open office quite intended as a drop-in, free replacement for Microsoft Office], work in much the same way. This workshop should be adaptable to those alternatives with minimal modification.
+
+## Loading data
+
+1. Start `Excel`
+2. Click on `Open`
+3. Navigate to the location of `esoph-tab.tsv`, select it and click `Open`
+
+```{r excel-open, echo="FALSE", fig.caption="Opening a plain-text file in `Excel`"}
+knitr::include_graphics("images/excel-01_landing.png")
+knitr::include_graphics("images/excel-02_select.png")
+```
+
+<div id="warning">
+**For any format other than its own, proprietary `.xls` or `.xlsx` format, `Excel` will start the `Text Import Wizard`.**
+
+This makes loading the simplest datasets seem more complicated than it really is, and serves to nudge users towards Microsoft's own format, and away from good data practice.
+</div>
+
+```{r excel-import1, echo="FALSE", fig.caption="The `Excel` Text Import Wizard"}
+knitr::include_graphics("images/excel-03_import1.png")
+```
+
+<div id="note">
+The `Text Import Wizard` should correctly identify that your data are *delimited*^[*delimited*: separated by a character that indicates a new column is starting. This is often a *tab* (`\t`) or comma (`,`)].
+
+**However, `Excel` may not notice that the first row is a *header row*^[*header row*: a row in a table that indicates the contents of each column], and may treat all rows equivalently.**
+</div>
+
+1. Click on `Next >`
+
+```{r excel-import2, echo="FALSE", fig.caption="The `Excel` Text Import Wizard: selecting a delimiter"}
+knitr::include_graphics("images/excel-04_import2.png")
+```
+
+On the next page of the wizard, `Excel` indicates that it has identified the *tab* (`\t`) character as the column delimiter. You would be able to select a different character if this was incorrect. Here, no changes are necessary.
+
+1. Click on `Next >`
+
+```{r excel-import3, echo="FALSE", fig.caption="The `Excel` Text Import Wizard: selecting data format"}
+knitr::include_graphics("images/excel-05_import3.png")
+```
+
+In the next wizard page, `Excel` allows you to select each column's data format. These formats are: `General`, `Text`, `Date`, and "skip column".
+
+<div id="warning">
+`Excel` does not allow you here to specify data formats or data types useful for statistical or data analysis.
+
+In particular, it does not distinguish between categorical and numerical data. It does not allow you to specify whether numerical values should be counts (whole numbers) or "real" values (can take any decimal value).
+
+**Importing data into `Excel` has very limited data validation.**
+</div>
+
+1. Click `Finish`
+
+`Excel` now presents your data in spreadsheet format.
+
+```{r excel-sheet, echo="FALSE", fig.caption="Excel has imported our data. But look closely."}
+knitr::include_graphics("images/excel-06_sheet.png")
+```
+
+<div id="note">
+Here, `Excel` again attempts to nudge us towards using one of the proprietary `Excel` formats by claiming that there is `**Possible Data Loss:** Some features might be lost if you save this workbook in the comma-delimited (.csv) format. To preserve these features, save it in Excel format.` 
+
+**This is misleading.** Our data should "safe" so long as we keep it in plain text, open, non-proprietary formats.
+</div>
+
+<div id="questions">
+1. Would it be better if `Excel` were able to distinguish header rows from data rows?
+2. What kinds of data do we have in each column? (numerical or categorical? count or real-valued?)
+3. Did `Excel` import our data correctly?
+</div>
+
+<div id="warning">
+**`Excel` did not import our data correctly.**
+
+`Excel` interpreted the range `10-19` as a date: October 19th. Our `tobgp` column now has a number of dates interspersed among the values. This is bad: `Excel` has changed our data without asking or notifying us that it would do so.
+</div>
+
+To avoid this problem, we must specify `Text` as the data format for our columns:
+
+1. Close the spreadsheet.
+2. Start `Excel`
+3. Click on `Open`
+4. Navigate to the location of `esoph-tab.tsv`, select it and click `Open`
+5. Click on `Next >`
+6. Click on `Next >`
+7. Click on each column in turn and select `Text`
+
+```{r excel-text-format, echo="FALSE", fig.caption="Be sure to select the `Text` data format for each column."}
+knitr::include_graphics("images/excel-07_text.png")
+```
+
+1. Click on `Finish`
+
+```{r excel-reload-sheet, echo="FALSE", fig.caption="Excel has now imported our data correctly."}
+knitr::include_graphics("images/excel-08_sheet.png")
+```
+
+Excel has now imported our data, and it *looks* to be correct.
+
+<div id="questions">
+1. Did `Excel` import our data correctly?
+</div>
+
+## Summary Statistics
