@@ -102,3 +102,4 @@ The current versions of the notebook HTML pages are linked below, for convenienc
 ## Workshop Demos
 
 - [`OpenRefine`](notebooks/workshop-openrefine.html)
+- [`Excel/Minitab/R`](notebooks/workshop-opening_data.html)
