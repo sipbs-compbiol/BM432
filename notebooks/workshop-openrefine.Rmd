@@ -223,6 +223,7 @@ To make space, you may have to close the `agegp` facet
   - The default settings do not correctly cluster the two entries for `0-39` gm/day, so we need to change the settings.
   - Choose the `nearest neighbour` and `levenshtein` clustering method, with radius `10` and `4` block chars.
   - Check the `Merge?` box for the `0-39` gm/day entries
+  - Click `Merge Selected & Close`
   
 <div id="questions">
 1. How many categories are there in the `alcgp` column?
@@ -241,9 +242,15 @@ There are several issues with data in `tobgp`, and we can fix them all using fac
 
 - Create a text facet for `tobgp`
 - Cluster the categories using `nearest neighbour`, `ppm` with radius `5` and `4` block chars`
-- Select the rows that should be merged and click `Merge Selected & Re-Cluster`
+- Select the rows that should be merged (`20-29` and `20-29 a day`) and click `Merge Selected & Re-Cluster`
 - Cluster the categories using `nearest neighbour`, `ppm` with radius `5` and `3` block chars`
-- Select the rows that should be merged and click `Merge Selected & Close`
+- Select the rows that should be merged (`0-9g/day`, `0-9g per day`, `0-9g/DAY` and `0-9g/Day`) and click `Merge Selected & Close`
+
+Again, notice that only one category has a set of units. As above, we prefer to place units in the header or an accompanying metadata file.
+
+- Removing the units
+  - Hover the mouse over `0-9g/day` and click `edit`
+  - Delete the units and click `Apply
 
 <div id="questions">
 1. How many categories are there in the `alcgp` column?
@@ -311,4 +318,6 @@ As `OpenRefine` does not modify your raw data, you will need to export your clea
 <div id="note">
 Remember that using widely-supported, plain text, open non-proprietary formats like `.tsv`/`.tab` (tab-separated value) or `.csv` (comma-separated value) makes it easier for yourself and others to use your data.
 </div>
-
+<div id="note">
+When you export your cleaned data and project files, remember to follow [good data management principles](./02-project_management.html) for naming and saving these files. You should be able to come back to your computer in six months and still be able to tell which file contains the cleaned data.
+</div>
