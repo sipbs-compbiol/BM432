@@ -261,4 +261,26 @@ knitr::include_graphics("images/excel-14_pivot3.png")
 <div id="questions">
 1. How many cases are there in total?
 2. How many controls are there in the `120+` category
+3. Why do you think the column of category names is not sorted in numerical order?
+</div>
+
+## Data visualiation
+
+Suppose we want to compare the numbers of cases and controls for each of our `alcgp` categories, we can reasonably use a bar graph (though we should really use a 1D scatterplot). To do so:
+
+1. Select the data in the pivot table (`A3:C7` in the figure)
+2. Click on `Insert` $\rightarrow$ `Pivot Chart`
+
+This will create a bar chart in the current worksheet, showing the number of controls and cases in each category of `alcgp`.
+
+```{r fig-pivot-hart, echo=FALSE, fig.caption="Creating a pivot table."}
+knitr::include_graphics("images/excel-15_pivot4.png")
+```
+
+# `Minitab`
+
+`Minitab` is a statistical software package, often used for teaching. It is moving towards a cloud-hosted model, but the `Minitab Express` package is still available for desktop use. This software requires a licence, which you will need to obtain from the university before you can run the tool.
+
+<div id="warning">
+Also, because of licensing restrictions, you must be connected to the university VPN, so that the licensing server can be reached. Otherwise, you will not be able to use `Minitab`.
 </div>
