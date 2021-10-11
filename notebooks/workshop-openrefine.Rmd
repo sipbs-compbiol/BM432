@@ -314,10 +314,15 @@ As `OpenRefine` does not modify your raw data, you will need to export your clea
 - Exporting cleaned data
   - Click the `Export` button (top right) and select the file type you want to use to export the data
   - The standard file download dialogue will appear for your browser
+
+<div id="warning">
+Be sure to save your data as both tab-separated format and comma-separated format, as you will need *both* formats for the second part of the workshop.
+</div>
   
 <div id="note">
 Remember that using widely-supported, plain text, open non-proprietary formats like `.tsv`/`.tab` (tab-separated value) or `.csv` (comma-separated value) makes it easier for yourself and others to use your data.
 </div>
+
 <div id="note">
 When you export your cleaned data and project files, remember to follow [good data management principles](./02-project_management.html) for naming and saving these files. You should be able to come back to your computer in six months and still be able to tell which file contains the cleaned data.
 </div>
