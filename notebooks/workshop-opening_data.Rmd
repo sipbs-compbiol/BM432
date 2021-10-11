@@ -452,15 +452,18 @@ knitr::include_graphics("images/r-05_save.png")
 
 <div id="note">
 You can get help on any `R` command by typing its name into the search field of the `Help` panel (bottom left, by default)
+
+When script commands are run in `RStudio`, you can see them being executed in the `Console` panel.
 </div>
 
 Here, it's worth breaking down what you've written in the script. The first two lines start with the "hash"/"pound"/octothorpe character. This means that the line is a *comment* and not treated like a command. This is one way in which we annotate and document our code, so it is understandable when we return to it in future (and so others can understand it).
 
-The data is loaded on line three: `data = read.table("esoph-tab.tsv", header=TRUE, sep="\t")`. This does the following:
+The data is loaded on line three: `data = read.table("esoph-tab.tsv", header=TRUE, sep="\t", stringsAsFactors=TRUE)`. This does the following:
 
 - It opens (`read.table()`) the file `esoph-tab.tsv`
   - It tells `R` that the first line of the file/first row of the table is a header (`header=TRUE`)
   - It tells `R` that the separator/delimiter is a tab character (`sep="\t"`)
+  - It tells `R` that the columns containing strings are *categorical variables* (`stringsAsFactors=TRUE`)
 - It places the data into a *variable*^[You can think of a variable as a box with a label on it. The label is the variable name (here, `data`), and the contents of the box are the data that was loaded. When you want to talk about the box or its contents, you can do so with the variable name.] so we can use it.
 
 <div id="note">
@@ -469,8 +472,71 @@ When the data is loaded, the `Environment` panel (top right, by default) shows t
 - Click on the triangle next to `data`: this shows a summary of the dataset
 - Click on the name `data`: this shows the data values in spreadsheet format in the `Editor` panel
   - **You cannot edit data in the spreadsheet view**
+  
+**The `data` variable contains an object called a *dataframe*^[The term *dataframe* refers to data stored according to good data practices: each row is an observation; each column is a variable] in `R` jargon.**
 </div>
 
-```{r fig-r-load-save, echo=FALSE, fig.caption="Viewing the dataset in R's spreadsheet view."}
+```{r fig-r-viewdata, echo=FALSE, fig.caption="Viewing the dataset in R's spreadsheet view."}
 knitr::include_graphics("images/r-06_viewdata.png")
 ```
+
+<div id="questions">
+1. What kinds of values did `R` read each column of the dataset in as?
+2. Is the data import process more, or less, reproducible than loading data into `Excel` or `Minitab`?
+</div>
+
+## Summary Statistics
+
+To get basic summary statistics from a *dataframe*, we use the `summary()` command in `R`. Add the following lines to your script, select that line, and then `Run` the script:
+
+```r
+# Obtain a summary of each column in the loaded data
+summary(data)
+```
+
+This generates output in the `Console` panel:
+
+```r
+> summary(data)
+   agegp       alcgp      tobgp        ncases         ncontrols    
+ 25-34:15   0-39  :23   0-9  :24   Min.   : 0.000   Min.   : 1.00  
+ 35-44:15   120+  :21   10-19:24   1st Qu.: 0.000   1st Qu.: 3.00  
+ 45-54:16   40-79 :23   20-29:20   Median : 1.000   Median : 6.00  
+ 55-64:16   80-119:21   30+  :20   Mean   : 2.273   Mean   :11.08  
+ 65-74:15                          3rd Qu.: 4.000   3rd Qu.:14.00  
+ 75+  :11                          Max.   :17.000   Max.   :60.00  
+```
+
+```{r fig-r-summary, echo=FALSE, fig.caption="Basic dataframe summary."}
+knitr::include_graphics("images/r-07_summary.png")
+```
+
+<div id="questions">
+1. How do these summary statistics differ from those in `Minitab`?
+</div>
+
+So far, the output does not include standard deviations for `ncases` and `ncontrols`. We can get this information by using the command `sd()` in our script, and selecting each column separately. To indicate a column, we use the variable name, followed by the `$` symbol, and then the column name. So, to obtain standard deviations for our two columns in the `data` dataframe, we add the following lines to our script:
+
+```r
+# Calculate standard deviations of the number of cases and controls
+sd(data$ncases)
+sd(data$ncontrols)
+```
+
+and running the script then gives us the result:
+
+```r
+> # Calculate standard deviations of the number of cases and controls
+> sd(data$ncases)
+[1] 2.753169
+> sd(data$ncontrols)
+[1] 12.7227
+```
+
+```{r fig-r-sdevs, echo=FALSE, fig.caption="Calculating standard deviations on data columns."}
+knitr::include_graphics("images/r-08_sdevs.png")
+```
+
+### Summary statistics grouped by categorical data
+
+
