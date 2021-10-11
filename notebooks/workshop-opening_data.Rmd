@@ -282,5 +282,88 @@ knitr::include_graphics("images/excel-15_pivot4.png")
 `Minitab` is a statistical software package, often used for teaching. It is moving towards a cloud-hosted model, but the `Minitab Express` package is still available for desktop use. This software requires a licence, which you will need to obtain from the university before you can run the tool.
 
 <div id="warning">
-Also, because of licensing restrictions, you must be connected to the university VPN, so that the licensing server can be reached. Otherwise, you will not be able to use `Minitab`.
+Also, because of licensing restrictions, you must be connected to the university VPN so that the licensing server can be reached. Otherwise, you will not be able to use `Minitab`.
 </div>
+
+## Loading data
+
+1. Start `Minitab Express`
+2. Click on `File` $\rightarrow$ `Open Worksheet`
+3. Navigate to the location of `esoph-tab.csv`, select it and click `Open`
+
+<div id="warning">
+`Minitab Express` will not import tab-separated value files.
+</div>
+
+`Minitab Express` presents your data in a panelled window. By default, the data is presented in spreadsheet form in the lower panel. The top panel will contain output, and the left panel will be a `Navigator`. This layout reflects `Minitab`'s role as a statistical analysis package, rather than a general spreadsheet tool.
+
+```{r fig-minitab-load, echo=FALSE, fig.caption="Importing CSV into Minitab."}
+knitr::include_graphics("images/minitab-01_import.png")
+knitr::include_graphics("images/minitab-02_landing.png")
+```
+
+<div id="note">
+`Minitab Express` did not ask any questions about data type or formats.
+</div>
+
+To see how `Minitab Express` imported your data:
+
+1. Click on any column in the spreadsheet view
+2. Click on the `Inspector` button (top right)
+
+A new window appears. Click on the `Column` icon (third icon).
+
+```{r fig-minitab-inspector, echo=FALSE, fig.caption="Minitab column inspector."}
+knitr::include_graphics("images/minitab-03_inspector.png")
+```
+
+<div id="questions">
+1. Has `Minitab Express` correctly distinguished between the header and data rows?
+2. What data type or format does `Minitab Express` think each column is?
+3. What kinds of data does `Minitab Express` "know about"?
+4. Do you need to change any of the data values or formats?
+5. How does this compare to loading data into `Excel`?
+</div>
+
+## Summary Statistics
+
+As a statistical package, `Minitab Express` is written to make obtaining summary statistical data relatively straightforward. Here we will try to recover the same data as we did in `Excel`.
+
+### Summary statistics for quantitative/numerical data
+
+To obtain summary statistics for a single data column in `Minitab Express`:
+
+1. Click on `Summary` $\rightarrow$ `Column Statistics`
+2. Select `C4 ncases` and click on the arrow next to `Variable`
+3. Click `OK`
+
+`Minitab` then updates the spreadsheet with calculated values and presents some output in the top panel, describing what values were calculated, and which cells in the spreadsheet hold output values.
+
+```{r fig-minitab-summary, echo=FALSE, fig.caption="Generating a single-column summary with Minitab."}
+knitr::include_graphics("images/minitab-04_summary1.png")
+knitr::include_graphics("images/minitab-05_summary2.png")
+knitr::include_graphics("images/minitab-06_summary3.png")
+```
+
+To generate a set of descriptive statistics for a data column:
+
+1. Click on `Summary` $\rightarrow$ `Descriptive Statistics`
+2. Select `C5 ncontrols` and click on the arrow next to `Variable`
+3. Click `OK`
+
+`Minitab` doesn't put these values in the spreadsheet, but it does show a nicely-formatted table with a number of descriptive statistics. You can switch between views on the data by clicking on previous steps in the `Navigator` (on the left, by default).
+
+```{r fig-minitab-summary2, echo=FALSE, fig.caption="Generating a single-column summary with Minitab."}
+knitr::include_graphics("images/minitab-04_summary1.png")
+knitr::include_graphics("images/minitab-05_summary2.png")
+knitr::include_graphics("images/minitab-06_summary3.png")
+```
+
+<div id="questions">
+1. Does `Minitab` give you the same information/values as `Excel` for this data?
+2. Does `Minitab` give you any useful extra data?
+</div>
+
+### Summary statistics for qualitative data
+
+We will again try to obtain case and control counts, conditioned on the `alcgp` category.
