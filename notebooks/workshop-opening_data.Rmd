@@ -21,6 +21,7 @@ knitr::opts_chunk$set(echo = FALSE)
   - these kinds file formats enable *exchangeability* and give greatest flexibility for choice of tools/programs for downstream analysis
 - There are many good tools for data analysis, including:
   - `Excel` is a general spreadsheet tool, with some statistical capability
+    - `Excel` may need care when importing data, as it does not have statistical datatypes, and converts data to new forms silently.
   - `Minitab` is a general-purpose statistical package, with an intuitive graphical interface
   - `R` is a general-purpose programming language with an emphasis on statistics and data science
 - `Minitab` and `R` have modes of operation that enforce good data practice; `Excel` does not
@@ -46,6 +47,12 @@ To download and install the latest versions of `Excel` and `Minitab` please visi
 
 Data can be collected, stored, and analysed in a variety of ways, using a wide range of tools. We do not prescribe any particular approach, other than to note best practices for `FAIR` and op science prefer open, plain-text, human-readable non-proprietary data formats that are shared in public repositories. The best tool for data analysis for *your* work may differ depending on your area, and from project to project. Most good tools will allow you to read and write data in exchangeable formats compatible with `FAIR` and open science. In this workshop we will explore three common tools: `Excel`, `Minitab` and `R`, and use these to open and analyse our cleaned dataset `esoph-tab.tsv` from the earlier workshop.
 
+We will perform three main tasks in each package:
+
+1. Loading (or importing) the dataset
+2. Generating standard summary statistics: mean, standard deviation, quartiles, etc.
+3. Visualising the distribution of the data graphically
+
 # `Excel`
 
 Microsoft `Excel` is almost ubiquitous. It is now available free of charge as a cloud service, as part of `Office365`^[https://office.live.com/start/Excel.aspx]. Alternatives to `Excel`, such as `Google Sheets`^[Google Sheets is a cloud-based spreadsheet package, free for personal use] and `Libre Office`^[[Libre Office](https://www.libreoffice.org/) is a free, open office quite intended as a drop-in, free replacement for Microsoft Office], work in much the same way. This workshop should be adaptable to those alternatives with minimal modification.
@@ -56,7 +63,7 @@ Microsoft `Excel` is almost ubiquitous. It is now available free of charge as a 
 2. Click on `Open`
 3. Navigate to the location of `esoph-tab.tsv`, select it and click `Open`
 
-```{r excel-open, echo="FALSE", fig.caption="Opening a plain-text file in `Excel`"}
+```{r excel-open, echo=FALSE, fig.caption="Opening a plain-text file in `Excel`"}
 knitr::include_graphics("images/excel-01_landing.png")
 knitr::include_graphics("images/excel-02_select.png")
 ```
@@ -67,7 +74,7 @@ knitr::include_graphics("images/excel-02_select.png")
 This makes loading the simplest datasets seem more complicated than it really is, and serves to nudge users towards Microsoft's own format, and away from good data practice.
 </div>
 
-```{r excel-import1, echo="FALSE", fig.caption="The `Excel` Text Import Wizard"}
+```{r excel-import1, echo=FALSE, fig.caption="The `Excel` Text Import Wizard"}
 knitr::include_graphics("images/excel-03_import1.png")
 ```
 
@@ -79,7 +86,7 @@ The `Text Import Wizard` should correctly identify that your data are *delimited
 
 1. Click on `Next >`
 
-```{r excel-import2, echo="FALSE", fig.caption="The `Excel` Text Import Wizard: selecting a delimiter"}
+```{r excel-import2, echo=FALSE, fig.caption="The `Excel` Text Import Wizard: selecting a delimiter"}
 knitr::include_graphics("images/excel-04_import2.png")
 ```
 
@@ -87,7 +94,7 @@ On the next page of the wizard, `Excel` indicates that it has identified the *ta
 
 1. Click on `Next >`
 
-```{r excel-import3, echo="FALSE", fig.caption="The `Excel` Text Import Wizard: selecting data format"}
+```{r excel-import3, echo=FALSE, fig.caption="The `Excel` Text Import Wizard: selecting data format"}
 knitr::include_graphics("images/excel-05_import3.png")
 ```
 
@@ -105,7 +112,7 @@ In particular, it does not distinguish between categorical and numerical data. I
 
 `Excel` now presents your data in spreadsheet format.
 
-```{r excel-sheet, echo="FALSE", fig.caption="Excel has imported our data. But look closely."}
+```{r excel-sheet, echo=FALSE, fig.caption="Excel has imported our data. But look closely."}
 knitr::include_graphics("images/excel-06_sheet.png")
 ```
 
@@ -137,13 +144,13 @@ To avoid this problem, we must specify `Text` as the data format for our columns
 6. Click on `Next >`
 7. Click on each column in turn and select `Text`
 
-```{r excel-text-format, echo="FALSE", fig.caption="Be sure to select the `Text` data format for each column."}
+```{r excel-text-format, echo=FALSE, fig.caption="Be sure to select the `Text` data format for each column."}
 knitr::include_graphics("images/excel-07_text.png")
 ```
 
 1. Click on `Finish`
 
-```{r excel-reload-sheet, echo="FALSE", fig.caption="Excel has now imported our data correctly."}
+```{r excel-reload-sheet, echo=FALSE, fig.caption="Excel has now imported our data correctly."}
 knitr::include_graphics("images/excel-08_sheet.png")
 ```
 
@@ -154,3 +161,104 @@ Excel has now imported our data, and it *looks* to be correct.
 </div>
 
 ## Summary Statistics
+
+To obtain summary statistics for each column we need to use `Excel`'s *functions* and *pivot tables*, as we need to treat *categorical* data differently from *numerical* data. We want to know, for instance, the number of datapoints we have in each `agegp` category, rather than a "mean" of the categories (which has no real meaning); but for our cases and controls, we might still want to know means, standard deviations, etc.
+
+<div id="warning">
+In all cases, we are potentially modifying our cleaned dataset *directly* because we are making changes to the same file we loaded - **this would be bad practice**.
+
+**Our first step should be to save a new spreadsheet to do our analysis in**
+</div>
+
+1. Save the current file as an `Excel` workbook (note: this is necessary to avoid losing `Excel`'s calculations and formatting)
+
+```{r excel-save, echo=FALSE, fig.caption="Save the spreadsheet in `Excel` workbook format."}
+knitr::include_graphics("images/excel-08_sheet.png")
+```
+
+### Summary statistics for quantitative/numerical data
+
+We will calculate mean and standard deviation values for columns `ncases` and `ncontrols`. To do so, we need to use `Excel`'s `AVERAGE` and `STDEV.S` functions.
+
+- The `ncases` values run from cell `D2` to cell `D89`
+- The `ncontrols` values run from cell `E2` to cell `E89`
+
+1. In cell `D90` enter the text `=AVERAGE(D2:D89)` and hit the return key. This will calculate the mean of quantitative data in the column of cells extending from `D2` to `D89`, and populate 
+
+<div id="question">
+1. Did `Excel` calculate the average value? If so, what is it?
+</div>
+
+<div id="warning">
+**`Excel` did not calculate the mean value.**
+
+When we selected `Text` as the input data format, `Excel` used this to do two things:
+
+1. All numerical values are now understood as text, *not* as numbers^[In Excel, numbers are right-aligned, text is left-aligned. Each cell also has a green triangle in its upper left corner to indicate that it is a text value, not numerical].
+2. All cells in both columns - *all the way to the bottom of the spreadsheet* - are interpreted as text, not numbers, formulas, or any other element.
+</div>
+
+<div id="note">
+To rectify this problem, we need to change those two columns to `General` format:
+
+1. Select all numerical data in columns `D` and `E` (`D2:E89`)
+2. Click on the `warning` icon (a small yellow triangle with an exclamation mark)
+3. Click on `Convert to Number`
+
+```{r fix-numbers, echo=FALSE, fig.caption="Converting text to numbers in `Excel`."}
+knitr::include_graphics("images/excel-09_warning.png")
+knitr::include_graphics("images/excel-10_convert.png")
+```
+</div>
+
+<div id="questions">
+1. Does the formula now give a plausible mean value?
+2. If you were new to this file, how could you tell that the formula gives a mean value, and not a standard deviation, or something else entirely?
+</div>
+
+1. As there is no visual indication in the file of what the number in cell `D90` represents, add a label to cell `C90` with the text `Mean:`.
+2. Copy and paste the formula from cell `D90` into cell `E90`
+3. Add the label `Std Dev:` to cell `C91`
+4. Enter the formula `=STDEV(D2:D89)` into cell `D91`
+5. Copy and past the formula from cell `D91` into cell `E91`
+
+Now we have some summary information for our quantitative data.
+
+```{r fix-quantsum, echo=FALSE, fig.caption="Spreadsheet with quantitative data summary."}
+knitr::include_graphics("images/excel-11_quantsum.png")
+```
+
+### Summary statistics for categorical data
+
+It is often useful to know how many datapoints you have in each category. Here, we *could* independently sum each of the `ncases` or `ncontrols` cells, depending on which mixture of categorical variables we wanted (e.g. combine all cells for rows where `tobgp` is equal to `10-19`), but `Excel` provides a tool called a *pivot table* to make things easier for us.
+
+For instance, suppose we wanted to know the numbers of cases and controls in each category of the `alcgp` column. We could insert a *pivot table* that combined all values from `ncases` and `ncontrols`, for each of the individual categories in `alcgp`. To do this:
+
+1. Select all of your data (`A2:E89`)
+2. Click `Insert` $\rightarrow$ `Pivot Table` $\rightarrow$ `OK`
+
+```{r fig-pivot, echo=FALSE, fig.caption="Creating a pivot table."}
+knitr::include_graphics("images/excel-12_pivot1.png")
+knitr::include_graphics("images/excel-13_pivot2.png")
+```
+
+This brings up an interface that might at first look confusing. We are going to try to create a table that has one row per category in `alcgp`, and holds three columns:
+
+- The `alcgp` category
+- The *sum* of values in `ncases` for that category
+- The *sum* of values in `ncontrols` for that category
+
+To do so:
+
+1. Click on the checkbox next to `alcgp` - this will place it in the `Rows` box, and you will see a view of the new pivot table
+2. Click on the checkbox next to `ncases` - this will place it in the `Values` box as `Sum of ncases` and you will see the pivot table change
+3. Click on the checkbox next to `ncontrols` - this will place it in the `Values` box as `Sum of ncontrols` and you will see the pivot table change 
+
+```{r fig-pivot-table, echo=FALSE, fig.caption="Creating a pivot table."}
+knitr::include_graphics("images/excel-14_pivot3.png")
+```
+
+<div id="questions">
+1. How many cases are there in total?
+2. How many controls are there in the `120+` category
+</div>
