@@ -452,7 +452,13 @@ First, save the script. Click File > Save As. (Alternatively, click on the "Save
 
 This will bring up a "Save File" dialogue. Save the file as `summarise_esoph.R`
 
-Next, click `Run` to run the script.
+Next, select the line starting `data =` in the script, and click `Run` to run it
+
+<div id="warning">
+The `Run` button will only **run the lines you currently have selected in the editor**.
+
+To run the entire script in one go, you can click on the `Source` button.
+</div>
 
 ```{r fig-r-load-save, echo=FALSE, fig.cap="Write, run and save the script.", out.width="600px"}
 knitr::include_graphics("images/r-04_load.png")
