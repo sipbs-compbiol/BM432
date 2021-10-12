@@ -21,11 +21,10 @@ knitr::opts_chunk$set(echo = FALSE)
   - these kinds file formats enable *exchangeability* and give greatest flexibility for choice of tools/programs for downstream analysis
 - There are many good tools for data analysis, including:
   - `Excel` is a general spreadsheet tool, with some statistical capability
-    - `Excel` may need care when importing data, as it does not have statistical datatypes, and converts data to new forms silently.
   - `Minitab` is a general-purpose statistical package, with an intuitive graphical interface
   - `R` is a general-purpose programming language with an emphasis on statistics and data science
 - `Minitab` and `R` have modes of operation that enforce good data practice; `Excel` does not
-- `R` has an extremely wide range of libraries and packages for specialised and advanced statistical analysis, which are not available in either `Minitab` or `Excel`
+- `R` has an extremely wide range of libraries and packages for specialised and advanced statistical analysis and visualisation, which are not available in either `Minitab` or `Excel`
 </div>
 
 # Setup
@@ -35,17 +34,17 @@ To participate in this workshop or to work through the example in your own time,
 1. The cleaned `OpenRefine` dataset from the ["Cleaning Data With OpenRefine" workshop](./workshop-openrefine.html): `esoph-tab.tsv` (or whatever you named it)
 2. Microsoft `Excel` (you have a licence for this *via* the university)
 3. `Minitab` (you have a licence for this *via* the university)
-4. `R` and `RStudio`
+4. `R` and `RStudio` (this is free and open-source)
 
 <div id="note">
 Please see the [configuration notebook](./configuration.html) for help and guidance on setting up `R` and `RStudio`.
 
-To download and install the latest versions of `Excel` and `Minitab` please visit the [university's IT pages](https://www.strath.ac.uk/professionalservices/is/software/).
+For guidance in obtaining, installing and using the latest versions of `Excel` and `Minitab` please visit the [university's IT pages](https://www.strath.ac.uk/professionalservices/is/software/).
 </div>
 
 # Introduction
 
-Data can be collected, stored, and analysed in a variety of ways, using a wide range of tools. We do not prescribe any particular approach, other than to note best practices for `FAIR` and op science prefer open, plain-text, human-readable non-proprietary data formats that are shared in public repositories. The best tool for data analysis for *your* work may differ depending on your area, and from project to project. Most good tools will allow you to read and write data in exchangeable formats compatible with `FAIR` and open science. In this workshop we will explore three common tools: `Excel`, `Minitab` and `R`, and use these to open and analyse our cleaned dataset `esoph-tab.tsv` from the earlier workshop.
+Data can be collected, stored, and analysed in a variety of ways, using a wide range of tools. We do not prescribe any particular approach, other than to note best practices for `FAIR` and open science prefer open, plain-text, human-readable non-proprietary data formats that are shared in public repositories. The best tool for data analysis for *your* work may differ depending on your research area, and from project to project. Most good tools will allow you to read and write data in exchangeable formats compatible with `FAIR` and open science. In this workshop we will explore the use of three common tools, `Excel`, `Minitab` and `R`, to open and summarise the dataset `esoph-tab.tsv` we cleaned in the earlier workshop.
 
 We will perform three main tasks in each package:
 
@@ -63,7 +62,7 @@ Microsoft `Excel` is almost ubiquitous. It is now available free of charge as a 
 2. Click on `Open`
 3. Navigate to the location of `esoph-tab.tsv`, select it and click `Open`
 
-```{r excel-open, echo=FALSE, fig.caption="Opening a plain-text file in `Excel`"}
+```{r fig-excel-open, echo=FALSE, fig.cap="Importing a plain-text file in `Excel`", out.width="600px"}
 knitr::include_graphics("images/excel-01_landing.png")
 knitr::include_graphics("images/excel-02_select.png")
 ```
@@ -74,36 +73,34 @@ knitr::include_graphics("images/excel-02_select.png")
 This makes loading the simplest datasets seem more complicated than it really is, and serves to nudge users towards Microsoft's own format, and away from good data practice.
 </div>
 
-```{r excel-import1, echo=FALSE, fig.caption="The `Excel` Text Import Wizard"}
+```{r fig-excel-import1, echo=FALSE, fig.cap="The `Excel` Text Import Wizard", out.width="400px"}
 knitr::include_graphics("images/excel-03_import1.png")
 ```
 
 <div id="note">
 The `Text Import Wizard` should correctly identify that your data are *delimited*^[*delimited*: separated by a character that indicates a new column is starting. This is often a *tab* (`\t`) or comma (`,`)].
 
-**However, `Excel` may not notice that the first row is a *header row*^[*header row*: a row in a table that indicates the contents of each column], and may treat all rows equivalently.**
+**However, `Excel` may not notice that the first row is a *header row*^[*header row*: a row in a table that indicates the contents of each column], and may treat all rows (data or metadata) equivalently.**
 </div>
 
 1. Click on `Next >`
 
-```{r excel-import2, echo=FALSE, fig.caption="The `Excel` Text Import Wizard: selecting a delimiter"}
+```{r excel-import2, echo=FALSE, fig.cap="The `Excel` Text Import Wizard: selecting a delimiter", out.width="400px"}
 knitr::include_graphics("images/excel-04_import2.png")
 ```
 
-On the next page of the wizard, `Excel` indicates that it has identified the *tab* (`\t`) character as the column delimiter. You would be able to select a different character if this was incorrect. Here, no changes are necessary.
+On the next page of the wizard, `Excel` indicates that it has identified the *tab* (`\t`) character as the column delimiter. You would be able to select a different character if this was incorrect. In this instance, no changes are necessary.
 
 1. Click on `Next >`
 
-```{r excel-import3, echo=FALSE, fig.caption="The `Excel` Text Import Wizard: selecting data format"}
+```{r excel-import3, echo=FALSE, fig.cap="The `Excel` Text Import Wizard: selecting data format", out.width="400px"}
 knitr::include_graphics("images/excel-05_import3.png")
 ```
 
 In the next wizard page, `Excel` allows you to select each column's data format. These formats are: `General`, `Text`, `Date`, and "skip column".
 
 <div id="warning">
-`Excel` does not allow you here to specify data formats or data types useful for statistical or data analysis.
-
-In particular, it does not distinguish between categorical and numerical data. It does not allow you to specify whether numerical values should be counts (whole numbers) or "real" values (can take any decimal value).
+`Excel` does not allow you here to specify data formats or data types that are standard for statistical or data analysis. In particular, it does not distinguish between categorical and continuous (numerical) data. It does not allow you to specify whether numerical values should be counts (whole numbers) or "real" values (can take any decimal value).
 
 **Importing data into `Excel` has very limited data validation.**
 </div>
@@ -112,12 +109,12 @@ In particular, it does not distinguish between categorical and numerical data. I
 
 `Excel` now presents your data in spreadsheet format.
 
-```{r excel-sheet, echo=FALSE, fig.caption="Excel has imported our data. But look closely."}
+```{r excel-sheet, echo=FALSE, fig.cap="Excel has imported our data. But look closely.", out.width="600px"}
 knitr::include_graphics("images/excel-06_sheet.png")
 ```
 
 <div id="note">
-Here, `Excel` again attempts to nudge us towards using one of the proprietary `Excel` formats by claiming that there is `**Possible Data Loss:** Some features might be lost if you save this workbook in the comma-delimited (.csv) format. To preserve these features, save it in Excel format.` 
+Here, `Excel` again attempts to nudge us towards using one of the proprietary `Excel` formats by claiming that there is `<b>Possible Data Loss:</b> Some features might be lost if you save this workbook in the comma-delimited (.csv) format. To preserve these features, save it in Excel format.` 
 
 **This is misleading.** Our data should "safe" so long as we keep it in plain text, open, non-proprietary formats.
 </div>
@@ -134,7 +131,7 @@ Here, `Excel` again attempts to nudge us towards using one of the proprietary `E
 `Excel` interpreted the range `10-19` as a date: October 19th. Our `tobgp` column now has a number of dates interspersed among the values. This is bad: `Excel` has changed our data without asking or notifying us that it would do so.
 </div>
 
-To avoid this problem, we must specify `Text` as the data format for our columns:
+So that `Excel` does not modify our data silently, we must specify `Text` as the data format for our columns:
 
 1. Close the spreadsheet.
 2. Start `Excel`
@@ -144,41 +141,38 @@ To avoid this problem, we must specify `Text` as the data format for our columns
 6. Click on `Next >`
 7. Click on each column in turn and select `Text`
 
-```{r excel-text-format, echo=FALSE, fig.caption="Be sure to select the `Text` data format for each column."}
+```{r excel-text-format, echo=FALSE, fig.cap="Be sure to select the `Text` data format for each column.", out.width="400px"}
 knitr::include_graphics("images/excel-07_text.png")
 ```
 
 1. Click on `Finish`
 
-```{r excel-reload-sheet, echo=FALSE, fig.caption="Excel has now imported our data correctly."}
+```{r excel-reload-sheet, echo=FALSE, fig.cap="Excel has now imported our data correctly.", out.width="600px"}
 knitr::include_graphics("images/excel-08_sheet.png")
 ```
 
 Excel has now imported our data, and it *looks* to be correct.
 
 <div id="questions">
-1. Did `Excel` import our data correctly?
+1. Why did `Excel` not import our data correctly, first time?
+2. What other kinds of data might cause problems for `Excel` (Hint^[https://www.theregister.com/2020/08/06/excel_gene_names/])?
 </div>
 
 ## Summary Statistics
 
-To obtain summary statistics for each column we need to use `Excel`'s *functions* and *pivot tables*, as we need to treat *categorical* data differently from *numerical* data. We want to know, for instance, the number of datapoints we have in each `agegp` category, rather than a "mean" of the categories (which has no real meaning); but for our cases and controls, we might still want to know means, standard deviations, etc.
+To obtain summary statistics for each column we need to use `Excel`'s *functions* and *pivot tables*, as we need to treat *categorical* data differently from *continuous* (numerical) data. We want to know, for instance, the number of datapoints we have in each `agegp` category, rather than a "mean" of the categories (which has no real meaning); but for our cases and controls, we might still want to know means, standard deviations, etc.
 
 <div id="warning">
-In all cases, we are potentially modifying our cleaned dataset *directly* because we are making changes to the same file we loaded - **this would be bad practice**.
+In all cases, we are potentially modifying our cleaned dataset *directly* because we are working in the same file we loaded - **this would be bad practice**.
 
 **Our first step should be to save a new spreadsheet to do our analysis in**
 </div>
 
-1. Save the current file as an `Excel` workbook (note: this is necessary to avoid losing `Excel`'s calculations and formatting)
-
-```{r excel-save, echo=FALSE, fig.caption="Save the spreadsheet in `Excel` workbook format."}
-knitr::include_graphics("images/excel-08_sheet.png")
-```
+1. Save the current file as an `Excel` workbook (note: this is necessary to avoid losing `Excel`'s formulas)
 
 ### Summary statistics for quantitative/numerical data
 
-We will calculate mean and standard deviation values for columns `ncases` and `ncontrols`. To do so, we need to use `Excel`'s `AVERAGE` and `STDEV.S` functions.
+We will calculate mean and standard deviation values for columns `ncases` and `ncontrols`. To do so, we need to use `Excel`'s `AVERAGE()` and `STDEV()` functions.
 
 - The `ncases` values run from cell `D2` to cell `D89`
 - The `ncontrols` values run from cell `E2` to cell `E89`
@@ -190,7 +184,7 @@ We will calculate mean and standard deviation values for columns `ncases` and `n
 </div>
 
 <div id="warning">
-**`Excel` did not calculate the mean value.**
+**`Excel` will not calculate a mean value for text data.**
 
 When we selected `Text` as the input data format, `Excel` used this to do two things:
 
@@ -199,13 +193,13 @@ When we selected `Text` as the input data format, `Excel` used this to do two th
 </div>
 
 <div id="note">
-To rectify this problem, we need to change those two columns to `General` format:
+To rectify this problem, we need to change the data in the two columns `D` and `E` to be numbers:
 
 1. Select all numerical data in columns `D` and `E` (`D2:E89`)
 2. Click on the `warning` icon (a small yellow triangle with an exclamation mark)
 3. Click on `Convert to Number`
 
-```{r fix-numbers, echo=FALSE, fig.caption="Converting text to numbers in `Excel`."}
+```{r fix-numbers, echo=FALSE, fig.cap="Converting text to numbers in `Excel`.", out.width="600px"}
 knitr::include_graphics("images/excel-09_warning.png")
 knitr::include_graphics("images/excel-10_convert.png")
 ```
@@ -222,9 +216,13 @@ knitr::include_graphics("images/excel-10_convert.png")
 4. Enter the formula `=STDEV(D2:D89)` into cell `D91`
 5. Copy and past the formula from cell `D91` into cell `E91`
 
+<div id="warning">
+Depending on your version of `Excel` you may need to use the function `STDEV.S()`.
+</div>
+
 Now we have some summary information for our quantitative data.
 
-```{r fix-quantsum, echo=FALSE, fig.caption="Spreadsheet with quantitative data summary."}
+```{r fix-quantsum, echo=FALSE, fig.cap="Spreadsheet with quantitative data summary.", out.width="600px"}
 knitr::include_graphics("images/excel-11_quantsum.png")
 ```
 
@@ -237,12 +235,12 @@ For instance, suppose we wanted to know the numbers of cases and controls in eac
 1. Select all of your data (`A2:E89`)
 2. Click `Insert` $\rightarrow$ `Pivot Table` $\rightarrow$ `OK`
 
-```{r fig-pivot, echo=FALSE, fig.caption="Creating a pivot table."}
+```{r fig-pivot, echo=FALSE, fig.cap="Creating a pivot table.", out.width="600px"}
 knitr::include_graphics("images/excel-12_pivot1.png")
 knitr::include_graphics("images/excel-13_pivot2.png")
 ```
 
-This brings up an interface that might at first look confusing. We are going to try to create a table that has one row per category in `alcgp`, and holds three columns:
+This brings up an interface that might at first look confusing. We are going to try to create a table that has one row per category in `alcgp`, and holds three columns in total:
 
 - The `alcgp` category
 - The *sum* of values in `ncases` for that category
@@ -254,7 +252,7 @@ To do so:
 2. Click on the checkbox next to `ncases` - this will place it in the `Values` box as `Sum of ncases` and you will see the pivot table change
 3. Click on the checkbox next to `ncontrols` - this will place it in the `Values` box as `Sum of ncontrols` and you will see the pivot table change 
 
-```{r fig-pivot-table, echo=FALSE, fig.caption="Creating a pivot table."}
+```{r fig-pivot-table, echo=FALSE, fig.cap="Creating a pivot table.", out.width="600px"}
 knitr::include_graphics("images/excel-14_pivot3.png")
 ```
 
@@ -273,7 +271,7 @@ Suppose we want to compare the numbers of cases and controls for each of our `al
 
 This will create a bar chart in the current worksheet, showing the number of controls and cases in each category of `alcgp`.
 
-```{r fig-pivot-hart, echo=FALSE, fig.caption="Creating a pivot table."}
+```{r fig-pivot-hart, echo=FALSE, fig.cap="Creating a pivot table.", out.width="600px"}
 knitr::include_graphics("images/excel-15_pivot4.png")
 ```
 
@@ -282,7 +280,7 @@ knitr::include_graphics("images/excel-15_pivot4.png")
 `Minitab` is a statistical software package, often used for teaching. It is moving towards a cloud-hosted model, but the `Minitab Express` package is still available for desktop use. This software requires a licence, which you will need to obtain from the university before you can run the tool.
 
 <div id="warning">
-Also, because of licensing restrictions, you must be connected to the university VPN so that the licensing server can be reached. Otherwise, you will not be able to use `Minitab`.
+Also, because of licensing restrictions, **you must be on the university network, or connected to the university VPN, so that the licensing server can be reached**. Otherwise, you will not be able to use `Minitab`.
 </div>
 
 ## Loading data
@@ -291,29 +289,29 @@ Also, because of licensing restrictions, you must be connected to the university
 2. Click on `File` $\rightarrow$ `Open Worksheet`
 3. Navigate to the location of `esoph-tab.csv`, select it and click `Open`
 
+```{r fig-minitab-load, echo=FALSE, fig.cap="Importing CSV into Minitab.", out.width="600px"}
+knitr::include_graphics("images/minitab-01_import.png")
+knitr::include_graphics("images/minitab-02_landing.png")
+```
+
 <div id="warning">
 `Minitab Express` will not import tab-separated value files.
 </div>
 
 `Minitab Express` presents your data in a panelled window. By default, the data is presented in spreadsheet form in the lower panel. The top panel will contain output, and the left panel will be a `Navigator`. This layout reflects `Minitab`'s role as a statistical analysis package, rather than a general spreadsheet tool.
 
-```{r fig-minitab-load, echo=FALSE, fig.caption="Importing CSV into Minitab."}
-knitr::include_graphics("images/minitab-01_import.png")
-knitr::include_graphics("images/minitab-02_landing.png")
-```
-
 <div id="note">
 `Minitab Express` did not ask any questions about data type or formats.
 </div>
 
-To see how `Minitab Express` imported your data:
+To see how `Minitab Express` understood your data:
 
 1. Click on any column in the spreadsheet view
 2. Click on the `Inspector` button (top right)
 
 A new window appears. Click on the `Column` icon (third icon).
 
-```{r fig-minitab-inspector, echo=FALSE, fig.caption="Minitab column inspector."}
+```{r fig-minitab-inspector, echo=FALSE, fig.cap="Minitab column inspector.", out.width="300px"}
 knitr::include_graphics("images/minitab-03_inspector.png")
 ```
 
@@ -337,13 +335,13 @@ To obtain summary statistics for a single data column in `Minitab Express`:
 2. Select `C4 ncases` and click on the arrow next to `Variable`
 3. Click `OK`
 
-`Minitab` then updates the spreadsheet with calculated values and presents some output in the top panel, describing what values were calculated, and which cells in the spreadsheet hold output values.
-
-```{r fig-minitab-summary, echo=FALSE, fig.caption="Generating a single-column summary with Minitab."}
+```{r fig-minitab-summary, echo=FALSE, fig.cap="Generating a single-column summary with Minitab.", out.width="600px"}
 knitr::include_graphics("images/minitab-04_summary1.png")
 knitr::include_graphics("images/minitab-05_summary2.png")
 knitr::include_graphics("images/minitab-06_summary3.png")
 ```
+
+`Minitab` then updates the spreadsheet with calculated values and presents some output in the top panel, describing what values were calculated, and which cells in the spreadsheet hold output values.
 
 To generate a set of descriptive statistics for a data column:
 
@@ -351,9 +349,9 @@ To generate a set of descriptive statistics for a data column:
 2. Select `C5 ncontrols` and click on the arrow next to `Variable`
 3. Click `OK`
 
-`Minitab` doesn't put these values in the spreadsheet, but it does show a nicely-formatted table with a number of descriptive statistics. You can switch between views on the data by clicking on previous steps in the `Navigator` (on the left, by default).
+`Minitab` doesn't put these values in the spreadsheet, but it does show a nicely-formatted table with a number of descriptive statistics in the upper panel. You can switch between views on the data by clicking on previous steps in the `Navigator` (on the left, by default).
 
-```{r fig-minitab-summary2, echo=FALSE, fig.caption="Generating a single-column summary with Minitab."}
+```{r fig-minitab-summary2, echo=FALSE, fig.cap="Generating a single-column summary with Minitab.", out.width="600px"}
 knitr::include_graphics("images/minitab-07_summary4.png")
 knitr::include_graphics("images/minitab-08_summary5.png")
 knitr::include_graphics("images/minitab-09_summary6.png")
@@ -364,7 +362,7 @@ knitr::include_graphics("images/minitab-09_summary6.png")
 2. Does `Minitab` give you any useful extra data?
 </div>
 
-### Summary statistics for qualitative data
+### Summary statistics and visualisation for qualitative data
 
 We will again try to obtain case and control counts, conditioned on the `alcgp` category.
 
@@ -375,22 +373,25 @@ We will again try to obtain case and control counts, conditioned on the `alcgp` 
 5. Choose `alcgp` as the categorical variable
 6. Select `Sum` as the function
 
-```{r fig-minitab-summary3, echo=FALSE, fig.caption="Generating a pivot view Minitab."}
+```{r fig-minitab-summary3, echo=FALSE, fig.cap="Generating a pivot view Minitab.", out.width="300px"}
 knitr::include_graphics("images/minitab-10_summary7.png")
 knitr::include_graphics("images/minitab-11_summary8.png")
 knitr::include_graphics("images/minitab-12_summary9.png")
 knitr::include_graphics("images/minitab-13_summary10.png")
 ```
 
-`Minitab`, unlike `Excel`, shows both the tabular summary and the bar graph visualisation in the upper panel.
+`Minitab`, unlike `Excel`, shows both the tabular summary and the bar graph visualisation in the upper panel. Also, the data for `ncases` and `ncontrol` are separated into two groups, rather than being presented side-by-side.
 
 <div id="questions">
 1. Was the data import and summary process easier and more convenient in `Excel` or `Minitab`? Why do you think that was?
+2. Which is better - presenting `ncases` and `ncontrol` side-by-side for each `alcgp` category, or separating them into distinct groups?
 </div>
 
 # `R`
 
-`R` is a general programming language, designed to be used by statisticians and data scientists. Unlike `Excel` and `Minitab` it is free and open-source. `RStudio` is a free, open-source integrated development environment (IDE) designed for use with `R`. It has powerful version control and project management features, and a very large number of third-party libraries are available for statistical, bioinformatics, and other activities. It is the *de facto* language of choice for much statistical and bioinformatics work in academia.
+`R` is a general programming language, designed to be used by statisticians and data scientists. Unlike `Excel` and `Minitab` it is free and open-source. It has a very large number of third-party libraries are available for statistical, bioinformatics, and other activities. It is the *de facto* language of choice for much statistical and bioinformatics work in academia.
+
+`RStudio` is a free, open-source integrated development environment (IDE) designed for use with `R`. It has powerful version control and project management features. 
 
 ## Loading data
 
@@ -399,25 +400,25 @@ knitr::include_graphics("images/minitab-13_summary10.png")
 3. Click on the `esoph-tab.tsv` file
 
 <div id="note">
-Clicking on the `esoph-tab.tsv` file shows the contents of the file in a navigation window (top left by default), but **does not load or import the dataset**
+Clicking on the `esoph-tab.tsv` file shows the contents of the file in an editor (top left by default), but **does not load or import the dataset into `R`**
 </div>
 
-```{r fig-r-view, echo=FALSE, fig.caption="The RStudio window, when viewing the data file."}
+```{r fig-r-view, echo=FALSE, fig.cap="The RStudio window, when viewing the data file.", out.width="600px"}
 knitr::include_graphics("images/r-01_view_data.png")
 ```
 
 <div id="warning">
 Working in `R`/`RStudio` is unlike working in a point-and-click environment such as `Excel` or `Minitab`. Commands are issued by typing them in the `Console` window (bottom left, by default) or by writing and running scripts.
 
-**Today, we will write and run a simple script**
+**In this workshop, we will write and run a simple script**
 </div>
 
-Before we load the data, we need to make sure we are in the correct working directory, and create an empty script.
+Before we load the data, we need to make sure we are in the correct working directory, and create an empty script. Using a script allows us to save and modify our commands as we develop the analysis. It is also easy to attach to a paper, or to share so that others can see exactly how the analysis was performed. Scripts can be placed under version control, and reused for new datasets.
 
 1. In the `Files` panel, click `More`
 2. Click `Set as Working Directory`
 
-```{r fig-r-setwd, echo=FALSE, fig.caption="Set waorking directory in R."}
+```{r fig-r-setwd, echo=FALSE, fig.cap="Set waorking directory in R.", out.width="600px"}
 knitr::include_graphics("images/r-02_setwd.png")
 ```
 
@@ -431,7 +432,7 @@ To create an empty script:
 
 This will start a new file in the top left `Editor` panel. It will be called `Untitled1`. 
 
-```{r fig-r-newscript, echo=FALSE, fig.caption="Start a new blank script."}
+```{r fig-r-newscript, echo=FALSE, fig.cap="Start a new blank script.", out.width="600px"}
 knitr::include_graphics("images/r-03_newscript.png")
 ```
 
@@ -445,7 +446,7 @@ data = read.table("esoph-tab.tsv", header=TRUE, sep="\t")
 
 Then click `Run`. This will bring up a "Save File" dialogue. Save the file as `summarise_esoph.R`
 
-```{r fig-r-load-save, echo=FALSE, fig.caption="Write, run and save the script."}
+```{r fig-r-load-save, echo=FALSE, fig.cap="Write, run and save the script.", out.width="600px"}
 knitr::include_graphics("images/r-04_load.png")
 knitr::include_graphics("images/r-05_save.png")
 ```
@@ -456,7 +457,9 @@ You can get help on any `R` command by typing its name into the search field of 
 When script commands are run in `RStudio`, you can see them being executed in the `Console` panel.
 </div>
 
-Here, it's worth breaking down what you've written in the script. The first two lines start with the "hash"/"pound"/octothorpe character. This means that the line is a *comment* and not treated like a command. This is one way in which we annotate and document our code, so it is understandable when we return to it in future (and so others can understand it).
+<details>
+  <summary>Breaking down what's happening in the script (Click to toggle)</summary>
+The first two lines start with the "hash"/"pound"/octothorpe character. This means that the line is a *comment* and not treated like a command. This is one way in which we annotate and document our code, so it is understandable when we return to it in future (and so others can understand it).
 
 The data is loaded on line three: `data = read.table("esoph-tab.tsv", header=TRUE, sep="\t", stringsAsFactors=TRUE)`. This does the following:
 
@@ -465,6 +468,7 @@ The data is loaded on line three: `data = read.table("esoph-tab.tsv", header=TRU
   - It tells `R` that the separator/delimiter is a tab character (`sep="\t"`)
   - It tells `R` that the columns containing strings are *categorical variables* (`stringsAsFactors=TRUE`)
 - It places the data into a *variable*^[You can think of a variable as a box with a label on it. The label is the variable name (here, `data`), and the contents of the box are the data that was loaded. When you want to talk about the box or its contents, you can do so with the variable name.] so we can use it.
+</details>
 
 <div id="note">
 When the data is loaded, the `Environment` panel (top right, by default) shows that `data` exists, with 88 observations of 5 variables.
@@ -476,7 +480,7 @@ When the data is loaded, the `Environment` panel (top right, by default) shows t
 **The `data` variable contains an object called a *dataframe*^[The term *dataframe* refers to data stored according to good data practices: each row is an observation; each column is a variable] in `R` jargon.**
 </div>
 
-```{r fig-r-viewdata, echo=FALSE, fig.caption="Viewing the dataset in R's spreadsheet view."}
+```{r fig-r-viewdata, echo=FALSE, fig.cap="Viewing the dataset in R's spreadsheet view.", out.width="600px"}
 knitr::include_graphics("images/r-06_viewdata.png")
 ```
 
@@ -487,7 +491,7 @@ knitr::include_graphics("images/r-06_viewdata.png")
 
 ## Summary Statistics
 
-To get basic summary statistics from a *dataframe*, we use the `summary()` command in `R`. Add the following lines to your script, select that line, and then `Run` the script:
+To get basic summary statistics from a *dataframe*, we can use the `summary()` command in `R`. Add the following lines to your script, select that line, and then `Run` the script:
 
 ```r
 # Obtain a summary of each column in the loaded data
@@ -533,10 +537,140 @@ and running the script then gives us the result:
 [1] 12.7227
 ```
 
-```{r fig-r-sdevs, echo=FALSE, fig.caption="Calculating standard deviations on data columns."}
+```{r fig-r-sdevs, echo=FALSE, fig.cap="Calculating standard deviations on data columns.", out.width="600px"}
 knitr::include_graphics("images/r-08_sdevs.png")
 ```
 
 ### Summary statistics grouped by categorical data
 
+To aggregate the number counts of cases and controls by `alcgp` category in `R`, we can use the `aggregate()` function. This requires us to name the columns we'd like to process (here, `ncases` and `ncontrols`), and columns we'd like to aggregate *by* (here, `alcgp`). The command itself can look quite daunting. Place the following command in your script and run it:
 
+```r
+# Produce a table with counts of ncases and ncontrols for each alcgp category
+aggregate(cbind(ncases_tot=data$ncases, ncontrols_tot=data$ncontrols),
+    by=list(alcgp=data$alcgp), FUN=sum)
+```
+
+```{r fig-r-aggregate, echo=FALSE, fig.cap="Aggregating summary data into a table.", out.width="600px"}
+knitr::include_graphics("images/r-09_aggregate.png")
+```
+
+<details>
+  <summary>Breakdown of the `aggregate()` command (Click to toggle)</summary>
+
+- The `aggregate()` function splits the `data` dataset into subsets (controlled by `alcgp` category) and calculates summary statistics for each subset, presenting a table as output.
+  - `cbind()` combines the columns we're interested in (`data$ncases` and `data$ncontrols`) into input for the `aggregate()` function.
+  - We use `ncases_tot=data$ncases` and `ncontrols_tot=data$ncontrols` as the values for `cbind()` so that the final table has column headers `ncases_tot` and `ncontrols_tot` (we could provide any names for the output columns)
+  - The `by=` part of the command tells `aggregate()` which column to *group values by*
+  - We provide the argument `by=list(alcgp=data$alcgp)` to tell `aggregate` to group by the `data$alcgp` column, and give the new column the name `alcgp`
+  - The `FUN=sum` tells `aggregate()` to use the `sum()` function to calculate the *sum* of values for each column, in each group. We could have provided an alternative function if we wanted different values.
+</details>
+  
+The output the command provides is:
+
+```r
+   alcgp ncases ncontrols
+1   0-39     29       415
+2   120+     45        67
+3  40-79     75       355
+4 80-119     51       138
+```
+
+<div id="questions">
+1. How do these values, and their presentation, compare to the outputs of `Minitab` and `Excel`?
+2. How reproducible are the steps for the analyses in `R`, `Minitab`, and `Excel`?
+</div>
+
+## Data visualisation
+
+One of the main advantages of using an environment like `R`/`RStudio` is that there are many excellent third-party packages available to perform cutting-edge statistics and specialised data visualisation. Here, we will use three of these packages to process and visualise data, as in `Excel` and `Minitab`. The two packages we'll use are `dplyr`, `tidyr`, and `ggplot2`. Add the following lines to your script and run them:
+
+```r
+# Generate a plot of ncases and ncontrols for each alcgp category
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+dfm = data %>%
+  group_by(alcgp) %>%
+  summarise(ncases=sum(ncases), ncontrol=sum(ncontrols)) %>%
+  pivot_longer(!alcgp, names_to="datatype", values_to="count")
+ggplot(dfm, aes(x=alcgp, y=count)) +
+  geom_bar(aes(fill=datatype), position="dodge", stat="identity")
+```
+
+When you run the script, the output appears in the `Plots` panel (lower right, by default)
+
+```{r fig-r-ggplot2, echo=FALSE, fig.cap="ggplot2 visualisation of the aggregated data", out.width="600px"}
+knitr::include_graphics("images/r-10_ggplot.png")
+```
+
+<details>
+  <summary>Breakdown of the commands used for visualisation (Click to toggle)</summary>
+This is certainly a much more complex set of commands than the others, but we unpack them, below.
+
+- The first three lines *import* libraries of commands to help us process and visualise data
+  - `library(dplyr)`^[https://dplyr.tidyverse.org/] makes *transforming* data into a new form easier
+  - `library(tidyr)`^[https://tidyr.tidyverse.org/] provides commands that make it easier to clean up "messy" data
+  - `library(ggplot2)`^[https://ggplot2.tidyverse.org/] provides commands for extremely flexible graphical output
+  
+All three commands *load* the packages into our workspace, so we can use their commands. They are also all part of the `Tidyverse` - a set of libraries that are very widely used for data science in `R`.
+
+The next command stretches over four lines, because it's really four commands wrapped into one:
+
+- `dfm =` will *assign* the result of processing the data to the *variable* `dfm`
+  - The `%>%` symbol is a *pipe*. It takes what is produced on the left of the symbol, and *pipes* it into the commond on the right.
+  - `data %>% group_by(algcgp)` *pipes* the `data` dataframe into the command `group_by` which, here, groups all the data by the categories in the column `alcgp`
+  -  `%>% summarise(ncases=sum(ncases), ncontrol=sum(ncontrols))` takes the grouped data and uses the `summarise()` command to create two new columns that take the sum of `ncases` and `ncontrols`, just like in the `aggregate()` function above. This is a different way of doing the same task^[There are often many ways to achieve the same goal in `R`. Generally, we use the way that suits the context of the analysis - as we're *piping* commands here, we use a version that works well with *pipes*.]. The resulting dataframe is ready for *piping* into the next command.
+  - `%>% pivot_longer(!alcgp, names_to="datatype", values_to="count")` works like `Excel`'s pivot table. It takes the two columns `ncases` and `ncontrols` and *pivots* them so that the data is in "long form"^[see, e.g. [https://anvil.works/blog/tidy-data](https://anvil.works/blog/tidy-data)], a kind of "tidy data" where there is a single column for each variable. Here, the *count* of individuals is a single variable, and the *type of case/control* they are is a single variable. We do this because long form data works best with `ggplot2`.
+
+Now we have the variable `dfm`, which looks like this:
+
+```r
+> dfm
+# A tibble: 8 x 3
+  alcgp  datatype count
+  <fct>  <chr>    <int>
+1 0-39   ncases      29
+2 0-39   ncontrol   415
+3 120+   ncases      45
+4 120+   ncontrol    67
+5 40-79  ncases      75
+6 40-79  ncontrol   355
+7 80-119 ncases      51
+8 80-119 ncontrol   138
+```
+  
+The final command is a `ggplot2` command to plot the content of `dfm`. This breaks down as follows:
+
+- `ggplot(dfm, aes(x=alcgp, y=count))` sets up the data for the plot. We're going to use `dfm` as our dataset. `alcgp` will be our categorical variable on the $x$ axis, and `count` will be our continuous variable on the $y$ axis.
+- `geom_bar()` is a command that is *added to* the result of `ggplot()` to create a barchart visualisation. To get the kind of formatting we want, we need to give it some instructions.
+  - `aes(fill=datatype)` tells `geom_bar()` to use a different colour for each category in the `datatype` variable
+  - `position="dodge"` tells `geom_bar()` to put bars side-by-side, rather than stacking them
+  - `stat="identity"` tells `geom_bar()` to use the values in the `count` variable directly, without transforming them or modifying them
+</details>
+
+The output image can be saved by adding the following line to the script, and running it:
+
+```r
+# Save bar chart as PDF for publication
+ggsave("case_control_counts_by_alcgp.pdf")
+```
+
+This creates a new PDF (vector) file in the working directory. Vector files are preferred for publications, as they are rescalable to any size without loss of clarity or detail.
+  
+```{r fig-r-ggsave, echo=FALSE, fig.cap="RStudio view after creating the output figure.", out.width="600px"}
+knitr::include_graphics("images/r-11_ggsave.png")
+```
+
+<div id="questions">
+1. Which of `R`, `Excel` and `Minitab` did you find the easiest to use? Why?
+2. Which of `R`, `Excel` and `Minitab` do you think were least likely to introduce accidental changes to the raw dataset?
+3. Which of `R`, `Excel` and `Minitab` do you think would make it easiest to rerun the same analysis on a new dataset?
+4. Which of the `R`, `Excel` and `Minitab` analyses do you think would be easiest to describe, include in a publication, or share, so that others could follow them?
+</div>
+
+<div id="note">
+`R` and the `Tidyverse` are extremely powerful and have far more features and capabilities than can be described here. For an introduction to what they can do, you might be interested to try the introduction to `R`, linked below.
+
+- [Data Analysis and Visualisation in `R` for Ecologists (Data Carpentry)](https://datacarpentry.org/R-ecology-lesson/index.html)
+</div>
