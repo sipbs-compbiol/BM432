@@ -56,6 +56,10 @@ We will perform three main tasks in each package:
 
 Microsoft `Excel` is almost ubiquitous. It is now available free of charge as a cloud service, as part of `Office365`^[https://office.live.com/start/Excel.aspx]. Alternatives to `Excel`, such as `Google Sheets`^[Google Sheets is a cloud-based spreadsheet package, free for personal use] and `Libre Office`^[[Libre Office](https://www.libreoffice.org/) is a free, open office quite intended as a drop-in, free replacement for Microsoft Office], work in much the same way. This workshop should be adaptable to those alternatives with minimal modification.
 
+<div id="warning">
+Your experience with Excel may vary slightly from the one described below, depending on what operating system and what version of Excel you are using.
+</div>
+
 ## Loading data
 
 1. Start `Excel`
@@ -211,7 +215,7 @@ knitr::include_graphics("images/excel-10_convert.png")
 </div>
 
 1. As there is no visual indication in the file of what the number in cell `D90` represents, add a label to cell `C90` with the text `Mean:`.
-2. Copy and paste the formula from cell `D90` into cell `E90`
+2. Copy and paste the cell `D90` into cell `E90`
 3. Add the label `Std Dev:` to cell `C91`
 4. Enter the formula `=STDEV(D2:D89)` into cell `D91`
 5. Copy and past the formula from cell `D91` into cell `E91`
@@ -418,12 +422,12 @@ Before we load the data, we need to make sure we are in the correct working dire
 1. In the `Files` panel, click `More`
 2. Click `Set as Working Directory`
 
-```{r fig-r-setwd, echo=FALSE, fig.cap="Set waorking directory in R.", out.width="600px"}
+```{r fig-r-setwd, echo=FALSE, fig.cap="Set working directory in R.", out.width="600px"}
 knitr::include_graphics("images/r-02_setwd.png")
 ```
 
 <div id="note">
-In the `Console` window, you should see that a command has been run.
+In the `Console` window, you should see that a command has been run (setting the working directory).
 </div>
 
 To create an empty script:
@@ -444,7 +448,11 @@ To load the data from `esoph-tab.tsv` we need to use the command `read.table()`.
 data = read.table("esoph-tab.tsv", header=TRUE, sep="\t")
 ```
 
-Then click `Run`. This will bring up a "Save File" dialogue. Save the file as `summarise_esoph.R`
+First, save the script. Click File > Save As. (Alternatively, click on the "Save" icon (picture of a floppy disk.))
+
+This will bring up a "Save File" dialogue. Save the file as `summarise_esoph.R`
+
+Next, click `Run` to run the script.
 
 ```{r fig-r-load-save, echo=FALSE, fig.cap="Write, run and save the script.", out.width="600px"}
 knitr::include_graphics("images/r-04_load.png")
