@@ -71,7 +71,7 @@ The current versions of the notebook HTML pages are linked below, for convenienc
 - [02-What Does Statistics Do, Anyway?](notebooks/03-02-statistics.html)
   - [02a-Exploring a Statistical Distribution (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-02a-sampling/)
   - [02b-Exploring a Statistical Relationship (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-02b-linear/)
-- [03-An Introduction to Data Visualisation](notebooks/03-04-visualisation.html)
+- [03-An Introduction to Data Visualisation](notebooks/03-03-visualisation.html)
   - [04-Better Tools Than Barcharts (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-04a-barchart/)
 - [04-Preparing Your Figures For An Audience](notebooks/03-04-figure_preparation.html)
 
