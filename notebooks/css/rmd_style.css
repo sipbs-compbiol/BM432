@@ -121,6 +121,48 @@ blockquote {
 #warning a:hover {color: darkcyan;}
 #warning a:active {color: lime;}
 
+#goofus-gallant, #section-goofus-gallant{
+    display: flex;
+}
+
+#goofus, #section-goofus{
+    flex: 0 0 50%;
+    background-color: mistyrose;
+    color: firebrick;
+}
+    
+#goofus:before, #section-goofus:before{
+    background-position: left;
+    font-weight: bold;
+    content: "Goofus:";
+    padding-left: 25px;
+}
+
+#goofus pre, #section-goofus pre{
+    background-position: left;
+    background-color: mistyrose;
+    color: firebrick;
+}
+
+
+#gallant, #section-gallant{
+    flex: 1;
+    background-color: lightgreen;
+    color: darkgreen;
+}
+
+#gallant:before, #section-gallant:before{
+    background-position: left;
+    font-weight: bold;
+    content: "Gallant:";
+    padding-left: 25px;
+}
+
+#gallant pre, #section-gallant pre{
+    background-color: lightgreen;
+    color: darkgreen;
+}
+
 details {
     background-color: linen;
 }
