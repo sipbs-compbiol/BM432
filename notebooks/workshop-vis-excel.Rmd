@@ -37,7 +37,6 @@ To work through these examples, you will need the following on your own computer
 <div id="note">
 - [**Click here to download the `ToothGrowth` dataset**](https://raw.githubusercontent.com/sipbs-compbiol/BM432/2021/notebooks/data/toothgrowth.tab)
 - [**Click here to download the `Prestige` dataset**](https://raw.githubusercontent.com/sipbs-compbiol/BM432/2021/notebooks/data/prestige.tab)
-- [**Click here to download the `chickwts` dataset**](https://raw.githubusercontent.com/sipbs-compbiol/BM432/2021/notebooks/data/chickwts.tab)
 </div>
 
 ## Boxplot
