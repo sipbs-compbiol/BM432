@@ -1,0 +1,144 @@
+---
+title: "Data Visualisation with Microsoft Excel"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<div id="summary">
+</div>
+
+# Setup
+
+To work through these examples, you will need the following on your own computer:
+
+1. The datasets (see [this link](./workshop-visualisation.html) for a description)
+2. Microsoft `Excel` (you have a licence for this *via* the university)
+
+<div id="note">
+- [**Click here to download the `ToothGrowth` dataset**](https://raw.githubusercontent.com/sipbs-compbiol/BM432/2021/notebooks/data/toothgrowth.tab)
+- [**Click here to download the `Prestige` dataset**](https://raw.githubusercontent.com/sipbs-compbiol/BM432/2021/notebooks/data/prestige.tab)
+- [**Click here to download the `chickwts` dataset**](https://raw.githubusercontent.com/sipbs-compbiol/BM432/2021/notebooks/data/chickwts.tab)
+</div>
+
+## Boxplot
+
+<div id="note">
+`Excel` does not have an option to produce a 1D scatterplot, natively. We therefore produce only a boxplot (also known as a box-and-whisker plot)
+</div>
+
+<div id="warning">
+You cannot easily convert the data in `toothgrowth.tab` to the format you need, in order to create a boxplot, using only `Excel`. The original file presents data in *long* format (one row per observation). To construct a boxplot in `Excel`, the data must be in *wide* format. This requires either a lot of function programming in `Excel`, or the use of the `Power Query` plugin, both of which are beyond the scope of this workshop.
+
+We are instead providing a pre-prepared dataset: `toothgrowth_wide.tab` so that you can construct a boxplot in `Excel`:
+
+- [**Click here to download the `ToothGrowth` wide-format dataset**](https://raw.githubusercontent.com/sipbs-compbiol/BM432/2021/notebooks/data/toothgrowth_wide.tab)
+</div>
+
+<details>
+  <summary>Click here to toggle details of how we modified the data using `R`</summary>
+
+Being a statistical programming package, `R` has several tools for reshaping datasets. We used the `tidyr` package function `pivot_wider` and some `dplyr` convenience functions to modify the data, then save it, using the commands below:
+
+```r
+widedata = ToothGrowth %>%
+  group_by(supp, dose) %>%
+  mutate(row=row_number()) %>%
+  pivot_wider(names_from=c(supp, dose), values_from=len)
+write.table(widedata, "data/toothgrowth_wide.tab",
+  sep="\t", row.names=FALSE)
+```
+</details>
+
+Our goal is to show how the measured guinea pig tooth growth varies by combination of supplement and supplement dosage. We could approach this in any of several ways, but here we want to treat each supplement as a _category_ or _factor_, and each dosage as a _category_ or _factor_. We'd like to see the distribution of measured tooth lengths _conditioned_ on these explanatory variables.
+
+What we're looking for is a visual representation of the variation in the dataset, for each combination of supplement and dosage. Normally, a 1D scatterplot is a good way to visualise the raw data, with a boxplot/box-and-whisker plot to represent summary statistics. Sadly, `Excel` cannot represent a 1D scatterplot easily, so we only show the box-and-whisker plot.
+
+
+- Create a new `Blank`Workbook` in Excel
+
+```{r fig-create-blank-excel, echo=FALSE, fig.cap="Create a blank workbook in `Excel`"}
+knitr::include_graphics("images/excelvis-01-create_blank.png")
+knitr::include_graphics("images/excelvis-02-create_blank.png")
+```
+
+- Use `File` $\rightarrow$ `Import` to begin the file import wizard.
+- Navigate to and select the `toothgrowth_wide.tab` file
+
+```{r fig-select-toothwide, echo=FALSE, fig.cap="Select data file for import"}
+knitr::include_graphics("images/excelvis-03-select_csv.png")
+knitr::include_graphics("images/excelvis-04-select_wide.png")
+```
+
+- Using the wizard, identify the file delimiter, set the column datatypes, and import the data into the current worksheet.
+
+```{r fig-open-toothwide, echo=FALSE, fig.cap="Select import options"}
+knitr::include_graphics("images/excelvis-05-select_delim.png")
+knitr::include_graphics("images/excelvis-05a-select_tab.png")
+knitr::include_graphics("images/excelvis-06-select_datatypes.png")
+knitr::include_graphics("images/excelvis-07-select_worksheet.png")
+knitr::include_graphics("images/excelvis-08-loaded.png")
+```
+
+At this point the data are in six columns, identified as a combination of supplement (`VC` or `OJ`) and supplement dose (one of `0.5`, `1`, or `2` mg/day). Each measurement is tooth length from a single guinea pig.
+
+To create the box-and-whisker plot, select the complete dataset (including headers), then click on `Insert` and select the statistical plots button from the ribbon, then the `Box-and-Whisker` option in the dropdown menu.
+
+```{r fig-select-graph, echo=FALSE, fig.cap="Select box-and-whisker plot"}
+knitr::include_graphics("images/excelvis-09-select_data.png")
+knitr::include_graphics("images/excelvis-10-statgraph.png")
+```
+
+This will generate a new graph in your worksheet.
+
+The graph is, by default, not informatively-labelled.
+
+- Use the `Add Chart Element` $\rightarrow$ `Legend` $\rightarrow$ `Right` menu to add a legend to the graph. 
+- Double-click on the chart title to edit it
+- Select and delete the uninformative horizontal axis label
+
+```{r fig-clean-graph, echo=FALSE, fig.cap="Tidy plot details"}
+knitr::include_graphics("images/excelvis-11-legend.png")
+knitr::include_graphics("images/excelvis-12-title.png")
+knitr::include_graphics("images/excelvis-13-axis.png")
+```
+
+This looks OK, and the interpretation is straightforward enough:
+
+- Increasing supplement dose looks to be correlated with tooth growth
+- At 2mg/day both supplements are associated with similar tooth growth
+- There appears to be a monotonic relationship between tooth length and dosage, for both supplements
+- At lower dosages, `OJ` appears to be associated with greater tooth length
+- The mean (cross) and median (line) values do not coincide, so the data may be skewed/non-normal
+- There is a single outlier in the `VC_1` data
+
+but we could do better with the colours. As the supplement choice is _categorical_ data, we can colour `OJ` and `VC` consistently, but differently: orange for `OJ` and green for `VC`. We can then use different _intensities_ (or _saturation_) to imply variation in dosage, so that more intense colours imply stronger dosage.
+
+To change the colour of a box/whisker combination, click on the box and choose `Format Data Series...` then change the colours as appropriate. 
+
+```{r fig-colour-graph, echo=FALSE, fig.cap="Recolour data series"}
+knitr::include_graphics("images/excelvis-14-select_series.png")
+knitr::include_graphics("images/excelvis-15-format_dialog.png")
+knitr::include_graphics("images/excelvis-16-format_sidepanel.png")
+```
+
+With the `Format Data Series` side panel open, you can colour each of the other data series, to obtain a final graph.
+
+```{r fig-final-graph, echo=FALSE, fig.cap="Final graph"}
+knitr::include_graphics("images/excelvis-17-final.png")
+```
+
+
+## Linear regression
+
