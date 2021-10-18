@@ -80,3 +80,50 @@ There are relatively few options to improve the graph, visually, but we can reti
 knitr::include_graphics("images/minitabvis-07-retitle.png")
 knitr::include_graphics("images/minitabvis-08-additions.png")
 ```
+
+## Linear regression
+
+The `Prestige` dataset described in the [introduction notebook](./workshop-visualisation.html) represents a set of occupations - one per row (observations) - with variables describing properties of each occupation, such as percentage of women, the "prestige" of the occupation, and the average number of years in education of a person in that occupation.
+
+Using `Minitab` we will model the relationship between prestige and years in education, using a linear relationship. We'd like to overlay a line describing the relationship, with some statistical information about goodness of fit and the inferred parameters of the model (_gradient_ and _intercept_).
+
+Click on `Open` $\rightarrow$ `Open Worksheet`, select the `prestige.csv` data file, and click `Open`. This will open up the `Prestige` dataset in `Minitab`.
+
+```{r fig-create-prestige, echo=FALSE, fig.cap="Open the `Prestige` dataset"}
+knitr::include_graphics("images/minitabvis-09-select_file.png")
+knitr::include_graphics("images/minitabvis-10-newproject.png")
+```
+
+Click on `Regression` $\rightarrow$ `Simple Regression...` $\rightarrow$ `Single Y Variable` $\rightarrow$ `With Groups`, and choose the appropriate variables. We want to regress the _response_ variable `prestige` against the _predictor_ `education`
+
+```{r fig-regress-variables, echo=FALSE, fig.cap="Select regression type"}
+knitr::include_graphics("images/minitabvis-11-select_regress.png")
+knitr::include_graphics("images/minitabvis-12-select_variables.png")
+```
+
+We also want to get the extra statistical information about confidence intervals and diagnostic plots that we saw in `Excel`. To do so, select the appropriate options in the `Options` and `Graphs` tabs, then click `OK`
+
+```{r fig-regress-options, echo=FALSE, fig.cap="Select regression type"}
+knitr::include_graphics("images/minitabvis-13-regress_options.png")
+knitr::include_graphics("images/minitabvis-14-regress_graphs.png")
+```
+
+<div id="note">
+`Minitab`, unlike `Excel`, makes it easy to do _multiple regression_. This enables simultaneous regression of a response variable onto multiple potential explanatory variables, taking into account the combined influence of the explanatory variables. The topic is beyond the scope of this workshop, but this dataset is well-suited to that kind of analysis.
+</div>
+
+Clicking `OK` presents an analysis of variance and other useful information about the regression result. Scrolling down in the top panel will show the regression plot and diagnostic plots. There are few visual elements that can be modified.
+
+```{r fig-regress-output, echo=FALSE, fig.cap="Select boxplot groups"}
+knitr::include_graphics("images/minitabvis-15-regression_stats.png")
+knitr::include_graphics("images/minitabvis-16-regression_plot.png")
+```
+
+<div id="note">
+`Minitab` and `Excel` present different summaries and diagnostic information.
+
+- `Excel` will present confidence intervals for fitted parameters, if asked; `Minitab` does not (however, these can be calculated from the information provided)
+- `Minitab` provides both a confidence interval for the fit (`95% CI`) and a probability interval for new values (`95% PI`) on the main regression graph.
+- `Minitab` provides more diagnostic plots
+- `Minitab` indicates potentially problematic datapoints, `Excel` does not
+</div>
