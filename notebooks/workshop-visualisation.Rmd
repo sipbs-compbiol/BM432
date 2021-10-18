@@ -85,5 +85,8 @@ The exercises linked below use the datasets above to explore how to present simi
 
 ## `Minitab`
 
+<div id="note">
+[**Click here to open the `Minitab` exercise notebook.**](./workshop-vis-minitab.html)
+</div>
 
 ## `R`
