@@ -142,3 +142,91 @@ knitr::include_graphics("images/excelvis-17-final.png")
 
 ## Linear regression
 
+The `Prestige` dataset is described in the [introduction notebook](./workshop-visualisation.html). It describes a set of occupations - one per row (observations) - with variables describing properties of each occupation, such as percentage of women, the "prestige" of the occupation, and the average number of years in education of a person in that occupation.
+
+Here, we will use `Excel` to load in the dataset and model the relationship between prestige and years in education, using a linear relationship. We'd like to overlay a line describing the relationship, with some statistical information about goodness of fit and the inferred parameters of the model (_gradient_ and _intercept_).
+
+
+- Create a new `Blank`Workbook` in Excel
+
+```{r fig-create-blank-excel-reg, echo=FALSE, fig.cap="Create a blank workbook in `Excel`"}
+knitr::include_graphics("images/excelvis-01-create_blank.png")
+knitr::include_graphics("images/excelvis-02-create_blank.png")
+```
+
+- Use `File` $\rightarrow$ `Import` to begin the file import wizard.
+- Navigate to and select the `prestige.tab` file
+
+```{r fig-select-prestige, echo=FALSE, fig.cap="Select data file for import"}
+knitr::include_graphics("images/excelvis-03-select_csv.png")
+knitr::include_graphics("images/excelvis-18-select_prestige.png")
+```
+
+- Using the wizard, identify the file delimiter, set the column datatypes, and import the data into the current worksheet.
+
+<div id="warning">
+**The first column has no header**
+
+To import the data correctly, you must select both the `Tab` and `Space` delimiter options.
+</div>
+
+```{r fig-open-prestige, echo=FALSE, fig.cap="Select import options"}
+knitr::include_graphics("images/excelvis-19-select_delim.png")
+knitr::include_graphics("images/excelvis-20-select_delim.png")
+knitr::include_graphics("images/excelvis-21-select_datatypes.png")
+knitr::include_graphics("images/excelvis-07-select_worksheet.png")
+knitr::include_graphics("images/excelvis-22-loaded.png")
+```
+
+Select the `education` and `prestige` columns, then click on `Insert` $\rightarrow$ 'Scatterplot`. This will create a scatterplot in the worksheet.
+
+```{r fig-plot-prestige, echo=FALSE, fig.cap="Create scatterplot"}
+knitr::include_graphics("images/excelvis-23-scatterplot.png")
+```
+
+To add a regression model, left-click on any of the datapoints in the graph, then right-click to bring up the context menu, and select `Add trendline...` The `Format Trendline` side panel will appear. Ensure that the `Linear` model is selected, and that `Display Equation on chart` and `Display R-squared value on chart` are checked (this adds the regression equation to the plot).
+
+```{r fig-plot-trendline, echo=FALSE, fig.cap="Create trendline"}
+knitr::include_graphics("images/excelvis-24-selectpoints.png")
+knitr::include_graphics("images/excelvis-25-trendline.png")
+knitr::include_graphics("images/excelvis-26-equation.png")
+```
+
+The model fit looks plausible, and has $r^2$ value 0.7228, which indicates a moderately strong positive correlation (around 30% of the variation in the value of job prestige cannot be explained solely by the average time spent in education). But the graph needs some attention before it is ready.
+
+We need to add meaningful $x$- and $y$-axis labels, and to improve the title. To rewrite the title, click on the graph element and write in a new title. To obtain axis title elements that you can edit in the same way, click on `Add Chart Element` $\rightarrow$ `Axis Titles` $\rightarrow$ `More Axis Title Options...`. Then edit the axis labels accordingly.
+
+```{r fig-plot-linear-final, echo=FALSE, fig.cap="Cleaning up the graph"}
+knitr::include_graphics("images/excelvis-27-axis_options.png")
+knitr::include_graphics("images/excelvis-28-final.png")
+```
+
+The fitted equation implies that each additional year of education is associated with an increased apparent occupational prestige of around 5.3 units. The model also implies that zero years of education results in an apparent occupational prestige of -10.7 units (which you may or may not think is appropriate in the context of the model).
+
+<div id="warning">
+`Excel` gives us an equation for a linear regression, but it does not provide us with any information about _uncertainty_ or _confidence_. What range of lines are _plausible_ fits to the data? What are the reasonable ranges of estimates of _intercept_ and _gradient_?
+
+We can't know from this analysis, but `Excel` 365 does provide an `Analysis ToolPak` which can give you that information.
+</div>
+
+<details>
+  <summary>Click to toggle information about the `Analysis Toolpak` output</summary>
+  
+Select the data (not the headers) in columns `B` (`education`) and `E` (`prestige`). Then click on `Data` $\rightarrow$ `Data Analysis` $\rightarrow$ `Regression` to get the dialogue box.
+
+```{r fig-reg-dialog, echo=FALSE, fig.cap="Regression dialogue box"}
+knitr::include_graphics("images/excelvis-29-regression_dialogue.png")
+```
+
+Clicking `OK` gives a new worksheet with more information about the linear regression than can be obtained through `Excel`'s usual plots.
+
+```{r fig-reg-output, echo=FALSE, fig.cap="Regression output"}
+knitr::include_graphics("images/excelvis-30-regression_output.png")
+```
+
+This worksheet shows us that the 95% confidence interval for the intercept runs between -18 and -3.4, and the confidence interval for the gradient is in the range 4.7 to 6.
+
+The worksheet also presents useful diagnostic plots of residuals and Normal probability that help us assess whether the regression was appropriate. Such graphs are always worth generating to see if they indicate problems with the data or the model (though a discussion is beyond the scope of this workshop).
+</details>
+
+## 

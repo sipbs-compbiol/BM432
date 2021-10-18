@@ -70,28 +70,12 @@ This dataset is an example dataset from `R`, provided by the `carData` package. 
 [**Click here to download the `Prestige` dataset**](https://raw.githubusercontent.com/sipbs-compbiol/BM432/2021/notebooks/data/prestige.tab)
 </div>
 
-## `chickwts`
-
-This is another example dataset from `R`. The data are derived from the publication
-
-> Anonymous (1948) Biometrika, 35, 214.
-
-and describe the weights in grams of 71 newly-hatched chicks after six weeks, along with the feed types they received. The variables are:
-
-- `weight` (continuous): chick weight in grams
-- `feed` (categorical): the feed type each chick received
-
-<div id="note">
-[**Click here to download the `chickwts` dataset**](https://raw.githubusercontent.com/sipbs-compbiol/BM432/2021/notebooks/data/chickwts.tab)
-</div>
-
 # The Exercises
 
 The exercises linked below use the datasets above to explore how to present similar data visualisations in three different tools you might encounter in your research: Microsoft `Excel`, `Minitab`, and `R`. The exercises cover the following visualisations:
 
 1. 1D scatterplots and/or boxplots
 2. Linear regression
-3. A Student's $t$-test
 
 ## Microsoft `Excel`
 
