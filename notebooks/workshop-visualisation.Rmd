@@ -1,0 +1,74 @@
+---
+title: "Visualisations"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<div id="summary">
+
+</div>
+
+# Setup
+
+To participate in this workshop or to work through the examples in your own time, you will need the following on your own computer:
+
+1. The datasets 
+2. Microsoft `Excel` (you have a licence for this *via* the university)
+3. `Minitab` (you have a licence for this *via* the university)
+4. `R` and `RStudio` (this is free and open-source)
+
+<div id="note">
+Please see the [configuration notebook](./configuration.html) for help and guidance on setting up `R` and `RStudio`.
+
+For guidance in obtaining, installing and using the latest versions of `Excel` and `Minitab` please visit the [university's IT pages](https://www.strath.ac.uk/professionalservices/is/software/).
+</div>
+
+# The DataSets
+
+## `ToothGrowth`
+
+This is a default `R` example dataset describing the effect of vitamin C on tooth growth in guinea pigs. The response is the length of odontoblasts (cells responsible for tooth growth) in 60 guinea pigs. Each animal received one of three dose levels of vitamin C (0.5, 1, and 2 mg/day) by one of two delivery methods, orange juice or ascorbic acid (a form of vitamin C and coded as `VC`).
+
+> Crampton, E. W. (1947). The growth of the odontoblast of the incisor teeth as a criterion of vitamin C intake of the guinea pig. The Journal of Nutrition, 33(5), 491–504. doi:[10.1093/jn/33.5.491](https://doi.org/10.1093/jn/33.5.491).
+
+There are 60 observations on 3 variables.
+
+- `len` (continuous):	Tooth length
+- `supp` (categorical): Supplement type (`VC` or `OJ`).
+- `dose` (continuous): Dose in milligrams/day
+
+## `Prestige`
+
+This dataset is an example dataset from `R`, provided by the `carData` package. There are 102 rows and 6 columns describing the historical "prestige" of Canadian occupations, where the observations are occupations, and the variables are:
+
+- `education` (continuous): Average education of occupational incumbents, years, in 1971.
+- `income` (continuous):  Average income of incumbents, dollars, in 1971.
+- `women` (continuous): Percentage of incumbents who are women.
+- `prestige` (continuous): Pineo-Porter prestige score for occupation, from a social survey conducted in the mid-1960s.
+- `census` (categorical):  Canadian Census occupational code.
+- `type` (categorical):  Type of occupation, coded as: `bc`, Blue Collar; `prof`, Professional, Managerial, and Technical; `wc`, White Collar.
+
+> Canada (1971) Census of Canada. Vol. 3, Part 6. Statistics Canada [pp. 19-1–19-21].
+
+## `chickwts`
+
+This is another example dataset from `R`. The data are derived from the publication
+
+> Anonymous (1948) Biometrika, 35, 214.
+
+and describe the weights in grams of 71 newly-hatched chicks after six weeks, along with the feed types they received. The variables are:
+
+- `weight` (continuous): chick weight in grams
+- `feed` (categorical): the feed type each chick received
