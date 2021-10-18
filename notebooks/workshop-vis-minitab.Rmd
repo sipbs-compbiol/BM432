@@ -17,6 +17,9 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 <div id="summary">
+- `Minitab` can represent both 1D scatterplots and boxplots.
+- `Minitab` can generate useful summary and diagnostic data for linear regression without using a separate package.
+- `Minitab` graphical output has relatively few options for customisation.
 </div>
 
 # Setup
@@ -35,11 +38,11 @@ You will need to be either on campus, or connected to the university VPN, to use
 - [**Click here to download the `Prestige` dataset**](https://raw.githubusercontent.com/sipbs-compbiol/BM432/2021/notebooks/data/prestige.csv)
 </div>
 
-## Boxplot
+## Boxplot and 1D scatterplot
 
 Our goal is to show how the measured guinea pig tooth growth varies by combination of supplement and supplement dosage. We could approach this in any of several ways, but here we want to treat each supplement as a _category_ or _factor_, and each dosage as a _category_ or _factor_. We'd like to see the distribution of measured tooth lengths _conditioned_ on these explanatory variables.
 
-What we're looking for is a visual representation of the variation in the dataset, for each combination of supplement and dosage. Normally, a 1D scatterplot is a good way to visualise the raw data, with a boxplot/box-and-whisker plot to represent summary statistics.
+What we're looking for is a visual representation of the variation in the dataset, for each combination of supplement and dosage. A 1D scatterplot is a good way to visualise the raw data, and a boxplot/box-and-whisker plot is a good way to represent summary statistics.
 
 Click on `Open` $\rightarrow$ `Open Worksheet`, select the `toothgrowth.csv` data file, and click `Open`. This will open up the `ToothGrowth` dataset in `Minitab`.
 
@@ -47,6 +50,8 @@ Click on `Open` $\rightarrow$ `Open Worksheet`, select the `toothgrowth.csv` dat
 knitr::include_graphics("images/minitabvis-01-select_file.png")
 knitr::include_graphics("images/minitabvis-02-newproject.png")
 ```
+
+### Boxplot
 
 Click on `Graphs` $\rightarrow$ `Boxplot` $\rightarrow$ `Single Y Variable` $\rightarrow$ `With Groups`.
 
@@ -80,6 +85,33 @@ There are relatively few options to improve the graph, visually, but we can reti
 knitr::include_graphics("images/minitabvis-07-retitle.png")
 knitr::include_graphics("images/minitabvis-08-additions.png")
 ```
+
+
+
+### 1D Scatterplot
+
+Boxplots are good representations of a data summary, showing quartiles and interquartile ranges (IQRs), but a 1D scatterplot is (for small to moderate data sizes) preferable for showing the actual distribution of raw data.
+
+Click on `Graphs` $\rightarrow$ `Individual Value Plot...` $\rightarrow$ `Single Y Variable` $\rightarrow$ `With Groups`.
+
+```{r fig-create-scatter, echo=FALSE, fig.cap="Select graph type"}
+knitr::include_graphics("images/minitabvis-03a-select_scatter.png")
+knitr::include_graphics("images/minitabvis-04a-select_scatter_groups.png")
+```
+
+Then choose the appropriate $x$- (group) and $y$-variables. We want to see the $y$-variable (_dependent_ variable) `len`, conditioned on the groups: `VC` and `OJ` (`supp`) split by their dosage `dose`, and we select accordingly.
+
+```{r fig-scatter-groups, echo=FALSE, fig.cap="Select scatterplot groups"}
+knitr::include_graphics("images/minitabvis-05a-scatter_groups.png")
+```
+
+This gives us a 1D scatterplot showing the same trends with dosage for both supplements, but no outlier information.
+
+```{r fig-scatterplot, echo=FALSE, fig.cap="Create the 1D scatterplot"}
+knitr::include_graphics("images/minitabvis-06a-scatter.png")
+```
+
+We can change the title of this graph as we saw before for the boxplot, by double-clicking on it, and typing in a new title.
 
 ## Linear regression
 
