@@ -17,6 +17,14 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 <div id="summary">
+- 1D scatterplots and boxplots are good visualisations of the distribution of a dataset.
+  - `Excel` cannot produce a 1D scatterplot easily
+  - To produce a boxplot, `Excel` needs data in _wide_ format
+  - `Excel` cannot easily convert _long_ format data to _wide_ format data
+- Linear regression is a method for fitting a linear model to a relationship between variables
+  - `Excel` can fit a basic trendline that is a linear regression model
+  - To obtain useful diagnostic statistics, and confidence intervals, the `analysis Toolpak` must be used
+- `Excel` plots usually need manual attention to conform to good visualisation guidelines
 </div>
 
 # Setup
@@ -228,5 +236,3 @@ This worksheet shows us that the 95% confidence interval for the intercept runs 
 
 The worksheet also presents useful diagnostic plots of residuals and Normal probability that help us assess whether the regression was appropriate. Such graphs are always worth generating to see if they indicate problems with the data or the model (though a discussion is beyond the scope of this workshop).
 </details>
-
-## 
