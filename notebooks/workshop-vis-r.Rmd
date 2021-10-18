@@ -1,0 +1,225 @@
+---
+title: "Data Visualisation with R"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<div id="summary">
+- `R` has many options for data visualisation, but for this workshop we will use only _base graphics_ and `ggplot2`
+  - base graphics are quick and powerful
+  - `ggplot2` graphics are extremely powerful and produce attractive professional graphics, but can take some getting used to
+</div>
+
+# Setup
+
+To work through these examples, you will need the following on your own computer:
+
+1. The datasets (see [this link](./workshop-visualisation.html) for a description)
+2. `R` and `RStudio`
+
+<div id="note">
+- [**Click here to download the `ToothGrowth` dataset**](https://raw.githubusercontent.com/sipbs-compbiol/BM432/2021/notebooks/data/toothgrowth.tab)
+- [**Click here to download the `Prestige` dataset**](https://raw.githubusercontent.com/sipbs-compbiol/BM432/2021/notebooks/data/prestige.tab)
+</div>
+
+## Boxplot and 1D scatterplot
+
+Our goal is to show how the measured guinea pig tooth growth varies by combination of supplement and supplement dosage. We could approach this in any of several ways, but here we want to treat each supplement as a _category_ or _factor_, and each dosage as a _category_ or _factor_. We'd like to see the distribution of measured tooth lengths _conditioned_ on these explanatory variables.
+
+What we're looking for is a visual representation of the variation in the dataset, for each combination of supplement and dosage. A 1D scatterplot is a good way to visualise the raw data, and a boxplot/box-and-whisker plot is a good way to represent summary statistics.
+
+To work in a reproducible and replicable way, we will create a script to manage our data visualisation.
+
+Start a new `RStudio` session, and use the `Files` panel to navigate to the location of the data for this workshop.
+
+```{r fig-new-session, echo=FALSE, fig.cap="Create a new `R` session"}
+knitr::include_graphics("images/rvis-01-new_session.png")
+```
+
+Click on `More` and select `Set As Working Directory`. A command will be executed in the console window, to set the working directory.
+
+```{r fig-setwd, echo=FALSE, fig.cap="Set working directory"}
+knitr::include_graphics("images/rvis-02-setwd.png")
+```
+
+Create a new `R` script by clicking on `File` $\rightarrow$ `New File` $\rightarrow$ `R Script`. This will open a new, empty `R` script in the upper left panel.
+
+```{r fig-new-script, echo=FALSE, fig.cap="Create a new `R` script"}
+knitr::include_graphics("images/rvis-03-new_script.png")
+```
+
+Enter the following comment and code into the `R` script. Save the script with a suitable name (e.g. `boxplot.R`), and select the code and click `Run` to load the `ToothGrowth` dataset into a _variable_ called `toothgrowth`.
+
+```r
+# Load the ToothGrowth dataset
+# There are three columns:
+#  - len: length of tooth (cm)
+#  - supp: supplement (VC or OJ)
+#  - dose: supplement dosage (mg/day)
+toothgrowth = read.table("toothgrowth.tab",
+                         header=TRUE,
+                         sep="\t",
+                         stringsAsFactors=TRUE)
+```
+
+<details>
+  <summary>Click to toggle explanation of the `R` command</summary>
+  
+- `read.table()` is a function that reads data in from a file, in tabular format. The first argument to the function is the name of the input file
+- `header=TRUE` tells the function to read the first line of the file as a header
+- `sep="\t"` tells the function to interpret the tab character as a column separator
+- `stringsAsFactors=TRUE` tells the function to read data that is a "string" as a qualitative data category
+</details>
+
+```{r fig-loaded, echo=FALSE, fig.cap="View of loaded `ToothGrowth` data"}
+knitr::include_graphics("images/rvis-04-loaded.png")
+```
+
+### Boxplot: base graphics
+
+`R` has built-in graphics capability called _base graphics_. These are available as functions in `R` without the need to load any other libraries. Although they are powerful and quick, they don't always give the most attractive results.
+
+To use `R`'s base graphics for generation of a boxplot, enter the following comment and code into the `R` script and run it.
+
+```r
+# Use R base graphics to produce a boxplot
+boxplot(len ~ supp + dose,
+        data=toothgrowth,
+        xlab="Supplement and dosage",
+        ylab="Tooth length",
+        main="Tooth length by supplement and dosage")
+```
+
+<details>
+  <summary>Click to toggle explanation of the `R` command</summary>
+  
+- `boxplot()` is a function that creates a boxplot
+- `len ~ supp + dose` tells the function which data to plot on the $y$- and $x$-axes. Read this as `<YDATA> ~ <XDATA1> + <XDATA2>`; using this expression tells `R` to group the length data by both supplement and dose
+- `data=toothgrowth` tells the function that `len`, `supp` and `dose` come from the `toothgrowth` dataframe
+- `xlab=` and `ylab=` tell the function what to write as $x$- and $y$-axis labels
+- `main=` tells the function what the title of the graph should be
+</details>
+
+```{r fig-basebox, echo=FALSE, fig.cap="Base graphics boxplot"}
+knitr::include_graphics("images/rvis-05-base_box.png")
+```
+
+<div id="note">
+The combinations of supplement and dosage are out of order in the boxplot. This can be fixed, but takes a little effort.
+</div>
+
+### 1D scatterplot: base graphics
+
+`R`'s base graphics have a `stripchart()` function, which works in a similar way to `boxplot()` for producing 1D scatterplots. To see it in action, add the code below to your script and run it.
+
+```r
+# Use R base graphics to produce a stripchart/1D scatterplot
+stripchart(len ~ supp + dose,
+        data=toothgrowth,
+        method="jitter",
+        pch=19,
+        frame=FALSE,
+        vertical=TRUE,
+        xlab="Supplement and dosage",
+        ylab="Tooth length",
+        main="Tooth length by supplement and dosage")
+```
+
+<div id="note">
+We only needed to swap the `stripchart()` function call for the `boxplot()` function to get a workable graph. The other options rotate the graph and improve its appearance.
+</div>
+
+<details>
+  <summary>Click to toggle explanation of the `R` command</summary>
+
+The features here that differ from the boxplot are:
+
+- `stripchart()` is a function that creates a stripchart/1D scatterplot
+- `method="jitter"` moves datapoints left and right a bit, so they don't overlap
+- `pch=19` changes the symbol for datapoints to be filled circles
+- `frame=FALSE` turns off the axis frame
+- `vertical=TRUE` plots the tooth lengths vertically, instead of horizontally
+</details>
+
+```{r fig-stripchart, echo=FALSE, fig.cap="Base graphics stripchart/1D scatterplot"}
+knitr::include_graphics("images/rvis-06-base_strip.png")
+```
+
+<div id="note">
+The combinations of supplement and dosage are out of order in the stripchart, too. This can again be fixed, but takes a little effort.
+</div>
+
+
+### Boxplot and 1D scatterplot: ggplot2 graphics
+
+The `ggplot2` library provides functions for generating high-quality, publication-ready figures using the _Grammar of Graphics_. The syntax for creating graphs takes a bit of time to learn, but the results are worth it.
+
+To use a `ggplot2` approach here, combining both a boxplot and 1D scatterplot, add the code below to your script, and run it.
+
+```r
+# Use ggplot2 to overlay a stripchart on a boxplot
+# First, import the ggplot2 library
+library(ggplot2)
+
+# Ensure that dosage is recorded as a category/factor
+toothgrowth$dose = as.factor(toothgrowth$dose)
+
+# Plot the graph
+ggplot(toothgrowth,
+       aes(x=dose, y=len, fill=supp)) +
+  geom_boxplot() +
+  geom_jitter(position=position_jitterdodge())
+```
+
+<details>
+  <summary>Click to toggle explanation of the `R` commands</summary>
+
+- `library(ggplot2)` loads the `ggplot2` library, so we can use it
+
+- `as.factor(toothgrowth$dose)` converts the numeric values in the `dose` column of the dataset into categories, so we can use them to group the datasets in `ggplot2` (otherwise, `ggplot2` thinks they're continuous values)
+
+- `ggplot()` is a function that sets up the data for our plot; the first argument is the dataset we're using
+- `aes(x=dose, y=len, fill=supp)` tells `ggplot()` that we want to use the `dose` data on the $x$-axis, the `len` data on the $y$ axis, and to colour (fill) the boxes by the category data in the `supp` column
+- `geom_boxplot()` draws a boxplot
+- `geom_jitter()` draws jittered datapoints
+  - `position=position_jitterdodge()` tells `geom_jitter()` to align the points with the boxes
+</details>
+
+```{r fig-ggbox, echo=FALSE, fig.cap="`ggplot2` stripchart/1D scatterplot"}
+knitr::include_graphics("images/rvis-07-ggplot_box.png")
+```
+
+This way of producing a graph is fast, economical, and powerful. We have accomplished in four lines of code something that we couldn't even achieve in `Excel` or `Minitab`. It also allows us to experiment by making minor changes to the code to modify the visualisation. For instance, we could add a line to the code to change the category colours:
+
+```r
+ggplot(toothgrowth,
+       aes(x=dose, y=len, fill=supp)) +
+  geom_boxplot() +
+  geom_jitter(position=position_jitterdodge()) +
+  scale_fill_manual(values=c("#999999", "#E69F00"))
+```
+
+<details>
+  <summary>Click to toggle explanation of the `R` command</summary>
+
+The feature here that differs from the plot above is:
+
+- `scale_fill_manual()` is a function that defines a colour scale
+  - here we pass two values for our two categories `OJ` and `VC`: one is grey, and the other yellow.
+</details>
+
+```{r fig-ggbox2, echo=FALSE, fig.cap="Recolouring the `ggplot` output"}
+knitr::include_graphics("images/rvis-08-ggplot_yellow.png")
+```

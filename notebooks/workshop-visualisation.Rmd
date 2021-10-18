@@ -90,3 +90,7 @@ The exercises linked below use the datasets above to explore how to present simi
 </div>
 
 ## `R`
+
+<div id="note">
+[**Click here to open the `R` exercise notebook.**](./workshop-vis-r.html)
+</div>
