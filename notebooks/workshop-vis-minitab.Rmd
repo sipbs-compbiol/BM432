@@ -1,0 +1,82 @@
+---
+title: "Data Visualisation with Minitab"
+author: "Leighton Pritchard, Morgan Feeney"
+date: "2021 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<div id="summary">
+</div>
+
+# Setup
+
+To work through these examples, you will need the following on your own computer:
+
+1. The datasets (see [this link](./workshop-visualisation.html) for a description)
+2. `Minitab` (you have a licence for this *via* the university)
+
+<div id="warning">
+You will need to be either on campus, or connected to the university VPN, to use `Minitab` due to licensing restrictions.
+</div>
+
+<div id="note">
+- [**Click here to download the `ToothGrowth` dataset**](https://raw.githubusercontent.com/sipbs-compbiol/BM432/2021/notebooks/data/toothgrowth.csv)
+- [**Click here to download the `Prestige` dataset**](https://raw.githubusercontent.com/sipbs-compbiol/BM432/2021/notebooks/data/prestige.csv)
+</div>
+
+## Boxplot
+
+Our goal is to show how the measured guinea pig tooth growth varies by combination of supplement and supplement dosage. We could approach this in any of several ways, but here we want to treat each supplement as a _category_ or _factor_, and each dosage as a _category_ or _factor_. We'd like to see the distribution of measured tooth lengths _conditioned_ on these explanatory variables.
+
+What we're looking for is a visual representation of the variation in the dataset, for each combination of supplement and dosage. Normally, a 1D scatterplot is a good way to visualise the raw data, with a boxplot/box-and-whisker plot to represent summary statistics.
+
+Click on `Open` $\rightarrow$ `Open Worksheet`, select the `toothgrowth.csv` data file, and click `Open`. This will open up the `ToothGrowth` dataset in `Minitab`.
+
+```{r fig-create-project, echo=FALSE, fig.cap="Open the `ToothGrowth` dataset"}
+knitr::include_graphics("images/minitabvis-01-select_file.png")
+knitr::include_graphics("images/minitabvis-02-newproject.png")
+```
+
+Click on `Graphs` $\rightarrow$ `Boxplot` $\rightarrow$ `Single Y Variable` $\rightarrow$ `With Groups`.
+
+```{r fig-create-boxplot, echo=FALSE, fig.cap="Select graph type"}
+knitr::include_graphics("images/minitabvis-03-select_boxplot.png")
+knitr::include_graphics("images/minitabvis-04-select_with_groups.png")
+```
+
+Then choose the appropriate $x$- (group) and $y$-variables. We want to see the $y$-variable (_dependent_ variable) `len`, conditioned on the groups: `VC` and `OJ` (`supp`) split by their dosage `dose`, and we select accordingly.
+
+```{r fig-select-groups, echo=FALSE, fig.cap="Select boxplot groups"}
+knitr::include_graphics("images/minitabvis-05-select_groups.png")
+```
+
+This gives us a similar plot to that we obtained with `Excel`, showing the same trends with dosage for both supplements, and the same outlier information.
+
+
+```{r fig-boxplot, echo=FALSE, fig.cap="Create the boxplot"}
+knitr::include_graphics("images/minitabvis-06-boxplot.png")
+```
+
+<div id="note">
+- The `Minitab` plot labels the $x$- and $y$-axes clearly and correctly.
+- The `Minitab` plot does not add distracting colour
+- By default the `Minitab` plot does not show the mean for each group
+</div>
+
+There are relatively few options to improve the graph, visually, but we can retitle the plot by double-clicking on it, and there are options for adding a little more explanatory data.
+
+```{r fig-modify, echo=FALSE, fig.cap="Annotate and retitle the boxplot"}
+knitr::include_graphics("images/minitabvis-07-retitle.png")
+knitr::include_graphics("images/minitabvis-08-additions.png")
+```
