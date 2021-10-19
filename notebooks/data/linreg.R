@@ -19,3 +19,12 @@ plot(prestige ~ education, data=prestige)
 lines(sort(prestige$education),
       fitted(model)[order(prestige$education)],
       col="red")
+
+# Add text annotation to plot
+text(x=6.2, y=70, pos=4,
+     labels=paste("y =",
+                  round(model$coefficients[2], 2),
+                  "x +",
+                  round(model$coefficients[1], 2),
+                  "; r^2 = ",
+                  round(summary(model)$r.squared, 2)))

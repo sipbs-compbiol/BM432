@@ -329,3 +329,116 @@ lines(sort(prestige$education),
 ```{r fig-fit-base, echo=FALSE, fig.cap="Fitted regression curve in base graphics"}
 knitr::include_graphics("images/rvis-13-fitted.png")
 ```
+
+So far, we have not seen an explicit numerical representation of the fitted model parameters: _intercept_ and _gradient_. They are present, in the summary of the `model` variable in the top right panel (the values are `-10.73` and `5.36` as we found with `Excel` and `Minitab`). We can access them directly using the console (lower left panel): type the command below, and hit the `<Return>` key:
+
+```r
+model
+```
+
+```{r fig-fit-params, echo=FALSE, fig.cap="Retrieve model parameters"}
+knitr::include_graphics("images/rvis-14-parameters.png")
+```
+
+This returns the information:
+
+```r
+Call:
+lm(formula = prestige ~ education, data = prestige)
+
+Coefficients:
+(Intercept)    education  
+    -10.732        5.361  
+```
+
+Reminding us of the nature of the model (`prestige ~ education`) and giving us the fitted parameter values.
+
+<div id="note">
+Here `R` calls the intercept `(Intercept)` but does not refer to a _gradient_. Instead, it associates the _gradient_ value with the `education` variable. This reinforces the meaning that each unit (year) increase in the `education` variable is associated with a predicted 5.361 increase in `prestige` score.
+</div>
+
+Alternatively, enter the following `R` code in the console and hit `<Return>`:
+
+```r
+summary(model)
+```
+
+```{r fig-fit-summary, echo=FALSE, fig.cap="Retrieve model summary"}
+knitr::include_graphics("images/rvis-15-summary.png")
+```
+
+This gives us more information about the model fit:
+
+```r
+Call:
+lm(formula = prestige ~ education, data = prestige)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-26.0397  -6.5228   0.6611   6.7430  18.1636 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  -10.732      3.677  -2.919  0.00434 ** 
+education      5.361      0.332  16.148  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 9.103 on 100 degrees of freedom
+Multiple R-squared:  0.7228,	Adjusted R-squared:   0.72 
+F-statistic: 260.8 on 1 and 100 DF,  p-value: < 2.2e-16
+```
+
+Again, it reminds us of the model formula (`prestige ~ education`), but gives us some more information, including the parameter estimates (again `-10.732`, and `5.361`) but also the $r^2$ value (`0.7228`, as before), and some other measures of significance.
+
+<div id="warning">
+The probability estimates in the ANOVA table (here the values `0.00434 **` and `< 2e-16 ***`) are estimates of the probability that the true value of the parameter is zero.
+
+It is possible that you may have a different _null hypothesis_ in mind. For instance, that the intercept is equal to -10, or that the gradient has the value 10. You would need to perform a different statistical test for those.
+</div>
+
+We can add arbitrary text to our regression plot, including the regression parameters and $r^2$ value. Because these are results we've obtained in `R`, we can refer to them with variable names, rather than having to type them directly. That way, if the data (or fit) changes, the values are still correct.
+
+<details>
+  <summary>Click to toggle how to get the variable values in `R`</summary>
+  
+```r
+> model$coefficients[1]
+(Intercept) 
+  -10.73198 
+> model$coefficients[2]
+education 
+ 5.360878 
+> summary(model)$r.squared
+[1] 0.7228007
+```
+</details>
+
+To add the equation to the plot in base graphics, we can add the code below to our script, and run it:
+
+```r
+# Add text annotation to plot
+text(x=6.2, y=70, pos=4,
+     labels=paste("y =",
+                  round(model$coefficients[2], 2),
+                  "x +",
+                  round(model$coefficients[1], 2),
+                  "; r^2 = ",
+                  round(summary(model)$r.squared, 2)))
+```
+
+<details>
+  <summary>Click to toggle explanation of the `R` command</summary>
+  
+- The `text()` function places text on the current plot
+  - `x=` sets the location of the text on the $x$-axis
+  - `y=` sets the location of the text on the $y$-axis
+  - `pos=4` makes the text start to the right of the ($x$, $y$) point specified in `x=`, `y=`
+  - `labels=` sets the text to be shown
+- `paste()` "sticks together" the text that follows into a single string
+  - `round()` rounds a value to the specified number of significant figures
+</details>
+
+```{r fig-fit-annotated, echo=FALSE, fig.cap="Annotated regression in base graphics"}
+knitr::include_graphics("images/rvis-16-annotated.png")
+```
