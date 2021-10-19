@@ -223,3 +223,109 @@ The feature here that differs from the plot above is:
 ```{r fig-ggbox2, echo=FALSE, fig.cap="Recolouring the `ggplot` output"}
 knitr::include_graphics("images/rvis-08-ggplot_yellow.png")
 ```
+
+## Linear regression
+
+The `Prestige` dataset described in the [introduction notebook](./workshop-visualisation.html) represents a set of occupations - one per row (observations) - with variables describing properties of each occupation, such as percentage of women, the "prestige" of the occupation, and the average number of years in education of a person in that occupation.
+
+In `R` (like `Minitab`) we can model the relationship between prestige and years in education, using a linear relationship, without plotting it - and we can use graphical tools to overlay a regression curve within a plot, that describes the relationship, with some statistical information about goodness of fit and the inferred parameters of the model (_gradient_ and _intercept_).
+
+Create a new `R` script by clicking on `File` $\rightarrow$ `New File` $\rightarrow$ `R Script`. This will open a new, empty `R` script in the upper left panel.
+
+```{r fig-new-script-fit, echo=FALSE, fig.cap="Create a new `R` script"}
+knitr::include_graphics("images/rvis-03-new_script.png")
+```
+
+Enter the following comment and code into the `R` script. Save the script with a suitable name (e.g. `linreg.R`), and select the code and click `Run` to load the `Prestige` dataset into a _variable_ called `prestige`.
+
+```r
+# Load the Prestige dataset
+prestige = read.table("prestige.tab",
+                         header=TRUE,
+                         sep="\t",
+                         stringsAsFactors=TRUE)
+```
+
+<details>
+  <summary>Click to toggle explanation of the `R` command</summary>
+  
+- `read.table()` is a function that reads data in from a file, in tabular format. The first argument to the function is the name of the input file
+- `header=TRUE` tells the function to read the first line of the file as a header
+- `sep="\t"` tells the function to interpret the tab character as a column separator
+- `stringsAsFactors=TRUE` tells the function to read data that is a "string" as a qualitative data category
+</details>
+
+```{r fig-loaded-linreg, echo=FALSE, fig.cap="View of loaded `Prestige` data"}
+knitr::include_graphics("images/rvis-09-loaded.png")
+```
+
+### Linear regression: base graphics
+
+The first step in the analysis to conduct the linear regression. To do this in `R`, use the function `lm()` to regress the `prestige` variable onto the `education` variable with the code below:
+
+```r
+# Carry out linear regression on the dataset, with prestige as
+# the dependent variable, and education as the explanatory
+# variable
+model = lm(prestige ~ education, data=prestige)
+```
+
+<details>
+  <summary>Click to toggle explanation of the `R` command</summary>
+  
+- The `lm()` function carries out a linear regression
+- `prestige ~ education` tells the function to use `education` as the explanatory variable, and `prestige` as the dependent variable
+- `data=prestige` tells the function to use the dataframe `prestige` as the source for the `education` and `prestige` columns in the regression
+</details>
+
+This appears to run silently, but in the upper right panel you will see a new variable called `model` has been populated. This contains the output of the linear regression, including the _intercept_ and _gradient_ (the `coefficients`), and diagnostic information.
+
+```{r fig-model, echo=FALSE, fig.cap="The linear regression model is fitted"}
+knitr::include_graphics("images/rvis-10-model.png")
+```
+
+The diagnostic information about the regression can be plotted using `R`'s base `plot()` function. To use it enter the following code in your script and run it.
+
+```r
+# Show diagnostic graphics for the regression model
+plot(model)
+```
+
+This will ask you to hit the `<Return>` key to list through diagnostic plots in the lower right panel. 
+
+```{r fig-diag1, echo=FALSE, fig.cap="Regression diagnostics"}
+knitr::include_graphics("images/rvis-11-diag1.png")
+```
+
+This is inconvenient, so we can modify our code in-place to put all four graphs together, as follows:
+
+```r
+# Show diagnostic graphics for the regression model
+par(mfrow=c(2,2))
+plot(model)
+par(mfrow=c(1,1))
+```
+
+Running this code now gives all four diagnostic plots together.
+
+```{r fig-diag2, echo=FALSE, fig.cap="Regression diagnostics"}
+knitr::include_graphics("images/rvis-12-diag2.png")
+```
+
+<div id="note">
+It may seem odd to you that, when we `plot()` the linear regression output we don't see the overlaid regression curve. This reflect's `R`'s usage as a statistical programming tool. In reality, we tend to fit much more complex models than simple linear regression, and overlaying the fitted curve onto data isn't generally as informative or interpretable about the quality of the model fit as these diagnostic plots.
+</div>
+
+To plot the fitted regression curve over the data using base graphics, we can use the code below:
+
+```r
+# Plot fitted regression curve on the data
+plot(prestige ~ education, data=prestige)
+lines(sort(prestige$education),
+      fitted(model)[order(prestige$education)],
+      col="red")
+```
+
+```{r fig-fit-base, echo=FALSE, fig.cap="Fitted regression curve in base graphics"}
+knitr::include_graphics("images/rvis-13-fitted.png")
+```
