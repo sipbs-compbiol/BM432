@@ -125,7 +125,7 @@ This looks OK, and the interpretation is straightforward enough:
 
 - Increasing supplement dose looks to be correlated with tooth growth
 - At 2mg/day both supplements are associated with similar tooth growth
-- There appears to be a monotonic relationship between tooth length and dosage, for both supplements
+- There appears to be a straightforward relationship between tooth length and dosage where increaseing supplement dosage is associated with increasing tooth length, for both supplements
 - At lower dosages, `OJ` appears to be associated with greater tooth length
 - The mean (cross) and median (line) values do not coincide, so the data may be skewed/non-normal
 - There is a single outlier in the `VC_1` data
