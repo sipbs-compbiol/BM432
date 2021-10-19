@@ -442,3 +442,92 @@ text(x=6.2, y=70, pos=4,
 ```{r fig-fit-annotated, echo=FALSE, fig.cap="Annotated regression in base graphics"}
 knitr::include_graphics("images/rvis-16-annotated.png")
 ```
+
+### Linear regression: `ggplot2`
+
+The procedure for generating an annotated linear regression plot using `ggplot2` is simpler.
+
+We can start by producing a scatterplot of `prestige` against `education` with the following code:
+
+```r
+# Import ggplot for graphics
+library(ggplot2)
+
+# Generate an annotated linear regression plot in ggplot2
+ggplot(prestige, aes(x=education, y=prestige)) +
+  geom_point()
+```
+
+<details>
+  <summary>Click to toggle explanation of the `R` command</summary>
+  
+- `library(ggplot2)` imports the `ggplot2` graphics library
+- The `ggplot()` function sets up the data that will be used in the plot. We use the `prestige` data, with `education` as the explanatory variable, and `prestige` as the dependent variable.
+- The `geom_point()` function adds a scatterplot _layer_ to the plot, and displays the data
+</details>
+
+```{r fig-fit-gg1, echo=FALSE, fig.cap="Scatterplot in `ggplot2`"}
+knitr::include_graphics("images/rvis-17-scatter.png")
+```
+
+We can add a regression plot to this, using the `geom_smooth()` function from `ggplot`:
+
+```r
+# Generate an annotated linear regression plot in ggplot2
+ggplot(prestige, aes(x=education, y=prestige)) +
+  geom_point() +
+  geom_smooth(method="lm")
+```
+
+<details>
+  <summary>Click to toggle explanation of the `R` command</summary>
+  
+- The `geom_smooth()` function adds a _smoothing function_ to summarise the dataset. This can take any of many forms, including a linear regression curve.
+  - `method="lm"` specifies that the smoothing curve we want is a linear regression
+</details>
+
+```{r fig-fit-gg2, echo=FALSE, fig.cap="Add a regression line in `ggplot2`"}
+knitr::include_graphics("images/rvis-18-smooth.png")
+```
+
+<div id="note">
+By default, the smoothed curve includes a _ribbon_ that represents the 95% confidence interval of the fitted curve.
+</div>
+
+We can annotate the graph with the fitted equation, and its $r^2$ value using the `ggpubr` function `stat_regline_equation()`:
+
+```r
+# Import ggplot/ggpubr for graphics
+library(ggplot)
+library(ggpubr)
+
+# Generate an annotated linear regression plot in ggplot2
+ggplot(prestige, aes(x=education, y=prestige)) +
+  geom_point() +
+  geom_smooth(method="lm") +
+  stat_regline_equation(label.x = 3, label.y = 75,
+                        aes(label = ..rr.label..)) +
+  stat_regline_equation(label.x = 3, label.y = 7,
+                        aes(label = ..eq.label..))
+```
+
+<details>
+  <summary>Click to toggle explanation of the `R` command</summary>
+  
+- `library(ggpubr)` imports the `ggpubr` library - a set of extensions to `ggplot2` that makes some tasks, like adding the equation of a regression line, simpler
+- `stat_regline_equation()` is a function that adds a regression label to the graph
+  - `label.x` and `label.y` set the co-ordinates of the regression label
+  - `aes(label = ..rr.label..)` represents the equation showing the $r^2$ (`rr`) value
+  - `aes(label = ..eq.label..)` represents the equation showing the linear equation (`eq`)
+</details>
+
+```{r fig-fit-gg3, echo=FALSE, fig.cap="Add annotation using `ggpubr``"}
+knitr::include_graphics("images/rvis-19-annotation.png")
+```
+
+<div id="note">
+Using `R` and `ggplot`/`ggpubr`, we have been able - **in only four lines of code** - to produce a linear regression plot with overlaid equation and $r^2$ value.
+
+The code is reusable and reproducible, and able to be shared in a report, thesis, or as supplementary information in a publication.
+</div>
+

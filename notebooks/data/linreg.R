@@ -28,3 +28,16 @@ text(x=6.2, y=70, pos=4,
                   round(model$coefficients[1], 2),
                   "; r^2 = ",
                   round(summary(model)$r.squared, 2)))
+
+# Import ggplot/ggpubr for graphics
+library(ggplot2)
+library(ggpubr)
+
+# Generate an annotated linear regression plot in ggplot2
+ggplot(prestige, aes(x=education, y=prestige)) +
+  geom_point() +
+  geom_smooth(method="lm") +
+  stat_regline_equation(label.x = 3, label.y = 75,
+                        aes(label = ..rr.label..)) +
+  stat_regline_equation(label.x = 3, label.y = 7,
+                        aes(label = ..eq.label..))
