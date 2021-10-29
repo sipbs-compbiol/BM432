@@ -27,7 +27,7 @@ bgal$Antibiotic = as.factor(bgal$Antibiotic)
 ```
 
 <div id="summary">
-- Your poster should tell a clear story about your project, and should serve as an aide for you as a presenter
+- Your poster should tell a clear story about your project, and should serve as an aid for you as a presenter
 - The design should be clear and clean, with the necessary information/key points and "take-home message" easy for your audience to see and understand
 
 </div>

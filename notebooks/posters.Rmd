@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <div id="summary">
 - A scientific poster helps to communicate the results of a particular study to an audience 
-  - A poster should help the presenter communicate (serve as a visual aide/memory prompt), but should also be able to stand alone (communicate the work done without the author present to explain it)
+  - A poster should help the presenter communicate (serve as a visual aid/memory prompt), but should also be able to stand alone (communicate the work done without the author present to explain it)
 - A poster should generally contain a title, list of authors, and several sections presenting the work: introduction, materials and methods, results, conclusions/significance
 </div>
 
@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 Posters are a common way to communicate science at conferences and other venues. They are often printed on a single large sheet of paper (e.g., A0), but size requirements vary between conferences.
 
-You should use your poster as a visual aide to presenting your work - it should have the key figures, results, etc. that you need to show your audience to convince them of the main findings of your work.
+You should use your poster as a visual aid to presenting your work - it should have the key figures, results, etc. that you need to show your audience to convince them of the main findings of your work.
 
 At the same time, however, your poster should be able to stand alone: a person should be able to look at it, without you being there to explain it, and still understand the work that you have done.
 
