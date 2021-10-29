@@ -17,7 +17,11 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 <div id="summary">
-
+- There are many options for data analysis an visualisation, in terms of tools and packages, and also style and technique.
+  - There is no absolutely _right_ way to approach data visualisation, but different approaches have relative advantages and disadvantages.
+- In this workshop we will consider
+  - two common tasks: presenting a data distribution (conditioned on _categorical data_); and presenting a linear regression fit
+  - three tools for completing these tasks: Microsoft `Excel`, `Minitab`, and `R`
 </div>
 
 # Setup
@@ -74,8 +78,10 @@ This dataset is an example dataset from `R`, provided by the `carData` package. 
 
 The exercises linked below use the datasets above to explore how to present similar data visualisations in three different tools you might encounter in your research: Microsoft `Excel`, `Minitab`, and `R`. The exercises cover the following visualisations:
 
-1. 1D scatterplots and/or boxplots
+1. 1D scatterplots and/or boxplots (data distributions, conditioned on a categorical variable)
 2. Linear regression
+
+To read and follow through the exercises, please click on each of the links below.
 
 ## Microsoft `Excel`
 
