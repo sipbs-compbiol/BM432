@@ -127,40 +127,40 @@ blockquote {
 
 #goofus, #section-goofus{
     flex: 0 0 50%;
-    background-color: mistyrose;
-    color: firebrick;
+    background-color: #F7F7FA;
+    color: #070040;
 }
     
 #goofus:before, #section-goofus:before{
     background-position: left;
     font-weight: bold;
-    content: "Goofus:";
+    content: "Not so good practice:";
     padding-left: 25px;
 }
 
 #goofus pre, #section-goofus pre{
     background-position: left;
-    background-color: mistyrose;
-    color: firebrick;
+    background-color: #F7F7FA;
+    color: #070040;
 }
 
 
 #gallant, #section-gallant{
     flex: 1;
-    background-color: lightgreen;
-    color: darkgreen;
+    background-color: #F2FFF2;
+    color: #003100;
 }
 
 #gallant:before, #section-gallant:before{
     background-position: left;
     font-weight: bold;
-    content: "Gallant:";
+    content: "Good practice:";
     padding-left: 25px;
 }
 
 #gallant pre, #section-gallant pre{
-    background-color: lightgreen;
-    color: darkgreen;
+    background-color: #F2FFF2;
+    color: #003100;
 }
 
 details {
