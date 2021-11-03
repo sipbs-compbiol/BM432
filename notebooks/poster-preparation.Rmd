@@ -149,10 +149,11 @@ In addition to using figures to present your data, consider using figures in the
 - A methods figure (a flow chart illustrating the steps done in an experiment) is a concise and clear way of presenting how an experiment was done.
 - Model figures (e.g., blobograms that illustrate biological pathways) can be concise and clear ways to summarize the state of a field (what is currently known) and to illustrate your contribution (what you have added to the field).
 
+<center>
 ```{r methods-fig,  out.width="60%", out.height="60%", echo=FALSE, fig.cap="An example of a methods figure (in this case, for Southern blotting [from NIH](https://www.genome.gov/genetics-glossary/Southern-Blot))"}
 knitr::include_graphics("images/southern_blot.jpg")
 ```
-
+</center>
 
 </div>
 
@@ -256,6 +257,12 @@ Aim:
 </div>
 
 
+<center>
+```{r font size, echo=FALSE, fig.cap="Font size on an academic poster. Image credit: [ErrantScience](https://errantscience.com/blog/2016/02/23/how-to-prepare-an-academic-poster-a-terrible-guide-that-no-one-should-follow/)"}
+knitr::include_graphics("images/Legible-poster.png")
+```
+</center>
+
 ## Graphic Design
 
 - Make sure there is plenty of white space - do not crowd everything together to fit more in. 
@@ -263,6 +270,17 @@ Aim:
   - It may help to number your sections, or to use arrows to guide the reader's eye.
 - Align your boxes to a grid as much as possible - avoid complicated, messy jumbles that can make your poster feel cluttered and busy.
 - Many posters use a plain coloured background, with white boxes or bubbles outlining the different subsections.
+
+### Image placement
+
+- Consider where you can place elements on your poster (text boxes, figures) for maximum effect. 
+  - You may wish to follow the [Rule of Thirds](https://libguides.uwf.edu/c.php?g=262293&p=6646747), subdividing your poster into three sections each horizontally and vertically. Your audience's attention is naturally drawn to these lines or to their intersections.
+
+<center>
+```{r thirds, echo=FALSE, fig.cap="A diagram illustrating the rule of thirds and highlighting natural attention points on a poster. Image credit: [UWF poster guides](https://libguides.uwf.edu/c.php?g=262293&p=6646747)"}
+knitr::include_graphics("images/rule-of-thirds.jpg")
+```
+</center>
 
 ### Colour choices
 
@@ -290,7 +308,12 @@ You can then start assembling the poster, adding images and text using the softw
 
 PowerPoint and Adobe programs are very commonly used. You may use any software you like to prepare your poster.
 
-It is usually best to prepare your figures separately (using the software of your choice) --> save them as image files (e.g., .png files) --> insert the figures into the poster as images. (Assembling the figures directly in the poster means that you will have many more movable pieces, and therefore more chances of those pieces being mis-aligned or lost.)
+It is usually best to prepare your figures separately (using the software of your choice) --> save them as image files --> insert the figures into the poster as images. (Assembling the figures directly in the poster means that you will have many more movable pieces, and therefore more chances of those pieces being mis-aligned or lost.)
+
+You want to keep in mind the size your figures will be printed at, and how they will appear at that resolution. The best practice here is to save images as vector files (.svg files) wherever possible, and for bitmaps use a suitable dpi for printing at A0 size, otherwise you can end up with very pixellated/poor quality images.
+
+	- You can convert bitmaps to vector images in Adobe Illustrator/similar.
+
 
 ## Size
 
@@ -311,3 +334,11 @@ Things to keep in mind while you are editing your poster:
 - Remove any text or figures that do not help you present your project 
 - Add any information that was missing (e.g., to answer any questions that your audience asked during your practice presentations)
 - Consider the overall aesthetics of your poster (e.g., is the colour scheme working well, is there enough whitespace, does the reader naturally move through the sections in the intended order?)
+
+
+# Additional reading
+
+- [Data visualization: A view of every Points of View column](https://protocolsmethods.springernature.com/posts/43650-data-visualization-a-view-of-every-points-of-view-column) - great tips on data visualization (organised by topic)
+- [UWF Poster Design: Tips for Creating a Successful Poster](https://libguides.uwf.edu/c.php?g=262293&p=6646732)
+- Erren, T. C., & Bourne, P. E. (2007). Ten simple rules for a good poster presentation. PLoS computational biology, 3(5), e102. https://doi.org/10.1371/journal.pcbi.0030102
+

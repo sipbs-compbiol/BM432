@@ -32,9 +32,11 @@ At the same time, however, your poster should be able to stand alone: a person s
 
 However, a poster is not a manuscript, and you cannot simply copy/paste figures and text from your thesis onto a poster template. A poster is primarily about visual communication, so text should be kept at a minimum and figures should be kept simple and clear.
 
+<center>
 ```{r poster, echo=FALSE, fig.cap="A poster is not a manuscript, from [PhD Comics](http://phdcomics.com/comics.php)."}
 knitr::include_graphics("images/Jorge_Cham_on_posters.jpg")
 ```
+</center>
 
 # The Anatomy of a Scientific Poster
 
