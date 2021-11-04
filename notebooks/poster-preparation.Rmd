@@ -312,7 +312,7 @@ It is usually best to prepare your figures separately (using the software of you
 
 You want to keep in mind the size your figures will be printed at, and how they will appear at that resolution. The best practice here is to save images as vector files (.svg files) wherever possible, and for bitmaps use a suitable dpi for printing at A0 size, otherwise you can end up with very pixellated/poor quality images.
 
-	- You can convert bitmaps to vector images in Adobe Illustrator/similar.
+You can convert bitmaps to vector images in Adobe Illustrator/similar.
 
 
 ## Size
