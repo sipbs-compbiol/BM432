@@ -75,6 +75,11 @@ The current versions of the notebook HTML pages are linked below, for convenienc
   - [04-Better Tools Than Barcharts (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-04a-barchart/)
 - [04-Preparing Your Figures For An Audience](notebooks/03-04-figure_preparation.html)
 
+### Session 4 (Thursday November 25th)
+
+- [01-The Anatomy of a Scientific Poster](notebooks/posters.html)
+- [02-Preparing a Scientific Poster](notebooks/poster-preparation.html)
+
 ### Supplementary Information
 
 - [01-Where Do Statistical Distributions Come From?](notebooks/supp-origins.html)
