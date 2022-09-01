@@ -13,3 +13,6 @@ notebooks/rsconnect/
 
 # System files
 .DS_Store
+
+# Don't track main page HTML preview
+README.html
