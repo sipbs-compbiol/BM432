@@ -1,6 +1,6 @@
 # BM432
 
-Welcome to the BM432 computational biology repository!
+Welcome to the BM432 computational biology repository for 2022!
 
 This repository contains materials to support workshop sessions on:
 
@@ -20,10 +20,12 @@ This repository contains materials to support workshop sessions on:
 
 These workshops are presented as part of BM432: Being a Biomolecular Scientist 4, at the University of Strathclyde.
 
-The material you are viewing relates to the 2021-2022 presentation of the course, and was prepared by:
+The material you are viewing relates to the 2022-2023 presentation of the course, and was prepared by:
 
 - [Dr Leighton Pritchard](https://www.strath.ac.uk/staff/pritchardleightondr/)
 - [Dr Morgan Feeney](https://pureportal.strath.ac.uk/en/persons/morgan-feeney)
+
+NOTE: The 2022-2023 presentation differs from that in 2021-2022 as that the workshop sessions on data analysis are not being run. However, we continue to make the materials for this session available as they may be a useful and valuable reference for students as they work on their projects.
 
 ------------
 
@@ -46,46 +48,51 @@ To download and use the materials for this workshop on your own computer, please
 
 -------------
 
-## Notebook HTML
+## Notebook HTML (2022-2023)
 
-The current versions of the notebook HTML pages are linked below, for convenience:
+Notebook HTML pages for the current presentation are linked below, for convenience:
 
-### Session 1 (Thursday October 7th)
+### Workshop 3: "Project Management" (Wednesday 5th October 2022, 9-11am)
 
-- [01-Data Analysis in the Research Cycle](notebooks/01-data_analysis.html)
-- [02-Data and Project Management](notebooks/02-project_management.html)
-- [03-Reproducibility, Replicability, and FAIR Guidelines](notebooks/03-reproducibility.html)
-- [04-Keeping a Lab Notebook to Document Your Project](notebooks/04-keeping_a_lab_notebook.html)
-- [05-Reference Management](notebooks/05-reference_management.html)
-- [06-How to Use Reference Management Software](notebooks/06-using_a_reference_manager.html)
+- [01-Data Analysis in the Research Cycle](notebooks/03-01-data_analysis.html)
+- [02-Data and Project Management](notebooks/03-02-project_management.html)
+- [03-Reproducibility, Replicability, and FAIR Guidelines](notebooks/03-03-reproducibility.html)
+- [04-Keeping a Lab Notebook to Document Your Project](notebooks/03-04-keeping_a_lab_notebook.html)
+- [05-Reference Management](notebooks/03-05-reference_management.html)
+- [06-How to Use Reference Management Software](notebooks/03-06-using_a_reference_manager.html)
 
-### Session 2 (Thursday October 14th)
+### Workshop 4: "Data Presentation" (Wednesday 12th October 2022, 9-11am)
+
+- [01-An Introduction to Data Visualisation](notebooks/04-01-visualisation.html)
+  - [01a-Better Tools Than Barcharts (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/04-04a-barchart/)
+- [02-Preparing Your Figures For An Audience](notebooks/04-02-figure_preparation.html)
+
+--------------
+
+## Notebook HTML (legacy)
+
+Notebook pages from previous years' presentations of this material are linked below.
+
+### "Data Management"
 
 - [01-What is a Dataset?](notebooks/02-01-dataset.html)
 - [02-Data Formats and File Formats](notebooks/02-02-data_formats.html)
 - [03-How to Access Data from Public Databases](notebooks/02-03-public_databases.html)
 
-### Session 3 (Thursday October 21st)
+### "An Introduction to Statistical Distributions"
 
 - [01-What is Statistics?](notebooks/03-01-statistics.html)
 - [02-What Does Statistics Do, Anyway?](notebooks/03-02-statistics.html)
   - [02a-Exploring a Statistical Distribution (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-02a-sampling/)
   - [02b-Exploring a Statistical Relationship (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-02b-linear/)
-- [03-An Introduction to Data Visualisation](notebooks/03-03-visualisation.html)
-  - [04-Better Tools Than Barcharts (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-04a-barchart/)
-- [04-Preparing Your Figures For An Audience](notebooks/03-04-figure_preparation.html)
+- [03-Where Do Statistical Distributions Come From?](notebooks/supp-origins.html)
+  - [03a-Where Does the Normal Distribution Come From? (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/supp-generate_normal/)
+- [04-Hypothesis Testing](notebooks/supp-nhst.html)
 
-### Session 4 (Thursday November 25th)
+### "Scientific Posters"
 
 - [01-The Anatomy of a Scientific Poster](notebooks/posters.html)
 - [02-Preparing a Scientific Poster](notebooks/poster-preparation.html)
-
-### Supplementary Information
-
-- [01-Where Do Statistical Distributions Come From?](notebooks/supp-origins.html)
-  - [01a-Where Does the Normal Distribution Come From? (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/supp-generate_normal/)
-- [02-Hypothesis Testing](notebooks/supp-nhst.html)
-
 
 --------------
 

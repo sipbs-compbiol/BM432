@@ -1,0 +1,318 @@
+---
+title: "How to Use Reference Management Software"
+author: "Morgan Feeney, Leighton Pritchard"
+date: "2022 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<div id="summary">
+- This workshop summarises how to use reference management software to:
+  - Build a reference library
+  - Insert references into a Word document
+  - Change the output style (formatting of the citations and bibliography)
+  - Correct some commonly encountered errors
+</div>
+
+We have covered the [basics of reference management](./03-05-reference_management.html), including the factors that influence your choice of reference management software, what references  you should be citing, and what referencing style you should use. This part of the workshop is a practical guide on how to use reference management software to organize your references and insert citations and a bibliography into your thesis, using Endnote and Mendeley as examples.^[You are free to use any reference management software you like; however, it is outside the scope of this workshop to cover every single software option.]
+
+The reference library and Word file we are using are available for you to download, if you would like to follow along with this tutorial:
+
+- [BM432_endnote.enl file](./reference_management/BM432_endnote.enl)
+- [BM432_endnote.xml file](./reference_management/BM432_endnote.xml)
+- [citation_example_no_references.docx](./reference_management/citation_example_no_references.docx)
+- [citation_example_with_references.docx file](./reference_management/citation_example_with_references.docx)
+
+The reference library is provided as .enl or .xml files which you may import into your reference management software. The example Word document is provided both with and without references added.
+
+# How to obtain a citation file (any software)
+
+## From PubMed 
+
+You can get citation files directly from PubMed. This will likely be an option for most of the articles you wish to cite.
+
+### Option 1: the "Cite" action
+
+We have found a reference that we want to add to our Endnote library via a PubMed search. To add this reference, we will click the blue button on the right-hand side of the abstract labeled "Cite".
+
+```{r Endnote1, echo=FALSE, fig.cap="A PubMed page for a journal article, with a blue arrow indicating the Cite button"}
+knitr::include_graphics("./images/Endnote-Fig1.JPG")
+```
+
+This brings up a pop-up window, which by default gives the reference in APA format (you could copy the reference from this box, if you wished to build your reference list manually.) We will download the reference by clicking on "Download .nbib".
+
+```{r Endnote2, echo=FALSE, fig.cap="The pop-up Cite menu for our journal article, with a blue arrow indicating the \"Download .nbib option\""}
+knitr::include_graphics("./images/Endnote-Fig2.JPG")
+```
+
+### Option 2: Use "Send to"
+
+We can also download the reference by clicking on "Send to" in the bar above the reference, and then clicking on "Citation manager".
+
+```{r Endnote3, echo=FALSE, fig.cap="Using Send to: Citation manager to obtain the reference for our journal article, with a blue arrow indicating the Citation manager option that should be clicked"}
+knitr::include_graphics("./images/Endnote-Fig3.JPG")
+```
+
+## From the journal website
+
+Many/most journals will also allow you to download a citation file for an article (the details of how this works vary from one journal to another).
+
+To give just one example, clicking on "Citation tools" from a journal article published in PNAS, brings up a menu that gives you the option of downloading the citation file in a variety of formats. 
+
+```{r citation-tools, echo=FALSE, fig.cap="PNAS citation tools menu"}
+knitr::include_graphics("./images/PNAS-citation-tools.JPG")
+```
+
+## Manually 
+
+In some instances, you may need to create a citation file manually (if no citation file exists, e.g. if you are citing a personal communication). In these cases, your only option is to create the file manually and populate it with the correct details yourself. 
+
+# Endnote 
+
+Please see the [Strathclyde Library guide to using Endnote](https://guides.lib.strath.ac.uk/c.php?g=653772&p=4589573) for more information about how to download Endnote for Windows or Mac, and how to use it.
+
+Worked examples here are using Endnote X8.2 on a Windows machine - some of the details may vary if you are using a different system. 
+
+## How to import a reference into your Endnote library
+
+Having downloaded the reference file using any of the above options, you will want to open it in Endnote. You can do this in a number of different ways:
+
+- by double-clicking on the downloaded file to open it, if Endnote is set as the default program to open this type of file (Endnote should open automatically if it is not already open)
+- dragging the file into Endnote (from the downloads folder or wherever you have saved it)
+- right-clicking the file and selecting Open (if Endnote is your default), or Open with (and selecting Endnote) 
+
+The reference will initially appear in your library under "Imported References."
+
+```{r Endnote4, echo=FALSE, fig.cap="The new reference appears under Imported References when it is first added to your Endnote library"}
+knitr::include_graphics("./images/Endnote-Fig4.JPG")
+```
+
+You can see all of the references in your library by clicking on "All References" in the menu at the right.
+
+```{r Endnote5, echo=FALSE, fig.cap="The newly imported reference highlighted in All References"}
+knitr::include_graphics("./images/Endnote-Fig5.JPG")
+```
+
+If you wish, you can attach the PDF of the paper to the reference record in Endnote, as a way to easily organize and find the paper files. You can do this by selecting the reference in your library and then clicking References > File Attachments > Attach File, and choosing the correct file.
+
+You can also attach a file by double-clicking on the reference to open it, and clicking on the paperclip icon.
+
+```{r Endnote6, echo=FALSE, fig.cap="The reference for the Meehan et al. article. Note the paperclip icon in the bar at the top of the window (click to attach a file)."}
+knitr::include_graphics("./images/Endnote-Fig6.JPG")
+```
+
+## How to insert a citation from Endnote in your Word document
+
+Option 1: Add a citation through Endnote
+
+First, position the cursor at the position in the text where you want to insert a citation. Next, open Endnote, select the reference you wish to cite, and click on the " button (indicated by a blue arrow.)
+
+```{r Endnote7, echo=FALSE, fig.cap="Inserting a reference into word using the \" button"}
+knitr::include_graphics("./images/Endnote-Fig7.JPG")
+```
+
+Endnote will automatically add the citation at the position where your cursor was (it added the Bardwell et al., 1991 citation in this example). It will also add the reference to your list of references cited, at the end of the document.
+
+```{r Endnote8, echo=FALSE, fig.cap="The new citation inserted into our text"}
+knitr::include_graphics("./images/Endnote-Fig8.JPG")
+```
+
+Option 2: Add a citation through Word
+
+You can also add a citation in Word, using the Endnote menu in the ribbon at the top. First place your cursor at the correct position in the text and then click on "Insert Citation".
+
+```{r Endnote9, echo=FALSE, fig.cap="Inserting a reference into word by clicking on \"Insert citation\" (indicated by a blue arrow)"}
+knitr::include_graphics("./images/Endnote-Fig9.JPG")
+```
+
+This will bring up a dialog box, where you can search for the publication that you wish to cite (in this case, we searched based on the last name of the first author). This brings up the correct reference, which you can then cite by clicking on the "insert citation" button.
+
+```{r Endnote10, echo=FALSE, fig.cap="Searching for the reference that you wish to cite in Word and inserting it by clicking on the insert button (indicated by a blue arrow)."}
+knitr::include_graphics("./images/Endnote-Fig7.JPG")
+```
+
+As with the previous option, this will insert the citation in the text and add the reference to the bibliography at the end of the document.
+
+```{r Endnote11, echo=FALSE, fig.cap="The updated Word document, with the citation in the text and the new reference added to the bibliography"}
+knitr::include_graphics("./images/Endnote-Fig11.JPG")
+```
+
+## How to change the output style of your references
+
+<div id="note">
+You can format your references for your thesis in either [Harvard](https://guides.lib.strath.ac.uk/referencing_guide/harvard) or [Vancouver](https://guides.lib.strath.ac.uk/referencing_guide/vancouver) style. 
+
+Note that there are *many* different variations on the Harvard style, which differ in the precise details of how citations are formatted. It is important to use *one* style consistently throughout a document.
+</div>
+
+You can select a different style for your references by clicking on the "Style" drop-down menu in the Endnote menu bar, and choosing your preferred option.
+
+```{r Endnote12, echo=FALSE, fig.cap="Changing Endnote's output style (in this case to Vancouver, indicated with a blue arrow)"}
+knitr::include_graphics("./images/Endnote-Fig12.JPG")
+```
+
+This will automatically change the format of your citations and reference list to the desired output format, as shown here.
+
+```{r Endnote13, echo=FALSE, fig.cap="The Word document with citations and bibliography now in Vancouver style"}
+knitr::include_graphics("./images/Endnote-Fig13.JPG")
+```
+
+You can also change the output style directly in Endnote, by going to Edit > Output Styles and selecting your desired style.
+
+## How to correct some common Endnote errors
+
+### Formatting errors
+
+Do not trust Endnote to preserve text formatting or any special characters correctly. (In the example above, notice that it has not formatted the species name, *Escherichia coli* in italics as it should have.)
+
+You can correct any errors by editing the reference directly in Endnote (i.e. adding italics where appropriate). You can italicize text within the reference list directly in Word, if you wish, but these changes may be lost when the citations and bibliography are updated.
+
+```{r Endnote14, echo=FALSE, fig.cap="The Endnote reference formatted correctly. Note that the species name has been italicized (indicated with an arrow). The buttons for editing text formatting are indicated with a blue box."}
+knitr::include_graphics("./images/Endnote-Fig14.JPG")
+```
+
+### Deleting citations
+
+You may occasionally insert the wrong citation by accident, or find that you have changed your text and therefore need to remove a citation. It is quite straightforward to delete a citation.
+
+For a single citation set alone in the text, you can remove the citation by simply deleting the text in Word. 
+
+Where you have groups of citations enclosed within a single set of brackets, it is easiest to use the "Edit and Manage Citations" tool found in the Endnote ribbon in Word. Click on "Edit Reference" and select "Remove Citation".
+
+```{r Endnote15, echo=FALSE, fig.cap="Removing a reference in Word. The \"Edit and Manage Citations\" button is indicated with a blue arrow. The Remove Citation option, in the Edit Reference menu, is highlighted."}
+knitr::include_graphics("./images/Endnote-Fig15.JPG")
+```
+
+# Mendeley
+
+You can download [Mendeley Desktop](https://www.mendeley.com/download-desktop-new) or [Mendeley Reference Manager](https://www.mendeley.com/reference-management/reference-manager) from the web; please refer to their website for installation instructions and FAQ, etc. 
+
+You will also want to download the MS Word Plugin, if you are using Mendeley with Word. 
+
+A number of useful [help guides](https://www.mendeley.com/guides) are available online. 
+
+<div id="warning">
+Note that you may run into some issues if you have multiple reference managers interfacing with Word (e.g., if Endnote and Mendeley both have add-ons running in Word). If you run into problems, you may need to disable or uninstall one of the add-ons.
+</div>
+
+
+Worked examples here are using Mendeley Desktop v 1.19.8 on a Windows machine - some of the details may vary if you are using a different system. 
+
+## How to import a reference into your Mendeley library 
+
+If you have downloaded a PDF file of the article you wish to reference, you can add the PDF, and an automatically generated reference, to your Mendeley library simply by dragging the file into Mendeley Desktop. (The program includes a built-in PDF viewer, so you can read your article in Mendeley as well as record your notes on it.)
+
+You can also use reference files downloaded from PubMed or journal websites, as described above. Once you have downloaded the file for the article you wish to reference, you will want to open it in Mendeley. You can do this in a number of different ways:
+
+- by double-clicking on the file to open it, if Mendeley is set as the default program to open this type of file (Mendeley should open automatically if it is not already open)
+- dragging the file into Mendeley (from the downloads folder or wherever you have saved it)
+- right-clicking the file and selecting Open (if Mendeley is your default), or Open with (and selecting Mendeley)
+
+## How to insert a citation from Mendeley in your Word document
+
+Place the cursor at the position in the text where you wish to insert a reference. 
+
+In the "References" ribbon at the top of the Word window, there should be an "Insert Citation" button (if you have correctly installed the Mendeley plugin for Word).
+
+```{r Mendeley1, echo=FALSE, fig.cap="The Mendeley \"Insert Citation\" button in Word, indicated with a blue arrow."}
+knitr::include_graphics("./images/Mendeley-fig1.JPG")
+```
+
+Clicking on the "Insert Citation" button brings up a pop-up window with a search bar. 
+
+Option 1: You can use the search bar to search for author, title, or year in the citations in your Mendeley library. In this case, we searched for the paper we wish to cite using the last name of the first author.
+
+```{r Mendeley2, echo=FALSE, fig.cap="Searching for a citation in your Mendeley library via Word"}
+knitr::include_graphics("./images/Mendeley-fig2.JPG")
+```
+
+Option 2: Go to Mendeley to find the article you wish to cite. 
+
+Clicking on the "Go To Mendeley" option will bring up your reference library in Mendeley Desktop. 
+
+```{r Mendeley3, echo=FALSE, fig.cap="The \"Go To Mendeley\" button in Word"}
+knitr::include_graphics("./images/Mendeley-fig3.JPG")
+```
+
+This allows you to scroll through or search your reference library to select the reference you wish to cite.
+
+Once you have found the desired reference, click on the " Cite button in the menu at the top of the screen, to insert your citation into Word. 
+
+```{r Mendeley4, echo=FALSE, fig.cap="The Mendeley Desktop window opened from Word"}
+knitr::include_graphics("./images/Mendeley-fig4.JPG")
+```
+
+## How to insert a bibliography using Mendeley 
+
+Unlike Endnote, Mendeley Desktop does not automatically start building your bibliography at the end of the document when you start adding references. 
+
+To add the bibliography, simply click on the "Insert Bibliography" button in the References ribbon at the top of the screen. 
+```{r Mendeley6, echo=FALSE, fig.cap="Example document with bibliography added. The blue arrow indicates the \"Insert Bibliography\" button in the References ribbon"}
+knitr::include_graphics("./images/Mendeley-fig6.JPG")
+```
+
+## How to change the output style of your references
+
+As noted above, either the Harvard or Vancouver styles are acceptable referencing styles for you to use in your thesis.
+
+To change the referencing style in your document using Mendeley Desktop, choose another style in the "Style:" drop-down menu in the References ribbon at the top of the page. 
+
+The drop-down menu includes a number of common referencing styles. If the style you are looking for is not in this menu, select "More Styles" which will bring up a more complete list.
+
+(You also have the option to add styles to your Mendeley, if the referencing style you are looking for is not already downloaded - you can do this in the "Get more styles" tab.)
+
+```{r Mendeley9, echo=FALSE, fig.cap="Selecting a different citation style using Mendeley Desktop"}
+knitr::include_graphics("./images/Mendeley-fig9.JPG")
+```
+
+## How to correct some common errors
+
+### Formatting errors
+
+In some cases, you may need to edit a citation. In the worked examples using Endnote above, we needed to fix the formatting of the text (species names were not italicized).
+
+In this example, we have run into a formatting issue because Mendeley has formatted an author's name in two different ways (see Figure 3.5 - Meehan, B M and Meehan, Brian M). This is causing the citations and bibliography to be incorrectly formatted. 
+
+We can fix this by opening the citation in Mendeley Desktop and editing it there. In this case, we changed the "Brian M" citation to "B M" to be more consistent with the rest of the references in our bibliography. 
+
+```{r Mendeley7, echo=FALSE, fig.cap="Editing a citation in Mendeley"}
+knitr::include_graphics("./images/Mendeley-fig7.JPG")
+```
+
+Once we have edited this citation and are happy with how it is displayed, we can return to Word to see the edited bibliography. (You may need to click "Refresh" in the References ribbon, to update the citation in Word.)
+
+As shown in Figure 3.8, the bibliography is now correctly formatted according to Harvard style - there are two Meehan references, 2017a and 2017b. 
+
+```{r Mendeley8, echo=FALSE, fig.cap="The updated bibliography, with the Meehan citations now correctly formatted"}
+knitr::include_graphics("./images/Mendeley-fig8.JPG")
+```
+
+### Merging citations
+
+If two references are inserted into the same place in the text, Mendeley sometimes formats these as separate citations (in two sets of parentheses).
+
+To fix this formatting issue, select the two references that you wish to merge into a single set of parentheses, and click on the "Merge Citations" button in the References ribbon in Word. 
+
+```{r Mendeley5, echo=FALSE, fig.cap="The \"Merge Citations\" button in the References ribbon, indicated by a blue arrow."}
+knitr::include_graphics("./images/Mendeley-fig5.JPG")
+```
+
+### Deleting citations
+
+You may occasionally insert the wrong citation by accident, or find that you have changed your text and therefore need to remove a citation. It is quite straightforward to delete a citation.
+
+For a single citation set alone in the text, you can remove the citation by simply deleting the text in Word. 
+
+Where you have groups of citations enclosed within a single set of brackets, it is easiest to use the "Edit Citation" button found in the References ribbon in Word. Click on "Edit Citation" and delete the citation that you wish to remove.
+
+
