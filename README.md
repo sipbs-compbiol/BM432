@@ -67,7 +67,7 @@ Notebook HTML pages for the current presentation are linked below, for convenien
 ### Workshop 4: "Data Presentation" (Wednesday 12th October 2022, 9-11am)
 
 - [01-An Introduction to Data Visualisation](notebooks/04-01-visualisation.html)
-  - [01a-Better Tools Than Barcharts (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/04-04a-barchart/)
+  - [01a-Better Tools Than Barcharts (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-04a-barchart/)
 - [02-Preparing Your Figures For An Audience](notebooks/04-02-figure_preparation.html)
 
 --------------
