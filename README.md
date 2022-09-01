@@ -61,8 +61,16 @@ Notebook HTML pages for the current presentation are linked below, for convenien
 - [05-Reference Management](notebooks/03-05-reference_management.html)
 - [06-How to Use Reference Management Software](notebooks/03-06-using_a_reference_manager.html)
 
+#### Slides
+
 - [Workshop Slides](assets/powerpoints/Project_Management_workshop_MFandLP.pptx)
 
+#### Example Lab Notebooks
+
+- [File 1](assets/pdfs/lab_notebooks/example_lab_notebook_file_1.pdf)
+- [File 2](assets/pdfs/lab_notebooks/example_lab_notebook_file_2.pdf)
+- [File 3](assets/pdfs/lab_notebooks/example_lab_notebook_file_3.pdf)
+- [File 4](assets/pdfs/lab_notebooks/example_lab_notebook_file_4.pdf)
 
 ### Workshop 4: "Data Presentation" (Wednesday 12th October 2022, 9-11am)
 
@@ -96,15 +104,6 @@ Notebook pages from previous years' presentations of this material are linked be
 
 - [01-The Anatomy of a Scientific Poster](notebooks/posters.html)
 - [02-Preparing a Scientific Poster](notebooks/poster-preparation.html)
-
---------------
-
-## Example Lab Notebooks
-
-- [File 1](assets/pdfs/lab_notebooks/example_lab_notebook_file_1.pdf)
-- [File 2](assets/pdfs/lab_notebooks/example_lab_notebook_file_2.pdf)
-- [File 3](assets/pdfs/lab_notebooks/example_lab_notebook_file_3.pdf)
-- [File 4](assets/pdfs/lab_notebooks/example_lab_notebook_file_4.pdf)
 
 ---------------
 

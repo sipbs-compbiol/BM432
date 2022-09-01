@@ -35,3 +35,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Powerpoint slides
 
 - [Workshop Slides](assets/powerpoints/Project_Management_workshop_MFandLP.pptx)
+
+## Example Lab Notebooks
+
+- [File 1](assets/pdfs/lab_notebooks/example_lab_notebook_file_1.pdf)
+- [File 2](assets/pdfs/lab_notebooks/example_lab_notebook_file_2.pdf)
+- [File 3](assets/pdfs/lab_notebooks/example_lab_notebook_file_3.pdf)
+- [File 4](assets/pdfs/lab_notebooks/example_lab_notebook_file_4.pdf)
