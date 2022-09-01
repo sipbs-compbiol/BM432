@@ -61,6 +61,9 @@ Notebook HTML pages for the current presentation are linked below, for convenien
 - [05-Reference Management](notebooks/03-05-reference_management.html)
 - [06-How to Use Reference Management Software](notebooks/03-06-using_a_reference_manager.html)
 
+- [Workshop Slides](assets/powerpoints/Project_Management_workshop_MFandLP.pptx)
+
+
 ### Workshop 4: "Data Presentation" (Wednesday 12th October 2022, 9-11am)
 
 - [01-An Introduction to Data Visualisation](notebooks/04-01-visualisation.html)
@@ -102,12 +105,6 @@ Notebook pages from previous years' presentations of this material are linked be
 - [File 2](assets/pdfs/lab_notebooks/example_lab_notebook_file_2.pdf)
 - [File 3](assets/pdfs/lab_notebooks/example_lab_notebook_file_3.pdf)
 - [File 4](assets/pdfs/lab_notebooks/example_lab_notebook_file_4.pdf)
-
----------------
-
-## PowerPoint Slides
-
-- [Workshop 1](assets/powerpoints/Project_Management_workshop_MFandLP.pptx)
 
 ---------------
 
