@@ -1,7 +1,7 @@
 ---
 title: "Better Tools Than Barcharts"
 author: "Leighton Pritchard, Morgan Feeney"
-date: "2021 Presentation"
+date: "2022 Presentation"
 output:
   bookdown::html_document2:
     css: css/rmd_style.css
