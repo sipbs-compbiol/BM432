@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Workshop 4: "Data Presentation" (Wednesday 12th October 2022, 9-11am)
 
-- [01-An Introduction to Data Visualisation](notebooks/04-01-visualisation.html)
+- [01-An Introduction to Data Visualisation](./04-01-visualisation.html)
   - [01a-Better Tools Than Barcharts (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-04a-barchart/)
-- [02-Preparing Your Figures For An Audience](notebooks/04-02-figure_preparation.html)
+- [02-Preparing Your Figures For An Audience](./04-02-figure_preparation.html)
 

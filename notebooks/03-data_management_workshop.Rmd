@@ -25,20 +25,20 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Workshop 3: "Project Management" (Wednesday 5th October 2022, 9-11am)
 
-- [01-Data Analysis in the Research Cycle](notebooks/03-01-data_analysis.html)
-- [02-Data and Project Management](notebooks/03-02-project_management.html)
-- [03-Reproducibility, Replicability, and FAIR Guidelines](notebooks/03-03-reproducibility.html)
-- [04-Keeping a Lab Notebook to Document Your Project](notebooks/03-04-keeping_a_lab_notebook.html)
-- [05-Reference Management](notebooks/03-05-reference_management.html)
-- [06-How to Use Reference Management Software](notebooks/03-06-using_a_reference_manager.html)
+- [01-Data Analysis in the Research Cycle](./03-01-data_analysis.html)
+- [02-Data and Project Management](./03-02-project_management.html)
+- [03-Reproducibility, Replicability, and FAIR Guidelines](./03-03-reproducibility.html)
+- [04-Keeping a Lab Notebook to Document Your Project](./03-04-keeping_a_lab_notebook.html)
+- [05-Reference Management](./03-05-reference_management.html)
+- [06-How to Use Reference Management Software](./03-06-using_a_reference_manager.html)
 
 ## Powerpoint slides
 
-- [Workshop Slides](assets/powerpoints/Project_Management_workshop_MFandLP.pptx)
+- [Workshop Slides](../assets/powerpoints/Project_Management_workshop_MFandLP.pptx)
 
 ## Example Lab Notebooks
 
-- [File 1](assets/pdfs/lab_notebooks/example_lab_notebook_file_1.pdf)
-- [File 2](assets/pdfs/lab_notebooks/example_lab_notebook_file_2.pdf)
-- [File 3](assets/pdfs/lab_notebooks/example_lab_notebook_file_3.pdf)
-- [File 4](assets/pdfs/lab_notebooks/example_lab_notebook_file_4.pdf)
+- [File 1](../assets/pdfs/lab_notebooks/example_lab_notebook_file_1.pdf)
+- [File 2](../assets/pdfs/lab_notebooks/example_lab_notebook_file_2.pdf)
+- [File 3](../assets/pdfs/lab_notebooks/example_lab_notebook_file_3.pdf)
+- [File 4](../assets/pdfs/lab_notebooks/example_lab_notebook_file_4.pdf)
