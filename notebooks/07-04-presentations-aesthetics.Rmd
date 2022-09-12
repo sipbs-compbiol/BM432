@@ -1,0 +1,141 @@
+---
+title: "Giving a Scientific Presentation: Aesthetics"
+author: "Morgan Feeney"
+date: "2022 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<div id="summary">
+- Follow good graphic design principles to maximise the impact of your slides
+  - Pay attention to your use of negative space, colour, and images
+  - Choose a large, readable font
+- Pay attention to accessibility: use colour-blind friendly colour palettes and dyslexia-friendly fonts
+</div>
+
+
+
+# Designing your slides
+
+Some general rules to keep in mind when designing your slides:
+
+- Less is more
+  - Everything on your slides must count - every single element has to contribute to the overall message you wish to convey. 
+  - Once you have drafted your talk, examine each element in it individually and critically assess whether or not it is *essential* to convey your message to the audience. If it is not essential, it must go.^[Non-essential elements include everything from data that aren't relevant to the points you are making, to cute cartoons that only distract your reader.]
+  - No one can sit through a talk and process a wall of dense text or the meaning behind fifty heat-maps. Identify the key points that you want to make, and the data that are important to prove those points, and make them shine by removing all extraneous or distracting items.
+- Narrative flow: make it easy for your audience visually to understand where they should look first, when they first look at your slides, and in what direction they should move through the sections.
+- As you design your slides, keep your audience in mind (how much do they likely know about the topic already?)
+- Clarity should be the bedrock of your presentation – avoid specialist jargon and acronyms, confusing figures, and muddled organisation. 
+
+
+## Graphic Design
+
+- Make sure there is plenty of white space - do not crowd everything together to fit more in. 
+- Consider where you can place elements on your slides (text boxes, figures) for maximum effect. Guide the reader's eye to focus naturally on the main point of the slide.
+- Align items to a grid as much as possible - avoid complicated, messy jumbles that can make your slides feel cluttered and busy.
+
+## Text
+
+- Keep text on the slides to a minimum
+  - Use bullet points instead of full sentences
+  - Use figures instead of text (e.g., a diagram showing the steps done in an experiment instead of a written description)
+  - Delete any unnecessary words
+- All text should be large enough to read from the back of the room 
+- Use a dyslexia-friendly font that is easy to read
+- Use plenty of white space: large blocks of text are difficult for a reader to parse. 
+
+<div id ="goofus-gallant">
+<div id="goofus">
+*Bad example of text on a slide*
+
+Introduction:
+
+Cell division is a complex process requiring a number of different proteins assembled into the divisome. In *Escherichia coli*, these proteins include FtsZ, ZipA, FtsA, FtsW, FtsN, FtsB, FtsL, FtsQ, FtsI, FtsW, and many other proteins. FtsZ localizes to midcell and this localization is essential for correct positioning of the divisome and eventual construction of the cell division septum. In *Streptomyces*, however, *ftsZ* is not an essential gene. The aim of this work, therefore, is to discover why *ftsZ* is not essential in *Streptomyces* as it is in other bacteria.
+
+</div>
+
+<div id="gallant">
+*Better example of text on a slide*
+
+Cell division in bacteria:
+
+- Divisome: protein complex required for cell division
+- FtsZ needed for correct divisome positioning and septum formation
+  - *ftsZ* essential in *E. coli* but not in *Streptomyces*
+  
+Aim of this paper:
+
+- Discover why *ftsZ* is not essential in *Streptomyces*
+</div>
+</div>
+
+
+## Images
+
+- Images should be high quality and of sufficient resolution to project well on a screen
+- Any images present on your slides should be essential for the presentation - don't include more data than you will discuss in your talk. Remove any distractions that will detract from the story you're telling.
+- [Read more about presenting data in a journal club presentation](./presentations-figures.html)
+
+
+## Colour 
+
+- Use a clear and consistent colour scheme throughout, ensuring that your colour choices are colour-blind accessible. 
+- Make sure that there is enough contrast between any background colour and the font colour, such that the font is easy to read.
+  - Dark fonts on a pale or white background are easiest to read.
+- Do not use a bewildering array of colours; use 3-5 colours at most, and use them consistently throughout the poster. 
+  - Use contrasting colours to draw your audience's attention to key points.
+- Avoid messy, unnecessarily detailed backgrounds - these only distract from the content of your slides.
+  - Especially avoid slide backgrounds that have background images that overlap with your slide content - this is very distracting and harder for your audience to read.
+- Overall, make sure that you use colour thoughtfully so that it aids in the clarity of your slides. 
+
+Many software include options to check whether your images are colourblind-accessible. There are also online tools that simulate colourblindness, which can be helpful in checking whether your figures are colourblind-accessible, for instance: 
+
+- [Coblis](https://www.color-blindness.com/coblis-color-blindness-simulator/)
+- [ColorOracle](https://colororacle.org/)
+
+
+
+### Colour-blind friendly palettes
+
+- When choosing colour palettes, it is important to keep in mind that your reader may perceive colour differently than you do. Red-green colourblindness is common, but it is important to note that it is not the only form of colourblindness. 
+
+- Unfortunately, red and green are commonly used together in certain types of biological images, perhaps especially in microscopy (e.g., immunofluorescence images) or microarray images. You may also find it intuitive to use a "stoplight" colour theme in some instances (e.g., red for deleted/downregulated and green for duplicated/upregulated genes) - but this is inaccessible to any individuals in the audience who are colourblind.
+
+- This problem can be easily addressed by using colourblind-friendly colour combinations; for example, by substituting magenta instead of red. 
+
+- Where possible, add textures, symbols or labels (in addition to colour), to improve the accessibility and readability of your figures.
+
+See [Picking a colour scale for scientific graphics](https://betterfigures.org/2015/06/23/picking-a-colour-scale-for-scientific-graphics/) for more advice.
+
+
+## Slide Themes/Backgrounds
+
+- Choose slide themes or backgrounds that do not conflict with or distract from the content that you are presenting.
+
+  - Embellishments on the slides (blocks of colour, bubbles, water droplets, lines, etc.) that overlap with your content are distracting; and they often use up room on the slide that can be better used to present content.
+
+- Choose a single theme and stick with it: it is distracting if you change themes midway through a presentation.
+
+
+## Negative space
+
+- Negative space is the space between elements in your slides (also known as whitespace). It helps to frame the elements, and when used effectively, can help draw the reader's attention to particular elements.^[[Points of View: Negative Space](https://www.nature.com/articles/nmeth0111-5)] 
+
+- Slides that are too crowded are harder for the audience to view and interpret correctly. It can feel claustrophobic, too. Give your figures a little space to breathe.
+
+## Font choices
+
+- Use [dyslexic friendly fonts](https://www.bdadyslexia.org.uk/advice/employers/creating-a-dyslexia-friendly-workplace/dyslexia-friendly-style-guide) such as Arial. 
+
+- Avoid using Comic Sans, and any fonts with unnecessary flourishes or embellishments.
+

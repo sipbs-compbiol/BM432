@@ -1,0 +1,248 @@
+---
+title: "Giving a Scientific Presentation: Data and Figures"
+author: "Morgan Feeney"
+date: "2022 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library("dplyr")
+library("ggplot2")
+
+#import bgal data
+
+bgal = read.table("./data/bgal-ex-csv.csv",
+                         header=TRUE,
+                         sep=",",
+                         stringsAsFactors=TRUE)
+
+bgal$Antibiotic = as.factor(bgal$Antibiotic)
+```
+
+<div id="summary">
+- Figures presented in your talk should be clear and informative, allowing the audience to easily and quickly understand the data that you present.
+- Design decisions, including layout and the use of white space, colour choices, font size and choice, all matter in terms of making your figure clear and easy to interpret.
+- Your figures should be designed with accessibility in mind: for example, you should use colourblind-friendly colour palettes, and dyslexia-friendly fonts. 
+</div>
+
+# Introduction
+
+You have spent weeks or months on your project and will be very familiar with the topic and with all of your figures. However, it is important, when you choose and design the figures to present in your talk, to take a few moments to consider how a naive audience (one who hasn't seen the figure before) will perceive it. 
+
+Unfortunately, many scientific figures are poorly designed. They are difficult to interpret, confuse the reader, and/or distract from the message that the authors mean to convey. While it is helpful to be aware of the norms in a field, and to look at examples of published figures, make sure that you are not simply replicating bad practices.
+
+In most cases, you will find that it is best not to simply re-use the figures from your thesis in your presentation. Figures that are prepared for publication (e.g., in a written thesis) are often more complex, perhaps including multiple panels or datasets. However, when giving a talk, you want to take into account that these figures are being projected in front of your audience for seconds/minutes - they will not have the time to sit and study them, the way that they would if reading your thesis. So, it is important that you make sure that your figures are easy for your audience to read and understand during your presentation, and that you have presented the data in the best and clearest way.
+
+```{r 1000words, fig.cap="A picture with a thousand words... [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1926)"}
+knitr::include_graphics(rep("./images/phd022417s.gif"))
+```
+
+# Figures, Graphs, Tables
+
+- You will want to include data in your talk to support your final conclusions/"take-home messages"; these data may be presented in different forms, including figures, graphs, or tables.
+
+<div id="note">
+In addition to using figures to present data from your thesis, consider using figures in the introduction, materials & methods, and conclusions. 
+
+- Model figures (e.g., blobograms that illustrate biological pathways) can be concise and clear ways to summarize the state of a field or to illustrate what your paper contributed to our understanding.
+</div>
+
+- Consider the best way to present the data (the easiest way for your audience to understand it). 
+  - Generally speaking, visual representations (images, graphs, etc.) are better than tables or text in a presentation.
+  
+- Any figures present in your slides should be clear and easy to read. Avoid “chart-junk” and remove any unnecessary information that does not contribute to your main message/narrative. 
+
+- Although there are some exceptions, in most cases you should restrict yourself to **one** figure per slide. Complex, multi-panel figures do not work well in a talk; to communicate your points clearly, remove any extraneous information (e.g., by cropping the figure to remove unnecessary panels), or splitting the figure into two separate slides.
+
+- Likewise, not all of the figures or tables from your thesis will fit into your talk: you must decide which are the most important/key points to include. (See [our guidelines on presentation content](./07-02-presentations-content.html) for more advice on identifying the take-home message and deciding which data to include.)
+  - Do not try to cram in too much information, as it is better to present 2-3 experiments clearly than 10 experiments in a rushed, superficial way.
+  - Once you have put together your talk and practiced it, check to make sure that you mentioned every figure/item on your slides. If you haven't mentioned it in your talk, it is probably not important enough to be on your slides!
+  
+
+## Simplifying or amending figures for presentations
+
+You may find it helpful to amend the figures that you present: for example, by using arrows, boxes, or circles to focus the audience's attention on key data, or by relabelling a figure to make it more readable. 
+
+You may also find it helpful to use animation to present a figure bit by bit, revealing more data only when you are ready to talk about it. This helps to keep the audience listening to you as you speak, instead of spending too much time reading a complex figure, when it is presented all at once.
+
+<div id ="goofus-gallant">
+<div id="goofus">
+*Example of a bad figure for a presentation*
+
+
+```{r bad-ex, echo=FALSE, fig.width=5, fig.height=5, fig.cap="Effect of adding antibiotics on beta-galactosidase activity in four reporter strains. ADA110 = AB734 (ibp::lacZ); ADA310 = AB734 (cspA::lacZ); ADA410 = AB734 (P3rpoH::lacZ); ADA510 = AB734 (sulA::lacZ). Antibiotics were added to the cultures for 20 minutes and then beta-galactosidase assays were performed. Amp = Ampicillin, Carb = Carbenicillin, Cm = Chloramphenicol, Nal = Nalidixic acid, Pmx = Polymyxin, Sm = Streptomycin. Controls were water (H2O) or ethanol (EtOH)."}  
+#plot all data
+
+ggplot(bgal,
+       aes(x=Strain, y=Miller.units, fill=Antibiotic)) +
+  geom_boxplot() +
+  labs(y="Beta-galactosidase activity (Miller Units)")
+```
+
+In Figure 2.1, we are looking at all the data from a 96-well plate beta-galactosidase assay. These data are not bad *per se*, but they are not ideal for a presentation as currently shown.
+
+- There is a lot of data and it is not clear what the audience should focus on.
+- The audience has to do a lot of work, looking between the figure legend with the genotypes and the full names of the antibiotics, and the figure itself, to understand what is being presented. 
+- The figure legend is quite wordy and takes a long time to read. You don't want your audience to be reading this instead of listening to your talk!
+</div>
+
+<div id="gallant">
+*Example of a better figure for a presentation*
+
+```{r better-ex, echo=FALSE, fig.width=5, fig.height=5, fig.cap="Nalidixic acid specifically induces expression of a sulA::lacZ reporter. Antibiotics were added to the cultures for 20 minutes and then beta-galactosidase assays were performed. Amp = Ampicillin, Carb = Carbenicillin, Cm = Chloramphenicol, Nal = Nalidixic acid, Pmx = Polymyxin, Sm = Streptomycin. Controls were water (H2O) or ethanol (EtOH)."}  
+
+#plot ADA510 data
+
+ADA510 <- bgal[73:96, ]
+
+ggplot(ADA510,
+       aes(y=Miller.units, fill=Antibiotic)) +
+  geom_boxplot() +
+theme(axis.text.x=element_blank(),  
+      axis.ticks.x=element_blank()  
+) +
+  labs(y="Beta-galactosidase activity (Miller Units)")
+
+```
+
+In Figure 2.2, we are looking at just a subset of the data from a 96-well plate beta-galactosidase assay. Here we have chosen to focus on just one of the *lacZ* reporter strains in order to make a key point that we want the audience to remember: that nalidixic acid specifically induces expression of this particular <i>sulA::lacZ</i> reporter. (Remember our discussion about identifying take-home messages!)
+
+- There is a lot less data and it is clearer what the audience should focus on (Nal)
+- The audience still has to do a lot of work, looking between the figure legend with the full names of the antibiotics, and the figure itself, to understand what is being presented. 
+
+The figure and legend could be cleaned up to make the presentation even better, but this is an improvement over Figure 2.1. It makes a specific, focussed point instead of trying to cram in all the data that the author has collected during his/her project.
+</div>
+</div>
+<br>
+<div id="warning">
+Do not mislead your audience! The figure should be a faithful representation of the data. You may find it helpful to simplify figures to present them in our journal club (and that is perfectly acceptable, so long as the data is still faithfully represented.) 
+
+Omitting data (such as "outliers"), skewing the axes on a graph, or leaving out key information, can lead your audience to draw incorrect conclusions. Unscrupulous use of colour (highlighting some data to make it more prominent, or making some data appear linked when in fact they are not) can also be very problematic. Always double check your final figure to make certain that it represents the data correctly.
+</div>
+
+## Example of amending a published figure for presentation
+
+In some cases, you may want to present figures that have been published elsewhere as part of your presentation (i.e., to show what has been previously done in the field). 
+
+This is perfectly acceptable, so long as you give appropriate credit to the original authors (a brief citation or DOI is usually acceptable, whereas a complete formal citation may take up too much space and add too much text to your slides.)
+
+```{r example, fig.cap="Figure example (from a paper) Bardwell JC, Lee JO, Jander G, Martin N, Belin D, Beckwith J. A pathway for disulfide bond formation in vivo. Proc Natl Acad Sci U S A. 1993 Feb 1;90(3):1038-42. doi: 10.1073/pnas.90.3.1038."}
+knitr::include_graphics(rep("./images/paper-fig.PNG"))
+```
+```{r example2, fig.cap="Figure example (modified for presentation)."}
+knitr::include_graphics(rep("./images/slide-fig.PNG"))
+```
+
+In this example, we have taken a multi-panel figure from a paper and chosen to highlight one point as a take-home message (that <i>dsb</i><sup>-</sup> strains are deficient in disulphide bond formation). Note that for other purposes, we might have chosen to focus on other points or take-home messages. 
+
+To focus on the point, we have cropped away the extraneous figure panels, leaving only the data needed to make the point. 
+
+We have relabeled the figure, so that the reader does not need to look back and forth between a legend/key and the figure itself. 
+
+We have added a blobogram next to the y-axis, illustrating what the assay is measuring (OmpA oxidation.)
+
+We have added a title, giving the main result of the experiment and focusing the audience's attention.
+
+To finish modifying this figure for presentation, we might need to add some additional content - perhaps a flow diagram illustrating the method used to measure OmpA oxidation, or a few brief bullet points describing the experiment and the results. 
+
+<div id="note">
+There are multiple ways to modify a paper figure for presentation - the one presented above is just one option! Preparing your presentation will give you an opportunity to develop your own style and preferences.
+</div>
+
+## Methods figures
+
+- A methods figure (a flow chart illustrating the steps done in an experiment) is a concise and clear way of presenting how an experiment was done. 
+
+- When describing a method used in your paper, you should give enough information for your audience to understand how the experiment(s) were done.
+
+  - You should give key parameters for the methods done, but do not need to be as detailed as a paper/thesis - your audience needs to understand what was done; they don't need to be able to reproduce the experiment.
+
+<center>
+```{r methods-fig,  out.width="60%", out.height="60%", echo=FALSE, fig.cap="An example of a methods figure (in this case, for Southern blotting [from NIH](https://www.genome.gov/genetics-glossary/Southern-Blot))"}
+knitr::include_graphics("images/southern_blot.jpg")
+```
+</center>
+
+## Remove distractions
+
+You want your figures to tell a clear, easy to read message - this means that you should remove anything that might distract your audience from that message.  
+
+- *Do* include the key data and all of the controls necessary to understand and interpret those data.
+- *Don't* include any data that you do not discuss in the presentation. Crop the image or cover up unnecessary regions with boxes that match the background colour. 
+
+
+## Figure aesthetics
+
+It is also essential that you consider *accessibility*: is your figure accessible to a broad audience? Or does it rely on niche jargon specific to a particular field, colour palettes that are difficult/impossible for some readers to see, and/or fonts that are difficult for some readers to read?
+
+Your audience will form an impression of your figure within the first 30 seconds (or less) of looking at it. First impressions matter - and you want that first impression to be pleasant, not an exercise in confusion or frustration.
+
+The example below shows what a lot of work reading a figure can be, if your audience has to move their gaze back and forth between the key and the graph in order to figure out what the different colours represent and what the data are. The same principle applies to your figures - you want to make it easy for your audience to see and interpret the data. For example, it can be very helpful to relabel a gel figure so that the name of each sample is presented above the well in which that sample was run. 
+
+```{r eyeroll, fig.cap="Tracing eye movements between a figure and the associated legend, From: [Junk Charts](https://junkcharts.typepad.com/junk_charts/2021/04/come-si-dice-donut-in-italiano.htmll)"}
+knitr::include_graphics(rep("./images/tracing-eye-movement.png"))
+```
+
+### Colors
+
+It is very tempting to use colour in scientific figures and in presentations, and the use of colour can, indeed, help to visualize data and communicate with your audience. But there are a number of important factors to consider when choosing to use colour in a figure/on a slide.
+
+Consider how the reader will perceive the colours that you are using: 
+
+- Do the colours help to illuminate key aspects of your data? Or do they distract from and/or distort the data? 
+- Will all members of the audience be able to clearly perceive differences between the colours you are using? 
+- Do the colour choices correspond with our natural and/or cultural associations with those colours? (e.g., in general darker colours = more; blue = water; etc.)
+
+```{r colour1, fig.cap="Choosing colours for a scientific figure, From: [Errant Science](https://blogs.egu.eu/divisions/gd/2017/08/23/the-rainbow-colour-map/)"}
+knitr::include_graphics(rep("./images/colour-choices.jpg"))
+```
+
+[Read more about colour choices in the section on presentation aesthetics](./presentations-aesthetics.html)
+
+# Text 
+
+Any text present in a figure should be clear and easy to read. 
+
+Some labels are essential for understanding a figure (e.g. axis labels, units, scale bars in micrographs). Too much text can be overwhelming, however, and make it take much longer for the reader to understand the figure. 
+
+## Labels
+
+Using a key or putting the data labels in the figure legend means that the reader has to do quite a lot of work to figure out what the data are (see Figure 2.1 and the example below).
+
+In this figure (3.1) showing a DNase I footprinting experiment, the labels on the right of the figure help the reader understand the relative positions of different nucleotides, and figure out where Region A and Region B are - these labels are very helpful.
+
+However, the lanes are labelled only with numbers - the reader has to read and understand the legend, and then look back and forth between the legend and t he figure, to determine which sample is in each of the lanes. Where possible, it is better to label the data with brief, descriptive names.
+
+```{r DNAseI, out.width="30%", out.height="30%", fig.cap="Figure example (DNase I footprint), with the figure legend: FIG. 4. DNase I footprint of NACWT and NACL111K bound to the nac promoter region. Radioactively labeled pCB1426 DNA was digested with DNase I in the presence of NACWT (lanes 2 to 6 [0, 0.9, 1.4, 2.2, and 4.4 pmol, respectively]) or NACL111K (lanes 7 to 11 [4.7, 9.5, 12.6, 12.6, and 25.2 pmol, respectively]). Lane 1 is the radiolabeled DNA without any DNase I treatment. Lane G is the G ladder. The solid line on the right of the footprint is the region protected by both NACWT and NACL111K. Arrowheads indicate the regions of DNase I hypersensitivity by NACWT, NACL111K, or both. From: [Rosario and Bender, 2020](https://doi.org/10.1128/JB.187.24.8291-8299.2005)"}
+knitr::include_graphics(rep("./images/DNaseI-footprint.jpeg"))
+```
+
+<div id="warning">
+While you may sometimes simplify a figure for the sake of presenting it well, it is essential that your figures still conform to scientific norms of data presentation. <br>
+Graph axes should be labelled, including correct scientific units<br>
+Micrographs should include scale bars<br>
+Text should be correctly formatted, including:<br>
+  - Gene and protein names correctly formatted<br>
+  - Binomial species names italicized<br>
+  - Correct formatting of any symbols, sub- or super- scripts, etc.<br>
+</div>
+
+
+
+# Further reading on data presentation
+
+- [Junk Charts](https://junkcharts.typepad.com/)
+
+- [Nature Methods: Points of View columns](http://blogs.nature.com/methagora/2013/07/data-visualization-points-of-view.html)
+
+- Rougier NP, Droettboom M, Bourne PE (2014) Ten Simple Rules for Better Figures. PLOS Computational Biology 10(9): e1003833. https://doi.org/10.1371/journal.pcbi.1003833
+
+- Jambor H, Antonietti A, Alicea B, Audisio TL, Auer S, et al. (2021) Creating clear and informative image-based figures for scientific publications. PLOS Biology 19(3): e3001161. https://doi.org/10.1371/journal.pbio.3001161

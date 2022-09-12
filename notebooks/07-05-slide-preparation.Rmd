@@ -1,0 +1,93 @@
+---
+title: "Giving a Scientific Presentation: Slide Preparation"
+author: "Morgan Feeney"
+date: "2022 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen    
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+<div id="summary">
+- You may find it helpful to plan an outline of your talk first. 
+- Make a first draft, adding figures and any other necessary content, and then edit it. 
+- Use animation effectively, especially on busy slides.
+</div>
+
+
+# How to Prepare your Slides
+
+Refer back to our workshop on [project management](./03-02-project_management.html) for some tips on how to work with files. Some hints here: make sure you save the file with your presentation slides frequently; make sure that you have multiple back-ups in case of catastrophe; use a sensible naming system and/or version control to keep track of edits. 
+
+Regardless of any file names that you may have given draft copies of your presentation, when you submit your final presentation on MyPlace, use a clear and informative file name (something like: YourName_BM432.ppt).
+
+```{r save, fig.cap="Save your file. Image credit: @JortsTheCat."}
+knitr::include_graphics(rep("./images/save-your-file-jorts.jpg"))
+```
+
+## First Draft
+
+Once you have decided what information needs to be included in your talk, you may find it helpful to draw a rough sketch or outline (on paper or electronically) identifying what content you will include in each slide.
+
+You can then start assembling the slide deck, adding images and text using the software of your choice. 
+
+## Software
+
+PowerPoint is perhaps the most commonly used software, but you may use any software you like to prepare your talk.
+
+
+## Adding Figures and Other Content
+
+- Make sure that any figures you add are large enough for the audience to see. Keep in mind that some people will be sitting at the back of the room!
+- Try to keep your content central to the slide (folks sitting at the back may find it hard to see the bottom of the slide; the projector may sometimes cut off the edges.)
+- If you resize your figures, make sure that you are not distorting them (i.e., resize them proportionally.)
+
+### Resolution
+
+- You want to keep in mind the size your figures will be displayed at, and how they will appear at that size/resolution. 
+- Pay attention to the resolution of your figures. In most cases you will be fine if you save the desired images as .png or .jpeg files and insert them into your presentation. Copy/pasting or using screenshots can sometimes lead to low-resolution or distorted images.
+
+### Animation
+
+- Use simple, effective animations to add/remove content from your slides.
+
+  - If you have a slide with a lot of text, consider bringing in the bullet points one at a time - so that your audience isn't confronted with a wall of text immediately when you show that slide. You don't want the audience to be reading the slide instead of listening to you.
+  
+  - If you have complex figures or data, you may want to present them piece by piece (i.e., explain the experiment, show the controls, then show the data.) One easy way of doing this is to place some white boxes over the figure hiding the areas that you aren't ready to discuss yet - then make the white boxes disappear to reveal the next section(s) using animations.
+  
+- Sticking to "Appear" and "Disappear" is probably best - fancy animations just distract attention from your slides and the points that you are making.
+
+- Use the "animation pane" in Powerpoint to make sure that your animations are all occurring in the desired order. Test out your slides as well in "Slideshow" mode.
+
+## Editing your slides
+
+- Once you have prepared a first draft of your slides, you will need to edit it. 
+
+- Practice presenting your slides in front of friends and/or colleagues, and note what works well (and what doesn't). Improve your slides based on their feedback. 
+
+- Things to keep in mind while you are editing your slides: 
+
+  - Remove any text or figures that do not help you present your paper 
+  
+  - Add any information that was missing (e.g., to answer questions that your audience asked during your practice presentations)
+  
+  - Consider the overall aesthetics of your poster (e.g., is the colour scheme working well, is there enough whitespace, does the reader naturally move through the sections in the intended order?)
+  
+  - Try to consider your slides from your audience's point of view (pretend that you are seeing them for the first time). What elements help you understand the main point? What is distracting/unnecessary? What is missing?
+
+# Some PowerPoint Tips
+
+- It can be helpful to group objects so that you can move them/manipulate them all at once.
+
+- Overly fancy slide transitions are distracting to your audience - keep it simple.
+
+- Edit the "slide master" template to make overall changes to font or style that apply to every slide in your presentation. 
+
+- Powerpoint offers many fancy "themes" that can add visual appeal to a presentation - however, they can also be very distracting. IF you are using a theme, choose it with care. [Refer to our section on aesthetics for some design tips.](./presentations-aesthetics.html) 

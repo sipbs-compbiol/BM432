@@ -1,0 +1,147 @@
+---
+title: "Giving a Scientific Presentation"
+author: "Morgan Feeney"
+date: "2022 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<div id="summary">
+- A summary of some of the issues that you should consider when planning your presentation: content, methods, data presentation, aesthetics, delivery
+- Some of the common mistakes we see in presentations, and how to avoid them
+- Suggested additional reading on how to give good presentations
+</div>
+
+# Introduction
+
+Being able to communicate the results of a scientific study to a particular audience is a key skill for a scientist. After all, if no one knows that you've performed this piece of research, they can't build on it to make further discoveries or use your results to deepen their understanding of the field. 
+
+Scientific presentations happen in many contexts (e.g., large international conferences or small group meetings), but here we will focus on the presentations that you will give for your honours thesis as part of BM432. 
+
+In addition to reading this guide, and attending the associated BM432 workshop on presentations, you should look at the guidance and assessment criteria for your presentation on MyPlace. Make sure that you understand exactly how the presentation will be marked, and what criteria must be met to earn good marks for your presentation.
+
+# Consider your audience
+
+One of the first things to consider when you begin to prepare a scientific presentation is the intended audience for that presentation. You would give a very different talk if you were doing outreach in schools, speaking to journalists, or presenting to other scientists (and even different talks when speaking to scientists with a general background knowledge of the area versus specialists who are well-versed in your particular field). 
+
+For your BM432 presentation, you will want to keep in mind that your audience hasn't spent the last several months studying your topic - the way that you have - indeed, some of your peers who are present will likely have done their projects in a completely different field. So you should pitch your presentation to a general scientific audience, and be sure to give sufficient information in the introduction so that your audience will understand your work and why it is important.
+
+# The Anatomy of a Presentation
+
+Every presentation is different, just as every research project is different - but every presentation should contain the following elements in some form: 
+- An explanation of the problem that you were trying to solve, and why it is important (what was known before you began this study, what gap in the scientific knowledge you were trying to fill, what you were trying to achieve)
+- A description of the work that was done (this should include materials & methods/experimental design, results and conclusions)
+- An explanation of the significance of the work (what other work will be made possible because of this paper? how does it change our understanding of the problem/field/question?)
+- Critical analysis of the study (including, but not limited to: limitations of the experimental design, controls, alternative experimental approaches...)
+
+Boiled down to the essentials, your presentation should inform your audience of why your work is important; describe the aims/hypothesis of your work, what experiments were done and how, and the overall conclusions/"take-home messages"; and help your audience understand the context and significance of your work.  
+
+## Content
+
+- You should present the key experiment(s)^[You do not need to present every single experiment that you performed during the course of your project; in fact, you probably should not try to do so. Decide which experiments are **essential** for conveying the take-home message.]. 
+- For every experiment, you should present (<b>in this order</b>):
+  1. what it is that you were trying to do (the <b>aim</b> of the experiment)
+  2. how you did it (the <b>method</b>)
+  3. what you found (the <b>result(s)</b> of the experiment) 
+  4. and what it means (the <b>significance</b> of these results to the field)
+
+[Read more about the content of a presentation](./07-02-presentations-content.html)
+
+### Methods
+
+- You should give enough information for your audience to understand how you did the experiments
+  - Give any key parameters for the methods done, but you do not need to be as detailed as you are in your written thesis: your audience should understand how the experiments were done, they do not need to reproduce them.
+- A good presentation often uses a figure/flow diagram to illustrate the methods, explaining key steps in the process (see the [section on figures](./07-03-presentations-figures.html) for an example)
+
+
+### Data (Figures and Tables, mostly)
+
+- Any data you present in your talk should help convince the audience of your take-home message. (If it doesn't help convince the audience, it's unnecessary and should be removed.)
+- You will very often want to reproduce a relevant figure from your thesis (and this is absolutely fine!), but in some cases it may be helpful to modify the figure for your presentation (e.g., make it simpler or relabel the figure to make it easier for your audience to read).
+- Multipanel or complex figures often do not work well in presentations. It can be helpful to bring complex figures into your presentation one step at a time using animation - to ensure that your audience is listening to you, instead of reading a complex graph/figure.
+
+[Read more about presenting data in your presentation](./07-03-presentations-figures.html)
+
+## Aesthetics
+
+- Your slides should be visually appealing to the audience and should be easy for them to read and interpret.
+- Be wary of using any design elements that distract or detract from the main take-home message of the presentation.
+- Be mindful in your use of colour, font, and slide background - make sure that your design choices enhance your presentation.
+
+[Read more about the aesthetics of a journal club presentation](./07-04-presentations-aesthetics.html)
+
+# Preparing slides and delivering a talk
+
+- Probably the most commonly used software for preparing slides is PowerPoint, but alternatives exist (Keynote, Canva, Prezi) - you may use any software you like to prepare your talk.^[If you are using one of the less common software, please make sure to communicate with the academics running your presentation session in advance of your session about the logistics of your presentation.]
+- Your slides should support your presentation. They serve two purposes: 1) to prompt you and help you remember what you want to say, and 2) to help your audience understand your talk. They are NOT there for you to read your presentation at the audience.
+
+[Read more about how to make slides for a presentation](./07-05-slide-preparation.html)
+
+[Read more about how to deliver a presentation](./07-06-presentation-delivery.html)
+  
+
+# Common mistakes we often see in students' presentations (and how to avoid them)
+
+*Too much content covered*
+
+- Do not try to explain every single experiment you have done over the course of the project - instead, focus on conveying the [take-home message](./07-02-presentations-content.html) of your thesis.
+
+
+*Separate methods sections*
+
+- Sometimes presenters try to cover all of the methods from their thesis in one slide - it is better to weave the methods into a story as you give your talk, explaining each method just before the experiment that used it. Otherwise your audience will not remember the method by the time you describe that experiment.
+
+
+*Too much text on slides/slides too busy*
+
+- Be ruthless in eliminating content from slides: if you don't mention something when practicing your presentation, remove it from the slides! Also consider using animations to bring items/text onto the slides gradually - that way your audience will be listening to you, instead of reading a whole block of text all presented at once.
+
+
+*Uninformative slide titles*
+
+- Think carefully about what the take-home message of each slide is. The slide title should not be what the purpose of the slide is (i.e., "Introduction") - it should be what you want your audience to remember from that slide (i.e., "Initiation of DNA Replication").
+
+
+*Critical analysis missing/lacking*
+
+- Critical analysis should be a rigorous analysis of the experiments described in the presentation (not simply saying that you should repeat the experiment until the results are statistically significant - a dangerous and unsound practice!) Ask questions like: were the correct controls performed? are there any alternative interpretations of the data? what other methods could you have used to address your question?
+
+
+*Historical background/significance lacking*
+
+- Make sure you carefully introduce the problem that you are trying to solve, and describe what has previously been done in the field to address this question. It can be helpful to add "model figures" showing the state of knowledge of a particular pathway/system. Show how your work fills a gap in our scientific knowledge of the problem.
+
+
+*No clear aim/hypothesis*
+
+- Make sure you clearly state what you were trying to achieve, and state your aims/hypothesis in your own words. It can be helpful to explicitly highlight these (e.g., "Aim: to discover novel FtsZ-interacting proteins").
+
+*Timing issues (under or over time)*
+
+- Practice, practice, practice! You will often find that your final presentation is a little faster than your practices (you will likely speak a bit faster than usual due to nerves: this is common, and it decreases with practice.) Practice in front of a mirror or your pet, your friends/family/colleagues; use a timer and practice until you can give your presentation in the allocated time. Have a very good idea of what you want to say for each slide so that you don't "ummm" and "ah" when you present.
+
+
+
+
+# FAQ
+- There are no FAQ yet as this is a brand new page!
+- Please e-mail Dr. Feeney with any questions or with any suggestions for how we can improve these pages.
+
+
+
+# Additional reading
+
+- Naegle KM (2021) Ten simple rules for effective presentation slides. PLOS Computational Biology 17(12): e1009554. https://doi.org/10.1371/journal.pcbi.1009554
+- Carey MA, Steiner KL, Petri WA Jr (2020) Ten simple rules for reading a scientific paper. PLOS Computational Biology 16(7): e1008032. https://doi.org/10.1371/journal.pcbi.1008032
+- [Data visualization: A view of every Points of View column](https://protocolsmethods.springernature.com/posts/43650-data-visualization-a-view-of-every-points-of-view-column) - great tips on data visualization (organised by topic)
+- Karen J. Murchie and Dylan Diomede. Fundamentals of graphic design—essential tools for effective visual science communication. FACETS. 5(1): 409-422. https://doi.org/10.1139/facets-2018-0049

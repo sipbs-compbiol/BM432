@@ -1,0 +1,81 @@
+---
+title: "Giving a Scientific Presentation: Delivery"
+author: "Morgan Feeney"
+date: "2022 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen    
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+<div id="summary">
+- Practice your presentation in advance so that you have a very good idea of what you will say for each slide.
+- Ask friends and colleagues to help you practice and prepare for questions. Implement their feedback to improve your presentation.
+- Be prepared on the day you are scheduled to present, including having a backup copy of your slides with you.
+</div>
+
+# Preparing for your presentation
+
+- Rehearse, rehearse, rehearse! You do not need to memorise your presentation, but you should have a very good idea of what you are going to say on each slide
+
+- You may find it helpful to write out a "script" for each slide, or use the "notes" space in PowerPoint to plan out what you will say
+
+- Practice presenting in front of friends/family/colleagues, and note what works well (and what doesn't). Improve your presentation based on their feedback. 
+
+  - Ask your practice audience to help you anticipate and prepare for questions.
+  
+- Practice with using a laser pointer or the mouse to indicate the part of your slide that you're talking about. (If you are worried that your hands will shake with nerves, you can try circling the item on your slide that you're talking about - instead of pointing at it - any tremors will be less obvious if the laser is moving.)
+
+- Practice modulating your voice to add emphasis to key points. Avoid delivering the presentation in a monotone throughout.
+
+- Make sure that your presentation is within the time limit.
+
+- You may find it helpful to record one of your practice presentations - review the recording to identify any areas for improvement.
+
+# Preparing for Questions 
+
+- One way of preparing for questions is through your practice presentations - ask the colleagues that you practice with to ask questions.
+
+- Common types of questions asked after these presentations might include (but are not limited to):
+
+  - Clarifying questions about the content of your presentation
+  
+  - Questions about the methods used in your experiments
+  
+  - Extrapolating questions (how might your findings apply to other systems/organisms/scenarios?) 
+  
+  - Questions testing your understanding of the underlying biology discussed in your presentation
+
+# On the day of your presentation
+
+- Have a backup copy of your slides (saved on a thumb drive, e-mailed to you, or on your laptop).
+
+- Bring a bottle of water.
+
+- Remember to pause and take a deep breath between sentences, and after every slide. Take a sip of water if you need to.
+
+- Make sure you are looking at the audience - don't turn your back to them and face your slides.
+
+- Try to avoid saying "umm" or similar filler words.
+
+- Don't chew gum while presenting.
+
+- Try not to bring your notes or script with you (it will only tempt you to read them instead of speaking to your audience!)
+
+- Try to project your voice so that your audience at the back of the room can hear you.
+  
+# Answering Questions
+
+- A key skill in answering questions is making sure that you have actually answered the question that was asked. Sometimes presenters hear one or two key words/phrases and start constructing an answer based on those, instead of actually answering the question. Listen carefully to the question. If you are not sure you understand it - ask the questioner to repeat it.
+
+- It is okay to say that you don't know, if you don't know the answer to a question - don't make something up!
+
+- If the question is about a particular figure or slide, go back through your slide deck to the relevant slide so that your audience can see what you're talking about.
+

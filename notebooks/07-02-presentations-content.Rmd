@@ -1,0 +1,152 @@
+---
+title: "Giving a Scientific Presentation: Content"
+author: "Morgan Feeney"
+date: "2022 Presentation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      toc_collapsed: false
+    number_sections: true
+    css: "css/rmd_style.css"
+    theme: lumen    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<div id="summary">
+- Your presentation helps to communicate the results of your study to an audience 
+  - Be sure to identify the take-home message of your work, and convey this clearly in your presentation
+  - A good presentation tells a story
+- Design your slides to support your presentation 
+  - Slides should help the presenter communicate (serve as a visual aid/memory prompt)
+  - For each experiment, you should explain the aim, method, result(s), and significance
+</div>
+
+
+
+# Identify the "Take-Home Message"
+
+Summarize in 1-3 sentences what it is that you want your audience to remember after hearing your talk.
+- Why your work is important, how it addressed a gap in the literature (discovered something that wasn't known before), what impact it will have
+- What it is specifically was found in your study, the main and most important conclusion you can draw from the results
+
+Everything that you choose to include in your talk should support this message. 
+
+<div id="goofus-gallant">
+<div id="goofus">
+*Bad examples of "take-home messages"*
+  
+- Antibiotics are important
+  - Too vague (which antibiotics? important for what?); does not give any precise idea of what this work added to the field
+- RpoS is conserved in bacteria
+  - Does not explain what RpoS is or why it is important; does not give any precise idea of what this work added to the field 
+- The OxyR regulon includes *hemH, ahpC, dsbG, fur, dps, grxA, hcp,* the *suf* and *znu* genes, *trxC*, and *gor*. *gor* encodes glutathione reductase and is an essential gene in *Escherichia coli* strains lacking *trxB*. We found that some bacteria do not have the *gor* gene.
+  - contains a lot of information that is not germane to the main point (long list of genes - not clear what any of them do or why they are important); gives some idea of what your work adds to the field, but a bit vague (which bacteria lack *gor*?)
+</div>
+
+<div id="gallant">
+*Better examples of "take-home messages"*
+
+- RpoS is an alternative sigma factor that controls the expression of stress response genes in *Escherichia coli*. We looked at the conservation of the *rpoS* gene and found that it is present in $\gamma$-, $\beta$-, and $\delta$- proteobacteria.
+  - Gives some context (more explanation of what sigma factors are would be helpful, depending on the intended audience), explains precisely what was discovered (the conservation of RpoS)
+- All bacteria encounter oxidative stress, particularly pathogens targeted by immune cells. Glutathione is a major part of their defense against oxidative stress. We found that some pathogens, such as *Mycobacterium tuberculosis*, do not have the genes for glutathione synthesis or reduction - instead, they use an alternative thiol, mycothiol.
+  - Gives context and explains why the work is important (pathogens); explains precisely what the work adds to the field
+</div>
+</div>
+<br>
+<br>
+
+
+
+# Design the narrative structure of your talk
+
+Most good scientific talks are structured like a story (Figure 1). In designing yours, decide what information the audience needs to know to understand the work (your introduction), which experiments  are essential for understanding the take-home message (middle), and what the conclusions from your thesis are, as well as what impact the work will have (the end of your talk).
+
+```{r structure, fig.cap="Narrative structure of a scientific talk. A good scientific talk is structured like a story, with a beginning, middle, and end. Image credit: [Matt Carter](https://www.aspet.org/docs/default-source/uploadedfiles/Committees/mcd-accordion/eb2017-colloquium-effective-science-communication)."}
+knitr::include_graphics(rep("./images/narrative-structure.png"))
+```
+
+# Design the content of your slides
+
+## Slides are a tool for presenting content
+
+- Your slides are there to help you (to support you as you give your presentation) and to help you communicate to your audience. 
+- Your slides are NOT a copy of the paper in PowerPoint form. You want to avoid copy/pasting figure legends, and using large blocks of text - your audience should be **listening** to you, **not** reading your slides.
+- Therefore, text should be kept at a minimum and figures should be kept simple and clear.
+- You do not want to read your slides word-for-word to your audience: instead, the text on the slides should prompt you (remind you of the points that you want to make).
+
+[Read more about how to make slides for a journal club presentation](./07-05-slide-preparation.html)
+
+## Identify the content needed on each slide
+
+- Each slide should be as concise as possible (use as few words as possible; you want the audience to be listening to you, not reading your slides!). 
+- Use bullet points instead of full sentences, but make sure that they convey your ideas clearly. 
+- All of the text must conform to the norms of academic scientific communication – it must be precise, concise, and specific. (For example: “the LD50 of drug X is 50 $\mu$g/mL” is a clearer and better statement than “some toxicity was observed.”)
+
+## Slide titles
+
+- Titles should be short (ideally <10 words), and in a very large font at the top of the slide
+- Should explain clearly what the point of the slide is
+  - Short, declarative statements or questions generally work well as slides titles
+  - These titles should be clear, concise, and **informative**: for example, “Cell division proteins in Archaea” is a better subheading than “Introduction."
+
+
+<div id="goofus-gallant">
+<div id="goofus">
+*Bad examples of slide titles*
+  
+- **"The role of His and Asp phosphorylation in QS and TCS in *Vibrio* biofilm formation"**: lots of acronyms that the audience may not understand; too long and too wordy; no context
+- **"cAMP and CCR in bacteria"**: acronyms that the audience may not understand; too vague
+- **"Results"** or **"Introduction"**; vague and unspecific; doesn't focus the audience's attention in the way that a more specific title will do
+</div>
+
+<div id="gallant">
+*Better examples of slide titles*
+
+- **"Do all bacteria have cell walls?"**: short and clear; asks a question to engage the audience's interest
+- **"Identification of two genes essential for penicillin tolerance in *Staphylococcus aureus*"**: short and to the point; makes the topic and main finding of the study clear
+- **"Magnesium is an essential cofactor for the DNA polymerase from *Bacillus strathclydensis*"**: short declarative statement; makes the topic and main finding clear
+</div>
+</div>
+
+## Slide Content
+
+### Title slide
+
+- Should contain the title of the presentation, ideally in a very large readable font. 
+  - The title may be a short description of what the work is about (e.g., "Discovery of phosphorylated residues in the key <i>Staphylococcus aureus</i> transcription factor CcpA"), a question that will be answered in the course of the presentation (e.g., "Is phosphorylation of CcpA essential for its function?"), or may be a declarative statement of what the research has found ("CcpA is phosphorylated on Thr-18 and Thr-33").
+  - The title for your presentation does not need to be the same as the title for your thesis (it is okay to use shorter, or sometimes jokey or punny titles for presentations).
+  
+- Authors are usually listed directly below the title
+  - Everyone who has contributed to the work should be listed
+  - The person who is giving the presentation (you) should be listed first, and the supervisor last
+  - Institutional affiliations should also be listed (e.g., University of Strathclyde)
+
+- You may also wish to include the date of the presentation on the title slide
+
+- The title slide may also contain one or more images relevant to the work (e.g., a picture of the molecule or protein that you were working on, or a picture of the model organism you used)
+  - Make sure that this image doesn't obscure any of the written information on the slide (title, authors, etc.)
+
+### Slides that present introduction or conclusions:
+
+- The introductory slides should give enough background for the reader to understand the research question addressed by your work and why it is important. 
+  - Start broad (explain the overall context) and narrow down to the specific question you will be answering
+  - Clearly set out the aims and hypothesis for your work
+  - Make the historical background to this research clear (what was known before you started working)
+  
+- The concluding slide(s) should summarise 1-3 clear, concise "take home" messages for your audience (usually relating back to the aims/hypothesis defined earlier).
+  - May use a model figure to summarize results/put results in context
+  - Put the results in the context of their field (i.e., explain what other work will be made possible by this paper, or what unanswered question(s) still remain).
+
+### Slides that present experimental data:
+- These slides should give enough information for the reader to understand how the experiments were done
+  - Using a figure or flow diagram to illustrate the experimental design/principles behind the experiment can be very helpful
+- Gives key parameters for the methods done, but not any extraneous details
+- Include the data
+  - Include key results that answer the stated hypothesis/research aims
+  - Use figures or tables that illustrate the key points
+  
+[Read more about presenting data here](./07-03-presentations-figures.html)
