@@ -40,7 +40,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Set A: wet-lab notebooks
 
-- [Example A1](assets/pdfs/lab_notebooks/example_lab_notebook_A1.pdf)
+- [Example A1](../assets/pdfs/lab_notebooks/example_lab_notebook_A1.pdf)
 - [Example A2](assets/pdfs/lab_notebooks/example_lab_notebook_A2.pdf)
 - [Example A3](assets/pdfs/lab_notebooks/example_lab_notebook_A3.pdf)
 - [Example A4](assets/pdfs/lab_notebooks/example_lab_notebook_A4.pdf)
