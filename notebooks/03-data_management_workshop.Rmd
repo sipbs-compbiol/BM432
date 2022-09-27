@@ -41,28 +41,28 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Set A: wet-lab notebooks
 
 - [Example A1](../assets/pdfs/lab_notebooks/example_lab_notebook_A1.pdf)
-- [Example A2](assets/pdfs/lab_notebooks/example_lab_notebook_A2.pdf)
-- [Example A3](assets/pdfs/lab_notebooks/example_lab_notebook_A3.pdf)
-- [Example A4](assets/pdfs/lab_notebooks/example_lab_notebook_A4.pdf)
+- [Example A2](../assets/pdfs/lab_notebooks/example_lab_notebook_A2.pdf)
+- [Example A3](../assets/pdfs/lab_notebooks/example_lab_notebook_A3.pdf)
+- [Example A4](../assets/pdfs/lab_notebooks/example_lab_notebook_A4.pdf)
 
 ### Set B: bioinformatics notebooks
 
-- [Example B1](assets/pdfs/lab_notebooks/example_bioinformatics_notebook_B1.pdf)
-- [Example B2](assets/pdfs/lab_notebooks/example_bioinformatics_notebook_B2.pdf)
-- [Example B3](assets/pdfs/lab_notebooks/example_bioinformatics_notebook_B3.pdf)
-- [Example B4](assets/pdfs/lab_notebooks/example_bioinformatics_notebook_B4.pdf)
+- [Example B1](../assets/pdfs/lab_notebooks/example_bioinformatics_notebook_B1.pdf)
+- [Example B2](../assets/pdfs/lab_notebooks/example_bioinformatics_notebook_B2.pdf)
+- [Example B3](../assets/pdfs/lab_notebooks/example_bioinformatics_notebook_B3.pdf)
+- [Example B4](../assets/pdfs/lab_notebooks/example_bioinformatics_notebook_B4.pdf)
 
 ### Set C: critical analysis notebooks
 
-- [Example C1](assets/pdfs/lab_notebooks/example_critical-analysis_notebook_C1.pdf)
-- [Example C2](assets/pdfs/lab_notebooks/example_critical-analysis_notebook_C2.pdf)
-- [Example C3](assets/pdfs/lab_notebooks/example_critical-analysis_notebook_C3.pdf)
-- [Example C4](assets/pdfs/lab_notebooks/example_critical-analysis_notebook_C4.pdf)
+- [Example C1](../assets/pdfs/lab_notebooks/example_critical-analysis_notebook_C1.pdf)
+- [Example C2](../assets/pdfs/lab_notebooks/example_critical-analysis_notebook_C2.pdf)
+- [Example C3](../assets/pdfs/lab_notebooks/example_critical-analysis_notebook_C3.pdf)
+- [Example C4](../assets/pdfs/lab_notebooks/example_critical-analysis_notebook_C4.pdf)
 
 ### Set D: education notebooks
 
-- [Example D1](assets/pdfs/lab_notebooks/example_education_notebook_D1.pdf)
-- [Example D2](assets/pdfs/lab_notebooks/example_education_notebook_D2.pdf)
-- [Example D3](assets/pdfs/lab_notebooks/example_education_notebook_D3.pdf)
-- [Example D4](assets/pdfs/lab_notebooks/example_education_notebook_D4.pdf)
+- [Example D1](../assets/pdfs/lab_notebooks/example_education_notebook_D1.pdf)
+- [Example D2](../assets/pdfs/lab_notebooks/example_education_notebook_D2.pdf)
+- [Example D3](../assets/pdfs/lab_notebooks/example_education_notebook_D3.pdf)
+- [Example D4](../assets/pdfs/lab_notebooks/example_education_notebook_D4.pdf)
 
