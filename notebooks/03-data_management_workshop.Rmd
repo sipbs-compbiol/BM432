@@ -34,7 +34,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Example lab notebooks and Google form
 
 - Please read through at least one of the sets of example lab notebooks (provided for you on MyPlace and also linked below for your convenience)
-- Please fill out this [Google form](https://forms.gle/WoSvnybRBrA8H6qa6) regarding the set of example lab notebooks that you read
+  - You may find it most helpful to choose the set of notebooks that is most similar to your project type
+  - You may choose to work through more than 1 set of notebooks, if you wish to do so (please fill out the Google form separately for each set)
+- Please fill out this [Google form](https://forms.gle/WoSvnybRBrA8H6qa6) regarding the set of example lab notebooks that you read - <b>before close of play on Monday October 3rd</b> (to give us time to compile your responses before the workshop on Weds)
 
 ### Set A: wet-lab notebooks
 
