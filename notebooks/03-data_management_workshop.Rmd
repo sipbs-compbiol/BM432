@@ -20,7 +20,6 @@ knitr::opts_chunk$set(echo = TRUE)
 <div id="summary">
 - This is the landing page for the 2022-10-05 workshop on data management
 - Please read and work through the pages linked below
-- The Powerpoint slides below will be used in the in-person workshop
 </div>
 
 # Workshop 3: "Project Management" (Wednesday 5th October 2022, 9-11am)
@@ -32,13 +31,36 @@ knitr::opts_chunk$set(echo = TRUE)
 - [05-Reference Management](./03-05-reference_management.html)
 - [06-How to Use Reference Management Software](./03-06-using_a_reference_manager.html)
 
-## Powerpoint slides
+## Example lab notebooks and Google form
 
-- [Workshop Slides](../assets/powerpoints/Project_Management_workshop_MFandLP.pptx)
+- Please read through at least one of the sets of example lab notebooks (provided for you on MyPlace and also linked below for your convenience)
+- Please fill out this [Google form](https://forms.gle/WoSvnybRBrA8H6qa6) regarding the set of example lab notebooks that you read
 
-## Example Lab Notebooks
+### Set A: wet-lab notebooks
 
-- [File 1](../assets/pdfs/lab_notebooks/example_lab_notebook_file_1.pdf)
-- [File 2](../assets/pdfs/lab_notebooks/example_lab_notebook_file_2.pdf)
-- [File 3](../assets/pdfs/lab_notebooks/example_lab_notebook_file_3.pdf)
-- [File 4](../assets/pdfs/lab_notebooks/example_lab_notebook_file_4.pdf)
+- [Example A1](assets/pdfs/lab_notebooks/example_lab_notebook_A1.pdf)
+- [Example A2](assets/pdfs/lab_notebooks/example_lab_notebook_A2.pdf)
+- [Example A3](assets/pdfs/lab_notebooks/example_lab_notebook_A3.pdf)
+- [Example A4](assets/pdfs/lab_notebooks/example_lab_notebook_A4.pdf)
+
+### Set B: bioinformatics notebooks
+
+- [Example B1](assets/pdfs/lab_notebooks/example_bioinformatics_notebook_B1.pdf)
+- [Example B2](assets/pdfs/lab_notebooks/example_bioinformatics_notebook_B2.pdf)
+- [Example B3](assets/pdfs/lab_notebooks/example_bioinformatics_notebook_B3.pdf)
+- [Example B4](assets/pdfs/lab_notebooks/example_bioinformatics_notebook_B4.pdf)
+
+### Set C: critical analysis notebooks
+
+- [Example C1](assets/pdfs/lab_notebooks/example_critical-analysis_notebook_C1.pdf)
+- [Example C2](assets/pdfs/lab_notebooks/example_critical-analysis_notebook_C2.pdf)
+- [Example C3](assets/pdfs/lab_notebooks/example_critical-analysis_notebook_C3.pdf)
+- [Example C4](assets/pdfs/lab_notebooks/example_critical-analysis_notebook_C4.pdf)
+
+### Set D: education notebooks
+
+- [Example D1](assets/pdfs/lab_notebooks/example_education_notebook_D1.pdf)
+- [Example D2](assets/pdfs/lab_notebooks/example_education_notebook_D2.pdf)
+- [Example D3](assets/pdfs/lab_notebooks/example_education_notebook_D3.pdf)
+- [Example D4](assets/pdfs/lab_notebooks/example_education_notebook_D4.pdf)
+
