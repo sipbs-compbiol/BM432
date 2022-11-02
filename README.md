@@ -105,6 +105,10 @@ Notebook pages from previous years' presentations of this material are linked be
 - [01-The Anatomy of a Scientific Poster](notebooks/posters.html)
 - [02-Preparing a Scientific Poster](notebooks/poster-preparation.html)
 
+(Scientific posters, for MP507)
+- [The Anatomy of a Scientific Poster](notebooks/posters_MP507.html)
+- [Preparing a Scientific Poster](notebooks/poster-preparation_MP507.html)
+
 ---------------
 
 ## Workshop Demos
