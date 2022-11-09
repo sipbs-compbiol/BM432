@@ -18,11 +18,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 <div id="summary">
-- This is the landing page for the 2022-10-12 workshop on data presentation
+- This is the landing page for the 2022-11-16 workshop on data presentation
 - Please read and work through the pages linked below
 </div>
 
-# Workshop 4: "Data Presentation" (Wednesday 12th October 2022, 9-11am)
+# Workshop 4: "Data Presentation" (Wednesday 16th October 2022, 10am-12noon)
 
 - [01-An Introduction to Data Visualisation](./04-01-visualisation.html)
   - [01a-Better Tools Than Barcharts (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-04a-barchart/)
