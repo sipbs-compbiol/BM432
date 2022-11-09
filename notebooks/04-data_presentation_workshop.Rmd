@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 - Please read and work through the pages linked below
 </div>
 
-# Workshop 4: "Data Presentation" (Wednesday 16th October 2022, 10am-12noon)
+# Workshop 4: "Data Presentation" (Wednesday 16th November 2022, 10am-12noon)
 
 - [01-An Introduction to Data Visualisation](./04-01-visualisation.html)
   - [01a-Better Tools Than Barcharts (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-04a-barchart/)
