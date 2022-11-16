@@ -72,11 +72,15 @@ Notebook HTML pages for the current presentation are linked below, for convenien
 - [File 3](assets/pdfs/lab_notebooks/example_lab_notebook_file_3.pdf)
 - [File 4](assets/pdfs/lab_notebooks/example_lab_notebook_file_4.pdf)
 
-### Workshop 4: "Data Presentation" (Wednesday 12th October 2022, 9-11am) [landing page](notebooks/04-data_presentation_workshop.html)
+### Workshop 8: "Data Presentation" (Wednesday 16th November 2022, 10-12am) [landing page](notebooks/04-data_presentation_workshop.html)
 
 - [01-An Introduction to Data Visualisation](notebooks/04-01-visualisation.html)
   - [01a-Better Tools Than Barcharts (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-04a-barchart/)
 - [02-Preparing Your Figures For An Audience](notebooks/04-02-figure_preparation.html)
+
+####
+
+- [Workshop Slides](workshops/figure_critical_analysis/slides.html)
 
 --------------
 
