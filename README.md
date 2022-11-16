@@ -78,7 +78,7 @@ Notebook HTML pages for the current presentation are linked below, for convenien
   - [01a-Better Tools Than Barcharts (INTERACTIVE)](https://sipbs-bm432.shinyapps.io/03-04a-barchart/)
 - [02-Preparing Your Figures For An Audience](notebooks/04-02-figure_preparation.html)
 
-####
+#### Slides
 
 - [Workshop Slides](workshops/figure_critical_analysis/slides.html)
 
