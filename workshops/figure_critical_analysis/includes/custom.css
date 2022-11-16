@@ -1,0 +1,180 @@
+body
+{
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  width: 100%;
+  height: 100%;
+  color: black;
+  background-color: black;
+  font-family: "Gill Sans MT", "Gill Sans", GillSans, sans-serif;
+  font-size: 14pt;
+}
+
+/* Resize slides
+slides > slide {
+    width: 1280px;
+    height: 720px;
+} */
+
+/* All slides get backdrop
+slides > slide.backdrop {
+    background-image: url('../images/strath_background.png');
+    background-size: 100% auto;
+    background-repeat: no-repeat;    
+} */
+
+/* Slide headers 
+
+Colour is Hutton purple; left-offset to avoid left-hand background
+*/
+hgroup h2 {
+    color: #5D9731;
+    padding-left: 70px;
+}
+
+/* Title page subtitle 
+
+Colour is Hutton blue; remove padding to override h2
+*/
+.title-slide hgroup h2 {
+    color: #5D9731;
+    padding-left: 0px;
+}
+
+/* Slide text
+
+Padding to avoid background images
+*/
+article {
+    padding-right: 80px;
+}
+
+/* Level 1 Background
+These are section separators. Set them to Hutton blue
+*/
+slides > slide.dark {
+    background: #5D9731 !important;
+}
+
+
+/* List and paragraph element text is black */
+li {
+  color: black;
+}
+
+p {
+  color: black;
+}
+
+
+/* Two-column layout */
+.col2 {
+    columns: 2 200px;         /* number of columns and width in pixels*/
+    -webkit-columns: 2 200px; /* chrome, safari */
+    -moz-columns: 2 200px;    /* firefox */
+    margin: -5px;
+    vertical-align: top;
+    position: relative;
+}
+.col3 {
+    columns: 3 100px;
+    -webkit-columns: 3 100px;
+    -moz-columns: 3 100px;
+}
+.col2 p {
+    -webkit-column-break-before: always;
+    break-before: column;
+    vertical-align: top;
+    margin: 0;               /* First element otherwise has vertical offset */
+}
+.col2 attention {
+    width: 45%;
+}
+.col2 highlight {
+    width: 45%;
+}
+
+/* References footer
+
+Used for references
+
+Highly-translucent Hutton green, with small text.
+*/
+.references {
+    color: black;
+    background: rgba(120, 162, 47, 0.2);
+    font-size: small;
+    width: 82%;
+    position: absolute;
+    bottom: 0;
+    padding-top: 2px;
+    padding-left: 50px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+}
+
+
+/* Footer */
+.footer {
+    color: black;
+    background: rgb(255, 255, 255);
+    font-size: small;
+    width: 82%;
+    position: absolute;
+    bottom: 0;
+    padding-top: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+}
+
+/* Highly-translucent Faculty Green, with small text. */
+.section {
+    color: black;
+    background: rgba(49, 151, 96, 0.25);
+    width: 100%;
+}
+
+/* Attention
+
+Highly-translucent Hutton purple, with small text.
+*/
+.attention {
+    color: black;
+    background: rgba(135, 33, 117, 0.2);
+    width: 100%;
+}
+
+/* Highlight
+
+Highly-translucent Hutton blue, with small text.
+*/
+.highlight {
+    color: black;
+    background: rgba(86, 155, 190, 0.25);
+    width: 100%;
+}
+
+/* Rmd Table
+
+Output from kable, etc.
+*/
+.table {
+    font-size: 10 !important;
+}
+
+.table th {
+    font-size: 11 !important;
+    background: #569BBE;
+}
+
+/* Shiny iframe */
+iframe {
+    height: 600px;
+}
+
+/* Smaller R code */
+pre {
+  font-size: 20px;
+  padding: 1px 80px 1px 80px;
+}
