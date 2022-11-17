@@ -1,0 +1,489 @@
+{
+    "formId": "13V7NGcgMHjhK_P6krUudKB1qMQeK3I_ifPaNbXn7FT8",
+    "info": {
+        "title": "BM432 Data Visualisation Workshop ",
+        "documentTitle": "BM432 Data Visualisation Workshop "
+    },
+    "revisionId": "000001cc",
+    "responderUri": "https://docs.google.com/forms/d/e/1FAIpQLScECon-B5N-JkK2PIB4YiEyy8k8iR9srls9UBFYq2NWqEB3Rw/viewform",
+    "items": [
+        {
+            "itemId": "146b5492",
+            "title": "Please indicate which figure you are using to answer the following questions. (You may analyse more than one figure, but please fill in a separate form for each figure.)",
+            "questionItem": {
+                "question": {
+                    "questionId": "42283d06",
+                    "required": true,
+                    "choiceQuestion": {
+                        "type": "RADIO",
+                        "options": [
+                            {
+                                "value": "1. SAP05 destabilizes plant TFs of the SPL and GATA families via interaction with the ubiquitin receptor AtRPN10"
+                            },
+                            {
+                                "value": "2. MyoAAV 1A transduces mouse skeletal muscles with high efficiency after systemic injection"
+                            },
+                            {
+                                "value": "3. SARS-CoV-2 epidemiology in Louisiana"
+                            },
+                            {
+                                "value": "4. High viral loads drive the efficient production of IFN-III and, to a lesser extent, IFN-I in an age-dependent manner in the upper airways of COVID-19 patients"
+                            },
+                            {
+                                "value": "5. ILC3s are dysregulated in human and mouse CRC"
+                            },
+                            {
+                                "value": "6.  Horizontal transmission of transgenerational PA14 avoidance learning"
+                            },
+                            {
+                                "value": "7. Cellular composition of human nasopharyngeal mucosa"
+                            },
+                            {
+                                "value": "8. The immune compartment in MMRd and MMRp CRC"
+                            },
+                            {
+                                "value": "9. Analysis in 12 men of young age uncovers the landscape of sperm clonal mosaicism"
+                            },
+                            {
+                                "value": "10. Anti-CHIKV E1 mAbs recognize a conserved, cryptic epitope in the E1 protein"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "0e939c9c",
+            "title": "On a scale of 1-5, please rate how effective you found the data visualization in this figure.",
+            "questionItem": {
+                "question": {
+                    "questionId": "0c20e7f3",
+                    "required": true,
+                    "scaleQuestion": {
+                        "low": 1,
+                        "high": 5,
+                        "lowLabel": "Not very effective",
+                        "highLabel": "Very effective"
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "02b8d8d2",
+            "title": "On a scale of 1-5, please rate how easy you found it to understand this figure.",
+            "questionItem": {
+                "question": {
+                    "questionId": "4ec2edb9",
+                    "required": true,
+                    "scaleQuestion": {
+                        "low": 1,
+                        "high": 5,
+                        "lowLabel": "Not at all easy",
+                        "highLabel": "Very easy"
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "51cfca4a",
+            "title": "On a scale of 1-5, please rate how aesthetically appealing you found this figure.",
+            "questionItem": {
+                "question": {
+                    "questionId": "7addde3a",
+                    "required": true,
+                    "scaleQuestion": {
+                        "low": 1,
+                        "high": 5,
+                        "lowLabel": "Not at all aesthetically appealing",
+                        "highLabel": "Very aesthetically appealing"
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "3c287f62",
+            "pageBreakItem": {},
+            "title": "Best Practices"
+        },
+        {
+            "itemId": "675b5875",
+            "title": "Do you believe that the data presented in your figure were analysed and presented using best practices?",
+            "questionItem": {
+                "question": {
+                    "questionId": "2c8ad8e7",
+                    "required": true,
+                    "choiceQuestion": {
+                        "type": "RADIO",
+                        "options": [
+                            {
+                                "value": "Yes"
+                            },
+                            {
+                                "value": "No"
+                            },
+                            {
+                                "value": "I am not sure"
+                            },
+                            {
+                                "value": "I do not know what best practices for this type of data analysis are"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "64440ae5",
+            "title": "If you answered \"No\" to the previous question, please briefly explain the data analysis errors/problems you identified.",
+            "questionItem": {
+                "question": {
+                    "questionId": "05fdd3c3",
+                    "textQuestion": {
+                        "paragraph": true
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "0019a8a2",
+            "title": "If you answered \"I am not sure\" or \"I do not know\" to the previous question, please briefly explain which aspect(s) or panel(s) of the figure you are unsure about.",
+            "questionItem": {
+                "question": {
+                    "questionId": "1b2cd1d3",
+                    "textQuestion": {
+                        "paragraph": true
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "50457f68",
+            "pageBreakItem": {},
+            "title": "Figure Effectiveness",
+            "description": "Please answer the following questions as briefly and succinctly as possible (1-2 sentences each)."
+        },
+        {
+            "itemId": "2edb503b",
+            "title": "Explain why you found the data presentation in this figure effective/not effective.",
+            "questionItem": {
+                "question": {
+                    "questionId": "2931ad24",
+                    "required": true,
+                    "textQuestion": {
+                        "paragraph": true
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "7d7d768b",
+            "title": "Suggest how you think the data presentation in this figure can be improved.",
+            "questionItem": {
+                "question": {
+                    "questionId": "61e3a8d6",
+                    "required": true,
+                    "textQuestion": {
+                        "paragraph": true
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "501c1426",
+            "pageBreakItem": {},
+            "title": "Figure Clarity",
+            "description": "Please answer the following questions, rating your figure on a scale of 1-5."
+        },
+        {
+            "itemId": "098dcb26",
+            "title": "The colour scheme chosen for this figure enhanced the data presentation, making it easier to understand this figure.",
+            "questionItem": {
+                "question": {
+                    "questionId": "46c4dce0",
+                    "scaleQuestion": {
+                        "low": 1,
+                        "high": 5,
+                        "lowLabel": "Not at all true",
+                        "highLabel": "Very true"
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "20ae438e",
+            "title": "The font(s) chosen for this figure was appropriate and easy to read.",
+            "questionItem": {
+                "question": {
+                    "questionId": "54986946",
+                    "scaleQuestion": {
+                        "low": 1,
+                        "high": 5,
+                        "lowLabel": "Not at all true",
+                        "highLabel": "Very true"
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "0d062023",
+            "title": "All of the elements in this figure that needed labels were appropriately and correctly labelled.",
+            "questionItem": {
+                "question": {
+                    "questionId": "3f75e2ee",
+                    "scaleQuestion": {
+                        "low": 1,
+                        "high": 5,
+                        "lowLabel": "Not at all true",
+                        "highLabel": "Very true"
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "73c93d98",
+            "title": "The statistical analyses performed to generate this figure appear to have been appropriate for this type of data/analysis.",
+            "questionItem": {
+                "question": {
+                    "questionId": "549cda28",
+                    "scaleQuestion": {
+                        "low": 1,
+                        "high": 5,
+                        "lowLabel": "Not at all true",
+                        "highLabel": "Very true"
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "22215aed",
+            "title": "The use of whitespace in this figure was effective and made it easier to read the figure.",
+            "questionItem": {
+                "question": {
+                    "questionId": "44d8dbda",
+                    "scaleQuestion": {
+                        "low": 1,
+                        "high": 5,
+                        "lowLabel": "Not at all true",
+                        "highLabel": "Very true"
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "0483ee1b",
+            "title": "The data presented in this figure are easy to understand and interpret at first glance.",
+            "questionItem": {
+                "question": {
+                    "questionId": "1ecef50b",
+                    "scaleQuestion": {
+                        "low": 1,
+                        "high": 5,
+                        "lowLabel": "Not at all true",
+                        "highLabel": "Very true"
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "09275aa2",
+            "title": "The figure legend provided sufficient information about the figure for you to understand the figure without reading the associated paper.",
+            "questionItem": {
+                "question": {
+                    "questionId": "5303cafe",
+                    "scaleQuestion": {
+                        "low": 1,
+                        "high": 5,
+                        "lowLabel": "Not at all true",
+                        "highLabel": "Very true"
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "2f67d1d4",
+            "title": "The figure title accurately and precisely describes the results presented in this figure.",
+            "questionItem": {
+                "question": {
+                    "questionId": "380d7208",
+                    "scaleQuestion": {
+                        "low": 1,
+                        "high": 5,
+                        "lowLabel": "Not at all true",
+                        "highLabel": "Very true"
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "730f4033",
+            "pageBreakItem": {},
+            "title": "Reproducibility"
+        },
+        {
+            "itemId": "30c9bca9",
+            "title": "On a scale of 1-5, please rate how confidently you feel that you could reproduce the experiments used to generate this figure, based on the information provided in the associated paper.",
+            "questionItem": {
+                "question": {
+                    "questionId": "6faa8672",
+                    "required": true,
+                    "scaleQuestion": {
+                        "low": 1,
+                        "high": 5,
+                        "lowLabel": "Not at all confident",
+                        "highLabel": "Very confident"
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "5b106941",
+            "title": "On a scale of 1-5, please rate how confidently you feel that you could reproduce this figure, if provided with all of the necessary raw data.",
+            "questionItem": {
+                "question": {
+                    "questionId": "7dd7d80a",
+                    "required": true,
+                    "scaleQuestion": {
+                        "low": 1,
+                        "high": 5,
+                        "lowLabel": "Not at all confident",
+                        "highLabel": "Very confident"
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "0ad0b272",
+            "title": "On a scale of 1-5, please rate how confidently you feel that you could accurately describe the result(s) presented in this figure to a colleague who has a good general background in the biomedical sciences (i.e., one of your fellow students).",
+            "questionItem": {
+                "question": {
+                    "questionId": "55bd230e",
+                    "scaleQuestion": {
+                        "low": 1,
+                        "high": 5,
+                        "lowLabel": "Not at all confident",
+                        "highLabel": "Very confident"
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "6451cb12",
+            "title": "Please add any other comments that you would like to make about this figure.",
+            "questionItem": {
+                "question": {
+                    "questionId": "78b93f0f",
+                    "textQuestion": {
+                        "paragraph": true
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "5b54df69",
+            "pageBreakItem": {},
+            "title": "Helping Us Improve The Exercise",
+            "description": "The following questions are optional, but are a chance for you to provide us with some feedback (to hopefully improve this exercise for next year)."
+        },
+        {
+            "itemId": "22f2af70",
+            "title": "How many minutes did you spend on this figure analysis exercise? ",
+            "questionItem": {
+                "question": {
+                    "questionId": "08c231f5",
+                    "choiceQuestion": {
+                        "type": "RADIO",
+                        "options": [
+                            {
+                                "value": "Less than 5 minutes"
+                            },
+                            {
+                                "value": "About 5 or 10 minutes"
+                            },
+                            {
+                                "value": "About 15 minutes"
+                            },
+                            {
+                                "value": "About 30 minutes"
+                            },
+                            {
+                                "value": "More than 30 minutes"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "062a407b",
+            "title": "How many figures have you analysed for this workshop (including this one)?",
+            "questionItem": {
+                "question": {
+                    "questionId": "43f1acc8",
+                    "choiceQuestion": {
+                        "type": "DROP_DOWN",
+                        "options": [
+                            {
+                                "value": "1"
+                            },
+                            {
+                                "value": "2"
+                            },
+                            {
+                                "value": "3"
+                            },
+                            {
+                                "value": "4"
+                            },
+                            {
+                                "value": "5"
+                            },
+                            {
+                                "value": "6"
+                            },
+                            {
+                                "value": "7"
+                            },
+                            {
+                                "value": "8"
+                            },
+                            {
+                                "value": "9"
+                            },
+                            {
+                                "value": "10"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "14638fd1",
+            "title": "How helpful did you find the assigned pre-reading for this workshop for evaluating your figure?",
+            "questionItem": {
+                "question": {
+                    "questionId": "7043cf28",
+                    "scaleQuestion": {
+                        "low": 1,
+                        "high": 5,
+                        "lowLabel": "Not at all helpful",
+                        "highLabel": "Very helpful"
+                    }
+                }
+            }
+        },
+        {
+            "itemId": "336a9ab3",
+            "title": "Please add any comments or feedback that you would like to make about this data visualisation exercise. We particularly welcome suggestions for improvements.",
+            "questionItem": {
+                "question": {
+                    "questionId": "301b4da2",
+                    "textQuestion": {
+                        "paragraph": true
+                    }
+                }
+            }
+        }
+    ],
+    "linkedSheetId": "1y8SM2IdBDEbRky23s3FQUfkMvxCBK0opEICz00ojclo"
+}
